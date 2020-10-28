@@ -1,0 +1,5 @@
+# Ignored development environment files
+/.idea
+
+# Ignored Bitrix core files
+/bitrix
