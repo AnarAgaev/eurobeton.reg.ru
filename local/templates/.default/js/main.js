@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded",() => {
 // Replace cart at the header on mobile screen
     const cart = document.getElementById("cart");
     const headerBottom = document.getElementById("headerBottom");
-    const headerTop = document.getElementById("headerTop").firstChild;
+    const headerTop = document.querySelector("#headerTop .header__top__body");
 
     const replaceCart = (move) => {
         move
@@ -427,6 +427,116 @@ document.addEventListener("DOMContentLoaded",() => {
 
 
 
+    // ***Янадекс нары -- Начало
+        if (document.getElementById("map")) {
+    // Функция ymaps.ready() будет вызвана, когда
+    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+        function init(){
+            // Создание карты.
+            let myMap = new ymaps.Map("map", {
+                    // Координаты центра карты.
+                    // Порядок по умолчанию: «широта, долгота».
+                    // Чтобы не определять координаты центра карты вручную,
+                    // воспользуйтесь инструментом Определение координат.
+                    center: [55.38046857198313,41.687034406250014],
+                    // Уровень масштабирования. Допустимые значения:
+                    // от 0 (весь мир) до 19.
+                    zoom: 6,
+                    controls: [],
+                }),
+
+                myPlacemarkKstovo = new ymaps.Placemark([56.179510068572036,44.15730749999993],
+                    {
+                        balloonContentHeader: "Кстовский филиал",
+                        balloonContentBody: "г. Кстово, ул. Магистральная, д. 1"
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    }),
+
+                myPlacemarkLipetsk = new ymaps.Placemark([52.60358425779388,39.59623749999995],
+                    {
+                        balloonContentHeader: "Липецкий филиал",
+                        balloonContentBody: "г. Липецк, район Цемзавода, 398027"
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    }),
+
+                myPlacemarkGranitstroy = new ymaps.Placemark([56.00991906873449,37.436966],
+                    {
+                        balloonContentHeader: "Гранитстрой",
+                        balloonContentBody: "г. Лобня, Краснополянский проезд, д. 5"
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    }),
+
+                myPlacemarkStroyRegion = new ymaps.Placemark([56.86988406782098,60.59384549999995],
+                    {
+                        balloonContentHeader: "ООО «СтройРегион-Трейд ЕК»",
+                        balloonContentBody: "г. Екатеринбург, ул. Артинская, д. 18"
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    }),
+
+                myPlacemarkEvrobeton = new ymaps.Placemark([55.77380806896347,37.50681899999997],
+                    {
+                        balloonContentHeader: "Москва: ЖБИ АО «Евробетон»",
+                        balloonContentBody: "г. Москва, 3-й Силикатный проезд, д. 10 , стр. 15"
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    }),
+
+                myPlacemarkMedvedkovo = new ymaps.Placemark([55.88525156886214,37.62130049999999],
+                    {
+                        balloonContentHeader: "Филиала Медведково АО «ЕВРОБЕТОН»",
+                        balloonContentBody: "ул. Чермянская, д.5"
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    });
+
+            myMap.geoObjects
+                .add(myPlacemarkKstovo)
+                .add(myPlacemarkLipetsk)
+                .add(myPlacemarkGranitstroy)
+                .add(myPlacemarkEvrobeton)
+                .add(myPlacemarkMedvedkovo)
+                .add(myPlacemarkStroyRegion);
+
+            myMap.controls.add('zoomControl', {
+                size: "small"
+            });
+
+            myMap.behaviors.disable('scrollZoom');
+        }
+    }
+    // ***Янадекс карты -- Конец
+
+
+
 
 
 
@@ -489,113 +599,3 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     });
 })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-
-
-
-// ***Янадекс нары -- Начало
-if (document.getElementById("map")) {
-// Функция ymaps.ready() будет вызвана, когда
-// загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-    ymaps.ready(init);
-    function init(){
-        // Создание карты.
-        let myMap = new ymaps.Map("map", {
-                // Координаты центра карты.
-                // Порядок по умолчанию: «широта, долгота».
-                // Чтобы не определять координаты центра карты вручную,
-                // воспользуйтесь инструментом Определение координат.
-                center: [55.38046857198313,41.687034406250014],
-                // Уровень масштабирования. Допустимые значения:
-                // от 0 (весь мир) до 19.
-                zoom: 6,
-                controls: [],
-            }),
-
-            myPlacemarkKstovo = new ymaps.Placemark([56.179510068572036,44.15730749999993],
-                {
-                    balloonContentHeader: "Кстовский филиал",
-                    balloonContentBody: "г. Кстово, ул. Магистральная, д. 1"
-                },
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/img/mark.png',
-                    iconImageSize: [36, 43],
-                    iconImageOffset: [-15, -43]
-                }),
-
-            myPlacemarkLipetsk = new ymaps.Placemark([52.60358425779388,39.59623749999995],
-                {
-                    balloonContentHeader: "Липецкий филиал",
-                    balloonContentBody: "г. Липецк, район Цемзавода, 398027"
-                },
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/img/mark.png',
-                    iconImageSize: [36, 43],
-                    iconImageOffset: [-15, -43]
-                }),
-
-            myPlacemarkGranitstroy = new ymaps.Placemark([56.00991906873449,37.436966],
-                {
-                    balloonContentHeader: "Гранитстрой",
-                    balloonContentBody: "г. Лобня, Краснополянский проезд, д. 5"
-                },
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/img/mark.png',
-                    iconImageSize: [36, 43],
-                    iconImageOffset: [-15, -43]
-                }),
-
-            myPlacemarkStroyRegion = new ymaps.Placemark([56.86988406782098,60.59384549999995],
-                {
-                    balloonContentHeader: "ООО «СтройРегион-Трейд ЕК»",
-                    balloonContentBody: "г. Екатеринбург, ул. Артинская, д. 18"
-                },
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/img/mark.png',
-                    iconImageSize: [36, 43],
-                    iconImageOffset: [-15, -43]
-                }),
-
-            myPlacemarkEvrobeton = new ymaps.Placemark([55.77380806896347,37.50681899999997],
-                {
-                    balloonContentHeader: "Москва: ЖБИ АО «Евробетон»",
-                    balloonContentBody: "г. Москва, 3-й Силикатный проезд, д. 10 , стр. 15"
-                },
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/img/mark.png',
-                    iconImageSize: [36, 43],
-                    iconImageOffset: [-15, -43]
-                }),
-
-            myPlacemarkMedvedkovo = new ymaps.Placemark([55.88525156886214,37.62130049999999],
-                {
-                    balloonContentHeader: "Филиала Медведково АО «ЕВРОБЕТОН»",
-                    balloonContentBody: "ул. Чермянская, д.5"
-                },
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/img/mark.png',
-                    iconImageSize: [36, 43],
-                    iconImageOffset: [-15, -43]
-                });
-
-        myMap.geoObjects
-            .add(myPlacemarkKstovo)
-            .add(myPlacemarkLipetsk)
-            .add(myPlacemarkGranitstroy)
-            .add(myPlacemarkEvrobeton)
-            .add(myPlacemarkMedvedkovo)
-            .add(myPlacemarkStroyRegion);
-
-        myMap.controls.add('zoomControl', {
-            size: "small"
-        });
-
-        myMap.behaviors.disable('scrollZoom');
-    }
-}
-// ***Янадекс карты -- Конец
