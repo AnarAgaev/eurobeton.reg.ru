@@ -1,0 +1,1 @@
+<img src="/local/templates/.default/img/billboard-back.png" alt="">

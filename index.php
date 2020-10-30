@@ -3,20 +3,54 @@ require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle("Главная");
 ?>
 <div class="page-index">
-    <!--<div class="billboard section_container">
+    <div class="billboard section_container">
         <div class="container">
             <div class="row">
                 <div class="billboard__desc col-lg-7 col-xl-6">
-                    <div class="billboard__title">В основе любой стройки качественный материал!</div>
-                    <div class="billboard__txt">Качественный строительный бетон по выгодным ценам от производителя!
+                    <div class="billboard__title">
+                        <? $APPLICATION->IncludeComponent(
+                            "bitrix:main.include",
+                            "",
+                            array(
+                                "AREA_FILE_SHOW" => "file",
+                                "AREA_FILE_SUFFIX" => "inc",
+                                "EDIT_TEMPLATE" => "",
+                                "PATH" => "/include/banner-title.php"
+                            )
+                        ); ?>
+                    </div>
+                    <div class="billboard__txt">
+                        <? $APPLICATION->IncludeComponent(
+                            "bitrix:main.include",
+                            "",
+                            array(
+                                "AREA_FILE_SHOW" => "file",
+                                "AREA_FILE_SUFFIX" => "inc",
+                                "EDIT_TEMPLATE" => "",
+                                "PATH" => "/include/bunner-subtitle.php"
+                            )
+                        ); ?>
                     </div>
                     <div class="billboard__btn"><a class="btn" href="">консультация</a></div>
                 </div>
-                <div class="billboard__pic col-lg-5 col-xl-6"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/billboard-back.png" alt="" title=""></div>
+                <div class="billboard__pic col-lg-5 col-xl-6">
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:main.include",
+                        "",
+                        Array(
+                            "AREA_FILE_SHOW" => "file",
+                            "AREA_FILE_SUFFIX" => "inc",
+                            "EDIT_TEMPLATE" => "",
+                            "PATH" => "/include/banner-picture.php"
+                        )
+                    );?>
+                </div>
             </div>
         </div>
     </div>
-    <div class="offers section_container">
+
+
+    <!--<div class="offers section_container">
         <div class="container">
             <div class="row">
                 <div class="offers__card-wrap col-xl-6 d-flex justify-content-center">
