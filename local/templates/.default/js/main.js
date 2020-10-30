@@ -6,6 +6,21 @@ document.addEventListener("DOMContentLoaded",() => {
     const faqLinks = document.getElementsByClassName("faq__item");
     let windowWidth = window.innerWidth;
 
+    const closeAccordion = () => {
+        for (let i = 0; i < dropLinks.length; ++i) {
+            dropLinks[i]
+                .parentElement
+                .classList
+                .remove('visible');
+        }
+
+        for (let i = 0; i < navLinks.length; ++i) {
+            navLinks[i]
+                .classList
+                .remove('visible');
+        }
+    };
+
 
     window.addEventListener('resize', (event) => {
         windowWidth = window.innerWidth;
@@ -92,49 +107,6 @@ document.addEventListener("DOMContentLoaded",() => {
 
         closeAccordion();
     });
-
-// Change city
-    let cities = document.querySelectorAll(".region__item");
-
-    for (let i = 0; i < cities.length; i++) {
-        cities[i].addEventListener("click", event => {
-            let cityContainer = event.target.closest(".region__item");
-
-            // Push city to the region
-            document
-                .getElementById("regionCity")
-                .innerHTML = cityContainer.dataset.regionCity
-                ? cityContainer.dataset.regionCity
-                : event.target.closest(".region__item").dataset.regionCity;
-
-            // Show unselected city
-            document
-                .querySelector(".region__item.active")
-                .classList
-                .remove("active");
-
-            // Hide selected city
-            cityContainer
-                .classList
-                .add("active");
-        });
-    }
-
-    const closeAccordion = () => {
-        for (let i = 0; i < dropLinks.length; ++i) {
-            dropLinks[i]
-                .parentElement
-                .classList
-                .remove('visible');
-        }
-
-        for (let i = 0; i < navLinks.length; ++i) {
-            navLinks[i]
-                .classList
-                .remove('visible');
-        }
-    };
-
 
 // Replace cart at the header on mobile screen
     const cart = document.getElementById("cart");
@@ -425,6 +397,79 @@ document.addEventListener("DOMContentLoaded",() => {
 
 
 
+/*
+ * Работа с городом пользователя.
+ *
+ * Смтотрим город в Storage, елси его нет, то создаём перемунную
+ * с городом по умолчанюи (Москва).
+ *
+ * Размещаем город по умолчанию в выпадающем меню выбора города
+ * в хедере.
+ * */
+    if (storageAvailable('localStorage')) {
+        if(!localStorage.getItem('usrCity')) {
+            localStorage.setItem('usrCity', 'Москва'); // Устанавливаем город по умолчанию в localStorage
+        }
+    }
+    else {
+        console.log(
+            'Браузер не поддерживает localStorage, возможно находится в режиме Инкогнито',
+            'Необходима реализация поддержки выбора города на альтернативной технологии.'
+        );
+    }
+/*
+ * Меняем город пользователя по клику на пунке города
+ * в выпадающем меню в хедере
+ * */
+    let cities = document.querySelectorAll(".region__item");
+    let cityContainer = document.getElementById("regionCity");
+
+
+    const activeSelectedCity = () => {
+        let usrCity = localStorage.getItem('usrCity');
+        let cityItems = document.getElementsByClassName("region__item");
+
+        for (let i = 0; i < cityItems.length; i++) {
+            usrCity === cityItems[i].dataset.regionCity
+                ? cityItems[i].classList.add('active')
+                : cityItems[i].classList.remove('active');
+        }
+    };
+
+    // Размещаем город пользователя как выбранный в хедере
+    cityContainer.innerHTML = localStorage.getItem('usrCity');
+
+    // Делаем выбранный город пользователя скрытым при инициализации страницы
+    activeSelectedCity();
+
+    for (let i = 0; i < cities.length; i++) {
+        cities[i].addEventListener("click", event => {
+            let cityItem = event.target.closest(".region__item");
+
+            // Получаем город по которому кликнул пользователь
+            let city = cityItem.dataset.regionCity
+                ? cityItem.dataset.regionCity
+                : event.target.closest(".region__item").dataset.regionCity;
+
+            // Меняем город в контейнере
+            cityContainer.innerHTML = city;
+
+            // Меняем город пользователя в localStorage
+            localStorage.setItem('usrCity', city);
+
+            activeSelectedCity();
+        });
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     // ***Янадекс нары -- Начало
@@ -534,16 +579,32 @@ document.addEventListener("DOMContentLoaded",() => {
         }
     }
     // ***Янадекс карты -- Конец
-
-
-
-
-
-
-
-
-
 });
+
+
+/*
+ * Функция проверки поддержки localStorage
+ * if (storageAvailable('localStorage')) {
+ * 	// Yippee! We can use localStorage awesomeness
+ * }
+ * else {
+ * 	// Too bad, no localStorage for us
+ * }
+ * */
+function storageAvailable(type) {
+    try {
+        let storage = window[type],
+            x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}
+
+
 
 
 

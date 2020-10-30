@@ -104,7 +104,7 @@
     padding: 0
 }
 
-.form .label_check input {
+.form .label_check .input {
     position: absolute;
     z-index: -1;
     opacity: 0;
@@ -112,7 +112,7 @@
     height: 1px
 }
 
-.form .label_check input:checked + .checker:before {
+.form .label_check .input:checked + .checker:before {
     opacity: 1
 }
 
@@ -149,7 +149,7 @@
     position: relative
 }
 
-.form .label_file input {
+.form .label_file .input {
     visibility: hidden;
     width: .1px;
     height: .1px;
@@ -291,7 +291,7 @@
     margin-right: 0
 }
 
-.form .label_value input {
+.form .label_value .input {
     background-color: #fff;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -545,7 +545,7 @@
     }
 }
 
-.form_comments-text textarea {
+.form_comments-text .textarea {
     max-width: 441px;
     width: 100%;
     height: 60px;
@@ -553,7 +553,7 @@
 }
 
 @media (min-width: 1200px) {
-    .form_comments-text textarea {
+    .form_comments-text .textarea {
         width: 441px
     }
 }
@@ -988,7 +988,7 @@ a {
     left: 0
 }
 
-.control, input, select, textarea {
+.control, .input, .select, .textarea {
     width: 100%;
     height: 40px;
     font-size: 14px;
@@ -1007,7 +1007,7 @@ a {
     text-align: left
 }
 
-select {
+.select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -1016,52 +1016,52 @@ select {
     cursor: pointer
 }
 
-select::-ms-expand {
+.select::-ms-expand {
     display: none
 }
 
-textarea {
+.textarea {
     padding: 10px 16px
 }
 
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+.input::-webkit-input-placeholder, .textarea::-webkit-input-placeholder {
     opacity: 1;
     color: rgba(0, 0, 0, .5);
     -webkit-transition: opacity .3s ease;
     transition: opacity .3s ease
 }
 
-input:-moz-placeholder, input::-moz-placeholder, textarea:-moz-placeholder, textarea::-moz-placeholder {
+.input:-moz-placeholder, .input::-moz-placeholder, .textarea:-moz-placeholder, .textarea::-moz-placeholder {
     opacity: 1;
     -moz-transition: opacity .3s ease;
     transition: opacity .3s ease
 }
 
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+.input:-ms-input-placeholder, .textarea:-ms-input-placeholder {
     opacity: 1;
     -ms-transition: opacity .3s ease;
     transition: opacity .3s ease
 }
 
-input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
+.input:focus::-webkit-input-placeholder, .textarea:focus::-webkit-input-placeholder {
     opacity: 0;
     -webkit-transition: opacity .3s ease;
     transition: opacity .3s ease
 }
 
-input:focus:-moz-placeholder, input:focus::-moz-placeholder, textarea:focus:-moz-placeholder, textarea:focus::-moz-placeholder {
+.input:focus:-moz-placeholder, .input:focus::-moz-placeholder, .textarea:focus:-moz-placeholder, .textarea:focus::-moz-placeholder {
     opacity: 0;
     -moz-transition: opacity .3s ease;
     transition: opacity .3s ease
 }
 
-input:focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder {
+.input:focus:-ms-input-placeholder, .textarea:focus:-ms-input-placeholder {
     opacity: 0;
     -ms-transition: opacity .3s ease;
     transition: opacity .3s ease
 }
 
-button:active, button:focus, button:hover, input:active, input:focus, input:hover, textarea:active, textarea:focus, textarea:hover {
+button:active, button:focus, button:hover, .input:active, .input:focus, .input:hover, .textarea:active, .textarea:focus, .textarea:hover {
     outline: 0;
     outline-offset: 0
 }
@@ -1265,7 +1265,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header .region.city-select-visible .region__list {
-    max-height: 150px;
+    max-height: 300px;
     opacity: 1;
     padding: 10px 0 20px;
     -webkit-box-shadow: 2px 1px 8px rgba(0, 0, 0, .15);
@@ -1380,7 +1380,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     border: 2px solid #eee;
     border-top: none;
-    background-color: #fff;
+    background-color: #fff !important;
     font-family: 'Source Sans Pro', sans-serif;
     padding: 0;
     left: -3px;
@@ -1490,7 +1490,15 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 1250px) {
     .header .nav__link {
         height: 64px;
-        position: relative
+        position: relative;
+    }
+    
+    .header .nav__link.selected {
+        color: #f1852c !important;
+    }
+    
+    .header .nav__link.selected::after {
+        border-color: #f1852c !important;
     }
 }
 
@@ -1540,11 +1548,8 @@ h1, h2, h3, h4, h5, h6 {
 
     .header .nav__item:hover .dropdown__list {
         opacity: 1;
-        padding: 7px 22px 20px
-    }
-
-    .header .nav__item:hover .dropdown__list.company {
-        max-height: 100px
+        padding: 7px 22px 20px;
+        max-height: 200px;
     }
 
     .header .nav__item:hover .nav__link {
@@ -1650,13 +1655,18 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     display: inline-block;
     text-transform: none !important;
-    color: #fff !important
+    color: #fff !important;
+    white-space: nowrap;
 }
 
 @media (min-width: 1250px) {
     .header .nav__item .dropdown__link {
         color: #000 !important;
         margin-bottom: 12px
+    }
+    
+    .header .nav__item .dropdown__link.selected {
+        color: #f1852c !important;
     }
 
     .header .nav__item .dropdown__link:hover {
@@ -1682,6 +1692,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header .nav__item.visible .dropdown__list.company {
+    max-height: 110px
+}
+
+.header .nav__item.visible .dropdown__list.prod {
+    max-height: 220px
+}
+
+.header .nav__item.visible .dropdown__list.production {
+    max-height: 275px
+}
+
+.header .nav__item.visible .dropdown__list.rent {
     max-height: 110px
 }
 
@@ -4936,14 +4958,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0
 }
 
-.modal__msg textarea {
+.modal__msg .textarea {
     width: 100%;
     height: 170px;
     resize: none
 }
 
 @media (min-width: 768px) {
-    .modal__msg textarea {
+    .modal__msg .textarea {
         width: 251px;
         height: 241px
     }

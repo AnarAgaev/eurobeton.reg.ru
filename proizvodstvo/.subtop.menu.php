@@ -1,0 +1,39 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"Товарный бетон", 
+		"/proizvodstvo/tovarnyy-beton/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Щебень", 
+		"/proizvodstvo/shcheben/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Лаборатория", 
+		"/proizvodstvo/laboratoriya/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Сертификаты", 
+		"/proizvodstvo/sertifikaty/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Дилерам", 
+		"/proizvodstvo/dileram/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

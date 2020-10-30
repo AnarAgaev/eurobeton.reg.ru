@@ -27,7 +27,7 @@
 
     ?>
 </head>
-<body class="page-index">
+<body>
 	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
 	<div class="modal" id="modalSetOrder">
 		<div class="modal__dialog modal__dialog_set-order">
@@ -71,45 +71,94 @@
 								<div class="region__map-marker d-md-none"><img src="<?= DEFAULT_TEMPLATE_PATH; ?>/img/map-marker-alt-solid.svg" alt=""
 																			   title=""></div>
 								<div class="region__caption d-none d-md-block">Ваш регион:</div>
-								<div class="region__description" id="regionCity">Москва</div>
-								<ul class="region__list">
-									<li class="region__item active" data-region-city="Москва"><span>Москва</span></li>
-									<li class="region__item" data-region-city="Липецк"><span>Липецк</span></li>
-									<li class="region__item" data-region-city="Екатеринбург"><span>Екатеринбург</span></li>
-									<li class="region__item" data-region-city="Кстово"><span>Кстово</span></li>
-									<li class="region__item" data-region-city="Лобня"><span>Лобня</span></li>
-								</ul>
+								<div class="region__description" id="regionCity"></div>
+
+                                <? // Список городов в хедере сайта ?>
+                                <?$APPLICATION->IncludeComponent("bitrix:news.list", "cities", Array(
+                                    "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
+                                        "ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
+                                        "AJAX_MODE" => "N",	// Включить режим AJAX
+                                        "AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
+                                        "AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
+                                        "AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
+                                        "AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
+                                        "CACHE_FILTER" => "N",	// Кешировать при установленном фильтре
+                                        "CACHE_GROUPS" => "Y",	// Учитывать права доступа
+                                        "CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+                                        "CACHE_TYPE" => "A",	// Тип кеширования
+                                        "CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
+                                        "DETAIL_URL" => "",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
+                                        "DISPLAY_BOTTOM_PAGER" => "N",	// Выводить под списком
+                                        "DISPLAY_DATE" => "N",	// Выводить дату элемента
+                                        "DISPLAY_NAME" => "Y",	// Выводить название элемента
+                                        "DISPLAY_PICTURE" => "N",	// Выводить изображение для анонса
+                                        "DISPLAY_PREVIEW_TEXT" => "N",	// Выводить текст анонса
+                                        "DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
+                                        "FIELD_CODE" => array(	// Поля
+                                            0 => "",
+                                            1 => "",
+                                        ),
+                                        "FILTER_NAME" => "",	// Фильтр
+                                        "HIDE_LINK_WHEN_NO_DETAIL" => "N",	// Скрывать ссылку, если нет детального описания
+                                        "IBLOCK_ID" => "1",	// Код информационного блока
+                                        "IBLOCK_TYPE" => "Structure",	// Тип информационного блока (используется только для проверки)
+                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",	// Включать инфоблок в цепочку навигации
+                                        "INCLUDE_SUBSECTIONS" => "N",	// Показывать элементы подразделов раздела
+                                        "MESSAGE_404" => "",	// Сообщение для показа (по умолчанию из компонента)
+                                        "NEWS_COUNT" => "20",	// Количество новостей на странице
+                                        "PAGER_BASE_LINK_ENABLE" => "N",	// Включить обработку ссылок
+                                        "PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
+                                        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
+                                        "PAGER_SHOW_ALL" => "N",	// Показывать ссылку "Все"
+                                        "PAGER_SHOW_ALWAYS" => "N",	// Выводить всегда
+                                        "PAGER_TEMPLATE" => ".default",	// Шаблон постраничной навигации
+                                        "PAGER_TITLE" => "Новости",	// Название категорий
+                                        "PARENT_SECTION" => "",	// ID раздела
+                                        "PARENT_SECTION_CODE" => "",	// Код раздела
+                                        "PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
+                                        "PROPERTY_CODE" => array(	// Свойства
+                                            0 => "",
+                                            1 => "",
+                                        ),
+                                        "SET_BROWSER_TITLE" => "N",	// Устанавливать заголовок окна браузера
+                                        "SET_LAST_MODIFIED" => "N",	// Устанавливать в заголовках ответа время модификации страницы
+                                        "SET_META_DESCRIPTION" => "N",	// Устанавливать описание страницы
+                                        "SET_META_KEYWORDS" => "N",	// Устанавливать ключевые слова страницы
+                                        "SET_STATUS_404" => "N",	// Устанавливать статус 404
+                                        "SET_TITLE" => "N",	// Устанавливать заголовок страницы
+                                        "SHOW_404" => "N",	// Показ специальной страницы
+                                        "SORT_BY1" => "ACTIVE_FROM",	// Поле для первой сортировки новостей
+                                        "SORT_BY2" => "SORT",	// Поле для второй сортировки новостей
+                                        "SORT_ORDER1" => "DESC",	// Направление для первой сортировки новостей
+                                        "SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
+                                        "STRICT_SECTION_CHECK" => "N",	// Строгая проверка раздела для показа списка
+                                    ),
+                                    false
+                                );?>
 							</div>
-							<div id="navContainer">
-								<nav class="nav" id="headerTopNav">
-									<ul class="nav__list d-flex">
-										<li class="drop nav__item d-flex flex-column align-items-start"><a
-												class="nav__link drop" href="/">О компании</a>
-											<ul class="company dropdown__list d-flex flex-column">
-												<li class="dropdown__item"><a class="dropdown__link" href="/">Новости</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">Вакансии</a></li>
-											</ul>
-										</li>
-										<li class="drop nav__item d-flex align-items-center"><a class="nav__link drop" href="/">Продукция</a>
-										</li>
-										<li class="drop nav__item d-flex align-items-center"><a class="nav__link drop" href="/">Производство</a>
-										</li>
-										<li class="drop nav__item d-flex align-items-center"><a class="nav__link drop" href="/">Аренда</a>
-										</li>
-										<li class="nav__item d-flex align-items-center"><a class="nav__link"
-																						   href="/">Доставка</a></li>
-										<li class="nav__item d-flex align-items-center"><a class="nav__link"
-																						   href="/">Тендеры</a></li>
-										<li class="nav__item d-flex align-items-center"><a class="nav__link"
-																						   href="/">Контакты</a></li>
-									</ul>
-								</nav>
-							</div>
+
+                            <? // Главное меню в хедере сайта ?>
+                            <?$APPLICATION->IncludeComponent("bitrix:menu", "main_menu", Array(
+                                "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                                    "CHILD_MENU_TYPE" => "subtop",	// Тип меню для остальных уровней
+                                    "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                                    "MAX_LEVEL" => "2",	// Уровень вложенности меню
+                                    "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                                    "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                                    "MENU_CACHE_TYPE" => "N",	// Тип кеширования
+                                    "MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
+                                    "ROOT_MENU_TYPE" => "top",	// Тип меню для первого уровня
+                                    "USE_EXT" => "N",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                                    "COMPONENT_TEMPLATE" => "main_menu"
+                                ),
+                                false
+                            );?>
+
 							<div class="handset" id="headerPhoneBtn"><img src="<?= DEFAULT_TEMPLATE_PATH; ?>/img/phone-alt-solid.svg" alt="" title=""></div>
 							<div class="cart d-flex justify-content-end align-items-center" id="cart">
 								<div class="cart__caption">Корзина</div>
 								<div class="cart__items">
-									<div class="cart__items__num">5</div>
+									<div class="cart__items__num" id="cartProds"></div>
 								</div>
 							</div>
 						</div>
