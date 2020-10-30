@@ -2,6 +2,7 @@
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle("Главная");
 ?>
+
 <div class="page-index">
     <div class="billboard section_container">
         <div class="container">
@@ -49,48 +50,76 @@ $APPLICATION->SetTitle("Главная");
         </div>
     </div>
 
+    <? //Вывод карточек с предложениями на главной странице: Инфоблоки->Типы инфоблоков->Структура->Предложения ?>
+    <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list", 
+	"offers", 
+	array(
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"DISPLAY_DATE" => "N",
+		"DISPLAY_NAME" => "Y",
+		"DISPLAY_PICTURE" => "Y",
+		"DISPLAY_PREVIEW_TEXT" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"FILTER_NAME" => "",
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+		"IBLOCK_ID" => "2",
+		"IBLOCK_TYPE" => "Structure",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"INCLUDE_SUBSECTIONS" => "Y",
+		"MESSAGE_404" => "",
+		"NEWS_COUNT" => "4",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_DESC_NUMBERING" => "N",
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALWAYS" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Новости",
+		"PARENT_SECTION" => "",
+		"PARENT_SECTION_CODE" => "",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"PROPERTY_CODE" => array(
+			0 => "PAGE_URL",
+			1 => "",
+		),
+		"SET_BROWSER_TITLE" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_404" => "N",
+		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_ORDER2" => "ASC",
+		"STRICT_SECTION_CHECK" => "N",
+		"COMPONENT_TEMPLATE" => "offers"
+	),
+	false
+);?>
 
-    <!--<div class="offers section_container">
-        <div class="container">
-            <div class="row">
-                <div class="offers__card-wrap col-xl-6 d-flex justify-content-center">
-                    <div class="offers__card"><a class="card-body offers__card-body" href="">
-                            <div class="offers__caption">АРЕНДА</div>
-                            <div class="offers__title">Аренда спецтехники</div>
-                            <div class="offers__txt">Аренда бетононасосов и кранов в Москве и Московской области</div>
-                            <div class="offers__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/offers-1.png" alt="" title=""></div>
-                        </a></div>
-                </div>
-                <div class="offers__card-wrap col-xl-6 d-flex justify-content-center">
-                    <div class="offers__card"><a class="card-body offers__card-body" href="">
-                            <div class="offers__caption">РАСЧЕТ ДОСТАВКИ БЕТОНА ОНЛАЙН</div>
-                            <div class="offers__title">Купить бетон с доставкой</div>
-                            <div class="offers__txt">Купить бетон с доставкой по Москве и области</div>
-                            <div class="offers__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/offers-2.png" alt="" title=""></div>
-                        </a></div>
-                </div>
-                <div class="offers__card-wrap col-xl-6 d-flex justify-content-center">
-                    <div class="offers__card"><a class="card-body offers__card-body" href="">
-                            <div class="offers__caption">СОБСТВЕННАЯ ЛАБОРАТОРИЯ</div>
-                            <div class="offers__title">Выпуск бетона в соответствии с ГОСТ</div>
-                            <div class="offers__txt">Наша лаборатория предоставляет широкий спектр лабораторного
-                                сопровождения объектов
-                            </div>
-                            <div class="offers__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/offers-3.png" alt="" title=""></div>
-                        </a></div>
-                </div>
-                <div class="offers__card-wrap col-xl-6 d-flex justify-content-center">
-                    <div class="offers__card"><a class="card-body offers__card-body" href="">
-                            <div class="offers__caption">тендеры</div>
-                            <div class="offers__title">Тендеры на поставку</div>
-                            <div class="offers__txt">АО «ЕВРОБЕТОН» объявляет конкурс на поставку в 1 квартале 2018 г.</div>
-                            <div class="offers__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/offers-4.png" alt="" title=""></div>
-                        </a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="calculator section_container">
+
+
+    <!--<div class="calculator section_container">
         <div class="calculator">
             <div class="calculator__title d-flex align-items-center justify-content-center">РАССЧИТАТЬ ЦЕНУ БЕТОНА С
                 ДОСТАВКОЙ
@@ -286,40 +315,85 @@ $APPLICATION->SetTitle("Главная");
             </div>
         </div>
     </div>
-    <div class="advantages section_container">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-xl-3 advantages__card-wrap">
-                    <div class="advantages__card d-flex flex-column justify-content-center align-items-center">
-                        <div class="advantages__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/advantages-1.png" alt="" title=""></div>
-                        <div class="advantages__desc px-5">Собственная сырьевая база</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 advantages__card-wrap">
-                    <div class="advantages__card d-flex flex-column justify-content-center align-items-center">
-                        <div class="advantages__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/advantages-2.png" alt="" title=""></div>
-                        <div class="advantages__desc px-5">Высококачественное сырье</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 advantages__card-wrap">
-                    <div class="advantages__card d-flex flex-column justify-content-center align-items-center">
-                        <div class="advantages__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/advantages-3.png" alt="" title=""></div>
-                        <div class="advantages__desc">Собственная испытательная лаборатория</div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 advantages__card-wrap">
-                    <div class="advantages__card d-flex flex-column justify-content-center align-items-center">
-                        <div class="advantages__pic"><img src="<?/*= DEFAULT_TEMPLATE_PATH; */?>/img/advantages-4.png" alt="" title=""></div>
-                        <div class="advantages__desc px-5">Тотальный контроль производства</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+    -->
+
+
+
+    <? //Выводим списка преимуществ на главной странице: Инфоблоки->Типы инфоблоков->Структура->Преимушества ?>
+    <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list", 
+	"advantages", 
+	array(
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "N",
+		"DISPLAY_DATE" => "N",
+		"DISPLAY_NAME" => "Y",
+		"DISPLAY_PICTURE" => "Y",
+		"DISPLAY_PREVIEW_TEXT" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"FILTER_NAME" => "",
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
+		"IBLOCK_ID" => "3",
+		"IBLOCK_TYPE" => "Structure",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"INCLUDE_SUBSECTIONS" => "N",
+		"MESSAGE_404" => "",
+		"NEWS_COUNT" => "4",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_DESC_NUMBERING" => "N",
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_SHOW_ALWAYS" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Новости",
+		"PARENT_SECTION" => "",
+		"PARENT_SECTION_CODE" => "",
+		"PREVIEW_TRUNCATE_LEN" => "",
+		"PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"SET_BROWSER_TITLE" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_404" => "N",
+		"SORT_BY1" => "ID",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER1" => "ASC",
+		"SORT_ORDER2" => "ASC",
+		"STRICT_SECTION_CHECK" => "N",
+		"COMPONENT_TEMPLATE" => "advantages"
+	),
+	false
+);?>
+
     <div class="map section_container">
         <div class="map__title px-5 section_title">Собственные заводы</div>
         <div class="map__body" id="map"></div>
     </div>
+
+    <!--
     <div class="partners section_container">
         <div class="container">
             <div class="partners__title section_title">Наши партнеры</div>
