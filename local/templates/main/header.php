@@ -168,8 +168,19 @@
 			<div class="header__bottom" id="headerBottomContainer">
 				<div class="container header__bottom__container">
 					<div class="headerBottom header__bottom__wrap d-flex justify-content-between align-items-center"
-						 id="headerBottom"><a class="logo" href="/" id="logo"><img class="logo" src="<?= DEFAULT_TEMPLATE_PATH; ?>/img/logo.svg"
-																				   alt="главная" title="главная"></a>
+						 id="headerBottom">
+                        <a class="logo" href="/" id="logo">
+                            <?$APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "",
+                                Array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "AREA_FILE_SUFFIX" => "inc",
+                                    "EDIT_TEMPLATE" => "",
+                                    "PATH" => "/include/header-logo.php"
+                                )
+                            );?>
+                        </a>
 						<div id="prodContainer">
 							<div class="products d-flex flex-column" id="nav">
 								<ul class="products__list d-flex">
@@ -233,8 +244,31 @@
 						</div>
 						<div class="operating d-flex flex-column align-items-center align-items-md-end justify-content-center"
 							 id="operating">
-							<div class="operating__worktime">Работаем: 24/7</div>
-							<div class="operating__phone"><a class="phone" href="tel:84957953018">+7 (495) 795-30-18</a></div>
+							<div class="operating__worktime">
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:main.include",
+                                    "",
+                                    Array(
+                                        "AREA_FILE_SHOW" => "file",
+                                        "AREA_FILE_SUFFIX" => "inc",
+                                        "EDIT_TEMPLATE" => "",
+                                        "PATH" => "/include/working-hours.php"
+                                    )
+                                );?>
+                            </div>
+                            <div class="operating__phone">
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:main.include",
+                                    "",
+                                    Array(
+                                        "AREA_FILE_RECURSIVE" => "Y",
+                                        "AREA_FILE_SHOW" => "file",
+                                        "AREA_FILE_SUFFIX" => "inc",
+                                        "EDIT_TEMPLATE" => "",
+                                        "PATH" => "/include/header-phone.php"
+                                    )
+                                );?>
+                            </div>
 						</div>
 					</div>
 				</div>
