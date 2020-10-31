@@ -482,13 +482,6 @@ $APPLICATION->SetTitle("Главная");
         )
     );?>
 
-
-
-
-
-    <!--
-
-
     <div class="promo section_container">
         <div class="container">
             <div class="row d-flex">
@@ -517,6 +510,15 @@ $APPLICATION->SetTitle("Главная");
             </div>
         </div>
     </div>
+
+
+
+
+
+
+    <!--
+
+
     <div class="container">
         <div class="all-news"><a href="">Все новости</a></div>
     </div>
