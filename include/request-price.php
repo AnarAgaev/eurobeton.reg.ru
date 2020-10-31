@@ -16,7 +16,7 @@
                             "AREA_FILE_SHOW" => "file",
                             "AREA_FILE_SUFFIX" => "inc",
                             "EDIT_TEMPLATE" => "",
-                            "PATH" => "/include/request-pirce-title.php"
+                            "PATH" => "/include/request-price-title.php"
                         )
                     );?></div>
                 <div class="request__content request-men">
@@ -27,7 +27,7 @@
                             "AREA_FILE_SHOW" => "file",
                             "AREA_FILE_SUFFIX" => "inc",
                             "EDIT_TEMPLATE" => "",
-                            "PATH" => "/include/request-pirce-txt.php"
+                            "PATH" => "/include/request-price-txt.php"
                         )
                     );?>
                 </div>

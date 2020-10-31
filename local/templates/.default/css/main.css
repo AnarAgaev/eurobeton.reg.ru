@@ -3792,7 +3792,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-.promo__banner__item {
+.promo__banner__list li {
     color: #727272;
     font-size: 15px;
     font-weight: 400;
@@ -3803,13 +3803,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-    .promo__banner__item {
+    .promo__banner__list li {
         line-height: 36px;
         margin-bottom: 0
     }
 }
 
-.promo__banner__item:before {
+.promo__banner__list li:before {
     content: "";
     display: inline-block;
     width: 3px;
@@ -3825,12 +3825,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (min-width: 768px) {
-    .promo__banner__item:before {
+    .promo__banner__list li:before {
         top: 50%
     }
 }
 
-.promo__banner__wrap:first-child {
+.promo__banner__list ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.promo__banner__list ul:first-child {
     padding-right: 55px
 }
 
