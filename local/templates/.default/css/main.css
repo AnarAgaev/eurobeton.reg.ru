@@ -58,7 +58,7 @@
     display: inline-block;
     max-width: 100%;
     margin-bottom: 28px;
-    margin-right: 29px
+    margin-right: 23px
 }
 
 .form .label:last-child {
@@ -217,7 +217,7 @@
 
 @media (min-width: 576px) {
     .form .label_w380 {
-        margin-right: 29px
+        margin-right: 23px
     }
 }
 
@@ -458,8 +458,12 @@
     margin-right: 4px
 }
 
+.form_parametrs .group-additive {
+    margin-bottom: 22px
+}
+
 .form_parametrs .group-two {
-    margin-top: 22px
+    display: none;
 }
 
 .form_parametrs .btn-form-send {
@@ -2854,6 +2858,10 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+.calculator {
+    position: relative;
+}
+
 .calculator__title {
     height: 130px;
     background-color: #434245;
@@ -2877,7 +2885,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .calculator__resaults-wrap {
     background-color: #434245;
-    padding: 16px 0 27px
+    padding: 16px 0 27px;
+    display: none !important;
 }
 
 @media (min-width: 1200px) {
@@ -7807,4 +7816,28 @@ h1, h2, h3, h4, h5, h6 {
         order: 1;
         margin-top: 30px
     }
+}
+
+
+
+
+
+
+
+/*!!! Заглушка до момнета деплоя рабочей версии калькулятора. После тестрирования на продакшене нужно удалить*/
+.temporary-plug {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255,255,255,.7) url("/local/templates/.default/img/temporary-plug.png");
+    text-align: center;
+}
+.temporary-plug .btn {
+    margin-top: 30px;
+    display: inline-block;
+}
+.temporary-plug h4 {
+    font-size: 17px;
 }

@@ -23,11 +23,13 @@
         Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/main.js');
 
         /* Добавляем Яндекс карту используемую на главной странице */
-        if($APPLICATION->GetCurPage() == '/')
+        if($APPLICATION->GetCurPage(false) == '/')
             Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
     ?>
 </head>
-<body>
+<body class="<?
+    if($APPLICATION->GetCurPage() == '/') echo 'page-index';?>">
+
 	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
 	<div class="modal" id="modalSetOrder">
 		<div class="modal__dialog modal__dialog_set-order">
