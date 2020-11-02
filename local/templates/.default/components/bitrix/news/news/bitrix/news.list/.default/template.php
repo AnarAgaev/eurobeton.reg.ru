@@ -40,8 +40,15 @@ $this->setFrameMode(true);
         <br /><?=$arResult["NAV_STRING"]?>
     <?endif;?> -->
 </div>
-
-
+<div class="get-more">
+    <div class="container">
+        <div class="d-flex justify-content-center page-news">
+            <a class="get-more__link" href="">
+                Загрузить ещё новости
+            </a>
+        </div>
+    </div>
+</div>
 
 <?php /*
 <div class="news-list">

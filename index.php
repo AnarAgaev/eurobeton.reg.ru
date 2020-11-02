@@ -116,268 +116,250 @@ array(
 false
 );?>
 
-
-
-    <div class="calculator section_container">
-        <div class="calculator">
-            <div class="calculator__title d-flex align-items-center justify-content-center">
-                РАССЧИТАТЬ ЦЕНУ БЕТОНА С ДОСТАВКОЙ
+<div class="calculator section_container">
+<div class="calculator">
+    <div class="calculator__title d-flex align-items-center justify-content-center">
+        РАССЧИТАТЬ ЦЕНУ БЕТОНА С ДОСТАВКОЙ
+    </div>
+    <form class="form" enctype="multipart/form-data" method="post">
+        <div class="container">
+            <div class="form__controls form_place d-flex align-items-lg-end flex-column align-items-start flex-lg-row">
+                <div class="form__title">Место и время доставки</div>
+                <label class="label label_w380">
+                    <span>Адрес доставки:</span>
+                    <input class="input" type="text" placeholder="Россия, Московская область, сельский посёлок Карачиха">
+                </label>
+                <label class="label label_w212">
+                    <span>Дата доставки:</span>
+                    <input class="input" type="text" placeholder="Не указана">
+                </label>
+                <label class="label label_check d-flex align-items-center">
+                    <span>Самовывоз</span>
+                    <input class="input" type="checkbox" value="true" name="takeself" checked>
+                    <span class="checker"></span>
+                </label>
+                <label class="label label_w205">
+                    <span>Выберите завод:</span>
+                    <input class="input" type="text" placeholder="Не указан">
+                </label>
             </div>
-            <form class="form" enctype="multipart/form-data" method="post">
-                <div class="container">
-                    <div class="form__controls form_place d-flex align-items-lg-end flex-column align-items-start flex-lg-row">
-                        <div class="form__title">Место и время доставки</div>
-                        <label class="label label_w380">
-                            <span>Адрес доставки:</span>
-                            <input class="input" type="text" placeholder="Россия, Московская область, сельский посёлок Карачиха">
-                        </label>
-                        <label class="label label_w212">
-                            <span>Дата доставки:</span>
-                            <input class="input" type="text" placeholder="Не указана">
-                        </label>
+            <div class="form__controls form_parametrs">
+                <div class="form__title">Основные параметры бетона</div>
+                <div class="group-one">
+                    <label class="label label_w380 label_select">
+                        <span>Марка:</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+                    <label class="label label_w212 label_select">
+                        <span>Прочность (кгс/см<sup>2</sup>):</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+                    <label class="label label_w245 label_select">
+                        <span>Наполнитель:</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+
+                    <label class="label label_value">
+                        <span>Объём (м<sup>3</sup>):</span>
+                        <span class="value-checker">
+                            <span class="value-checker__btn value-checker__btn_minus"></span>
+                            <input class="input" type="text" value="0" readonly="">
+                            <span class="value-checker__btn value-checker__btn_plus"></span>
+                        </span>
+                    </label>
+                </div>
+                <div class="group-additive">
+                    <div class="tglr"><b>Добавки</b>(выберите при необходиости):</div>
+                </div>
+                <div class="group-two">
+                    <label class="label label_w179 label_select">
+                        <span>Морозостойкость:</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+                    <label class="label label_w174 label_select">
+                        <span>Подвижность:</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+                    <label class="label label_w212 label_select">
+                        <span>Водонепроницаемость:</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+                    <label class="label label_w179 label_select">
+                        <span>Противоморозные доб.:</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+                    <label class="label label_w205 label_select">
+                        <span>Фибра:</span>
+                        <select class="select">
+                            <option value="">Не указана</option>
+                            <option>Пункт 1</option>
+                            <option>Пункт 2</option>
+                            <option>Пункт 3</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="btn-form-send"><span>добавить товар</span></div>
+            </div>
+
+
+
+            <div class="form_comments d-flex justify-content-between flex-wrap">
+                <div class="d-flex flex-column wrapper flex-xl-row">
+                    <div class="form_comments-text">
+                        <div class="title">Комментарий к заказу:</div>
+                        <textarea class="textarea" placeholder="Начните вводить ..."></textarea>
+                    </div>
+                    <div class="form_comments-technics">
+                        <div class="title">Аренда техники:</div>
                         <label class="label label_check d-flex align-items-center">
-                            <span>Самовывоз</span>
-                            <input class="input" type="checkbox" value="true" name="takeself" checked>
+                            <span>Бетононасос</span>
+                            <input class="input" type="checkbox" value="true" name="pump" checked>
                             <span class="checker"></span>
                         </label>
-                        <label class="label label_w205">
-                            <span>Выберите завод:</span>
-                            <input class="input" type="text" placeholder="Не указан">
+                        <label class="label label_check d-flex align-items-center">
+                            <span>Кран</span>
+                            <input class="input" type="checkbox" value="true" name="crane">
+                            <span class="checker"></span>
                         </label>
                     </div>
-                    <div class="form__controls form_parametrs">
-                        <div class="form__title">Основные параметры бетона</div>
-                        <div class="group-one">
-                            <label class="label label_w380 label_select">
-                                <span>Марка:</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-                            <label class="label label_w212 label_select">
-                                <span>Прочность (кгс/см<sup>2</sup>):</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-                            <label class="label label_w245 label_select">
-                                <span>Наполнитель:</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-
-                            <label class="label label_value">
-                                <span>Объём (м<sup>3</sup>):</span>
-                                <span class="value-checker">
-                                    <span class="value-checker__btn value-checker__btn_minus"></span>
-                                    <input class="input" type="text" value="0" readonly="">
-                                    <span class="value-checker__btn value-checker__btn_plus"></span>
-                                </span>
-                            </label>
-                        </div>
-                        <div class="group-additive">
-                            <div class="tglr"><b>Добавки</b>(выберите при необходиости):</div>
-                        </div>
-                        <div class="group-two">
-                            <label class="label label_w179 label_select">
-                                <span>Морозостойкость:</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-                            <label class="label label_w174 label_select">
-                                <span>Подвижность:</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-                            <label class="label label_w212 label_select">
-                                <span>Водонепроницаемость:</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-                            <label class="label label_w179 label_select">
-                                <span>Противоморозные доб.:</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-                            <label class="label label_w205 label_select">
-                                <span>Фибра:</span>
-                                <select class="select">
-                                    <option value="">Не указана</option>
-                                    <option>Пункт 1</option>
-                                    <option>Пункт 2</option>
-                                    <option>Пункт 3</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="btn-form-send"><span>добавить товар</span></div>
-                    </div>
-
-
-
-                    <div class="form_comments d-flex justify-content-between flex-wrap">
-                        <div class="d-flex flex-column wrapper flex-xl-row">
-                            <div class="form_comments-text">
-                                <div class="title">Комментарий к заказу:</div>
-                                <textarea class="textarea" placeholder="Начните вводить ..."></textarea>
-                            </div>
-                            <div class="form_comments-technics">
-                                <div class="title">Аренда техники:</div>
-                                <label class="label label_check d-flex align-items-center">
-                                    <span>Бетононасос</span>
-                                    <input class="input" type="checkbox" value="true" name="pump" checked>
-                                    <span class="checker"></span>
-                                </label>
-                                <label class="label label_check d-flex align-items-center">
-                                    <span>Кран</span>
-                                    <input class="input" type="checkbox" value="true" name="crane">
-                                    <span class="checker"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form_comments-offer d-flex flex-column align-items-center">
-                            <div class="title"><b>Набрал свыше 300 кубов?</b>Тогда получай</div>
-                            <a class="btn" href="">Персональное предложение</a></div>
-                    </div>
                 </div>
-            </form>
-            <div class="calculator__resaults-wrap d-flex justify-content-center align-items-center">
-                <div class="calculator__resaults d-flex align-items-center flex-column flex-xl-row">
-                    <div class="calculator__resaults-btn"><a class="btn" href="">добавить в корзину</a></div>
-                    <div class="calculator__resaults-price d-flex align-items-center">
-                        <div>Итого:<span>3000</span>руб.</div>
-                    </div>
-                    <div class="calculator__resaults-comments">
-                        <div class="calculator__resaults-delivery">Стоимость
-                            доставки:<span>Не выбран адрес доставки</span></div>
-                        <div class="calculator__resaults-concrete">Стоимость бетона:<span>Укажите параметры</span></div>
-                    </div>
-                </div>
+                <div class="form_comments-offer d-flex flex-column align-items-center">
+                    <div class="title"><b>Набрал свыше 300 кубов?</b>Тогда получай</div>
+                    <a class="btn" href="">Персональное предложение</a></div>
             </div>
-
-           <!-- !!! Заглушка до момнета деплоя рабочей версии калькулятора. После тестрирования на продакшене нужно удалить -->
-            <div class="temporary-plug d-flex justify-content-center align-items-center flex-column">
-                <h4>Скоро зедсь будет новый и удобный калькулятор.<br>А пока, если у Вас есть вопросы, их можно здалть менеджеру.</h4>
-                <a class="btn" href="">Вопрос менеджеру</a>
-            </div>
-
         </div>
-    </div>
-
-
-    <div class="prices section_container">
-        <div class="container">
-            <div class="prices__title section_title">Лучшие предложения</div>
-            <div class="prices__link"><a href="/">Перейти в каталог</a></div>
-            <div class="prices__slider">
-                <div class="slider">
-                    <div class="slider__controller slider__controller_left slider-controller-left"></div>
-                    <div class="slider__controller slider__controller_right slider-controller-right"></div>
-                    <div class="slider__viewport">
-                        <div class="slider__list d-flex">
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                            <div class="slider__item d-flex flex-column justify-content-start align-items-center">
-                                <div class="prices__pic" style="background-image: url('<?= DEFAULT_TEMPLATE_PATH;?>/img/prices-pic.jpg')"></div>
-                                <div class="prices__caption">БЕТОН</div>
-                                <div class="prices__desc">М 100 В7.5 П2-П4 F50 W2</div>
-                                <div class="prices__price">от<span>3000</span>руб./м<sup>2</sup></div>
-                                <div class="prices__btn"><a class="btn" href="/">ПОДРОБНЕЕ</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    </form>
+    <div class="calculator__resaults-wrap d-flex justify-content-center align-items-center">
+        <div class="calculator__resaults d-flex align-items-center flex-column flex-xl-row">
+            <div class="calculator__resaults-btn"><a class="btn" href="">добавить в корзину</a></div>
+            <div class="calculator__resaults-price d-flex align-items-center">
+                <div>Итого:<span>3000</span>руб.</div>
+            </div>
+            <div class="calculator__resaults-comments">
+                <div class="calculator__resaults-delivery">Стоимость
+                    доставки:<span>Не выбран адрес доставки</span></div>
+                <div class="calculator__resaults-concrete">Стоимость бетона:<span>Укажите параметры</span></div>
             </div>
         </div>
     </div>
 
+   <!-- !!! Заглушка до момнета деплоя рабочей версии калькулятора. После тестрирования на продакшене нужно удалить -->
+    <div class="temporary-plug d-flex justify-content-center align-items-center flex-column">
+        <h4>Скоро зедсь будет новый и удобный калькулятор.<br>А пока, если у Вас есть вопросы, их можно здалть менеджеру.</h4>
+        <a class="btn" href="">Вопрос менеджеру</a>
+    </div>
 
+</div>
+</div>
+
+<?/* Выводим слайдер с популярными товарами ТОЛЬКО ИНФОБЛОКА БЕТОН (из всех подразделов кталога):
+   * Инфоблоки->Типы инфоблоков->Каталог->Бетон
+   */
+$APPLICATION->IncludeComponent("bitrix:news.list", "beton-slider", Array(
+	"ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
+		"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
+		"AJAX_MODE" => "N",	// Включить режим AJAX
+		"AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
+		"AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
+		"AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
+		"AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
+		"CACHE_FILTER" => "N",	// Кешировать при установленном фильтре
+		"CACHE_GROUPS" => "Y",	// Учитывать права доступа
+		"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+		"CACHE_TYPE" => "A",	// Тип кеширования
+		"CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
+		"DETAIL_URL" => "",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
+		"DISPLAY_BOTTOM_PAGER" => "N",	// Выводить под списком
+		"DISPLAY_DATE" => "N",	// Выводить дату элемента
+		"DISPLAY_NAME" => "Y",	// Выводить название элемента
+		"DISPLAY_PICTURE" => "Y",	// Выводить изображение для анонса
+		"DISPLAY_PREVIEW_TEXT" => "Y",	// Выводить текст анонса
+		"DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
+		"FIELD_CODE" => array(	// Поля
+			0 => "",
+			1 => "",
+		),
+		"FILTER_NAME" => "",	// Фильтр
+		"HIDE_LINK_WHEN_NO_DETAIL" => "N",	// Скрывать ссылку, если нет детального описания
+		"IBLOCK_ID" => "7",	// Код информационного блока
+		"IBLOCK_TYPE" => "catalog",	// Тип информационного блока (используется только для проверки)
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",	// Включать инфоблок в цепочку навигации
+		"INCLUDE_SUBSECTIONS" => "Y",	// Показывать элементы подразделов раздела
+		"MESSAGE_404" => "",	// Сообщение для показа (по умолчанию из компонента)
+		"NEWS_COUNT" => "100",	// Количество новостей на странице
+		"PAGER_BASE_LINK_ENABLE" => "N",	// Включить обработку ссылок
+		"PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
+		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
+		"PAGER_SHOW_ALL" => "N",	// Показывать ссылку "Все"
+		"PAGER_SHOW_ALWAYS" => "N",	// Выводить всегда
+		"PAGER_TEMPLATE" => ".default",	// Шаблон постраничной навигации
+		"PAGER_TITLE" => "Новости",	// Название категорий
+		"PARENT_SECTION" => "",	// ID раздела
+		"PARENT_SECTION_CODE" => "",	// Код раздела
+		"PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
+		"PROPERTY_CODE" => array(	// Свойства
+			0 => "CONCRETE_GRADE",
+			1 => "CONCRETE_CLASS",
+			2 => "CONCRETE_MOBILITY",
+			3 => "CONCRETE_FROST",
+			4 => "CONCRETE_WATER",
+			5 => "CONCRETE_FILLER",
+			6 => "CONCRETE_STRENGTH",
+			7 => "PRICE",
+			8 => "PRICE_MINIMUM",
+			9 => "POPULAR",
+			10 => "",
+		),
+		"SET_BROWSER_TITLE" => "N",	// Устанавливать заголовок окна браузера
+		"SET_LAST_MODIFIED" => "N",	// Устанавливать в заголовках ответа время модификации страницы
+		"SET_META_DESCRIPTION" => "N",	// Устанавливать описание страницы
+		"SET_META_KEYWORDS" => "N",	// Устанавливать ключевые слова страницы
+		"SET_STATUS_404" => "N",	// Устанавливать статус 404
+		"SET_TITLE" => "N",	// Устанавливать заголовок страницы
+		"SHOW_404" => "N",	// Показ специальной страницы
+		"SORT_BY1" => "ACTIVE_FROM",	// Поле для первой сортировки новостей
+		"SORT_BY2" => "SORT",	// Поле для второй сортировки новостей
+		"SORT_ORDER1" => "DESC",	// Направление для первой сортировки новостей
+		"SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
+		"STRICT_SECTION_CHECK" => "N",	// Строгая проверка раздела для показа списка
+	),
+	false
+);?>
 
 <?/* Выводим списка преимуществ на главной странице:
    * Инфоблоки->Типы инфоблоков->Структура->Преимушества
