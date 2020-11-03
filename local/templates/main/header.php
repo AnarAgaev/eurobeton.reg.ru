@@ -76,64 +76,68 @@
 								<div class="region__description" id="regionCity"></div>
 
                                 <? // Список городов в хедере сайта ?>
-                                <?$APPLICATION->IncludeComponent("bitrix:news.list", "cities", Array(
-                                    "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
-                                        "ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
-                                        "AJAX_MODE" => "N",	// Включить режим AJAX
-                                        "AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
-                                        "AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
-                                        "AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
-                                        "AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
-                                        "CACHE_FILTER" => "N",	// Кешировать при установленном фильтре
-                                        "CACHE_GROUPS" => "Y",	// Учитывать права доступа
-                                        "CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-                                        "CACHE_TYPE" => "A",	// Тип кеширования
-                                        "CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
-                                        "DETAIL_URL" => "",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
-                                        "DISPLAY_BOTTOM_PAGER" => "N",	// Выводить под списком
-                                        "DISPLAY_DATE" => "N",	// Выводить дату элемента
-                                        "DISPLAY_NAME" => "Y",	// Выводить название элемента
-                                        "DISPLAY_PICTURE" => "N",	// Выводить изображение для анонса
-                                        "DISPLAY_PREVIEW_TEXT" => "N",	// Выводить текст анонса
-                                        "DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
-                                        "FIELD_CODE" => array(	// Поля
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:news.list",
+                                    "cities",
+                                    array(
+                                        "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                                        "ADD_SECTIONS_CHAIN" => "N",
+                                        "AJAX_MODE" => "N",
+                                        "AJAX_OPTION_ADDITIONAL" => "",
+                                        "AJAX_OPTION_HISTORY" => "N",
+                                        "AJAX_OPTION_JUMP" => "N",
+                                        "AJAX_OPTION_STYLE" => "Y",
+                                        "CACHE_FILTER" => "N",
+                                        "CACHE_GROUPS" => "Y",
+                                        "CACHE_TIME" => "36000000",
+                                        "CACHE_TYPE" => "A",
+                                        "CHECK_DATES" => "Y",
+                                        "DETAIL_URL" => "",
+                                        "DISPLAY_BOTTOM_PAGER" => "N",
+                                        "DISPLAY_DATE" => "N",
+                                        "DISPLAY_NAME" => "Y",
+                                        "DISPLAY_PICTURE" => "N",
+                                        "DISPLAY_PREVIEW_TEXT" => "N",
+                                        "DISPLAY_TOP_PAGER" => "N",
+                                        "FIELD_CODE" => array(
                                             0 => "",
                                             1 => "",
                                         ),
-                                        "FILTER_NAME" => "",	// Фильтр
-                                        "HIDE_LINK_WHEN_NO_DETAIL" => "N",	// Скрывать ссылку, если нет детального описания
-                                        "IBLOCK_ID" => "1",	// Код информационного блока
-                                        "IBLOCK_TYPE" => "Structure",	// Тип информационного блока (используется только для проверки)
-                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",	// Включать инфоблок в цепочку навигации
-                                        "INCLUDE_SUBSECTIONS" => "N",	// Показывать элементы подразделов раздела
-                                        "MESSAGE_404" => "",	// Сообщение для показа (по умолчанию из компонента)
-                                        "NEWS_COUNT" => "20",	// Количество новостей на странице
-                                        "PAGER_BASE_LINK_ENABLE" => "N",	// Включить обработку ссылок
-                                        "PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
-                                        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
-                                        "PAGER_SHOW_ALL" => "N",	// Показывать ссылку "Все"
-                                        "PAGER_SHOW_ALWAYS" => "N",	// Выводить всегда
-                                        "PAGER_TEMPLATE" => ".default",	// Шаблон постраничной навигации
-                                        "PAGER_TITLE" => "Новости",	// Название категорий
-                                        "PARENT_SECTION" => "",	// ID раздела
-                                        "PARENT_SECTION_CODE" => "",	// Код раздела
-                                        "PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
-                                        "PROPERTY_CODE" => array(	// Свойства
+                                        "FILTER_NAME" => "",
+                                        "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                                        "IBLOCK_ID" => "1",
+                                        "IBLOCK_TYPE" => "structures",
+                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                        "INCLUDE_SUBSECTIONS" => "N",
+                                        "MESSAGE_404" => "",
+                                        "NEWS_COUNT" => "20",
+                                        "PAGER_BASE_LINK_ENABLE" => "N",
+                                        "PAGER_DESC_NUMBERING" => "N",
+                                        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                                        "PAGER_SHOW_ALL" => "N",
+                                        "PAGER_SHOW_ALWAYS" => "N",
+                                        "PAGER_TEMPLATE" => ".default",
+                                        "PAGER_TITLE" => "Новости",
+                                        "PARENT_SECTION" => "",
+                                        "PARENT_SECTION_CODE" => "",
+                                        "PREVIEW_TRUNCATE_LEN" => "",
+                                        "PROPERTY_CODE" => array(
                                             0 => "",
                                             1 => "",
                                         ),
-                                        "SET_BROWSER_TITLE" => "N",	// Устанавливать заголовок окна браузера
-                                        "SET_LAST_MODIFIED" => "N",	// Устанавливать в заголовках ответа время модификации страницы
-                                        "SET_META_DESCRIPTION" => "N",	// Устанавливать описание страницы
-                                        "SET_META_KEYWORDS" => "N",	// Устанавливать ключевые слова страницы
-                                        "SET_STATUS_404" => "N",	// Устанавливать статус 404
-                                        "SET_TITLE" => "N",	// Устанавливать заголовок страницы
-                                        "SHOW_404" => "N",	// Показ специальной страницы
-                                        "SORT_BY1" => "ACTIVE_FROM",	// Поле для первой сортировки новостей
-                                        "SORT_BY2" => "SORT",	// Поле для второй сортировки новостей
-                                        "SORT_ORDER1" => "DESC",	// Направление для первой сортировки новостей
-                                        "SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
-                                        "STRICT_SECTION_CHECK" => "N",	// Строгая проверка раздела для показа списка
+                                        "SET_BROWSER_TITLE" => "N",
+                                        "SET_LAST_MODIFIED" => "N",
+                                        "SET_META_DESCRIPTION" => "N",
+                                        "SET_META_KEYWORDS" => "N",
+                                        "SET_STATUS_404" => "N",
+                                        "SET_TITLE" => "N",
+                                        "SHOW_404" => "N",
+                                        "SORT_BY1" => "ACTIVE_FROM",
+                                        "SORT_BY2" => "SORT",
+                                        "SORT_ORDER1" => "DESC",
+                                        "SORT_ORDER2" => "ASC",
+                                        "STRICT_SECTION_CHECK" => "N",
+                                        "COMPONENT_TEMPLATE" => "cities"
                                     ),
                                     false
                                 );?>
@@ -186,61 +190,115 @@
 						<div id="prodContainer">
 							<div class="products d-flex flex-column" id="nav">
 								<ul class="products__list d-flex">
-									<li class="drop products__item"><a class="products__link drop" href="/">Бетон</a>
+									<li class="drop products__item">
+                                        <a class="products__link drop" href="/produktsiya/beton">Бетон</a>
 										<div class="products__dropdown concrete d-flex justify-content-center align-items-center">
-											<ul class="dropdown-list d-flex flex-column">
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М100
-														(В7,5)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М150
-														(В10)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М200
-														(В15)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М250
-														(В20)</a></li>
-											</ul>
-											<ul class="dropdown-list d-flex flex-column">
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М300
-														(В22,5)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М350
-														(В25)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М400
-														(В30)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М450
-														(В35)</a></li>
-											</ul>
-											<ul class="dropdown-list d-flex flex-column">
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М550
-														(В40)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М600
-														(В45)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М700
-														(В50)</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">БЕТОН М800
-														(В60)</a></li>
-											</ul>
-											<ul class="dropdown-list d-flex flex-column">
-												<li class="dropdown__item"><a class="dropdown__link" href="/">РАСТВОР БЕТОНА</a>
-												</li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">ТОВАРНЫЙ БЕТОН</a>
-												</li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">ТЯЖЕЛЫЙ БЕТОН</a>
-												</li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">ДЛЯ ФУНДАМЕНТА</a>
-												</li>
-											</ul>
+                                            <?$APPLICATION->IncludeComponent(
+                                                "bitrix:catalog.section.list",
+                                                "nav-beton",
+                                                array(
+                                                    "ADD_SECTIONS_CHAIN" => "N",
+                                                    "CACHE_FILTER" => "N",
+                                                    "CACHE_GROUPS" => "Y",
+                                                    "CACHE_TIME" => "36000000",
+                                                    "CACHE_TYPE" => "A",
+                                                    "COUNT_ELEMENTS" => "N",
+                                                    "COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
+                                                    "FILTER_NAME" => "sectionsFilter",
+                                                    "IBLOCK_ID" => "7",
+                                                    "IBLOCK_TYPE" => "products",
+                                                    "SECTION_CODE" => "",
+                                                    "SECTION_FIELDS" => array(
+                                                        0 => "",
+                                                        1 => "",
+                                                    ),
+                                                    "SECTION_ID" => $_REQUEST["SECTION_ID"],
+                                                    "SECTION_URL" => "/produktsiya/beton/#SECTION_CODE#",
+                                                    "SECTION_USER_FIELDS" => array(
+                                                        0 => "",
+                                                        1 => "",
+                                                    ),
+                                                    "SHOW_PARENT_NAME" => "Y",
+                                                    "TOP_DEPTH" => "1",
+                                                    "VIEW_MODE" => "TEXT",
+                                                    "COMPONENT_TEMPLATE" => "nav-beton"
+                                                ),
+                                                false
+                                            );?>
 										</div>
 									</li>
-									<li class="drop products__item"><a class="products__link drop" href="/">Щебень</a>
+									<li class="drop products__item"><a class="products__link drop" href="/produktsiya/shcheben">Щебень</a>
 										<div class="products__dropdown rubble d-flex justify-content-center align-items-center">
-											<ul class="dropdown-list d-flex flex-column">
-												<li class="dropdown__item"><a class="dropdown__link" href="/">Гранитный
-														щебень</a></li>
-												<li class="dropdown__item"><a class="dropdown__link" href="/">Доломитовый
-														щебень</a></li>
-											</ul>
+                                            <?$APPLICATION->IncludeComponent(
+                                                "bitrix:news.list",
+                                                "nav-shcheben",
+                                                array(
+                                                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                                                    "ADD_SECTIONS_CHAIN" => "N",
+                                                    "AJAX_MODE" => "N",
+                                                    "AJAX_OPTION_ADDITIONAL" => "",
+                                                    "AJAX_OPTION_HISTORY" => "N",
+                                                    "AJAX_OPTION_JUMP" => "N",
+                                                    "AJAX_OPTION_STYLE" => "Y",
+                                                    "CACHE_FILTER" => "N",
+                                                    "CACHE_GROUPS" => "Y",
+                                                    "CACHE_TIME" => "36000000",
+                                                    "CACHE_TYPE" => "A",
+                                                    "CHECK_DATES" => "Y",
+                                                    "DETAIL_URL" => "/produktsiya/shcheben/#ELEMENT_CODE#",
+                                                    "DISPLAY_BOTTOM_PAGER" => "N",
+                                                    "DISPLAY_DATE" => "N",
+                                                    "DISPLAY_NAME" => "Y",
+                                                    "DISPLAY_PICTURE" => "N",
+                                                    "DISPLAY_PREVIEW_TEXT" => "N",
+                                                    "DISPLAY_TOP_PAGER" => "N",
+                                                    "FIELD_CODE" => array(
+                                                        0 => "",
+                                                        1 => "",
+                                                    ),
+                                                    "FILTER_NAME" => "",
+                                                    "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                                                    "IBLOCK_ID" => "8",
+                                                    "IBLOCK_TYPE" => "products",
+                                                    "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                                    "INCLUDE_SUBSECTIONS" => "Y",
+                                                    "MESSAGE_404" => "",
+                                                    "NEWS_COUNT" => "20",
+                                                    "PAGER_BASE_LINK_ENABLE" => "N",
+                                                    "PAGER_DESC_NUMBERING" => "N",
+                                                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                                                    "PAGER_SHOW_ALL" => "N",
+                                                    "PAGER_SHOW_ALWAYS" => "N",
+                                                    "PAGER_TEMPLATE" => ".default",
+                                                    "PAGER_TITLE" => "Новости",
+                                                    "PARENT_SECTION" => "",
+                                                    "PARENT_SECTION_CODE" => "",
+                                                    "PREVIEW_TRUNCATE_LEN" => "",
+                                                    "PROPERTY_CODE" => array(
+                                                        0 => "",
+                                                        1 => "",
+                                                    ),
+                                                    "SET_BROWSER_TITLE" => "N",
+                                                    "SET_LAST_MODIFIED" => "N",
+                                                    "SET_META_DESCRIPTION" => "N",
+                                                    "SET_META_KEYWORDS" => "N",
+                                                    "SET_STATUS_404" => "N",
+                                                    "SET_TITLE" => "N",
+                                                    "SHOW_404" => "N",
+                                                    "SORT_BY1" => "ACTIVE_FROM",
+                                                    "SORT_BY2" => "SORT",
+                                                    "SORT_ORDER1" => "DESC",
+                                                    "SORT_ORDER2" => "ASC",
+                                                    "STRICT_SECTION_CHECK" => "N",
+                                                    "COMPONENT_TEMPLATE" => "nav-shcheben"
+                                                ),
+                                                false
+                                            );?>
 										</div>
 									</li>
-									<li class="products__item"><a class="products__link" href="/">Минеральный порошок</a></li>
+									<li class="products__item">
+                                        <a class="products__link" href="/produktsiya/mineralnyy-poroshok">Минеральный порошок</a>
+                                    </li>
 								</ul>
 							</div>
 						</div>
