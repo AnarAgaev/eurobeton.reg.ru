@@ -4354,6 +4354,10 @@ h1, h2, h3, h4, h5, h6 {
     transition: all .3s linear
 }
 
+span.bread-crumbs__link {
+    color: #f1852c;
+}
+
 @media (min-width: 576px) {
     .bread-crumbs__link {
         font-size: 16px
