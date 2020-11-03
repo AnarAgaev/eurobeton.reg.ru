@@ -64,3 +64,21 @@ $APPLICATION->IncludeComponent(
         "PATH" => "/include/buy-concrete.php"
     )
 );?>
+
+
+<?/* Вставка включаемой области "Вопрос ответ"
+   * Путь к включаемой области: /include/faq.php
+   * Внутри включаемой области компонент список новостей
+   * который выводит список пункутов Вопрос-Ответ из инфоблока
+   * Инфоблок Вопрос-Ответ: Инфоблоки->Типы инфоблоков->Контент->Вопрос-Ответ
+   */
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/include/faq.php"
+    )
+);?>

@@ -48,7 +48,7 @@
 </div>
 
 <?/* Вывод карточек с предложениями на главной странице:
-   * Инфоблоки->Типы инфоблоков->Структуры->Предложения
+   * Инфоблоки->Типы инфоблоков->Контент->Предложения
    */
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
@@ -80,7 +80,7 @@ $APPLICATION->IncludeComponent(
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "2",
-		"IBLOCK_TYPE" => "structures",
+		"IBLOCK_TYPE" => "content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"MESSAGE_404" => "",
@@ -366,7 +366,7 @@ $APPLICATION->IncludeComponent(
 );?>
 
 <?/* Выводим списка преимуществ на главной странице:
-   * Инфоблоки->Типы инфоблоков->Структуры->Преимушества
+   * Инфоблоки->Типы инфоблоков->Контент->Преимушества
    */
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
@@ -398,7 +398,7 @@ $APPLICATION->IncludeComponent(
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "3",
-		"IBLOCK_TYPE" => "structures",
+		"IBLOCK_TYPE" => "content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
 		"MESSAGE_404" => "",
@@ -441,7 +441,7 @@ $APPLICATION->IncludeComponent(
 </div>
 
 <?/* Выводим списка партнёров на главной странице:
-   * Инфоблоки->Типы инфоблоков->Структуры->Партнёры
+   * Инфоблоки->Типы инфоблоков->Контент->Партнёры
    */
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
@@ -473,7 +473,7 @@ $APPLICATION->IncludeComponent(
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "4",
-		"IBLOCK_TYPE" => "structures",
+		"IBLOCK_TYPE" => "content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "N",
 		"MESSAGE_404" => "",
