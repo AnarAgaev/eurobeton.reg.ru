@@ -31,7 +31,14 @@
     if($APPLICATION->GetCurPage() == '/') echo 'page-index';?>">
 
 	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
-	<div class="modal" id="modalSetOrder">
+
+    <div class="spinner" id="spinner">
+        <div class="ldio">
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalSetOrder">
 		<div class="modal__dialog modal__dialog_set-order">
 			<div class="modal__close"></div>
 			<div class="modal__content">

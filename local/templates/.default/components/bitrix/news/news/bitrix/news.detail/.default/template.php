@@ -12,84 +12,100 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="news-detail">
-	<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arResult["DETAIL_PICTURE"])):?>
-		<img
-			class="detail_picture"
-			border="0"
-			src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"
-			width="<?=$arResult["DETAIL_PICTURE"]["WIDTH"]?>"
-			height="<?=$arResult["DETAIL_PICTURE"]["HEIGHT"]?>"
-			alt="<?=$arResult["DETAIL_PICTURE"]["ALT"]?>"
-			title="<?=$arResult["DETAIL_PICTURE"]["TITLE"]?>"
-			/>
-	<?endif?>
-	<?if($arParams["DISPLAY_DATE"]!="N" && $arResult["DISPLAY_ACTIVE_FROM"]):?>
-		<span class="news-date-time"><?=$arResult["DISPLAY_ACTIVE_FROM"]?></span>
-	<?endif;?>
-	<?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
-		<h3><?=$arResult["NAME"]?></h3>
-	<?endif;?>
-	<?if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arResult["FIELDS"]["PREVIEW_TEXT"]):?>
-		<p><?=$arResult["FIELDS"]["PREVIEW_TEXT"];unset($arResult["FIELDS"]["PREVIEW_TEXT"]);?></p>
-	<?endif;?>
-	<?if($arResult["NAV_RESULT"]):?>
-		<?if($arParams["DISPLAY_TOP_PAGER"]):?><?=$arResult["NAV_STRING"]?><br /><?endif;?>
-		<?echo $arResult["NAV_TEXT"];?>
-		<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?><br /><?=$arResult["NAV_STRING"]?><?endif;?>
-	<?elseif($arResult["DETAIL_TEXT"] <> ''):?>
-		<?echo $arResult["DETAIL_TEXT"];?>
-	<?else:?>
-		<?echo $arResult["PREVIEW_TEXT"];?>
-	<?endif?>
-	<div style="clear:both"></div>
-	<br />
-	<?foreach($arResult["FIELDS"] as $code=>$value):
-		if ('PREVIEW_PICTURE' == $code || 'DETAIL_PICTURE' == $code)
-		{
-			?><?=GetMessage("IBLOCK_FIELD_".$code)?>:&nbsp;<?
-			if (!empty($value) && is_array($value))
-			{
-				?><img border="0" src="<?=$value["SRC"]?>" width="<?=$value["WIDTH"]?>" height="<?=$value["HEIGHT"]?>"><?
-			}
-		}
-		else
-		{
-			?><?=GetMessage("IBLOCK_FIELD_".$code)?>:&nbsp;<?=$value;?><?
-		}
-		?><br />
-	<?endforeach;
-	foreach($arResult["DISPLAY_PROPERTIES"] as $pid=>$arProperty):?>
-
-		<?=$arProperty["NAME"]?>:&nbsp;
-		<?if(is_array($arProperty["DISPLAY_VALUE"])):?>
-			<?=implode("&nbsp;/&nbsp;", $arProperty["DISPLAY_VALUE"]);?>
-		<?else:?>
-			<?=$arProperty["DISPLAY_VALUE"];?>
-		<?endif?>
-		<br />
-	<?endforeach;
-	if(array_key_exists("USE_SHARE", $arParams) && $arParams["USE_SHARE"] == "Y")
-	{
-		?>
-		<div class="news-detail-share">
-			<noindex>
-			<?
-			$APPLICATION->IncludeComponent("bitrix:main.share", "", array(
-					"HANDLERS" => $arParams["SHARE_HANDLERS"],
-					"PAGE_URL" => $arResult["~DETAIL_PAGE_URL"],
-					"PAGE_TITLE" => $arResult["~NAME"],
-					"SHORTEN_URL_LOGIN" => $arParams["SHARE_SHORTEN_URL_LOGIN"],
-					"SHORTEN_URL_KEY" => $arParams["SHARE_SHORTEN_URL_KEY"],
-					"HIDE" => $arParams["SHARE_HIDE"],
-				),
-				$component,
-				array("HIDE_ICONS" => "Y")
-			);
-			?>
-			</noindex>
-		</div>
-		<?
-	}
-	?>
+<div class="page-title">
+    <div class="container">
+        <h1 class="page-title__content"><?=$arResult['NAME']?></h1>
+    </div>
 </div>
+<div class="single-news">
+    <div class="container">
+        <div class="single-news__slider">
+            <div class="slider">
+                <?/* Предыдущая/Следующая новости Start
+                  * https://dev.1c-bitrix.ru/api_help/iblock/classes/ciblockelement/getlist.php
+                  * Смотри Пример 6:
+                  */
+                $res=CIBlockElement::GetList(
+                    array(
+                        "SORT" => "DESC"
+                    ),
+                    array(
+                        "ACTIVE"=>"Y",
+                        "IBLOCK_ID"=>$arResult["IBLOCK_ID"],
+                        "IBLOCK_SECTION_ID"=>$arResult["IBLOCK_SECTION_ID"]
+                    ),
+                    false,
+                    array(
+                        "nPageSize" => "1",
+                        "nElementID" => $arResult["ID"]
+                    ),
+                    array(
+                        "ID",
+                        "NAME",
+                        "DETAIL_PAGE_URL"
+                    )
+                );
+
+                $navElement = array();
+                while($ob = $res->GetNext()){
+                    $navElement[] = $ob;
+                }
+
+                if (count($navElement) == 2 && $arResult["ID"] == $navElement[0]['ID']):?>
+                    <a href="<?=$navElement[1]['DETAIL_PAGE_URL']?>/"
+                       class="slider__controller slider__controller_left slider-controller-left"></a>
+                <?elseif (count($navElement) == 3):?>
+                    <a href="<?=$navElement[2]['DETAIL_PAGE_URL']?>/"
+                       class="slider__controller slider__controller_left slider-controller-left"></a>
+                    <a href="<?=$navElement[0]['DETAIL_PAGE_URL']?>/"
+                       class="slider__controller slider__controller_right slider-controller-right"></a>
+
+                <?elseif (count($navElement) == 2 && $arResult["ID"] == $navElement[1]['ID']):?>
+                    <a href="<?=$navElement[0]['DETAIL_PAGE_URL']?>/"
+                       class="slider__controller slider__controller_right slider-controller-right"></a>
+                <?endif;?>
+
+                <div class="slider__viewport">
+                    <div class="slider__list d-flex">
+                        <div class="slider__item">
+                            <div class="single-news__pic" style="background-image: url(<?=$arResult['DETAIL_PICTURE']['SRC']?>)"></div>
+                            <div class="single-news__content"><?=$arResult['DETAIL_TEXT']?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?/* Вставка включаемой области Баннер "Получить расчёт стоимости"
+   * Внтури родительского контейнера включаемой области /include/request-price.php
+   * две дочерние включаемые области /include/request-price-title.php и /include/request-price-txt.php
+   * соответственно с заголовком блока и текстом блока
+   */
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/include/request-price.php"
+    )
+);?>
+
+<?/* Вклчаемая область Промо "Сеть бетонных заводов ..."
+   * Внтури родительского контейнера включаемой области /include/promo.php
+   * две дочерние включаемые области /include/promo-title.php и /include/promo-list.php
+   * соответственно с заголовком блока и списком преимуществ
+   */
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/include/promo.php"
+    )
+);?>

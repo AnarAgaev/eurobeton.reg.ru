@@ -1,3 +1,20 @@
+// Сервис-функция асинхронного поучения данных с сервера
+const getResource = async (url) => {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error('Не удалось получить данные от ' + url +  '. Получен ответ: ' . response.status);
+    }
+
+    try {
+        return await response.json();
+    } catch (error) {
+        throw new TypeError('Полученные данные должны быть в формате JSON. Произошла ошибка на URL: ' + response.url);
+    }
+};
+
+
+
 document.addEventListener("DOMContentLoaded",() => {
 
     const body = document.body;
@@ -579,6 +596,16 @@ document.addEventListener("DOMContentLoaded",() => {
         }
     }
     // ***Янадекс карты -- Конец
+
+
+
+
+
+
+
+
+
+
 });
 
 

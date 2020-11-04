@@ -11,6 +11,37 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+/*
+ * На странице реализована AJAX подгрузка новостей после клика по кноаке ЗАГРУЗИТЬ ЕЩЁ НОВОСТИ
+ *
+ * Обработчик клика и реализация AJAX запроса в файле script.js соответствующего шаблона
+ * /local/templates/.default/components/bitrix/news/news/bitrix/news.list/.default/script.js
+ *
+ * Компонент собирающий и отдающй данные (новости следующей страницы)
+ * реализован в файле get-next-news-page.php
+ * /utility/get-next-news-page.php
+ *
+ * Ссылка для получения данных хранится в параметре href у кнопки ЗАГРУЗИТЬ ЕЩЁ НОВОСТИ
+ * При первой загрузке пишем туда адрес первой следующей стрницы
+ *
+ * !!!Важно:
+ * Количество новостей показываемых на одной странице в текущем компоненте
+ * должно совпадать с колиеством новостей показываемых на странице в компоненте
+ * собирающим данные для следующей страницы (get-next-news-page.php), в компонентах
+ * за это отвечает параметр "NEWS_COUNT" => "количество_показываемых_элементов"
+ * Либо Инициализируемый адрес для первого запроса должен начинаться со страницы
+ * содержащей следующею новость после уже показаной.
+ *
+ * Для того чтобы компонент отвечающий на синхонноый запрос отдавал чистые данные JSON
+ * в папке его шаблона добален файл component_epilog.php в котором необходимые данные
+ * вырезаются из содежания
+ * /local/templates/.default/components/bitrix/news.list/ajax-news-list/component_epilog.php
+ *
+ * $arResult["NAV_RESULT"]->NavPageNomer; - Номер текущей страницы
+ * $arResult["NAV_RESULT"]->NavPageCount; - Количество страниц
+ * $arResult["NAV_RESULT"]->NavRecordCount; - Общее количество элементов
+ * $arResult["NAV_RESULT"]->NavPageSize; - Количество элементов на странице
+ */
 ?>
 <div class="page-title">
     <div class="container">
@@ -18,7 +49,7 @@ $this->setFrameMode(true);
     </div>
 </div>
 <div class="container news-list">
-    <div class="row news-list__wrap">
+    <div class="row news-list__wrap" id="newsListContainer">
         <?foreach($arResult["ITEMS"] as $arItem):?>
             <?
             $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
@@ -35,20 +66,26 @@ $this->setFrameMode(true);
             </div>
         <?endforeach;?>
     </div>
-    <!--
-    <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-        <br /><?=$arResult["NAV_STRING"]?>
-    <?endif;?> -->
 </div>
-<div class="get-more">
-    <div class="container">
-        <div class="d-flex justify-content-center page-news">
-            <a class="get-more__link" href="">
-                Загрузить ещё новости
-            </a>
+
+<?/* Выводим кнопку ЗАГРУЗИТЬ ЕЩЁ только в том случае
+   * если номер тукущей страницы меньше
+   * общего количества страниц с элементами
+   */
+if($arResult["NAV_RESULT"]->NavPageNomer < $arResult["NAV_RESULT"]->NavPageCount):?>
+    <div class="get-more">
+        <div class="container">
+            <div class="d-flex justify-content-center page-news">
+                <a class="get-more__link"
+                   href="/utils/get-next-news-page.php?PAGEN_1=2"
+                   id="btnGetNextPage">
+                    Загрузить ещё новости
+                </a>
+            </div>
         </div>
     </div>
-</div>
+<?endif;?>
+
 <?/* Вставка включаемой области Баннер "Купить бетон с доставкой"
    * Внтури родительского контейнера включаемой области /include/buy-concrete.php
    * две дочерние включаемые области /include/buy-concrete-title.php и /include/buy-concrete-txt.php
@@ -64,7 +101,6 @@ $APPLICATION->IncludeComponent(
         "PATH" => "/include/buy-concrete.php"
     )
 );?>
-
 
 <?/* Вставка включаемой области "Вопрос ответ"
    * Путь к включаемой области: /include/faq.php
