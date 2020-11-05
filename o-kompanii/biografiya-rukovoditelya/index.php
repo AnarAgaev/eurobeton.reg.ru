@@ -1,5 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
-<?$APPLICATION->SetTitle("Биография руководителя");?>
+<?$APPLICATION->SetTitle("БИОГРАФИЯ");?>
 <?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "breadcrumbs", Array(
     "PATH" => "",	// Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
     "SITE_ID" => "s1",	// Cайт (устанавливается в случае многосайтовой версии, когда DOCUMENT_ROOT у сайтов разный)
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-xl-7">
                 <h1 class="director__title">
-                    БИОГРАФИЯ
+                    <?$APPLICATION->ShowTitle(false);?>
                 </h1>
                 <?/* Вклчаемая область Подзаголовок на старнице */
                 $APPLICATION->IncludeComponent(

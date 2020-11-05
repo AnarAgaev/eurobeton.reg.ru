@@ -30,6 +30,7 @@
 <body class="<?
     if($APPLICATION->GetCurPage() == '/') echo 'page-index';
     if($APPLICATION->GetCurPage() == '/o-kompanii/biografiya-rukovoditelya/') echo 'page-director';
+    if($APPLICATION->GetCurPage() == '/proizvodstvo/dileram/') echo 'page-dealers';
 ?>">
 	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
 

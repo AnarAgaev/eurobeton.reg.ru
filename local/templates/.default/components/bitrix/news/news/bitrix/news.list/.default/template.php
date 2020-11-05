@@ -45,7 +45,9 @@ $this->setFrameMode(true);
 ?>
 <div class="page-title">
     <div class="container">
-        <h1 class="page-title__content">Новости</h1>
+        <h1 class="page-title__content">
+            <?$APPLICATION->ShowTitle(false);?>
+        </h1>
     </div>
 </div>
 <div class="container news-list">
