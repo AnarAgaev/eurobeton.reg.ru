@@ -816,7 +816,8 @@ li, ul {
     padding: 0
 }
 
-.list {
+.list,
+.table__column ul {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -827,7 +828,8 @@ li, ul {
     width: 100%
 }
 
-.list-item:before {
+.list-item:before,
+.table__column li:before {
     content: "";
     width: 3px;
     height: 3px;
@@ -837,7 +839,10 @@ li, ul {
     top: -4px
 }
 
-.link, .list-item:before, a.link {
+.link,
+.list-item:before,
+a.link,
+.table__column li:before {
     display: inline-block;
     position: relative
 }
