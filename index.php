@@ -543,7 +543,7 @@ $APPLICATION->IncludeComponent(
 
 <?/* Конмпонент списка новостей
    * Шаблон компонента:
-   *   local->templates->main->components->bitrix->news.list->news-list
+   * local->templates->main->components->bitrix->news.list->news-list
    */
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 

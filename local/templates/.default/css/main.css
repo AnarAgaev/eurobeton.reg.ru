@@ -4473,6 +4473,17 @@ span.bread-crumbs__link {
     text-transform: uppercase
 }
 
+.certificates-item.hide {
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+.certificates-item {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all .5s ease-out;
+}
+
 .certificates__card {
     background-color: #eee;
     padding: 18px 25px 23px;
@@ -4508,11 +4519,12 @@ span.bread-crumbs__link {
     right: 0;
     width: 0;
     height: 0;
-    border-bottom: 343px solid rgba(0, 0, 0, .02);
+    border-bottom: 343px solid rgba(0, 0, 0, .03);
     border-left: 262px solid rgba(0, 0, 0, 0);
     -webkit-transition: all .3s linear;
     -o-transition: all .3s linear;
-    transition: all .3s linear
+    transition: all .3s linear;
+    z-index: 99;
 }
 
 @media (min-width: 768px) {
