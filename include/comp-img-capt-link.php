@@ -1,1 +1,1 @@
-<a class="link" href="/">Генеральный директор</a>
+<a class="link" href="/o-kompanii/biografiya-rukovoditelya/">Генеральный директор</a>

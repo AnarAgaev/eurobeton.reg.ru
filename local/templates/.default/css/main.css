@@ -5752,13 +5752,13 @@ span.bread-crumbs__link {
     }
 }
 
-.director__pic {
+.director__pic img {
     margin-bottom: 28px;
     margin-top: 7px
 }
 
 @media (min-width: 1200px) {
-    .director__pic {
+    .director__pic img {
         left: -18px;
         margin-top: 12px
     }

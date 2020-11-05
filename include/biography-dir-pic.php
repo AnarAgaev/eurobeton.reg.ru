@@ -1,0 +1,1 @@
+<img alt="Директор Гочелашвили Муртаз Александрович" src="/local/templates/.default/img/director.jpg">

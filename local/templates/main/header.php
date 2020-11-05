@@ -28,8 +28,9 @@
     ?>
 </head>
 <body class="<?
-    if($APPLICATION->GetCurPage() == '/') echo 'page-index';?>">
-
+    if($APPLICATION->GetCurPage() == '/') echo 'page-index';
+    if($APPLICATION->GetCurPage() == '/o-kompanii/biografiya-rukovoditelya/') echo 'page-director';
+?>">
 	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
 
     <div class="spinner" id="spinner">
