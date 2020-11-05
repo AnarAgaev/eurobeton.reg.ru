@@ -437,7 +437,7 @@ $APPLICATION->IncludeComponent(
 <?// Яндекс карта для главной страницы с несколькоими балунами ?>
 <div class="map section_container">
     <div class="map__title px-5 section_title">Собственные заводы</div>
-    <div class="map__body" id="map"></div>
+    <div class="map__body" id="indexMap"></div>
 </div>
 
 <?/* Выводим списка партнёров на главной странице:

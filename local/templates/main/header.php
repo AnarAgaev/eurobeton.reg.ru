@@ -23,8 +23,9 @@
         Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/main.js');
 
         /* Добавляем Яндекс карту используемую на главной странице */
-        if($APPLICATION->GetCurPage(false) == '/')
-            Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
+        if($APPLICATION->GetCurPage(false) == '/'
+            or $APPLICATION->GetCurPage(false) == '/kontakty/')
+                Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
     ?>
 </head>
 <body class="<?

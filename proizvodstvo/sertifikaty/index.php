@@ -1,10 +1,9 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Сертификаты");?><?$APPLICATION->SetTitle("Сертификаты");?> <?$APPLICATION->IncludeComponent(
+$APPLICATION->SetTitle("Сертификаты");?>
+<?$APPLICATION->IncludeComponent(
 	"bitrix:breadcrumb",
 	"breadcrumbs",
 	Array(
-		"3" => '',
-		"4" => fals,
 		"PATH" => "",
 		"SITE_ID" => "s1",
 		"START_FROM" => "0"

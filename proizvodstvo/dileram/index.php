@@ -1,5 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Сотрудничество с АО «Евробетон» для бизнеса");?><?$APPLICATION->SetTitle("Сотрудничество с АО «Евробетон» для бизнеса");?> <?$APPLICATION->IncludeComponent(
+$APPLICATION->SetTitle("Сотрудничество с АО «Евробетон» для бизнеса");?><?$APPLICATION->IncludeComponent(
 	"bitrix:breadcrumb",
 	"breadcrumbs",
 	Array(

@@ -489,14 +489,18 @@ document.addEventListener("DOMContentLoaded",() => {
 
 
 
-    // ***Янадекс нары -- Начало
-        if (document.getElementById("map")) {
-    // Функция ymaps.ready() будет вызвана, когда
-    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-        ymaps.ready(init);
-        function init(){
-            // Создание карты.
-            let myMap = new ymaps.Map("map", {
+    /* Yandex maps -- START
+     *
+     * Функция ymaps.ready() будет вызвана, когда
+     * загрузятся все компоненты API,
+     * а также когда будет готово DOM-дерево.
+     */
+    ymaps.ready(init);
+    function init() {
+
+        // Карта на Главной старнице
+        if (document.getElementById("indexMap")) {
+            let indexMap = new ymaps.Map("indexMap", {
                     // Координаты центра карты.
                     // Порядок по умолчанию: «широта, долгота».
                     // Чтобы не определять координаты центра карты вручную,
@@ -519,7 +523,6 @@ document.addEventListener("DOMContentLoaded",() => {
                         iconImageSize: [36, 43],
                         iconImageOffset: [-15, -43]
                     }),
-
                 myPlacemarkLipetsk = new ymaps.Placemark([52.60358425779388,39.59623749999995],
                     {
                         balloonContentHeader: "Липецкий филиал",
@@ -531,7 +534,6 @@ document.addEventListener("DOMContentLoaded",() => {
                         iconImageSize: [36, 43],
                         iconImageOffset: [-15, -43]
                     }),
-
                 myPlacemarkGranitstroy = new ymaps.Placemark([56.00991906873449,37.436966],
                     {
                         balloonContentHeader: "Гранитстрой",
@@ -543,7 +545,6 @@ document.addEventListener("DOMContentLoaded",() => {
                         iconImageSize: [36, 43],
                         iconImageOffset: [-15, -43]
                     }),
-
                 myPlacemarkStroyRegion = new ymaps.Placemark([56.86988406782098,60.59384549999995],
                     {
                         balloonContentHeader: "ООО «СтройРегион-Трейд ЕК»",
@@ -555,7 +556,6 @@ document.addEventListener("DOMContentLoaded",() => {
                         iconImageSize: [36, 43],
                         iconImageOffset: [-15, -43]
                     }),
-
                 myPlacemarkEvrobeton = new ymaps.Placemark([55.77380806896347,37.50681899999997],
                     {
                         balloonContentHeader: "Москва: ЖБИ АО «Евробетон»",
@@ -567,7 +567,6 @@ document.addEventListener("DOMContentLoaded",() => {
                         iconImageSize: [36, 43],
                         iconImageOffset: [-15, -43]
                     }),
-
                 myPlacemarkMedvedkovo = new ymaps.Placemark([55.88525156886214,37.62130049999999],
                     {
                         balloonContentHeader: "Филиала Медведково АО «ЕВРОБЕТОН»",
@@ -580,22 +579,53 @@ document.addEventListener("DOMContentLoaded",() => {
                         iconImageOffset: [-15, -43]
                     });
 
-            myMap.geoObjects
+            // Пушим метки в карту indexMap
+            indexMap.geoObjects
                 .add(myPlacemarkKstovo)
                 .add(myPlacemarkLipetsk)
                 .add(myPlacemarkGranitstroy)
                 .add(myPlacemarkEvrobeton)
                 .add(myPlacemarkMedvedkovo)
                 .add(myPlacemarkStroyRegion);
-
-            myMap.controls.add('zoomControl', {
-                size: "small"
-            });
-
-            myMap.behaviors.disable('scrollZoom');
+            indexMap.controls.add('zoomControl');
+            indexMap.behaviors.disable('scrollZoom');
         }
+
+        // Карта на старнице Контакты
+        if (document.getElementById("contactsMap")) {
+            let indexMap = new ymaps.Map("contactsMap", {
+                    // Координаты центра карты.
+                    // Порядок по умолчанию: «широта, долгота».
+                    // Чтобы не определять координаты центра карты вручную,
+                    // воспользуйтесь инструментом Определение координат.
+                    center: [55.77380806896347,37.50681899999997],
+                    // Уровень масштабирования. Допустимые значения:
+                    // от 0 (весь мир) до 19.
+                    zoom: 16,
+                    controls: [],
+                }),
+
+                myPlacemarkMsk = new ymaps.Placemark([55.77380806896347,37.50681899999997],
+                    {
+                        balloonContentHeader: "Головной офис в Москве",
+                        balloonContentBody: "123308, Россия, г. Москва, Силикатный проезд, д. 10, стр. 15"
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    });
+
+            // Пушим метки в карту indexMap
+            indexMap.geoObjects
+                .add(myPlacemarkMsk)
+            indexMap.controls.add('zoomControl');
+            indexMap.behaviors.disable('scrollZoom');
+        }
+
     }
-    // ***Янадекс карты -- Конец
+    //** Yandex maps -- END
 
 
 
