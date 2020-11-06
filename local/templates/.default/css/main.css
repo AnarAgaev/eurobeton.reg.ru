@@ -5838,13 +5838,8 @@ span.bread-crumbs__link {
     }
 }
 
-.delivery .map__wrap #map {
+#deliveryMap {
     height: 100%
-}
-
-.delivery .map__wrap #map [class*=ymaps-2][class*=-ground-pane] {
-    -webkit-filter: none;
-    filter: none
 }
 
 .page-delivery .bread-crumbs__wrap {

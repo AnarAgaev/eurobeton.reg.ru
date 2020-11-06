@@ -1,0 +1,1 @@
+<img src="/local/templates/.default/img/delivery.png">
