@@ -817,7 +817,8 @@ li, ul {
 }
 
 .list,
-.table__column ul {
+.table__column ul,
+.breakstone__accordion-content ul {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -829,7 +830,8 @@ li, ul {
 }
 
 .list-item:before,
-.table__column li:before {
+.table__column li:before,
+.breakstone__accordion-content li:before {
     content: "";
     width: 3px;
     height: 3px;
@@ -842,7 +844,8 @@ li, ul {
 .link,
 .list-item:before,
 a.link,
-.table__column li:before {
+.table__column li:before,
+.breakstone__accordion-content li:before {
     display: inline-block;
     position: relative
 }
@@ -6192,7 +6195,8 @@ span.bread-crumbs__link {
 }
 
 .concrete__link {
-    margin-top: 13px
+    margin-top: 13px;
+    margin-bottom: 25px;
 }
 
 .page-concrete .request {
