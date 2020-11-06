@@ -850,14 +850,23 @@ a.link,
     position: relative
 }
 
-.link, a.link {
+.link,
+a.link,
+.vacancies-txt a {
     color: #000;
     -webkit-transition: all .3s linear;
     -o-transition: all .3s linear;
     transition: all .3s linear
 }
 
-.link:before, a.link:before {
+.vacancies-txt a {
+    position: relative;
+    display: inline-block;
+}
+
+.link:before,
+a.link:before,
+.vacancies-txt a:before {
     content: "";
     display: block;
     position: absolute;
@@ -867,7 +876,9 @@ a.link,
     bottom: 1px
 }
 
-.link:hover, a.link:hover {
+.link:hover,
+a.link:hover,
+.vacancies-txt a:hover {
     color: #f1852c
 }
 

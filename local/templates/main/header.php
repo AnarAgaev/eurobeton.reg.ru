@@ -35,6 +35,7 @@
     if($APPLICATION->GetCurPage() == '/proizvodstvo/laboratoriya/') echo 'page-laboratory';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/shcheben/') echo 'page-breakstone';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/dileram/') echo 'page-dealers';
+    if($APPLICATION->GetCurPage() == '/o-kompanii/vakansii/') echo 'page-vacancy';
     if($APPLICATION->GetCurPage() == '/dostavka/') echo 'page-delivery';
     if($APPLICATION->GetCurPage() == '/tendery/') echo 'page-tenders';
     if($APPLICATION->GetCurPage() == '/') echo 'page-index';
@@ -51,25 +52,43 @@
 		<div class="modal__dialog modal__dialog_set-order">
 			<div class="modal__close"></div>
 			<div class="modal__content">
-				<div class="modal__header"><h4 class="modal__title">Оставить заявку</h4></div>
-				<div class="modal__body"><h5 class="modal__subtitle">Вам нужна помощь в расчёте стоимости бетона? Или у Вас
-						есть другой вопрос?<br>Наш менеджер поможет Вам во всём разобраться</h5>
-					<form class="form modal__form d-flex flex-column flex-md-row" enctype="multipart/form-data"
+				<div class="modal__header">
+                    <h4 class="modal__title">Оставить заявку</h4>
+                </div>
+				<div class="modal__body">
+                    <h5 class="modal__subtitle">
+                        Вам нужна помощь в расчёте стоимости бетона? Или у Вас
+						есть другой вопрос?<br>Наш менеджер поможет Вам во всём разобраться
+                    </h5>
+					<form class="form modal__form d-flex flex-column flex-md-row"
+                          enctype="multipart/form-data"
 						  method="post">
-						<div class="modal__controls d-flex flex-column"><label class="label label_w272"><span>Ваше имя (название организации):</span><input
-									type="text" placeholder="Иван"></label><label
-								class="label label_w272"><span>Ваш e-mail:</span><input type="text"
-																						placeholder="example@example.com"></label><label
-								class="label label_w272"><span>Телефон:</span><input type="text"
-																					 placeholder="+7 (999) 999-99-99"></label>
+						<div class="modal__controls d-flex flex-column">
+                            <label class="label label_w272">
+                                <span>Ваше имя (название организации):</span>
+                                <input type="text" placeholder="Иван" class="input">
+                            </label>
+                            <label class="label label_w272">
+                                <span>Ваш e-mail:</span>
+                                <input type="text" placeholder="example@example.com" class="input">
+                            </label>
+                            <label class="label label_w272">
+                                <span>Телефон:</span>
+                                <input type="text" placeholder="+7 (999) 999-99-99" class="input">
+                            </label>
 						</div>
-						<div class="modal__msg"><label class="label"><span>Ваш вопрос (данные для расчета)?:</span><textarea
-									placeholder="Начните вводить ..."></textarea></label></div>
+						<div class="modal__msg">
+                            <label class="label">
+                                <span>Ваш вопрос (данные для расчета)?:</span>
+                                <textarea placeholder="Начните вводить ..." class="textarea"></textarea>
+                            </label>
+                        </div>
 					</form>
 				</div>
 				<div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
 					<button class="btn">отправить</button>
-					<div class="modal__agreement">Нажимая кнопку, вы соглашаетесь с условиями
+					<div class="modal__agreement">
+                        Нажимая кнопку, вы соглашаетесь с условиями
 						<a class="link" href="/">пользовательского соглашения</a>
 						по обработке персональных данных
 					</div>
@@ -93,70 +112,70 @@
 
                                 <? // Список городов в хедере сайта ?>
                                 <?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"cities", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "N",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "N",
-		"DISPLAY_PREVIEW_TEXT" => "N",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "1",
-		"IBLOCK_TYPE" => "content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "N",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "cities"
-	),
-	false
-);?>
+                                    "bitrix:news.list",
+                                    "cities",
+                                    array(
+                                        "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                                        "ADD_SECTIONS_CHAIN" => "N",
+                                        "AJAX_MODE" => "N",
+                                        "AJAX_OPTION_ADDITIONAL" => "",
+                                        "AJAX_OPTION_HISTORY" => "N",
+                                        "AJAX_OPTION_JUMP" => "N",
+                                        "AJAX_OPTION_STYLE" => "Y",
+                                        "CACHE_FILTER" => "N",
+                                        "CACHE_GROUPS" => "Y",
+                                        "CACHE_TIME" => "36000000",
+                                        "CACHE_TYPE" => "A",
+                                        "CHECK_DATES" => "Y",
+                                        "DETAIL_URL" => "",
+                                        "DISPLAY_BOTTOM_PAGER" => "N",
+                                        "DISPLAY_DATE" => "N",
+                                        "DISPLAY_NAME" => "Y",
+                                        "DISPLAY_PICTURE" => "N",
+                                        "DISPLAY_PREVIEW_TEXT" => "N",
+                                        "DISPLAY_TOP_PAGER" => "N",
+                                        "FIELD_CODE" => array(
+                                            0 => "",
+                                            1 => "",
+                                        ),
+                                        "FILTER_NAME" => "",
+                                        "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                                        "IBLOCK_ID" => "1",
+                                        "IBLOCK_TYPE" => "content",
+                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                        "INCLUDE_SUBSECTIONS" => "N",
+                                        "MESSAGE_404" => "",
+                                        "NEWS_COUNT" => "20",
+                                        "PAGER_BASE_LINK_ENABLE" => "N",
+                                        "PAGER_DESC_NUMBERING" => "N",
+                                        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                                        "PAGER_SHOW_ALL" => "N",
+                                        "PAGER_SHOW_ALWAYS" => "N",
+                                        "PAGER_TEMPLATE" => ".default",
+                                        "PAGER_TITLE" => "Новости",
+                                        "PARENT_SECTION" => "",
+                                        "PARENT_SECTION_CODE" => "",
+                                        "PREVIEW_TRUNCATE_LEN" => "",
+                                        "PROPERTY_CODE" => array(
+                                            0 => "",
+                                            1 => "",
+                                        ),
+                                        "SET_BROWSER_TITLE" => "N",
+                                        "SET_LAST_MODIFIED" => "N",
+                                        "SET_META_DESCRIPTION" => "N",
+                                        "SET_META_KEYWORDS" => "N",
+                                        "SET_STATUS_404" => "N",
+                                        "SET_TITLE" => "N",
+                                        "SHOW_404" => "N",
+                                        "SORT_BY1" => "ACTIVE_FROM",
+                                        "SORT_BY2" => "SORT",
+                                        "SORT_ORDER1" => "DESC",
+                                        "SORT_ORDER2" => "ASC",
+                                        "STRICT_SECTION_CHECK" => "N",
+                                        "COMPONENT_TEMPLATE" => "cities"
+                                    ),
+                                    false
+                                );?>
 							</div>
 
                             <? // Главное меню в хедере сайта ?>

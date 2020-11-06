@@ -3,8 +3,6 @@ $APPLICATION->SetTitle("Сотрудничество с АО «Евробето�
 	"bitrix:breadcrumb",
 	"breadcrumbs",
 	Array(
-		"3" => '',
-		"4" => fals,
 		"PATH" => "",
 		"SITE_ID" => "s1",
 		"START_FROM" => "0"
