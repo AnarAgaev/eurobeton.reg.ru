@@ -12,6 +12,9 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<div class="yandex-modal-map" id="prodMap">
+    <button class="yandex-modal-map__btn-close" id="prodMapCloser"></button>
+</div>
 <div class="concrete">
     <?foreach($arResult["ITEMS"] as $arKey => $arItem):?>
         <?
@@ -35,7 +38,11 @@ $this->setFrameMode(true);
                                     </li>
                                 <?endforeach;?>
                             </ul>
-                            <a class="link concrete__link" href="/">Показать на карте</a>
+                            <a class="link concrete__link open-map"
+                               data-coord="<?=$arItem['PROPERTIES']['COORDINATES']['VALUE']?>"
+                               data-hint-desc="<?=$arItem['PREVIEW_TEXT']?>">
+                                Показать на карте
+                            </a>
                         </div>
                     </div>
                     <div class="col-xl-7 order-xl-2">
@@ -64,7 +71,11 @@ $this->setFrameMode(true);
                                     </li>
                                 <?endforeach;?>
                             </ul>
-                            <a class="link concrete__link" href="/">Показать на карте</a>
+                            <a class="link concrete__link open-map"
+                               data-coord="<?=$arItem['PROPERTIES']['COORDINATES']['VALUE']?>"
+                               data-hint-desc="<?=$arItem['PREVIEW_TEXT']?>">
+                                Показать на карте
+                            </a>
                         </div>
                     </div>
                 </div>

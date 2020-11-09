@@ -632,6 +632,77 @@ document.addEventListener("DOMContentLoaded",() => {
     }
     /* Yandex maps -- END */
 
+    /* Yandex maps на странице Производство бетона товарного -- START */
+    if (document.getElementById("prodMap")) {
+        const btnsOpenMap = document.getElementsByClassName("open-map");
+        const prodMap = document.getElementById('prodMap');
+        const btnClose = document.getElementById('prodMapCloser');
+
+        btnClose.addEventListener('click', () => {
+            prodMap.classList.remove('visible');
+        });
+
+        // Создаём карту
+        ymaps.ready(function () {
+            let prodYaMap = new ymaps.Map("prodMap", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [55.75652310301268,37.616237390624995],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 5,
+                controls: [],
+            });
+
+            // Собираем метки и добавляем на карту
+            for (let i = 0; i < btnsOpenMap.length; i++) {
+                const coordinate = btnsOpenMap[i].dataset.coord;
+                const hint = btnsOpenMap[i].dataset.hintDesc;
+
+                const myPlacemark = new ymaps.Placemark(
+                    JSON.parse(coordinate),
+                    { balloonContentBody: hint },
+                    {
+                        iconLayout: 'default#imageWithContent',
+                        iconImageHref: '/local/templates/.default/img/mark.png',
+                        iconImageSize: [36, 43],
+                        iconImageOffset: [-15, -43]
+                    }
+                );
+                // Добавляем созданную метку на карту
+                prodYaMap.geoObjects.add(myPlacemark);
+            }
+
+            prodYaMap.controls.add('zoomControl');
+            prodYaMap.behaviors.disable('scrollZoom');
+
+            // Открываем крту при клике на люой из кнопок
+            for (let i = 0; i < btnsOpenMap.length; i++) {
+                btnsOpenMap[i].addEventListener('click', evt => {
+                    evt.preventDefault();
+                    prodMap.classList.add('visible');
+
+                    //Забираем координаты из кнопки
+                    let local = btnsOpenMap[i].dataset.coord;
+                    local = JSON.parse(local);
+                    //Увеличиваем карту до нужного размера
+                    prodYaMap.setZoom(18,{smooth:true,centering:true});
+                    //Перемещаем карту к нужной метке
+                    prodYaMap.panTo(local);
+                });
+            }
+        });
+    }
+    /* Yandex maps на странице Производство бетона товарного -- END */
+
+
+
+
+
+
+
     /* Обработчик отправки формы Сообщение с сайта -- Start */
     const cleanErrs = (name, mail, phone, msg) => {
         // Чистим контейнеры для сообщений об ошибках

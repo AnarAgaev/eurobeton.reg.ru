@@ -6263,6 +6263,7 @@ span.bread-crumbs__link {
 .concrete__link {
     margin-top: 13px;
     margin-bottom: 25px;
+    cursor: pointer;
 }
 
 .page-concrete .request {
@@ -8008,3 +8009,70 @@ span.bread-crumbs__link {
     transform-origin: 0 0; /* see note above */
 }
 .ldio div { box-sizing: content-box; }
+
+
+
+/* Яндекс карта в модальном окне */
+.yandex-modal-map {
+    width: 90vw;
+    height: 90vh;
+    max-width: 1200px;
+    max-height: 800px;
+    position: fixed;
+    bottom: -800px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: #f5f5f5;
+    z-index: 99;
+    opacity: 0;
+    transition: all .3s ease-out;
+    border: 3px solid #f1852c;
+    border-radius: 50px;
+    overflow: hidden;
+    
+}
+.yandex-modal-map.visible {
+    bottom: 50%;
+    opacity: 1;
+}
+.yandex-modal-map__btn-close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 25px;
+    right: 25px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    z-index: 999;
+}
+.yandex-modal-map__btn-close::before,
+.yandex-modal-map__btn-close::after {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 4px;
+    background-color: #000;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+}
+
+.yandex-modal-map__btn-close::before {
+    -webkit-transform: translate(-50%, -50%) rotate(45deg);
+    -ms-transform: translate(-50%, -50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.yandex-modal-map__btn-close::after {
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+    -ms-transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.yandex-modal-map__btn-close:hover::before,
+.yandex-modal-map__btn-close:hover::after {
+    background-color: #f1852c;
+}
