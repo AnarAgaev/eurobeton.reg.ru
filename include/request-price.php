@@ -32,7 +32,7 @@
                     );?>
                 </div>
                 <div class="request__btn">
-                    <a class="btn btn-modal"
+                    <a class="btn show-modal"
                        href=""
                        data-modal-id="modalSetOrder">
                         оставить заявку

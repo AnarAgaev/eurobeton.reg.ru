@@ -31,7 +31,10 @@
                         )
                     );?>
                 </div>
-                <div class="request__btn"><a class="btn btn-modal" href="" data-modal-id="">узнать больше</a>
+                <div class="request__btn">
+                    <button class="btn show-modal" data-modal-id="modalSetOrder">
+                        узнать больше
+                    </button>
                 </div>
             </div>
         </div>

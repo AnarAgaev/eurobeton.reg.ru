@@ -34,9 +34,9 @@
                                 )
                             );?></div>
                         <div class="promo__banner__btn">
-                            <a class="btn" href="">
+                            <button class="btn show-modal" data-modal-id="modalSetOrder">
                                 консультация с менеджером
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -29,18 +29,20 @@ $APPLICATION->SetTitle("Сотрудничество с АО «Евробето�
 	)
 );?>
 				<div class="dealers__btn-wrap d-flex flex-column align-items-center flex-md-row">
- <a class="btn" href="/">оставить заявку</a>
+                    <button class="btn show-modal" data-modal-id="modalSetOrder">
+                        оставить заявку
+                    </button>
 					<div class="dealers__btn-caption">
 						 <?$APPLICATION->IncludeComponent(
-	"bitrix:main.include",
-	"",
-	Array(
-		"AREA_FILE_SHOW" => "file",
-		"AREA_FILE_SUFFIX" => "inc",
-		"EDIT_TEMPLATE" => "",
-		"PATH" => "/include/dealers-btn-txt.php"
-	)
-);?>
+                            "bitrix:main.include",
+                            "",
+                            Array(
+                                "AREA_FILE_SHOW" => "file",
+                                "AREA_FILE_SUFFIX" => "inc",
+                                "EDIT_TEMPLATE" => "",
+                                "PATH" => "/include/dealers-btn-txt.php"
+                            )
+                        );?>
 					</div>
 				</div>
 			</div>

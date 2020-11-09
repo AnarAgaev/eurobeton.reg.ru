@@ -29,7 +29,9 @@
                         )
                     ); ?>
                 </div>
-                <div class="billboard__btn"><a class="btn" href="">консультация</a></div>
+                <div class="billboard__btn">
+                    <a class="btn show-modal" href="" data-modal-id="modalSetOrder">консультация</a>
+                </div>
             </div>
             <div class="billboard__pic col-lg-5 col-xl-6">
                 <?$APPLICATION->IncludeComponent(
@@ -281,7 +283,7 @@ $APPLICATION->IncludeComponent(
    <!-- !!! Заглушка до момнета деплоя рабочей версии калькулятора. После тестрирования на продакшене нужно удалить -->
     <div class="temporary-plug d-flex justify-content-center align-items-center flex-column">
         <h4>Скоро зедсь будет новый и удобный калькулятор.<br>А пока, если у Вас есть вопросы, их можно здалть менеджеру.</h4>
-        <a class="btn" href="">Вопрос менеджеру</a>
+        <button class="btn show-modal" data-modal-id="modalSetOrder">Вопрос менеджеру</button>
     </div>
 
 </div>

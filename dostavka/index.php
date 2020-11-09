@@ -78,7 +78,7 @@ $APPLICATION->SetTitle("Доставка");
                     <!-- !!! Заглушка до момнета деплоя рабочей версии калькулятора. После тестрирования на продакшене нужно удалить -->
                     <div class="temporary-plug d-flex justify-content-center align-items-center flex-column">
                         <h4 style="padding: 0 50px;">Скоро зедсь будет новый и удобный калькулятор доставки.<br><br>А пока, если у Вас есть вопросы, их можно здалть менеджеру.</h4>
-                        <a class="btn" href="">Вопрос менеджеру</a>
+                        <button class="btn show-modal" data-modal-id="modalSetOrder">Вопрос менеджеру</button>
                     </div>
 
 

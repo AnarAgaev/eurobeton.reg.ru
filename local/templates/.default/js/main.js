@@ -1,6 +1,13 @@
-// Сервис-функция асинхронного поучения данных с сервера
-const getResource = async (url) => {
-    const response = await fetch(url);
+/* Сервис-функция асинхронного поучения данных с сервера */
+const getResource = async (url, form) => {
+
+    const response = (form === undefined)
+        ? await fetch(url)
+        : await fetch(url, {
+            method: 'POST',
+            cache  : 'no-cache',
+            body: new FormData(form)
+        });
 
     if (!response.ok) {
         throw new Error('Не удалось получить данные от ' + url +  '. Получен ответ: ' . response.status);
@@ -13,10 +20,19 @@ const getResource = async (url) => {
     }
 };
 
+/* Функция для валидации электронной почты */
+function validMail(mail) {
+    let regular = /.+@.+\..+/i;
+    return regular.test(mail);
+}
 
+/* Функция для валидации телефона */
+function validPhone(phone) {
+    let regular = /^((8|\+7)[\- ]?)?(\(?\d{3,4}\)?[\- ]?)?[\d\- ]{6,10}$/;
+    return regular.test(phone);
+}
 
 document.addEventListener("DOMContentLoaded",() => {
-
     const body = document.body;
     const dropLinks = document.querySelectorAll(".products__link.drop");
     const navLinks = document.querySelectorAll(".nav__item.drop");
@@ -37,7 +53,6 @@ document.addEventListener("DOMContentLoaded",() => {
                 .remove('visible');
         }
     };
-
 
     window.addEventListener('resize', (event) => {
         windowWidth = window.innerWidth;
@@ -72,7 +87,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     });
 
-// Toggle phone at the header on mobile screen
+    /* Toggle phone at the header on mobile screen */
     const headerPhoneBtn = document.getElementById('headerPhoneBtn');
     const toggleHeaderPhone = () => {
         body
@@ -86,8 +101,7 @@ document.addEventListener("DOMContentLoaded",() => {
     };
     headerPhoneBtn.addEventListener('click', toggleHeaderPhone);
 
-
-// Toggle navigation at the header on mobile screen
+    /* Toggle navigation at the header on mobile screen */
     const navTgglr = document.getElementById('navTgglr');
     const toggleHeaderNav = () => {
         body
@@ -102,8 +116,7 @@ document.addEventListener("DOMContentLoaded",() => {
     };
     navTgglr.addEventListener('click', toggleHeaderNav);
 
-
-// Toggle city selector at the header on mobile screen
+    /* Toggle city selector at the header on mobile screen */
     const region = document.getElementById("region");
 
     region.addEventListener("click", event => {
@@ -125,7 +138,7 @@ document.addEventListener("DOMContentLoaded",() => {
         closeAccordion();
     });
 
-// Replace cart at the header on mobile screen
+    /* Replace cart at the header on mobile screen */
     const cart = document.getElementById("cart");
     const headerBottom = document.getElementById("headerBottom");
     const headerTop = document.querySelector("#headerTop .header__top__body");
@@ -136,16 +149,12 @@ document.addEventListener("DOMContentLoaded",() => {
             : headerBottom.appendChild(cart);
     };
 
-    // Replace cart after initial page
+    /* Replace cart after initial page */
     windowWidth >= 768
         ? replaceCart(true)
         : replaceCart(false);
 
-
-
-
-
-// Replace operating at the header on mobile screen
+    /* Replace operating at the header on mobile screen */
     const operating = document.getElementById("operating");
 
     const replaceOperating = (move) => {
@@ -154,15 +163,12 @@ document.addEventListener("DOMContentLoaded",() => {
             : body.prepend(operating);
     };
 
-    // Replace operating after initial page
+    /* Replace operating after initial page */
     windowWidth >= 768
         ? replaceOperating(true)
         : replaceOperating(false);
 
-
-
-
-// Replace navigation at the header on mobile screen
+    /* Replace navigation at the header on mobile screen */
     const headerBottomContainer = document.getElementById("headerBottomContainer");
     const headerTopNav = document.getElementById("headerTopNav");
     const nav = document.getElementById("nav");
@@ -183,9 +189,7 @@ document.addEventListener("DOMContentLoaded",() => {
         ? replaceNav(true) // replace nav after logo
         : replaceNav(false);
 
-
-
-// Nav accordion for mobile version
+    /* Nav accordion for mobile version */
     if (windowWidth <=1250) {
 
         // Toggle product dropdown
@@ -222,12 +226,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
     }
 
-
-
-
-
-
-// FAQ accordion
+    /* FAQ accordion */
     const closeFaqAccordion = () => {
         for (let i = 0; i < faqLinks.length; ++i) {
             faqLinks[i].classList.remove("visible");
@@ -248,13 +247,7 @@ document.addEventListener("DOMContentLoaded",() => {
             });
         }  }
 
-
-
-
-
-
-
-// Input FILE
+    /* Input FILE */
     let inputs = document.querySelectorAll(".label_file input");
 
     for (let i = 0; i < inputs.length; i++) {
@@ -265,14 +258,8 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-
-
-
-
-
-
-// Show, hide modals
-    let btns = document.getElementsByClassName('btn-modal');
+    /* Show, hide modals */
+    let btns = document.getElementsByClassName('show-modal');
 
     const toggleModal = (modal, action) => {
         if (action) {
@@ -281,6 +268,37 @@ document.addEventListener("DOMContentLoaded",() => {
         } else {
             body.classList.remove("modal-open");
             modal.classList.remove("show");
+            modalBody.classList.remove('hide');
+            sendMsgTrue.classList.remove('visible');
+
+            const errors = modalBody.getElementsByClassName("err__msg");
+            const labels = modalBody.getElementsByClassName("label");
+            const inputs = modalBody.getElementsByClassName("input");
+            const texts = modalBody.getElementsByClassName("textarea");
+
+            if (errors.length > 0) {
+                for (let i = 0; i < errors.length; i++) {
+                    errors[i].innerHTML = '';
+                }
+            }
+
+            if (labels.length > 0) {
+                for (let i = 0; i < labels.length; i++) {
+                    labels[i].classList.remove("has__error");
+                }
+            }
+
+            if (inputs.length > 0) {
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].value = '';
+                }
+            }
+
+            if (texts.length > 0) {
+                for (let i = 0; i < texts.length; i++) {
+                    texts[i].value = '';
+                }
+            }
         }
     };
 
@@ -308,10 +326,7 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-
-
-
-// Show, hide comments for product on product page
+    /* Show, hide comments for product on product page */
     const tgglr = document.querySelector(".description__toggler");
 
     if (tgglr) {
@@ -326,10 +341,7 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-
-
-
-// Click outside any elements
+    /* Click outside any elements */
     document.addEventListener("click", event => {
         const el = event.target.parentElement;
 
@@ -347,11 +359,7 @@ document.addEventListener("DOMContentLoaded",() => {
         // }
     });
 
-
-
-
-
-// Slider for small image at the block
+    /* Slider for small image at the block */
     const pics = document.querySelectorAll(".sml-img-slider__item");
 
     for (let i = 0; i < pics.length; i++) {
@@ -380,12 +388,7 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-
-
-
-
-
-// Breakstone page accordion
+    /* Breakstone page accordion */
     const bsBtns = document.querySelectorAll(".breakstone__accordion-caption");
     const bsTxts = document.querySelectorAll(".breakstone__accordion-content");
     const closeBreakstoneAccordion = () => {
@@ -411,18 +414,15 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-
-
-
-/*
- * Работа с городом пользователя.
- *
- * Смтотрим город в Storage, елси его нет, то создаём перемунную
- * с городом по умолчанюи (Москва).
- *
- * Размещаем город по умолчанию в выпадающем меню выбора города
- * в хедере.
- * */
+    /*
+     * Работа с городом пользователя.
+     *
+     * Смтотрим город в Storage, елси его нет, то создаём перемунную
+     * с городом по умолчанюи (Москва).
+     *
+     * Размещаем город по умолчанию в выпадающем меню выбора города
+     * в хедере.
+     * */
     if (storageAvailable('localStorage')) {
         if(!localStorage.getItem('usrCity')) {
             localStorage.setItem('usrCity', 'Москва'); // Устанавливаем город по умолчанию в localStorage
@@ -434,13 +434,12 @@ document.addEventListener("DOMContentLoaded",() => {
             'Необходима реализация поддержки выбора города на альтернативной технологии.'
         );
     }
-/*
- * Меняем город пользователя по клику на пунке города
- * в выпадающем меню в хедере
- * */
+    /*
+     * Меняем город пользователя по клику на пунке города
+     * в выпадающем меню в хедере
+     * */
     let cities = document.querySelectorAll(".region__item");
     let cityContainer = document.getElementById("regionCity");
-
 
     const activeSelectedCity = () => {
         let usrCity = localStorage.getItem('usrCity');
@@ -453,10 +452,10 @@ document.addEventListener("DOMContentLoaded",() => {
         }
     };
 
-    // Размещаем город пользователя как выбранный в хедере
+    /* Размещаем город пользователя как выбранный в хедере */
     cityContainer.innerHTML = localStorage.getItem('usrCity');
 
-    // Делаем выбранный город пользователя скрытым при инициализации страницы
+    /* Делаем выбранный город пользователя скрытым при инициализации страницы */
     activeSelectedCity();
 
     for (let i = 0; i < cities.length; i++) {
@@ -478,24 +477,17 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-
-
-
-
-
-
-
-
-
-
-
     /* Yandex maps -- START
      *
      * Функция ymaps.ready() будет вызвана, когда
      * загрузятся все компоненты API,
      * а также когда будет готово DOM-дерево.
      */
-    ymaps.ready(init);
+    if (document.getElementById("indexMap")
+            || document.getElementById("contactsMap")
+            || document.getElementById("deliveryMap")) {
+        ymaps.ready(init);
+    }
     function init() {
         // Создаём метки один раз, а длее пушим их в нужную карту
         const myPlacemarkMsk = new ymaps.Placemark(
@@ -638,11 +630,108 @@ document.addEventListener("DOMContentLoaded",() => {
             map.behaviors.disable('scrollZoom');
         }
     }
-    //** Yandex maps -- END
+    /* Yandex maps -- END */
 
+    /* Обработчик отправки формы Сообщение с сайта -- Start */
+    const cleanErrs = (name, mail, phone, msg) => {
+        // Чистим контейнеры для сообщений об ошибках
+        name.nextSibling.innerHTML = '';
+        mail.nextSibling.innerHTML = '';
+        phone.nextSibling.innerHTML = '';
+        msg.nextSibling.innerHTML = '';
 
+        // Удаляем класс ошибки у родительского узла
+        name.parentElement.classList.remove('has__error');
+        mail.parentElement.classList.remove('has__error');
+        phone.parentElement.classList.remove('has__error');
+        msg.parentElement.classList.remove('has__error');
+    };
 
+    const cleanFields = (name, mail, phone, msg) => {
+        name.value = '';
+        mail.value = '';
+        phone.value = '';
+        msg.value = '';
+    };
 
+    const form          = document.getElementById('formFeedback');
+    const name          = document.getElementById('formFeedbackName');
+    const mail          = document.getElementById('formFeedbackMail');
+    const phone         = document.getElementById('formFeedbackPhone');
+    const msg           = document.getElementById('formFeedbackMsg');
+    const modalSetOrder = document.getElementById('modalSetOrder');
+    const modalBody     = document.getElementById('modalDialogFeedback');
+    const sendMsgTrue   = document.getElementById("sendMsgTrue");
+    const btnFBClose    = document.getElementById("btnFBClose");
+
+    btnFBClose
+        .addEventListener("click", () =>  toggleModal(modalSetOrder, false));
+
+    form.addEventListener('submit', evt => {
+        evt.preventDefault();
+        cleanErrs(name, mail, phone, msg);
+        let formValid = true;
+
+        if (msg.value === '') {
+            let err = msg.nextElementSibling;
+            err.innerHTML = 'Напишите вопрос';
+            msg.parentElement.classList.add('has__error');
+            msg.focus();
+            formValid = false;
+        }
+
+        if (phone.value === '') {
+            let err = phone.nextElementSibling;
+            err.innerHTML = 'Укажите телефон';
+            phone.parentElement.classList.add('has__error');
+            formValid = false;
+            phone.focus();
+        } else {
+            if (validPhone(phone.value) === false) {
+                let err =  phone.nextElementSibling;
+                err.innerHTML = 'Некорректный телефон';
+                phone.parentElement.classList.add('has__error');
+                formValid = false;
+                phone.focus();
+            }
+        }
+
+        if (mail.value === '') {
+            let err =  mail.nextElementSibling;
+            err.innerHTML = 'Укажите e-mail';
+            mail.parentElement.classList.add('has__error');
+            formValid = false;
+            mail.focus();
+        } else {
+            if (validMail(mail.value) === false) {
+                let err =  mail.nextElementSibling;
+                err.innerHTML = 'Некорректный e-mail';
+                mail.parentElement.classList.add('has__error');
+                formValid = false;
+                mail.focus();
+            }
+        }
+
+        if (name.value === '') {
+            let err =  name.nextElementSibling;
+            err.innerHTML = 'Укажите имя';
+            name.parentElement.classList.add('has__error');
+            name.focus();
+            formValid = false;
+        }
+
+        if (formValid) {
+            spinner.classList.add('visible');
+            getResource(form.action, form)
+                .then(response  => {
+                    spinner.classList.remove('visible');
+                    cleanFields(name, mail, phone, msg);
+                    modalBody.classList.add('hide');
+                    sendMsgTrue.classList.add("visible");
+                });
+        }
+    });
+    /* Обработчик отправки формы Сообщение с сайта -- End */
 
 
 
