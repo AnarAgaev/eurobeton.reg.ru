@@ -26,7 +26,8 @@
         if($APPLICATION->GetCurPage(false) == '/'
             or $APPLICATION->GetCurPage(false) == '/kontakty/'
             or $APPLICATION->GetCurPage(false) == '/dostavka/'
-            or $APPLICATION->GetCurPage(false) == '/proizvodstvo/tovarnyy-beton/')
+            or $APPLICATION->GetCurPage(false) == '/proizvodstvo/tovarnyy-beton/'
+            or $APPLICATION->GetCurPage(false) == '/proizvodstvo/shcheben/')
                 Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
     ?>
 </head>

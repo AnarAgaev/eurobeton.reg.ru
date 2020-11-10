@@ -632,7 +632,7 @@ document.addEventListener("DOMContentLoaded",() => {
     }
     /* Yandex maps -- END */
 
-    /* Yandex maps на странице Производство бетона товарного -- START */
+    /* Yandex maps на страницах Производство бетона и Производства щебня бетона товарного -- START */
     if (document.getElementById("prodMap")) {
         const btnsOpenMap = document.getElementsByClassName("open-map");
         const prodMap = document.getElementById('prodMap');
@@ -653,7 +653,7 @@ document.addEventListener("DOMContentLoaded",() => {
                 // Уровень масштабирования. Допустимые значения:
                 // от 0 (весь мир) до 19.
                 zoom: 5,
-                controls: [],
+                controls: ['default', 'routeButtonControl'],
             });
 
             // Собираем метки и добавляем на карту
@@ -675,7 +675,6 @@ document.addEventListener("DOMContentLoaded",() => {
                 prodYaMap.geoObjects.add(myPlacemark);
             }
 
-            prodYaMap.controls.add('zoomControl');
             prodYaMap.behaviors.disable('scrollZoom');
 
             // Открываем крту при клике на люой из кнопок
