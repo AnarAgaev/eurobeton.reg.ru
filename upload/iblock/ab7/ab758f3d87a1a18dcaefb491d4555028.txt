@@ -1,0 +1,40 @@
+git clone u0856964@31.31.198.109:/var/www/u0856964/data/designtalk.ru.git
+
+ssh u0856964@31.31.198.109
+
+u0856964
+F!F7KfF6
+31.31.198.109
+
+старый пароль для ssh доступа !nK4DemK
+
+
+
+
+
+
+.htaccess
+
+RewriteEngine on
+
+# Редирект с http на https создан автоматически при заказе бесплатного ssl-сертификата
+RewriteEngine On
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+# Конец редиректа
+
+Order deny,allow
+deny from all
+# Список IP через пробел, с которых доступ разрешен
+Allow from 176.59.38.203
+
+# Редактирум URL адрес рубрики с именем рубрики как вложенная папка на URL запрос к файлу rubrics/index.php
+# Страница с конкретной рубрикой формируется динамически, где имя рубрики получаем из URL адреса путём разбора строки URL
+RewriteRule ^rubrics/(.*)$ rubrics/index.php
+
+# Редактирум URL адрес страницы со статьёй, где статья как вложенная папка на URL запрос к файлу articles/index.php
+# Страница с конкретной статьёй формируется динамически, где имя статьи получаем из URL адреса путём разбора строки URL
+RewriteRule ^articles/(.*)$ articles/index.php
+
+# Своя ошибка на 404 (Page not found) ошибку
+ErrorDocument 404 /404.php

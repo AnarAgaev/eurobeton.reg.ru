@@ -14,7 +14,7 @@ const getResource = async (url, form) => {
     }
 
     try {
-        return await response.json();
+        return await response.text();
     } catch (error) {
         throw new TypeError('Полученные данные должны быть в формате JSON. Произошла ошибка на URL: ' + response.url);
     }
@@ -30,6 +30,12 @@ function validMail(mail) {
 function validPhone(phone) {
     let regular = /^((8|\+7)[\- ]?)?(\(?\d{3,4}\)?[\- ]?)?[\d\- ]{6,10}$/;
     return regular.test(phone);
+}
+
+/* Функция для валидации даты */
+function validDate(date) {
+    let regular = /^\d{2}\.\d{2}\.\d{4}$/
+    return regular.test(date);
 }
 
 document.addEventListener("DOMContentLoaded",() => {
@@ -795,13 +801,213 @@ document.addEventListener("DOMContentLoaded",() => {
             getResource(form.action, form)
                 .then(response  => {
                     spinner.classList.remove('visible');
-                    cleanFields(name, mail, phone, msg);
-                    modalBody.classList.add('hide');
-                    sendMsgTrue.classList.add("visible");
+
+                    if (response['IS_ERRORS']) {
+                        alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.')
+                    } else {
+                        cleanFields(name, mail, phone, msg);
+                        modalBody.classList.add('hide');
+                        sendMsgTrue.classList.add("visible");
+                    }
                 });
         }
     });
     /* Обработчик отправки формы Сообщение с сайта -- End */
+
+    /* Обработчик отправки формы "Записать на собеседование" -- Start */
+    const cleanErrsVacancy = (
+        name, birthday, phone,
+        email, position, questionary,
+        photo) => {
+
+        // Чистим контейнеры для сообщений об ошибках
+        name.nextSibling.innerHTML = '';
+        birthday.nextSibling.innerHTML = '';
+        phone.nextSibling.innerHTML = '';
+        email.nextSibling.innerHTML = '';
+        position.nextSibling.innerHTML = '';
+        questionary.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
+        photo.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
+
+        // Удаляем класс ошибки у родительского узла
+        name.parentElement.classList.remove('has__error');
+        birthday.parentElement.classList.remove('has__error');
+        phone.parentElement.classList.remove('has__error');
+        email.parentElement.classList.remove('has__error');
+        position.parentElement.classList.remove('has__error');
+        questionary.parentElement.classList.remove('has__error');
+        photo.parentElement.classList.remove('has__error');
+    };
+
+    const cleanFieldsVacancy = (
+        name, birthday, phone,
+        email, position, questionary,
+        photo) => {
+
+        name.value = '';
+        birthday.value = '';
+        phone.value = '';
+        email.value = '';
+        position.value = '';
+        questionary.value = '';
+        photo.value = '';
+        questionary.nextElementSibling.innerHTML = '';
+        photo.nextElementSibling.innerHTML = '';
+    };
+
+    const formVacancy        = document.getElementById('formVacancy');
+    const nameVacancy        = document.getElementById('formVacancyName');
+    const birthdayVacancy    = document.getElementById('formVacancyBirthday');
+    const phoneVacancy       = document.getElementById('formVacancyPhone');
+    const emailVacancy       = document.getElementById('formVacancyEmail');
+    const positionVacancy    = document.getElementById('formVacancyPosition');
+    const questionaryVacancy = document.getElementById('formVacancyQuestionary');
+    const photoVacancy       = document.getElementById('formVacancyPhoto');
+
+    formVacancy.addEventListener('submit', evt => {
+        evt.preventDefault();
+        cleanErrsVacancy(
+            nameVacancy, birthdayVacancy, phoneVacancy,
+            emailVacancy, positionVacancy, questionaryVacancy,
+            photoVacancy);
+        let formValid = true;
+
+        questionaryVacancy.nextElementSibling.innerHTML = questionaryVacancy.value.split('\\').pop();
+        photoVacancy.nextElementSibling.innerHTML = photoVacancy.value.split('\\').pop();
+
+        // Фото можно не добавлять, нет проверки на пустое поле.
+        if (photoVacancy.value !== '') {
+            let type = photoVacancy
+                .files[0]
+                .name
+                .split(".")
+                .splice(-1,1)[0];
+
+            if (!(type === 'jpg' || type === 'gif' || type === 'bmp' || type === 'png' || type === 'jpeg')) {
+                let err =  photoVacancy.nextElementSibling.nextElementSibling;
+                err.innerHTML = 'Выбранный файл - не картинка. Допускаются файлы jpg, gif, bmp, png, jpeg';
+                photoVacancy.parentElement.classList.add('has__error');
+                formValid = false;
+            }
+        }
+
+        if (questionaryVacancy.value === '') {
+            let err = questionaryVacancy.nextElementSibling.nextElementSibling;
+            err.innerHTML = 'Заполните и прикрепите анкету';
+            questionaryVacancy.parentElement.classList.add('has__error');
+            formValid = false;
+        } else {
+            let type = questionaryVacancy
+                .files[0]
+                .name
+                .split(".")
+                .splice(-1,1)[0];
+
+            if (!(type === 'txt' || type === 'doc' || type === 'rtf')) {
+                let err =  questionaryVacancy.nextElementSibling.nextElementSibling;
+                err.innerHTML = 'Ошибка формата. Допускаются txt, doc, rtf';
+                questionaryVacancy.parentElement.classList.add('has__error');
+                formValid = false;
+            }
+        }
+
+        if (positionVacancy.value === '') {
+            let err = positionVacancy.nextElementSibling;
+            err.innerHTML = 'Укажите желаемую должность';
+            positionVacancy.parentElement.classList.add('has__error');
+            positionVacancy.focus();
+            formValid = false;
+        }
+
+        if (emailVacancy.value === '') {
+            let err = emailVacancy.nextElementSibling;
+            err.innerHTML = 'Укажите Ваш Е-мэйл';
+            emailVacancy.parentElement.classList.add('has__error');
+            emailVacancy.focus();
+            formValid = false;
+        } else {
+            if (validMail(emailVacancy.value) === false) {
+                let err =  emailVacancy.nextElementSibling;
+                err.innerHTML = 'Е-мэйл указан некорректно';
+                emailVacancy.parentElement.classList.add('has__error');
+                emailVacancy.focus();
+                formValid = false;
+            }
+        }
+
+        if (phoneVacancy.value === '') {
+            let err = phoneVacancy.nextElementSibling;
+            err.innerHTML = 'Укажите Ваш телефон';
+            phoneVacancy.parentElement.classList.add('has__error');
+            phoneVacancy.focus();
+            formValid = false;
+        } else {
+            if (validPhone(phoneVacancy.value) === false) {
+                let err =  phoneVacancy.nextElementSibling;
+                err.innerHTML = 'Телефон указан некорректно';
+                phoneVacancy.parentElement.classList.add('has__error');
+                phoneVacancy.focus();
+                formValid = false;
+            }
+        }
+
+        if (birthdayVacancy.value === '') {
+            let err = birthdayVacancy.nextElementSibling;
+            err.innerHTML = 'Укажите дату рождения';
+            birthdayVacancy.parentElement.classList.add('has__error');
+            birthdayVacancy.focus();
+            formValid = false;
+        } else {
+            if (validDate(birthdayVacancy.value) === false) {
+                let err =  birthdayVacancy.nextElementSibling;
+                err.innerHTML = 'Формат даты должен быть ДД.ММ.ГГГГ';
+                birthdayVacancy.parentElement.classList.add('has__error');
+                birthdayVacancy.focus();
+                formValid = false;
+            }
+        }
+
+        if (nameVacancy.value === '') {
+            let err = nameVacancy.nextElementSibling;
+            err.innerHTML = 'Заполните поле имя';
+            nameVacancy.parentElement.classList.add('has__error');
+            nameVacancy.focus();
+            formValid = false;
+        }
+
+        if (formValid) {
+            spinner.classList.add('visible');
+            getResource(formVacancy.action, formVacancy)
+                .then(response  => {
+                    spinner.classList.remove('visible');
+
+                    if (response['IS_ERRORS']) {
+                        alert('Данные не добавлены. Произошла ошибка. Попробуйте немного позже.')
+                    } else {
+                        cleanFieldsVacancy(
+                            nameVacancy, birthdayVacancy, phoneVacancy,
+                            emailVacancy, positionVacancy, questionaryVacancy,
+                            photoVacancy);
+
+                        let modal = document.getElementById('modalVacancy');
+                        let modalDialog = modal.getElementsByClassName('send-msg-true')[0];
+                        let btnClose = document.getElementById('btnVacancyClose');
+
+                        modal.classList.add('show');
+                        body.classList.add('modal-open');
+                        modalDialog.classList.add('visible');
+
+                        btnClose.addEventListener('click', () => {
+                            modal.classList.remove('show');
+                            body.classList.remove('modal-open');
+                            modalDialog.classList.remove('visible');
+                        });
+                    }
+                });
+        }
+    });
+    /* Обработчик отправки формы "Записать на собеседование" -- End */
+
 
 
 

@@ -2,6 +2,13 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Вакансии");
 ?>
+    <div class="modal" id="modalVacancy">
+        <div class="send-msg-true flex-column justify-content-center align-items-center">
+            <h3 class="send-msg-true__title">Сообщение отправлено</h3>
+            <span class="send-msg-true__txt">Менеджер свяжется с Вами в ближайшее время.</span>
+            <button class="btn" id="btnVacancyClose">Закрыть</button>
+        </div>
+    </div>
 <?$APPLICATION->IncludeComponent(
     "bitrix:breadcrumb",
     "breadcrumbs",
@@ -54,50 +61,15 @@ $APPLICATION->SetTitle("Вакансии");
         </div>
     </div>
 </div>
-<form class="form form-interview-wrap" enctype="multipart/form-data" method="post">
-    <div class="container">
-        <div class="form__controls form_interview d-flex flex-column align-items-start flex-lg-row flex-wrap">
-            <div class="form__title">Записать на собеседование</div>
-            <label class="label label_w378">
-                <span>Фамилии, Имя, Отчество:</span>
-                <input class="input control" type="text" placeholder="Иванов Ивановский Иванович">
-            </label>
-            <label class="label label_w284">
-                <span>Дата рождения:</span>
-                <input class="input control" type="text" placeholder="01.01.1999">
-            </label>
-            <label class="label label_w339">
-                <span>Телефон:</span>
-                <input class="input control" type="text" placeholder="+7 (999) 999-99-99">
-            </label>
-            <label class="label label_w378">
-                <span>Е-mail почта:</span>
-                <input class="input control" type="text" placeholder="example@example.com">
-            </label>
-            <label class="label label_w653">
-                <span>На какую должность Вы претендуете в нашей компании:</span>
-                <input class="input control" type="text">
-            </label>
-            <label class="label label_file label_w299">
-                <span>Прикрепить анкету соискателя:</span>
-                <input id="photo" type="file" class="input">
-                <span class="controller control"></span>
-                <a class="download" href="">Скачать образец анкеты соискателя</a>
-            </label>
-            <label class="label label_file label_w175">
-                <span>Прикрепить фото:</span>
-                <input id="questionaty" type="file" class="input">
-                <span class="controller control"></span>
-            </label>
-            <div class="form__send-wrap d-flex flex-column flex-md-row align-items-md-center">
-                <div class="form__send-btn">
-                    <button class="btn btn" type="submit">Отправить</button>
-                </div>
-                <div class="form__send-caption">
-                    <span>Нажимая кнопку, вы соглашаетесь с условиями <a href="/">пользовательского соглашения</a> по обработке персональных данных</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+<?/* Форма заявки на вакансию */
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/include/form-vacancy.php"
+    )
+);?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
