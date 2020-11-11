@@ -32,6 +32,8 @@
     ?>
 </head>
 <body class="<?
+    if(preg_match('/\/produktsiya\/shcheben\/\w/', $APPLICATION->GetCurPage())) echo 'page-product-rubble';
+
     if($APPLICATION->GetCurPage() == '/produktsiya/izvestnyakovaya-muka/') echo 'page-limestone-flour';
     if($APPLICATION->GetCurPage() == '/produktsiya/mineralnyy-poroshok/') echo 'page-mineral-powder';
     if($APPLICATION->GetCurPage() == '/o-kompanii/biografiya-rukovoditelya/') echo 'page-director';

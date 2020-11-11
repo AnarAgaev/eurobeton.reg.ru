@@ -7008,9 +7008,11 @@ span.bread-crumbs__link {
     position: absolute;
     width: 100%;
     height: 0;
-    bottom: 8px;
+    top: 16px;
     z-index: -1;
-    border-bottom: 2px dotted rgba(0, 0, 0, .7)
+    border-bottom: 2px dotted rgba(0, 0, 0, .6);
+    background-color: transparent;
+    border-radius: 0;
 }
 
 .product-rubble .specifications__parametr {
