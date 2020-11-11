@@ -32,10 +32,12 @@
     ?>
 </head>
 <body class="<?
+    if($APPLICATION->GetCurPage() == '/produktsiya/izvestnyakovaya-muka/') echo 'page-limestone-flour';
     if($APPLICATION->GetCurPage() == '/produktsiya/mineralnyy-poroshok/') echo 'page-mineral-powder';
     if($APPLICATION->GetCurPage() == '/o-kompanii/biografiya-rukovoditelya/') echo 'page-director';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/tovarnyy-beton/') echo 'page-concrete';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/laboratoriya/') echo 'page-laboratory';
+    if($APPLICATION->GetCurPage() == '/produktsiya/shcheben/') echo 'page-catalog-rubble';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/shcheben/') echo 'page-breakstone';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/dileram/') echo 'page-dealers';
     if($APPLICATION->GetCurPage() == '/o-kompanii/vakansii/') echo 'page-vacancy';

@@ -1,5 +1,13 @@
 <?php
 $arUrlRewrite=array (
+  2 => 
+  array (
+    'CONDITION' => '#^/produktsiya/shcheben/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/produktsiya/shcheben/index.php',
+    'SORT' => 100,
+  ),
   1 => 
   array (
     'CONDITION' => '#^/o-kompanii/novosti/#',

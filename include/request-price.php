@@ -3,7 +3,7 @@
         <div class="row">
             <div class="request__pic col-lg-4">
                 <img class="request-men"
-                     src="<?= DEFAULT_TEMPLATE_PATH; ?>/img/request-men.png"
+                     src="<?=DEFAULT_TEMPLATE_PATH?>/img/request-men.png"
                      alt=""
                      title="">
             </div>

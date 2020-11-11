@@ -4399,6 +4399,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 35px
 }
 
+.page-limestone-flour .bread-crumbs__list,
+.page-mineral-powder .bread-crumbs__list {
+    -webkit-box-pack: start !important;
+    -ms-flex-pack: start !important;
+    justify-content: flex-start !important
+}
+
 .bread-crumbs__item {
     padding: 0 10px 0 5px;
     position: relative
@@ -7402,6 +7409,10 @@ span.bread-crumbs__link {
     margin-top: 0
 }
 
+.page-limestone-flour .mineral-powder {
+    padding-bottom: 45px;
+}
+
 .mineral-powder .image {
     width: 100%;
     height: 0;
@@ -7771,13 +7782,15 @@ span.bread-crumbs__link {
     transition: all .3s linear
 }
 
-.page-mineral-powder .bread-crumbs__wrap {
+.page-mineral-powder .bread-crumbs__wrap,
+.page-limestone-flour .bread-crumbs__wrap {
     -webkit-box-pack: start !important;
     -ms-flex-pack: start !important;
     justify-content: start !important
 }
 
-.page-mineral-powder .page-title__content {
+.page-mineral-powder .page-title__content,
+.page-limestone-flour  .page-title__content {
     text-align: left
 }
 

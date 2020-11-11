@@ -124,7 +124,9 @@ class handleVacancyFrom {
                 'EMAIL_FROM' => $arFields['PROPERTY_VALUES']['EMAIL'],
                 'POSITION' => $arFields['PROPERTY_VALUES']['POSITION'],
                 'QUESTIONARY' => $_SERVER["SERVER_NAME"].CFile::GetPath($arProps['QUESTIONARY']['VALUE']) ,
-                'PHOTO' => $_SERVER["SERVER_NAME"].CFile::GetPath($arProps['PHOTO']['VALUE']),
+                'PHOTO' => $arFields['PROPERTY_VALUES']['PHOTO']
+                            ? 'Не указано'
+                            : $_SERVER["SERVER_NAME"].CFile::GetPath($arProps['PHOTO']['VALUE']),
             );
             CEvent::Send('INTERVIEW_REQUEST',SITE_ID,$arSend);
         }

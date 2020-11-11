@@ -864,7 +864,8 @@ document.addEventListener("DOMContentLoaded",() => {
     const questionaryVacancy = document.getElementById('formVacancyQuestionary');
     const photoVacancy       = document.getElementById('formVacancyPhoto');
 
-    formVacancy.addEventListener('submit', evt => {
+    if(formVacancy) {
+        formVacancy.addEventListener('submit', evt => {
         evt.preventDefault();
         cleanErrsVacancy(
             nameVacancy, birthdayVacancy, phoneVacancy,
@@ -1006,6 +1007,7 @@ document.addEventListener("DOMContentLoaded",() => {
                 });
         }
     });
+    }
     /* Обработчик отправки формы "Записать на собеседование" -- End */
 
 

@@ -19,7 +19,7 @@ $this->setFrameMode(true);
         $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
         ?>
         <li class="dropdown__item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-            <a class="dropdown__link" href="<?=$arItem["DETAIL_PAGE_URL"]?>"><?=$arItem["NAME"]?></a>
+            <a class="dropdown__link" href="<?=$arItem["DETAIL_PAGE_URL"]?>/"><?=$arItem["NAME"]?></a>
         </li>
     <?endforeach;?>
 </ul>
