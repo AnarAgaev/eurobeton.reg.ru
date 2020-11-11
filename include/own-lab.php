@@ -32,9 +32,9 @@
                     );?>
                 </div>
                 <div class="request__btn">
-                    <button class="btn show-modal" data-modal-id="modalSetOrder">
+                    <a href="/proizvodstvo/laboratoriya/" class="btn">
                         узнать больше
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

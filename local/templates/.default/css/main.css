@@ -839,7 +839,7 @@ body.phone-visible {
 
 img {
     max-width: 100%;
-    display: block;
+    display: inline-block;
     margin: 0 auto;
     position: relative
 }
@@ -852,7 +852,8 @@ li, ul {
 
 .list,
 .table__column ul,
-.breakstone__accordion-content ul {
+.breakstone__accordion-content ul,
+.specifications ul {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -865,7 +866,8 @@ li, ul {
 
 .list-item:before,
 .table__column li:before,
-.breakstone__accordion-content li:before {
+.breakstone__accordion-content li:before,
+.specifications li:before {
     content: "";
     width: 3px;
     height: 3px;
@@ -879,7 +881,8 @@ li, ul {
 .list-item:before,
 a.link,
 .table__column li:before,
-.breakstone__accordion-content li:before {
+.breakstone__accordion-content li:before,
+.specifications li:before {
     display: inline-block;
     position: relative
 }
@@ -920,7 +923,7 @@ a {
     text-decoration: none
 }
 
-.btn, a.btn, button.btn {
+.btn, a.btn, button.btn, .btn-call {
     -webkit-box-shadow: 4px 4px 20px rgba(138, 83, 5, .35), inset 0 0 0 rgba(111, 53, 5, .25);
     box-shadow: 4px 4px 20px rgba(138, 83, 5, .35), inset 0 0 0 rgba(111, 53, 5, .25);
     border-radius: 999px;
@@ -943,7 +946,7 @@ a {
     cursor: pointer
 }
 
-.btn:hover, a.btn:hover, button.btn:hover {
+.btn:hover, a.btn:hover, button.btn:hover, .btn-call:hover {
     -webkit-box-shadow: 0 0 0 rgba(138, 83, 5, .35), inset 2px 1px 3px rgba(111, 53, 5, .25);
     box-shadow: 0 0 0 rgba(138, 83, 5, .35), inset 2px 1px 3px rgba(111, 53, 5, .25);
     background-image: -webkit-gradient(linear, left bottom, left top, from(#f1852c), to(#f1852c));
@@ -5608,7 +5611,8 @@ span.bread-crumbs__link {
     }
 }
 
-.product .btn_call {
+.product .btn_call,
+.btn-call {
     width: 151px;
     height: 59px;
     color: #000;
@@ -5622,17 +5626,31 @@ span.bread-crumbs__link {
     box-shadow: 0 0 0 rgba(138, 83, 5, .35), inset 2px 1px 3px rgba(111, 53, 5, .25)
 }
 
-.product .btn_call img {
+.btn-call a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.product .btn_call img,
+.btn-call img {
     z-index: 10;
     position: relative;
     height: 22px
 }
 
-.product .btn_call:hover:before {
+.product .btn_call:hover:before,
+.btn-call:hover:before {
     opacity: 0
 }
 
-.product .btn_call:before {
+.product .btn_call:before,
+.btn-call:before {
     content: "";
     display: block;
     position: absolute;
@@ -6147,7 +6165,8 @@ span.bread-crumbs__link {
     margin-bottom: 0
 }
 
-.page-laboratory .advantages {
+.page-laboratory .advantages,
+.page-mineral-powder .advantages {
     margin-top: 0
 }
 
@@ -6493,7 +6512,8 @@ span.bread-crumbs__link {
     order: 2
 }
 
-.pump-rental .specifications__title {
+.pump-rental .specifications h4,
+.pump-rental .specifications h5 {
     font-weight: 500;
     font-size: 15px
 }

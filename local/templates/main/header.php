@@ -32,6 +32,7 @@
     ?>
 </head>
 <body class="<?
+    if($APPLICATION->GetCurPage() == '/produktsiya/mineralnyy-poroshok/') echo 'page-mineral-powder';
     if($APPLICATION->GetCurPage() == '/o-kompanii/biografiya-rukovoditelya/') echo 'page-director';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/tovarnyy-beton/') echo 'page-concrete';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/laboratoriya/') echo 'page-laboratory';
