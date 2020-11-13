@@ -6,13 +6,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	),
-	Array(
-		"Кран", 
-		"/arenda/kran/", 
-		Array(), 
-		Array(), 
-		"" 
 	)
 );
 ?>

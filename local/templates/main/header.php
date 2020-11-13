@@ -43,6 +43,7 @@
     if($APPLICATION->GetCurPage() == '/proizvodstvo/shcheben/') echo 'page-breakstone';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/dileram/') echo 'page-dealers';
     if($APPLICATION->GetCurPage() == '/o-kompanii/vakansii/') echo 'page-vacancy';
+    if($APPLICATION->GetCurPage() == '/produktsiya/beton/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/dostavka/') echo 'page-delivery';
     if($APPLICATION->GetCurPage() == '/tendery/') echo 'page-tenders';
     if($APPLICATION->GetCurPage() == '/') echo 'page-index';
@@ -198,37 +199,37 @@
                                     <a class="products__link drop" href="/produktsiya/beton">Бетон</a>
                                     <div class="products__dropdown concrete d-flex justify-content-center align-items-center">
                                         <?$APPLICATION->IncludeComponent(
-                                            "bitrix:catalog.section.list",
-                                            "nav-beton",
-                                            array(
-                                                "ADD_SECTIONS_CHAIN" => "N",
-                                                "CACHE_FILTER" => "N",
-                                                "CACHE_GROUPS" => "Y",
-                                                "CACHE_TIME" => "36000000",
-                                                "CACHE_TYPE" => "A",
-                                                "COUNT_ELEMENTS" => "N",
-                                                "COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
-                                                "FILTER_NAME" => "sectionsFilter",
-                                                "IBLOCK_ID" => "7",
-                                                "IBLOCK_TYPE" => "products",
-                                                "SECTION_CODE" => "",
-                                                "SECTION_FIELDS" => array(
-                                                    0 => "",
-                                                    1 => "",
-                                                ),
-                                                "SECTION_ID" => $_REQUEST["SECTION_ID"],
-                                                "SECTION_URL" => "/produktsiya/beton/#SECTION_CODE#",
-                                                "SECTION_USER_FIELDS" => array(
-                                                    0 => "",
-                                                    1 => "",
-                                                ),
-                                                "SHOW_PARENT_NAME" => "Y",
-                                                "TOP_DEPTH" => "1",
-                                                "VIEW_MODE" => "TEXT",
-                                                "COMPONENT_TEMPLATE" => "nav-beton"
-                                            ),
-                                            false
-                                        );?>
+	"bitrix:catalog.section.list", 
+	"nav-beton", 
+	array(
+		"ADD_SECTIONS_CHAIN" => "N",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"COUNT_ELEMENTS" => "Y",
+		"COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
+		"FILTER_NAME" => "sectionsFilter",
+		"IBLOCK_ID" => "7",
+		"IBLOCK_TYPE" => "products",
+		"SECTION_CODE" => "",
+		"SECTION_FIELDS" => array(
+			0 => "",
+			1 => "",
+		),
+		"SECTION_ID" => $_REQUEST["SECTION_ID"],
+		"SECTION_URL" => "/produktsiya/beton/#SECTION_CODE#",
+		"SECTION_USER_FIELDS" => array(
+			0 => "",
+			1 => "",
+		),
+		"SHOW_PARENT_NAME" => "Y",
+		"TOP_DEPTH" => "2",
+		"VIEW_MODE" => "TEXT",
+		"COMPONENT_TEMPLATE" => "nav-beton"
+	),
+	false
+);?>
                                     </div>
                                 </li>
                                 <li class="drop products__item"><a class="products__link drop" href="/produktsiya/shcheben">Щебень</a>

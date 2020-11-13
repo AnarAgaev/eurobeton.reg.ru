@@ -1,5 +1,14 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?
+    /*
+     * При создании массива с результирующими данными сразу добавляем туда ссылку
+     * на следующую страницу и данные постраничной навигации
+     *
+     * $arResult["NAV_RESULT"]->NavPageNomer; - Номер текущей страницы
+     * $arResult["NAV_RESULT"]->NavPageCount; - Количество страниц
+     * $arResult["NAV_RESULT"]->NavRecordCount; - Общее количество элементов
+     * $arResult["NAV_RESULT"]->NavPageSize; - Количество элементов на странице
+     */
     $arResponse = [
             getNextPage(
                 $arResult,

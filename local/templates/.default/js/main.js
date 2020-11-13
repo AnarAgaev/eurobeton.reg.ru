@@ -14,7 +14,7 @@ const getResource = async (url, form) => {
     }
 
     try {
-        return await response.text();
+        return await response.json();
     } catch (error) {
         throw new TypeError('Полученные данные должны быть в формате JSON. Произошла ошибка на URL: ' + response.url);
     }
@@ -1014,6 +1014,24 @@ document.addEventListener("DOMContentLoaded",() => {
 
 
 
+    /* Блокируем ссылки/пункты меню Производство и Аренда - Start */
+    const prodMenuItem = document
+        .getElementsByClassName("production")[0]
+        .previousElementSibling;
+    const rentMenuItem = document
+        .getElementsByClassName("rent")[0]
+        .previousElementSibling;
+
+    prodMenuItem.style.cursor = "default";
+    prodMenuItem.addEventListener('click', evt => {
+       evt.preventDefault();
+    });
+
+    rentMenuItem.style.cursor = "default";
+    rentMenuItem.addEventListener('click', evt => {
+       evt.preventDefault();
+    });
+    /* Блокируем ссылки/пункты меню Производство и Аренда - End */
 
 
 });

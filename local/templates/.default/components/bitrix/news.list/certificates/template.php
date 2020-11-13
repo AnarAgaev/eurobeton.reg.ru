@@ -35,12 +35,8 @@ $this->setFrameMode(true);
  * Для того чтобы компонент отвечающий на асинхонноый запрос отдавал чистые данные JSON
  * в папке его шаблона добален файл component_epilog.php в котором необходимые данные
  * вырезаются из содежания
- * /local/templates/.default/components/bitrix/news.list/ajax-news-list/component_epilog.php
+ * /local/templates/.default/components/bitrix/news.list/ajax-certificates-list/component_epilog.php
  *
- * $arResult["NAV_RESULT"]->NavPageNomer; - Номер текущей страницы
- * $arResult["NAV_RESULT"]->NavPageCount; - Количество страниц
- * $arResult["NAV_RESULT"]->NavRecordCount; - Общее количество элементов
- * $arResult["NAV_RESULT"]->NavPageSize; - Количество элементов на странице
  */
 ?>
 <div class="container">

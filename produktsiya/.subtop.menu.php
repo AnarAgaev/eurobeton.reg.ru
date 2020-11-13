@@ -20,13 +20,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	),
-	Array(
-		"Спец. предложение", 
-		"/produktsiya/spets-predlozhenie/", 
-		Array(), 
-		Array(), 
-		"" 
 	)
 );
 ?>

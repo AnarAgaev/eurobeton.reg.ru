@@ -3146,15 +3146,16 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    line-height: 24px
+    line-height: 24px;
+    height: 48px;
 }
 
 .catalog__price, .prices__price {
     font-size: 16px;
     font-weight: 400;
     line-height: 30px;
-    padding-top: 21px;
-    padding-bottom: 32px
+    padding-top: 5px;
+    padding-bottom: 25px
 }
 
 .catalog__price span, .prices__price span {
@@ -5193,6 +5194,17 @@ span.bread-crumbs__link {
     }
 }
 
+.catalog__item {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all .5s ease-out;
+}
+
+.catalog__item.hide {
+    opacity: 0;
+    transform: translateX(25px);
+}
+
 .page-catalog .get-more {
     margin-top: 35px;
     margin-bottom: 63px
@@ -6945,7 +6957,8 @@ span.bread-crumbs__link {
     margin-bottom: 63px
 }
 
-.page-catalog-rubble .request {
+.page-catalog-rubble .request,
+.page-catalog .request {
     margin-bottom: 0
 }
 

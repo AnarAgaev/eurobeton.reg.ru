@@ -2,7 +2,8 @@
         <div class="container">
             <div class="row d-flex">
                 <div class="promo__cards col-xl-4">
-                    <a class="promo__card d-flex flex-column justify-content-center align-items-center" href="/">
+                    <a class="promo__card d-flex flex-column justify-content-center align-items-center"
+                       href="/proizvodstvo/sertifikaty/">
                         <img class="promo__card__pic" src="<?=DEFAULT_TEMPLATE_PATH;?>/img/certificate.png" alt="" title="">
                         <div class="promo__card__desc">Свидетельства и сертификаты качества</div>
                     </a>
