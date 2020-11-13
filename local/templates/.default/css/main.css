@@ -6958,7 +6958,8 @@ span.bread-crumbs__link {
 }
 
 .page-catalog-rubble .request,
-.page-catalog .request {
+.page-catalog .request,
+.page-catalog-item .request {
     margin-bottom: 0
 }
 

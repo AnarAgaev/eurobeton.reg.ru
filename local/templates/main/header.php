@@ -33,7 +33,11 @@
 </head>
 <body class="<?
     if(preg_match('/\/produktsiya\/shcheben\/\w/', $APPLICATION->GetCurPage())) echo 'page-product-rubble';
+    if(preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())) echo 'page-catalog-item';
+    if(preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())) echo 'page-catalog-item';
+    if(preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) echo 'page-catalog-item';
 
+    if($APPLICATION->GetCurPage() == '/produktsiya/beton/rastvory-tsementno-peschanye/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/produktsiya/izvestnyakovaya-muka/') echo 'page-limestone-flour';
     if($APPLICATION->GetCurPage() == '/produktsiya/mineralnyy-poroshok/') echo 'page-mineral-powder';
     if($APPLICATION->GetCurPage() == '/o-kompanii/biografiya-rukovoditelya/') echo 'page-director';
@@ -43,6 +47,8 @@
     if($APPLICATION->GetCurPage() == '/proizvodstvo/shcheben/') echo 'page-breakstone';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/dileram/') echo 'page-dealers';
     if($APPLICATION->GetCurPage() == '/o-kompanii/vakansii/') echo 'page-vacancy';
+    if($APPLICATION->GetCurPage() == '/produktsiya/beton/betonnaya-smes/') echo 'page-catalog';
+    if($APPLICATION->GetCurPage() == '/produktsiya/beton/tovarnyy-beton/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/produktsiya/beton/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/dostavka/') echo 'page-delivery';
     if($APPLICATION->GetCurPage() == '/tendery/') echo 'page-tenders';

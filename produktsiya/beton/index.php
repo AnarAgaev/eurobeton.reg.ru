@@ -18,8 +18,7 @@ $APPLICATION->SetTitle("Бетон");
         <h1 class="page-title__content">Бетон</h1>
     </div>
 </div>
-<?/* Компонент список всех товаро раздела Бетон
-   */
+<?/* Компонент список всех товаров раздела Бетон */
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"concrete", 
@@ -261,14 +260,4 @@ $APPLICATION->IncludeComponent(
     ),
     false
 );?>
-
-
-
-
-
-
-
-
-
-
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

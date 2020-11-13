@@ -1,5 +1,29 @@
 <?php
 $arUrlRewrite=array (
+  5 => 
+  array (
+    'CONDITION' => '#^/produktsiya/beton/rastvory-tsementno-peschanye/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/produktsiya/beton/rastvory-tsementno-peschanye/index.php',
+    'SORT' => 100,
+  ),
+  3 => 
+  array (
+    'CONDITION' => '#^/produktsiya/beton/tovarnyy-beton/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/produktsiya/beton/tovarnyy-beton/index.php',
+    'SORT' => 100,
+  ),
+  4 => 
+  array (
+    'CONDITION' => '#^/produktsiya/beton/betonnaya-smes/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/produktsiya/beton/betonnaya-smes/index.php',
+    'SORT' => 100,
+  ),
   2 => 
   array (
     'CONDITION' => '#^/produktsiya/shcheben/#',
