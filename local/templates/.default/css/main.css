@@ -5930,7 +5930,8 @@ span.bread-crumbs__link {
 
 .director__pic img {
     margin-bottom: 28px;
-    margin-top: 7px
+    margin-top: 7px;
+    display: block;
 }
 
 @media (min-width: 1200px) {
