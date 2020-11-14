@@ -22,8 +22,10 @@ $this->setFrameMode(true);
 ?>
 <div class="prices section_container">
     <div class="container">
-        <div class="prices__title section_title">Лучшие предложения</div>
-        <div class="prices__link"><a href="/">Перейти в каталог</a></div>
+        <div class="prices__title section_title">
+            Лучшие предложения
+        </div>
+        <div class="prices__link"><a href="/produktsiya/beton/">Перейти в каталог</a></div>
         <div class="prices__slider">
             <div class="slider">
                 <div class="slider__controller slider__controller_left slider-controller-left"></div>

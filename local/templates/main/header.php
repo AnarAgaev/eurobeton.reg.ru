@@ -22,20 +22,26 @@
         Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/main.css');
         Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/main.js');
 
-        /* Добавляем Яндекс карту используемую на главной странице */
-        if($APPLICATION->GetCurPage(false) == '/'
+        /* Добавляем Яндекс картуы только на те страницы где она используется*/
+        if ($APPLICATION->GetCurPage(false) == '/'
             or $APPLICATION->GetCurPage(false) == '/kontakty/'
             or $APPLICATION->GetCurPage(false) == '/dostavka/'
             or $APPLICATION->GetCurPage(false) == '/proizvodstvo/tovarnyy-beton/'
             or $APPLICATION->GetCurPage(false) == '/proizvodstvo/shcheben/')
                 Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
+
+        if (preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) {
+            Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
+        }
     ?>
 </head>
 <body class="<?
     if(preg_match('/\/produktsiya\/shcheben\/\w/', $APPLICATION->GetCurPage())) echo 'page-product-rubble';
-    if(preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())) echo 'page-catalog-item';
-    if(preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())) echo 'page-catalog-item';
-    if(preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) echo 'page-catalog-item';
+    if(preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())) echo 'page-product';
+    if(preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())) echo 'page-product';
+    if(preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) echo 'page-product';
 
     if($APPLICATION->GetCurPage() == '/produktsiya/beton/rastvory-tsementno-peschanye/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/produktsiya/izvestnyakovaya-muka/') echo 'page-limestone-flour';
