@@ -83,7 +83,7 @@ $APPLICATION->SetTitle("Контакты");?>
                             )
                         );?>
                     </p>
-                    <a class="btn contacts__btn" href="/">Реквизиты АО «ЕВРОБЕТОН»</a>
+                    <a class="btn contacts__btn" target="_blank" href="/download/evrobeton-rekviziti.PDF">Реквизиты АО «ЕВРОБЕТОН»</a>
                 </div>
             </div>
             <div class="col-xl-5 contacts__map-wrap">
