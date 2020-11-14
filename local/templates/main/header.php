@@ -42,6 +42,7 @@
     if(preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())) echo 'page-product';
     if(preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())) echo 'page-product';
     if(preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) echo 'page-product';
+    if(preg_match('/\/arenda\/\w/', $APPLICATION->GetCurPage())) echo 'pump-rental';
 
     if($APPLICATION->GetCurPage() == '/produktsiya/beton/rastvory-tsementno-peschanye/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/produktsiya/izvestnyakovaya-muka/') echo 'page-limestone-flour';
@@ -55,6 +56,7 @@
     if($APPLICATION->GetCurPage() == '/o-kompanii/vakansii/') echo 'page-vacancy';
     if($APPLICATION->GetCurPage() == '/produktsiya/beton/betonnaya-smes/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/produktsiya/beton/tovarnyy-beton/') echo 'page-catalog';
+    if($APPLICATION->GetCurPage() == '/arenda/') echo 'page-rent-list';
     if($APPLICATION->GetCurPage() == '/produktsiya/beton/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/dostavka/') echo 'page-delivery';
     if($APPLICATION->GetCurPage() == '/tendery/') echo 'page-tenders';

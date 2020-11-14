@@ -853,7 +853,8 @@ li, ul {
 .list,
 .table__column ul,
 .breakstone__accordion-content ul,
-.specifications ul {
+.specifications ul,
+.pump-rent ul {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -864,10 +865,15 @@ li, ul {
     width: 100%
 }
 
+.pump-rent li {
+    margin-bottom: 7px;
+}
+
 .list-item:before,
 .table__column li:before,
 .breakstone__accordion-content li:before,
-.specifications li:before {
+.specifications li:before,
+.pump-rent li:before {
     content: "";
     width: 3px;
     height: 3px;
@@ -882,7 +888,8 @@ li, ul {
 a.link,
 .table__column li:before,
 .breakstone__accordion-content li:before,
-.specifications li:before {
+.specifications li:before,
+.pump-rent li:before {
     display: inline-block;
     position: relative
 }
@@ -3059,6 +3066,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 14px
 }
 
+.pump-rental .prices__title {
+    margin-bottom: 25px;
+}
+
 .catalog__link, .prices__link {
     text-align: right;
     margin: 0 auto 12px;
@@ -5078,6 +5089,24 @@ span.bread-crumbs__link {
     background-color: #eee
 }
 
+.pump-rent .modal__body {
+    padding: 30px 20px 10px;
+}
+
+.pump-rent .modal__footer {
+    padding: 10px 0 30px;
+}
+
+@media (min-width: 768px) {
+    .pump-rent .modal__body {
+        padding: 50px 60px 30px;
+    }
+    
+    .pump-rent .modal__footer {
+        padding: 10px 0 50px;
+    }
+}
+
 .modal__subtitle {
     color: #000;
     font-weight: 300;
@@ -6528,6 +6557,19 @@ span.bread-crumbs__link {
     margin-bottom: 30px
 }
 
+.pump-rental .specifications__mark.has-border {
+    border: 2px solid #f1852c;
+    padding: 20px 15px;
+    margin-top: 30px;
+}
+
+@media (min-width: 1200px) {
+    .pump-rental .specifications__mark.has-border {
+        max-width: 525px;
+        margin-left: 25px;
+    }
+}
+
 .pump-rental .specifications__wrap {
     -webkit-box-ordinal-group: 3;
     -ms-flex-order: 2;
@@ -6550,9 +6592,11 @@ span.bread-crumbs__link {
     position: absolute;
     width: 100%;
     height: 0;
-    bottom: 8px;
+    top: 16px;
     z-index: -1;
-    border-bottom: 2px dotted rgba(0, 0, 0, .7)
+    border-bottom: 2px dotted rgba(0, 0, 0, .6);
+    background-color: transparent;
+    border-radius: 0;
 }
 
 .pump-rental .specifications__parametr {
@@ -6575,6 +6619,22 @@ span.bread-crumbs__link {
 
 .pump-rental .note {
     margin-top: 5px
+}
+
+.pump-rental .note a {
+    cursor: pointer;
+}
+
+.modal.pump-rent .modal__close {
+    position: relative;
+    width: auto;
+    height: auto;
+    top: auto;
+    right: auto;
+}
+.modal.pump-rent .modal__close::before,
+.modal.pump-rent .modal__close::after {
+    display: none;
 }
 
 .pump-rental .description__wrap {
@@ -6723,9 +6783,7 @@ span.bread-crumbs__link {
 
 @media (min-width: 576px) {
     .pump-rental .actions__price {
-        line-height: 54px;
         margin-right: 10px;
-        margin-bottom: 10px
     }
 }
 
@@ -6750,14 +6808,18 @@ span.bread-crumbs__link {
     font-weight: 400;
     font-style: normal;
     line-height: 26px;
-    text-align: right;
+    text-align: center;
     letter-spacing: .07px;
     margin-bottom: 30px
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
     .pump-rental .actions .comment {
         margin-bottom: 0
+    }
+    
+    .actions__price_wrap {
+        margin-bottom: 30px;
     }
 }
 
@@ -6937,22 +6999,30 @@ span.bread-crumbs__link {
     }
 }
 
-.page-pump-rental .bread-crumbs__wrap {
+.pump-rental .bread-crumbs__wrap {
     -webkit-box-pack: start !important;
     -ms-flex-pack: start !important;
     justify-content: start !important
 }
 
-.page-pump-rental .page-title__content {
+.pump-rental .page-title__content {
     text-align: left
 }
 
-.page-pump-rental .request {
+.pump-rental .request {
     margin-bottom: 0
 }
 
-.page-pump-rental .advantages {
+.pump-rental .page-title__content .advantages {
     margin-top: 0
+}
+
+.pump-rental .advantages {
+    margin-top: 0
+}
+
+.pump-rental .request  {
+    margin-bottom: 0
 }
 
 .page-catalog-rubble .get-more {
@@ -6962,7 +7032,9 @@ span.bread-crumbs__link {
 
 .page-catalog-rubble .request,
 .page-catalog .request,
-.page-product .request {
+.page-product .request,
+.pump-rental .request,
+.page-rent-list .request {
     margin-bottom: 0
 }
 
