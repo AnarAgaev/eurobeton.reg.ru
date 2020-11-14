@@ -3,50 +3,50 @@ $aMenuLinks = Array(
 	Array(
 		"О компании", 
 		"/o-kompanii/", 
-		Array(),
-        Array("DIF_CLASS"=>"company"),
+		Array(), 
+		Array("DIF_CLASS"=>"company"), 
 		"" 
 	),
 	Array(
 		"Продукция", 
 		"/produktsiya/", 
-		Array(),
-        Array("DIF_CLASS"=>"prod"),
+		Array(), 
+		Array("DIF_CLASS"=>"prod"), 
 		"" 
 	),
 	Array(
 		"Производство", 
 		"/proizvodstvo/", 
-		Array(),
-        Array("DIF_CLASS"=>"production"),
+		Array(), 
+		Array("DIF_CLASS"=>"production"), 
 		"" 
 	),
 	Array(
 		"Аренда", 
-		"/arenda/", 
-		Array(),
-        Array("DIF_CLASS"=>"rent"),
+		"/arenda/betononasos/", 
+		Array(), 
+		Array("DIF_CLASS"=>"rent"), 
 		"" 
 	),
 	Array(
 		"Доставка", 
 		"/dostavka/", 
-		Array(),
-        Array("DIF_CLASS"=>"delivery"),
+		Array(), 
+		Array("DIF_CLASS"=>"delivery"), 
 		"" 
 	),
 	Array(
 		"Тендеры", 
 		"/tendery/", 
-		Array(),
-        Array("DIF_CLASS"=>"tenders"),
+		Array(), 
+		Array("DIF_CLASS"=>"tenders"), 
 		"" 
 	),
 	Array(
 		"Контакты", 
 		"/kontakty/", 
-		Array(),
-        Array("DIF_CLASS"=>"contacts"),
+		Array(), 
+		Array("DIF_CLASS"=>"contacts"), 
 		"" 
 	)
 );

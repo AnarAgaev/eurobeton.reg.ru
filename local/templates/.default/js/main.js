@@ -1014,24 +1014,16 @@ document.addEventListener("DOMContentLoaded",() => {
 
 
 
-    /* Блокируем ссылки/пункты меню Производство и Аренда - Start */
+    /* Блокируем ссылки/пункты меню Производство - Start */
     const prodMenuItem = document
         .getElementsByClassName("production")[0]
-        .previousElementSibling;
-    const rentMenuItem = document
-        .getElementsByClassName("rent")[0]
         .previousElementSibling;
 
     prodMenuItem.style.cursor = "default";
     prodMenuItem.addEventListener('click', evt => {
        evt.preventDefault();
     });
-
-    rentMenuItem.style.cursor = "default";
-    rentMenuItem.addEventListener('click', evt => {
-       evt.preventDefault();
-    });
-    /* Блокируем ссылки/пункты меню Производство и Аренда - End */
+    /* Блокируем ссылки/пункты меню Производство - End */
 
 
 });
