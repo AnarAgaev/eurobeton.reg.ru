@@ -32,7 +32,7 @@
                     );?>
                 </div>
                 <div class="request__btn">
-                    <a class="btn" href="/arenda/">подробнее</a>
+                    <a class="btn" href="/arenda/betononasos/">подробнее</a>
                 </div>
             </div>
         </div>
