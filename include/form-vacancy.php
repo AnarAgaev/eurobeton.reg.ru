@@ -52,14 +52,13 @@
                 <span class="err__msg"></span>
             </label>
             <label class="label label_file label_w299">
-                <span>Прикрепить анкету соискателя:</span>
+                <span>Прикрепить резюме (по желанию):</span>
                 <input type="file"
                        class="input"
                        name="questionary"
                        id="formVacancyQuestionary">
                 <span class="controller control"></span>
                 <span class="err__msg"></span>
-                <a class="download" href="">Скачать образец анкеты соискателя</a>
             </label>
             <label class="label label_file label_w175">
                 <span>Прикрепить фото:</span>

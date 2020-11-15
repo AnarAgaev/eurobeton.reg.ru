@@ -892,12 +892,7 @@ document.addEventListener("DOMContentLoaded",() => {
             }
         }
 
-        if (questionaryVacancy.value === '') {
-            let err = questionaryVacancy.nextElementSibling.nextElementSibling;
-            err.innerHTML = 'Заполните и прикрепите анкету';
-            questionaryVacancy.parentElement.classList.add('has__error');
-            formValid = false;
-        } else {
+        if (questionaryVacancy.value !== '') {
             let type = questionaryVacancy
                 .files[0]
                 .name

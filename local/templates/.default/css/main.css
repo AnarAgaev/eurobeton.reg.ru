@@ -673,7 +673,7 @@
 
 @media (min-width: 1200px) {
     .form_interview {
-        padding: 27px 0 5px 40px
+        padding: 27px 0 10px 40px
     }
 }
 
@@ -1299,6 +1299,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .header .logo {
     width: 193px
+}
+
+.header .logo img {
+    display: block;
 }
 
 @media (min-width: 768px) {
@@ -8239,4 +8243,117 @@ span.bread-crumbs__link {
 .yandex-modal-map__btn-close:hover::before,
 .yandex-modal-map__btn-close:hover::after {
     background-color: #f1852c;
+}
+
+.pnf {
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 90px;
+    position: relative;
+}
+
+.pnf__pic {
+
+}
+
+.pnf__title {
+    font-size: 30px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    margin-top: -25px;
+    margin-bottom: 25px;
+}
+
+.pnf__err {
+    font-size: 120px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 1;
+}
+
+.pnf__subtitle {
+    font-size: 21px;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: normal;
+    margin-top: 15px;
+    margin-bottom: 65px;
+}
+
+.pnf__link a {
+    color: #000;
+    font-size: 21px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    display: inline-block;
+    position: relative;
+}
+
+.pnf__link a::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ff9400;
+    bottom: 2px;
+    position: absolute;
+    transition: all .3s;
+}
+
+.pnf__link a:hover::after {
+    background-color: rgba(0,0,0,0);
+}
+
+.pnf__tringle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 100px solid #434245;
+    border-right: 200px solid transparent;
+}
+
+@media (min-width: 576px) {
+    .pnf__tringle {
+        border-top: 150px solid #434245;
+        border-right: 300px solid transparent;
+    }
+}
+
+@media (min-width: 768px) {
+    .pnf__tringle {
+        border-top: 250px solid #434245;
+        border-right: 500px solid transparent;
+    }
+}
+
+@media (min-width: 992px) {
+    .pnf__title {
+        margin-top: -120px;
+        margin-bottom: 10px;
+    }
+    
+    .pnf__tringle {
+        border-top: 300px solid #434245;
+        border-right: 600px solid transparent;
+    }
+}
+
+@media (min-width: 1200px) {
+    .pnf__title {
+        margin-top: -168px;
+    }
+    
+    .pnf__err {
+        font-size: 181px;
+    }
+    
+    .pnf__tringle {
+        border-top: 586px solid #434245;
+        border-right: 910px solid transparent;
+    }
 }

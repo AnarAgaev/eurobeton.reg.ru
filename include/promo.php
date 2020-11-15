@@ -7,7 +7,7 @@
                         <img class="promo__card__pic" src="<?=DEFAULT_TEMPLATE_PATH;?>/img/certificate.png" alt="" title="">
                         <div class="promo__card__desc">Свидетельства и сертификаты качества</div>
                     </a>
-                    <a class="promo__card d-flex flex-column justify-content-center align-items-center" href="/">
+                    <a class="promo__card d-flex flex-column justify-content-center align-items-center" href="/download/dogovor_postavki.docx">
                         <img class="promo__card__pic" src="<?=DEFAULT_TEMPLATE_PATH;?>/img/contract.png" alt="" title="">
                         <div class="promo__card__desc">Договор поставки</div>
                     </a>

@@ -6,7 +6,25 @@
 	<?$APPLICATION->ShowHead();?>
 	<title><?$APPLICATION->ShowTitle();?></title>
     <?php
-        Asset::getInstance()->addString('<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />');
+        /* Added favicons */
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">');
+        Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">');
+        Asset::getInstance()->addString('<link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">');
+        Asset::getInstance()->addString('<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">');
+        Asset::getInstance()->addString('<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">');
+        Asset::getInstance()->addString('<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">');
+        Asset::getInstance()->addString('<link rel="manifest" href="/favicon/manifest.json">');
+        Asset::getInstance()->addString('<meta name="msapplication-TileColor" content="#ffffff">');
+        Asset::getInstance()->addString('<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">');
+        Asset::getInstance()->addString('<meta name="theme-color" content="#ffffff">');
+
         Asset::getInstance()->addString('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
         Asset::getInstance()->addString('<meta http-equiv="X-UA-Compatible" content="ie=edge">');
         Asset::getInstance()->addString('<meta name="robots" content="index, follow">');
@@ -89,8 +107,10 @@
                             <div class="nav-tglr__burger"></div>
                         </div>
                         <div class="region d-flex flex-md-column align-items-center justify-content-center" id="region">
-                            <div class="region__map-marker d-md-none"><img src="<?= DEFAULT_TEMPLATE_PATH; ?>/img/map-marker-alt-solid.svg" alt=""
-                                                                           title=""></div>
+                            <div class="region__map-marker d-md-none">
+                                <img src="<?= DEFAULT_TEMPLATE_PATH; ?>/img/map-marker-alt-solid.svg"
+                                     alt="" title="">
+                            </div>
                             <div class="region__caption d-none d-md-block">Ваш регион:</div>
                             <div class="region__description" id="regionCity"></div>
 
