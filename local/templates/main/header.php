@@ -42,10 +42,11 @@
 
         /* Добавляем Яндекс картуы только на те страницы где она используется*/
         if ($APPLICATION->GetCurPage(false) == '/'
-            or $APPLICATION->GetCurPage(false) == '/kontakty/'
-            or $APPLICATION->GetCurPage(false) == '/dostavka/'
             or $APPLICATION->GetCurPage(false) == '/proizvodstvo/tovarnyy-beton/'
-            or $APPLICATION->GetCurPage(false) == '/proizvodstvo/shcheben/')
+            or $APPLICATION->GetCurPage(false) == '/proizvodstvo/shcheben/'
+            or $APPLICATION->GetCurPage(false) == '/produktsiya/'
+            or $APPLICATION->GetCurPage(false) == '/kontakty/'
+            or $APPLICATION->GetCurPage(false) == '/dostavka/')
                 Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
 
         if (preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
@@ -66,16 +67,17 @@
     if($APPLICATION->GetCurPage() == '/produktsiya/izvestnyakovaya-muka/') echo 'page-limestone-flour';
     if($APPLICATION->GetCurPage() == '/produktsiya/mineralnyy-poroshok/') echo 'page-mineral-powder';
     if($APPLICATION->GetCurPage() == '/o-kompanii/biografiya-rukovoditelya/') echo 'page-director';
+    if($APPLICATION->GetCurPage() == '/produktsiya/beton/tovarnyy-beton/') echo 'page-catalog';
+    if($APPLICATION->GetCurPage() == '/produktsiya/beton/betonnaya-smes/') echo 'page-catalog';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/tovarnyy-beton/') echo 'page-concrete';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/laboratoriya/') echo 'page-laboratory';
     if($APPLICATION->GetCurPage() == '/produktsiya/shcheben/') echo 'page-catalog-rubble';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/shcheben/') echo 'page-breakstone';
     if($APPLICATION->GetCurPage() == '/proizvodstvo/dileram/') echo 'page-dealers';
     if($APPLICATION->GetCurPage() == '/o-kompanii/vakansii/') echo 'page-vacancy';
-    if($APPLICATION->GetCurPage() == '/produktsiya/beton/betonnaya-smes/') echo 'page-catalog';
-    if($APPLICATION->GetCurPage() == '/produktsiya/beton/tovarnyy-beton/') echo 'page-catalog';
-    if($APPLICATION->GetCurPage() == '/arenda/') echo 'page-rent-list';
     if($APPLICATION->GetCurPage() == '/produktsiya/beton/') echo 'page-catalog';
+    if($APPLICATION->GetCurPage() == '/produktsiya/') echo 'page-products';
+    if($APPLICATION->GetCurPage() == '/arenda/') echo 'page-rent-list';
     if($APPLICATION->GetCurPage() == '/dostavka/') echo 'page-delivery';
     if($APPLICATION->GetCurPage() == '/tendery/') echo 'page-tenders';
     if($APPLICATION->GetCurPage() == '/') echo 'page-index';

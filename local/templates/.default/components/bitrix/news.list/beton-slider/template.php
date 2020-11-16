@@ -23,7 +23,11 @@ $this->setFrameMode(true);
 <div class="prices section_container">
     <div class="container">
         <div class="prices__title section_title">
-            Лучшие предложения
+            <?if($APPLICATION->GetCurPage() == '/produktsiya/'):?>
+                ВАС ТАКЖЕ МОЖЕТ ЗАИНТЕРЕСОВАТЬ
+            <?else:?>
+                Лучшие предложения
+            <?endif;?>
         </div>
         <div class="prices__link"><a href="/produktsiya/beton/">Перейти в каталог</a></div>
         <div class="prices__slider">
