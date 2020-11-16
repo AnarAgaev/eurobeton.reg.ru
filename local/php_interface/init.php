@@ -123,12 +123,62 @@ class handleVacancyFrom {
                 'PHONE' => $arFields['PROPERTY_VALUES']['PHONE'],
                 'EMAIL_FROM' => $arFields['PROPERTY_VALUES']['EMAIL'],
                 'POSITION' => $arFields['PROPERTY_VALUES']['POSITION'],
-                'QUESTIONARY' => $_SERVER["SERVER_NAME"].CFile::GetPath($arProps['QUESTIONARY']['VALUE']) ,
-                'PHOTO' => $arFields['PROPERTY_VALUES']['PHOTO']
+                'QUESTIONARY' => $arProps['QUESTIONARY']['VALUE'] === ""
+                            ? 'Не указана'
+                            : $_SERVER["SERVER_NAME"].CFile::GetPath($arProps['QUESTIONARY']['VALUE']),
+                'PHOTO' => $arProps['PHOTO']['VALUE'] === ""
                             ? 'Не указано'
                             : $_SERVER["SERVER_NAME"].CFile::GetPath($arProps['PHOTO']['VALUE']),
             );
             CEvent::Send('INTERVIEW_REQUEST',SITE_ID,$arSend);
+        }
+    }
+}
+
+/*
+ * Обработка отправки сообщения из формы
+ * Заявка на тендер на странице Тендеры
+ *
+ * Регистрируем обработчик
+ */
+AddEventHandler(
+    "iblock",
+    "OnAfterIBlockElementAdd",
+    Array("handleRequestTenderFrom", "OnAfterIBlockElementAddHandler")
+);
+class handleRequestTenderFrom {
+    /*
+     * Создаем обработчик события "OnAfterIBlockElementAdd"
+     * который слушает редактирование инфоблока
+     * Запросы/Зааявки на тендеры
+     * с идентификатором 23.
+     *
+     * В массиве $arSend перезаписываем стандартные макросы
+     * почтового сообщения и добавляем свои в сответствии
+     * со свойствами инфоблока.
+     */
+    function OnAfterIBlockElementAddHandler(&$arFields) {
+        if ($arFields["IBLOCK_ID"] == 23) {
+
+            // Получаем url добавленных файлов
+            $arFilter = Array("IBLOCK_ID"=>23, "ID"=>$arFields['RESULT']);
+            $res = CIBlockElement::GetList(Array(), $arFilter);
+            $ob = $res->GetNextElement();
+            $arProps = $ob->GetProperties();
+
+            $arSend = array(
+                'COMPANY' => $arFields['NAME'],
+                'ADDRESS' => $arFields['PROPERTY_VALUES']['ADDRESS'],
+                'FIO' => $arFields['PROPERTY_VALUES']['FIO'],
+                'OGRN' => $arFields['PROPERTY_VALUES']['OGRN'],
+                'PHONE' => $arFields['PROPERTY_VALUES']['PHONE'],
+                'EMAIL_FROM' => $arFields['PROPERTY_VALUES']['EMAIL'],
+                'MONEY' => $arFields['PROPERTY_VALUES']['MONEY'],
+                'DOCUMENTS' => $arProps['DOCUMENTS']['VALUE'] === ""
+                    ? 'Не указаны'
+                    : $_SERVER["SERVER_NAME"].CFile::GetPath($arProps['DOCUMENTS']['VALUE']),
+            );
+            CEvent::Send('USER_REQUEST_TENDER',SITE_ID,$arSend);
         }
     }
 }

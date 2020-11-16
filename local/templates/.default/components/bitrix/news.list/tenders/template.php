@@ -50,7 +50,9 @@ $this->setFrameMode(true);
                             <?=$arItem['PROPERTIES']['PRICE']['VALUE']?>
                         </td>
                         <td class="table__column">
-                            <button class="table__btn btn">ОСТАВИТЬ ЗАЯВКУ</button>
+                            <button class="table__btn btn show-modal" data-modal-id="modalRequestTender">
+                                ОСТАВИТЬ ЗАЯВКУ
+                            </button>
                         </td>
                     </tr>
                 <?endforeach;?>

@@ -272,15 +272,24 @@ document.addEventListener("DOMContentLoaded",() => {
             body.classList.add("modal-open");
             modal.classList.add("show");
         } else {
+            const modalDialog = modal.getElementsByClassName("modal__dialog")[0];
+
             body.classList.remove("modal-open");
             modal.classList.remove("show");
-            modalBody.classList.remove('hide');
-            sendMsgTrue.classList.remove('visible');
+            modalDialog.classList.remove('hide');
 
-            const errors = modalBody.getElementsByClassName("err__msg");
-            const labels = modalBody.getElementsByClassName("label");
-            const inputs = modalBody.getElementsByClassName("input");
-            const texts = modalBody.getElementsByClassName("textarea");
+            const modalsResult = document.getElementsByClassName('send-msg-true');
+            const errors = modalDialog.getElementsByClassName("err__msg");
+            const labels = modalDialog.getElementsByClassName("label");
+            const inputs = modalDialog.getElementsByClassName("input");
+            const texts = modalDialog.getElementsByClassName("textarea");
+            const files = modalDialog.querySelectorAll('input[type="file"]');
+
+            if (modalsResult.length > 0) {
+                for (let i = 0; i < modalsResult.length; i++) {
+                    modalsResult[i].classList.remove('visible');
+                }
+            }
 
             if (errors.length > 0) {
                 for (let i = 0; i < errors.length; i++) {
@@ -303,6 +312,12 @@ document.addEventListener("DOMContentLoaded",() => {
             if (texts.length > 0) {
                 for (let i = 0; i < texts.length; i++) {
                     texts[i].value = '';
+                }
+            }
+
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    files[i].nextElementSibling.innerHTML = '';
                 }
             }
         }
@@ -740,9 +755,6 @@ document.addEventListener("DOMContentLoaded",() => {
     const sendMsgTrue   = document.getElementById("sendMsgTrue");
     const btnFBClose    = document.getElementById("btnFBClose");
 
-    btnFBClose
-        .addEventListener("click", () =>  toggleModal(modalSetOrder, false));
-
     form.addEventListener('submit', evt => {
         evt.preventDefault();
         cleanErrs(name, mail, phone, msg);
@@ -899,9 +911,9 @@ document.addEventListener("DOMContentLoaded",() => {
                 .split(".")
                 .splice(-1,1)[0];
 
-            if (!(type === 'txt' || type === 'doc' || type === 'rtf')) {
+            if (!(type === 'txt' || type === 'doc' || type === 'docx' || type === 'rtf' || type === 'pdf')) {
                 let err =  questionaryVacancy.nextElementSibling.nextElementSibling;
-                err.innerHTML = 'Ошибка формата. Допускаются txt, doc, rtf';
+                err.innerHTML = 'Ошибка формата. Допускаются txt, doc, docx, rtf, pdf';
                 questionaryVacancy.parentElement.classList.add('has__error');
                 formValid = false;
             }
@@ -1006,8 +1018,189 @@ document.addEventListener("DOMContentLoaded",() => {
     /* Обработчик отправки формы "Записать на собеседование" -- End */
 
 
+    /* Обработчик отправки формы Заявка на тендер -- Start */
+    const cleanErrsRequestTender = (
+      name, address, director,
+      ogrn, phone, mail, docs,
+      money) => {
+        // Чистим контейнеры для сообщений об ошибках
+        name.nextSibling.innerHTML = '';
+        address.nextSibling.innerHTML = '';
+        director.nextSibling.innerHTML = '';
+        ogrn.nextSibling.innerHTML = '';
+        phone.nextSibling.innerHTML = '';
+        mail.nextSibling.innerHTML = '';
+        money.nextSibling.innerHTML = '';
+        docs.nextSibling.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
 
+        // Удаляем класс ошибки у родительского узла
+        name.parentElement.classList.remove('has__error');
+        address.parentElement.classList.remove('has__error');
+        director.parentElement.classList.remove('has__error');
+        ogrn.parentElement.classList.remove('has__error');
+        phone.parentElement.classList.remove('has__error');
+        mail.parentElement.classList.remove('has__error');
+        name.parentElement.classList.remove('has__error');
+        money.parentElement.classList.remove('has__error');
+        docs.parentElement.classList.remove('has__error');
+    };
 
+    const cleanFieldsRequestTender = (
+      name, address, director,
+      ogrn, phone, mail, docs,
+      money) => {
+        name.value = '';
+        address.value = '';
+        director.value = '';
+        ogrn.value = '';
+        phone.value = '';
+        mail.value = '';
+        money.value = '';
+        docs.nextElementSibling.innerHTML = '';
+    };
+
+    const formRequestTender     = document.getElementById('formRequestTender');
+    const nameRequestTender     = document.getElementById('formRequestTenderName');
+    const addressRequestTender  = document.getElementById('formRequestTenderAddress');
+    const directorRequestTender = document.getElementById('formRequestTenderDirector');
+    const ogrnRequestTender     = document.getElementById('formRequestTenderOgrn');
+    const phoneRequestTender    = document.getElementById('formRequestTenderPhone');
+    const mailRequestTender     = document.getElementById('formRequestTenderMail');
+    const docsRequestTender     = document.getElementById('formRequestTenderDocs');
+    const moneyRequestTender    = document.getElementById('formRequestTenderMoney');
+
+    if(formRequestTender) {
+        formRequestTender.addEventListener('submit', evt => {
+            evt.preventDefault();
+            cleanErrsRequestTender(
+                nameRequestTender, addressRequestTender,
+                directorRequestTender, ogrnRequestTender,
+                phoneRequestTender, mailRequestTender,
+                docsRequestTender, moneyRequestTender);
+            let formValid = true;
+
+            if (moneyRequestTender.value === '') {
+                let err =  moneyRequestTender.nextElementSibling;
+                err.innerHTML = 'Укажите сумму';
+                moneyRequestTender.parentElement.classList.add('has__error');
+                moneyRequestTender.focus();
+                formValid = false;
+            }
+
+            if (docsRequestTender.value !== '') {
+                let type = docsRequestTender
+                    .files[0]
+                    .name
+                    .split(".")
+                    .splice(-1,1)[0];
+
+                if (!(type === '7z' || type === 'gzip' || type === 'rar' || type === 'zip' || type === 'gz')) {
+                    let err =  docsRequestTender.nextElementSibling.nextElementSibling;
+                    err.innerHTML = 'Не корректный формат файла. Необходимо выбрать архив. Допускаются форматы 7z, gz, gzip, rar, zip';
+                    docsRequestTender.parentElement.classList.add('has__error');
+                    formValid = false;
+                }
+            }
+
+            if (mailRequestTender.value === '') {
+                let err =  mailRequestTender.nextElementSibling;
+                err.innerHTML = 'Укажите Е-mail';
+                mailRequestTender.parentElement.classList.add('has__error');
+                formValid = false;
+                mailRequestTender.focus();
+            } else {
+                if (validMail(mailRequestTender.value) === false) {
+                    let err =  mailRequestTender.nextElementSibling;
+                    err.innerHTML = 'Некорректный Е-mail';
+                    mailRequestTender.parentElement.classList.add('has__error');
+                    formValid = false;
+                    mailRequestTender.focus();
+                }
+            }
+
+            if (directorRequestTender.value === '') {
+                let err = directorRequestTender.nextElementSibling;
+                err.innerHTML = 'Укажите ФИЩ директора';
+                directorRequestTender.parentElement.classList.add('has__error');
+                directorRequestTender.focus();
+                formValid = false;
+            }
+
+            if (phoneRequestTender.value === '') {
+                let err = phoneRequestTender.nextElementSibling;
+                err.innerHTML = 'Укажите телефон';
+                phoneRequestTender.parentElement.classList.add('has__error');
+                formValid = false;
+                phoneRequestTender.focus();
+            } else {
+                if (validPhone(phoneRequestTender.value) === false) {
+                    let err =  phoneRequestTender.nextElementSibling;
+                    err.innerHTML = 'Некорректный телефон';
+                    phoneRequestTender.parentElement.classList.add('has__error');
+                    formValid = false;
+                    phoneRequestTender.focus();
+                }
+            }
+
+            if (addressRequestTender.value === '') {
+                let err = addressRequestTender.nextElementSibling;
+                err.innerHTML = 'Укажите адрес';
+                addressRequestTender.parentElement.classList.add('has__error');
+                addressRequestTender.focus();
+                formValid = false;
+            }
+
+            if (ogrnRequestTender.value === '') {
+                let err = ogrnRequestTender.nextElementSibling;
+                err.innerHTML = 'Укажите ОГРН';
+                ogrnRequestTender.parentElement.classList.add('has__error');
+                ogrnRequestTender.focus();
+                formValid = false;
+            }
+
+            if (nameRequestTender.value === '') {
+                let err = nameRequestTender.nextElementSibling;
+                err.innerHTML = 'Укажите наименование';
+                nameRequestTender.parentElement.classList.add('has__error');
+                nameRequestTender.focus();
+                formValid = false;
+            }
+
+            if (formValid) {
+                spinner.classList.add('visible');
+                getResource(formRequestTender.action, formRequestTender)
+                    .then(response  => {
+                        spinner.classList.remove('visible');
+
+                        if (response['IS_ERRORS']) {
+                            alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.')
+                        } else {
+                            cleanFieldsRequestTender(
+                                nameRequestTender, addressRequestTender,
+                                directorRequestTender, ogrnRequestTender,
+                                phoneRequestTender, mailRequestTender,
+                                docsRequestTender, moneyRequestTender);
+
+                            let modal = document.getElementById('modalRequestTender');
+                            let modalDialog = document.getElementById('modalDialogRequestTender');
+                            let sendRequestTenderTrue = document.getElementById("sendMsgRequestTenderTrue");
+                            let btnClose = document.getElementById('btnMRTClose');
+
+                            modalDialog.classList.add('hide');
+                            sendRequestTenderTrue.classList.add("visible");
+
+                            btnClose.addEventListener('click', () => {
+                                modal.classList.remove('show');
+                                body.classList.remove('modal-open');
+                                modalDialog.classList.remove('hide');
+                                sendRequestTenderTrue.classList.remove("visible");
+                            });
+                        }
+                    });
+            }
+        });
+    }
+    /* Обработчик отправки формы Заявка на тендер -- End */
 
     /* Блокируем ссылки/пункты меню Производство - Start */
     const prodMenuItem = document

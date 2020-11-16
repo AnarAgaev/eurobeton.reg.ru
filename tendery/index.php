@@ -1,5 +1,119 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Тендеры");?>
+
+<div class="modal" id="modalRequestTender">
+    <div class="send-msg-true flex-column justify-content-center align-items-center" id="sendMsgRequestTenderTrue">
+        <h3 class="send-msg-true__title">Сообщение отправлено</h3>
+        <span class="send-msg-true__txt">Менеджер свяжется с Вами в ближайшее время.</span>
+        <button class="btn" id="btnMRTClose">Закрыть</button>
+    </div>
+    <div class="modal__dialog modal__dialog_set-order" id="modalDialogRequestTender">
+        <div class="modal__close"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h4 class="modal__title">Заявка на тендер</h4>
+            </div>
+            <div class="modal__body">
+                <form class="form modal__form d-flex flex-column"
+                      name="add_request_tender"
+                      action="/utils/handle-request-tender-form.php"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      id="formRequestTender">
+                    <div class="d-flex flex-column flex-md-row">
+                        <div class="d-flex flex-column">
+                            <label class="label label_w345">
+                                <span>Наименование компании</span>
+                                <input class="input"
+                                       type="text"
+                                       name="name"
+                                       placeholder="ООО Компания"
+                                       id="formRequestTenderName">
+                                <span class="err__msg"></span>
+                            </label>
+                            <label class="label label_w345">
+                                <span>Адрес компании</span>
+                                <input class="input"
+                                       type="text"
+                                       placeholder="г. Москва, ул. ..."
+                                       name="address"
+                                       id="formRequestTenderAddress">
+                                <span class="err__msg"></span>
+                            </label>
+                            <label class="label label_w345">
+                                <span>Генеральный директор (ФИО)</span>
+                                <input class="input"
+                                       type="text"
+                                       placeholder="Иванов Иван Иванович"
+                                       name="fio"
+                                       id="formRequestTenderDirector">
+                                <span class="err__msg"></span>
+                            </label>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label class="label label_w205">
+                                <span>ОГРН</span>
+                                <input class="input"
+                                       type="text"
+                                       name="ogrn"
+                                       placeholder="0000000000000"
+                                       id="formRequestTenderOgrn">
+                                <span class="err__msg"></span>
+                            </label>
+                            <label class="label label_w205">
+                                <span>Телефон</span>
+                                <input class="input"
+                                       type="text"
+                                       placeholder="+7 (000) 000-00-00"
+                                       name="phone"
+                                       id="formRequestTenderPhone">
+                                <span class="err__msg"></span>
+                            </label>
+                            <label class="label label_w205">
+                                <span>E-mail</span>
+                                <input class="input"
+                                       type="text"
+                                       placeholder="example@example.com"
+                                       name="email"
+                                       id="formRequestTenderMail">
+                                <span class="err__msg"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <label class="label label_file label_w399">
+                            <span>Прикрепить документы (сжатый архив)</span>
+                            <input type="file"
+                                   class="input"
+                                   name="docs"
+                                   id="formRequestTenderDocs">
+                            <span class="controller control"></span>
+                            <span class="err__msg"></span>
+                        </label>
+                        <label class="label label_w154">
+                            <span>Сумма (руб)</span>
+                            <input class="input"
+                                   type="text"
+                                   placeholder=""
+                                   name="money"
+                                   id="formRequestTenderMoney">
+                            <span class="err__msg"></span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
+                <button class="btn" type="submit" form="formRequestTender">отправить</button>
+                <div class="modal__agreement">
+                    Нажимая кнопку, вы соглашаетесь с условиями
+                    <a class="link">пользовательского соглашения</a>
+                    по обработке персональных данных
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?$APPLICATION->IncludeComponent(
     "bitrix:breadcrumb",
     "breadcrumbs",

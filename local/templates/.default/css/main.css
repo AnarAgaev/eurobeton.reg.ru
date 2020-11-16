@@ -218,6 +218,11 @@
     }
 }
 
+.form .label_w399 {
+    width: 399px;
+    margin-right: 0
+}
+
 .form .label_w380 {
     width: 380px;
     margin-right: 0
@@ -227,10 +232,17 @@
     .form .label_w380 {
         margin-right: 23px
     }
+    .form .label_w399 {
+        margin-right: 23px
+    }
 }
 
 .form .label_w378 {
     width: 378px
+}
+
+.form .label_w345 {
+    width: 345px
 }
 
 .form .label_w339 {
@@ -275,6 +287,10 @@
 
 .form .label_w174 {
     width: 174px
+}
+
+.form .label_w154 {
+    width: 154px
 }
 
 .form .label_select {
@@ -5037,7 +5053,8 @@ span.bread-crumbs__link {
     margin-top: 20px;
 }
 
-#modalDialogFeedback.hide {
+#modalDialogFeedback.hide,
+#modalDialogRequestTender.hide {
     display: none;
 }
 
@@ -5093,6 +5110,10 @@ span.bread-crumbs__link {
     background-color: #eee
 }
 
+#modalRequestTender .modal__body {
+    padding-top: 40px;
+}
+
 .pump-rent .modal__body {
     padding: 30px 20px 10px;
 }
@@ -5136,6 +5157,19 @@ span.bread-crumbs__link {
         padding: 0 68px
     }
 }
+
+#formRequestTender {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+    #formRequestTender {
+        padding-right: 35px;
+        padding-left: 60px;
+    }
+}
+
 
 .modal__form .label {
     margin-bottom: 29px !important
