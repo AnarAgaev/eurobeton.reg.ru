@@ -1060,7 +1060,6 @@ a {
 }
 
 .slider__viewport {
-    overflow: hidden;
     position: relative
 }
 
@@ -3130,8 +3129,14 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-.catalog .slider__viewport, .prices .slider__viewport {
-    height: 387px
+.catalog .slider__viewport {
+    height: 387px;
+    overflow: hidden;
+}
+
+.prices .slider__viewport {
+    height: 387px;
+    overflow: hidden;
 }
 
 .catalog .slider__viewport:after, .prices .slider__viewport:after {
@@ -3379,11 +3384,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .partners .slider__item {
-    width: 285px;
     height: 66px;
     position: relative;
-    border-left: 1px solid #eee;
-    border-right: 1px solid #eee
 }
 
 .partners .slider__item img {
@@ -3398,6 +3400,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (min-width: 992px) {
+    .partners .slider__item {
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee
+    }
     .partners .slider__item img {
         max-width: 90%
     }

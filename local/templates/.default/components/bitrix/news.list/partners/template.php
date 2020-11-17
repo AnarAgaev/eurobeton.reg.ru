@@ -17,21 +17,17 @@ $this->setFrameMode(true);
         <div class="partners__title section_title">Наши партнеры</div>
         <div class="partners__slider">
             <div class="slider">
-                <div class="slider__controller slider__controller_left slider-controller-left"></div>
-                <div class="slider__controller slider__controller_right slider-controller-right"></div>
                 <div class="slider__viewport">
-                    <ul class="slider__list d-flex">
+                    <ul class="partners-slick-slider">
                         <?foreach($arResult["ITEMS"] as $arItem):?>
                         <?
                         $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
                         $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
                         ?>
                         <li class="slider__item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-                            <a href="<?=$arItem["DISPLAY_PROPERTIES"]["PARTNER_URL"]["DISPLAY_VALUE"]?>">
-                                <img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
-                                     alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
-                                     title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>">
-                            </a>
+                            <img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
+                                 alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
+                                 title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>">
                         </li>
                         <?endforeach;?>
                     </ul>

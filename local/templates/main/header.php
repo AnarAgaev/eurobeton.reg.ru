@@ -34,6 +34,11 @@
         Asset::getInstance()->addJs('https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js');
         Asset::getInstance()->addJs('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js');
 
+        /* Added Slick slider apps */
+        Asset::getInstance()->addJs('//code.jquery.com/jquery-migrate-1.2.1.min.js');
+        Asset::getInstance()->addJs('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
+        Asset::getInstance()->addCss('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
+
         /* Added base site includes */
         Asset::getInstance()->addString('<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">');
         Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/vendors.css');

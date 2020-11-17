@@ -718,11 +718,6 @@ document.addEventListener("DOMContentLoaded",() => {
     /* Yandex maps на странице Производство бетона товарного -- END */
 
 
-
-
-
-
-
     /* Обработчик отправки формы Сообщение с сайта -- Start */
     const cleanErrs = (name, mail, phone, msg) => {
         // Чистим контейнеры для сообщений об ошибках
@@ -1213,7 +1208,40 @@ document.addEventListener("DOMContentLoaded",() => {
     });
     /* Блокируем ссылки/пункты меню Производство - End */
 
-
+    /* Инициализируем Slick Slider на слайдере Партнёры (Главная страница) */
+    $('.partners-slick-slider').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        prevArrow: "<div class=\"slider__controller slider__controller_left\"></div>",
+        nextArrow: "<div class=\"slider__controller slider__controller_right\"></div>",
+        responsive: [
+            {
+                breakpoint: 1400,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+        ]
+    });
 });
 
 
