@@ -1242,7 +1242,7 @@ document.addEventListener("DOMContentLoaded",() => {
     $('.product-slick-slider').slick({
         infinite: true,
         slidesToShow: 2,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         prevArrow: "<div class=\"slider__controller slider__controller_left\"></div>",
         nextArrow: "<div class=\"slider__controller slider__controller_right\"></div>",
         adaptiveHeight: true,
@@ -1251,6 +1251,7 @@ document.addEventListener("DOMContentLoaded",() => {
                 breakpoint: 992,
                 settings: {
                     slidesToShow: 1,
+                    slidesToScroll: 1,
                 }
             },
         ]
