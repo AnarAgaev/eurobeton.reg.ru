@@ -1220,28 +1220,42 @@ document.addEventListener("DOMContentLoaded",() => {
                 breakpoint: 1400,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 1,
-                    infinite: true,
                 }
             },
             {
                 breakpoint: 1200,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
                 }
             },
             {
                 breakpoint: 992,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1,
-                    infinite: true,
                 }
             },
         ]
     });
+
+
+    /* Инициализируем Slick Slider на слайдере товаров (Главная страница) */
+    $('.product-slick-slider').slick({
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        prevArrow: "<div class=\"slider__controller slider__controller_left\"></div>",
+        nextArrow: "<div class=\"slider__controller slider__controller_right\"></div>",
+        adaptiveHeight: true,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 1,
+                }
+            },
+        ]
+    });
+
 });
 
 

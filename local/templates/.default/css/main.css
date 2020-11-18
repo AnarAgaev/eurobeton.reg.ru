@@ -3113,12 +3113,6 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 1400px) {
     .catalog__link, .prices__link {
-        width: 856px
-    }
-}
-
-@media (max-width: 1199px) {
-    .catalog__link, .prices__link {
         width: 572px
     }
 }
@@ -3130,11 +3124,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .catalog .slider__viewport {
-    height: 387px;
-    overflow: hidden;
-}
-
-.prices .slider__viewport {
     height: 387px;
     overflow: hidden;
 }
@@ -3151,15 +3140,27 @@ h1, h2, h3, h4, h5, h6 {
     right: -1px
 }
 
-.catalog .slider__item, .prices .slider__item {
+.catalog .slider__item,
+.prices .slider__item {
     width: 286px;
     height: 387px;
     border: 2px solid #e3e3e3;
-    padding: 0 15px
+    padding: 0 15px;
+    float: left;
+    border-right: none;
+    margin-right: -2px;
 }
 
-.catalog .slider__item:nth-child(n+1), .prices .slider__item:nth-child(n+1) {
-    margin-right: -2px
+.catalog .slider__item:first-child,
+.prices .slider__item:first-child {
+    margin-bottom: -2px
+}
+
+.slider {
+    border-right: 2px solid #e3e3e3;
+    -webkit-box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
+    -moz-box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
+    box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
 }
 
 .catalog__pic, .prices__pic {
@@ -3236,12 +3237,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 1400px) {
-    .catalog .slider, .prices .slider {
-        width: 856px
-    }
-}
-
-@media (max-width: 1199px) {
     .catalog .slider, .prices .slider {
         width: 572px
     }
