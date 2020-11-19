@@ -3151,20 +3151,33 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: -2px;
 }
 
-.catalog .slider__item:first-child,
-.prices .slider__item:first-child {
-    /*margin-bottom: -2px*/
+@media (max-width: 1400px) {
+    .catalog .slider__item:nth-child(2),
+    .prices .slider__item:nth-child(2) {
+        border-top: none;
+    }
 }
 
-.slider {
-    /*
+
+@media (min-width: 992px) {
+    .catalog .slider__item,
+    .prices .slider__item {
+        border-left: none;
+    }
     
-    border-right: 2px solid #e3e3e3;
-    -webkit-box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
-    -moz-box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
-    box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
-    
-    */
+    .slick-list.draggable::before {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        -webkit-box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
+        -moz-box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
+        box-shadow: inset 2px 0px 0px 0px rgba(227,227,227,1);
+        z-index: 99;
+    }
 }
 
 .catalog__pic, .prices__pic {
