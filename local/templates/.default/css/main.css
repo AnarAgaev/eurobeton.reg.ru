@@ -7180,7 +7180,11 @@ span.bread-crumbs__link {
     margin-bottom: 0
 }
 
-.page-catalog-rubble .advantages {
+.page-catalog-rubble .advantages,
+.page-catalog .advantages,
+.page-product .advantages,
+.pump-rental .advantages,
+.page-rent-list .advantages {
     margin-top: 0
 }
 

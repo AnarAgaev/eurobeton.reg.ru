@@ -12,7 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<div class="prices section_container">
+<div class="prices section_container" id="pumpSlider">
     <div class="container">
         <div class="prices__title section_title">ВАС ТАКЖЕ МОЖЕТ ЗАИНТЕРЕСОВАТЬ</div>
         <div class="prices__slider">

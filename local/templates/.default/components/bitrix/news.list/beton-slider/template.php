@@ -21,7 +21,7 @@ $this->setFrameMode(true);
  */
 
 ?>
-<div class="prices section_container">
+<div class="prices section_container" id="concreteSlider">
     <div class="container">
         <div class="prices__title section_title">
             <?if($APPLICATION->GetCurPage() == '/produktsiya/'):?>

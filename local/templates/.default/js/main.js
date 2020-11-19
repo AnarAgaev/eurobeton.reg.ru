@@ -38,6 +38,16 @@ function validDate(date) {
     return regular.test(date);
 }
 
+/* Функция возвращает координаты элемента в контексте документа */
+function getCoords(elem) {
+    let box = elem.getBoundingClientRect();
+
+    return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+    };
+}
+
 document.addEventListener("DOMContentLoaded",() => {
     const body = document.body;
     const dropLinks = document.querySelectorAll(".products__link.drop");
@@ -1257,8 +1267,36 @@ document.addEventListener("DOMContentLoaded",() => {
         ]
     });
 
-});
 
+    /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- Start */
+    const handleClickSliderControls = (sliderContainerId) => {
+        const sliderContainer = document
+            .getElementById(sliderContainerId);
+
+        if (sliderContainer) {
+            const controls = sliderContainer
+                .getElementsByClassName("slider__controller");
+
+            for (let el of controls) {
+                el.addEventListener('click', () => {
+                    //window.scrollTo(0, getCoords(slider).top - 150);
+                    sliderContainer.scrollIntoView({
+                        block: "start",
+                        behavior: "smooth"
+                    });
+                });
+            }
+        }
+    }
+
+    // Инициализируем только для мобильных
+    if (windowWidth < 992) {
+        handleClickSliderControls("concreteSlider");
+        handleClickSliderControls("rubbleSlider");
+        handleClickSliderControls("pumpSlider");
+    }
+    /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- End */
+});
 
 /*
  * Функция проверки поддержки localStorage
