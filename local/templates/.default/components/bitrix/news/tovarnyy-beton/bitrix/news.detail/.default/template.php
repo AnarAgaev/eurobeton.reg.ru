@@ -12,6 +12,19 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<?/* Вставка включаемой области Модальные окна на странице с видежетом доставка
+   * include/delivery-txt.php
+   */
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/include/delivery-calc-modals.php"
+    )
+);?>
 <div class="page-title">
     <div class="container">
         <h1 class="page-title__content">

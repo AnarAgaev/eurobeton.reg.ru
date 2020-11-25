@@ -2,6 +2,19 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Продукция");
 ?>
+<?/* Вставка включаемой области Модальные окна на странице с видежетом доставка
+   * include/delivery-txt.php
+   */
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/include/delivery-calc-modals.php"
+    )
+);?>
 <?$APPLICATION->IncludeComponent(
     "bitrix:breadcrumb",
     "breadcrumbs",

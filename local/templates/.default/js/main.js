@@ -38,6 +38,14 @@ function validDate(date) {
     return regular.test(date);
 }
 
+/* Функция для координат на Яндкс карте */
+function validCoords(coordsStr) {
+    let regular = /^\[\d{2}\.\d+,\d{2}\.\d+\]$/  // [55.90356412305141,37.3824537177734]
+    return regular.test(coordsStr);
+}
+
+
+
 /* Функция возвращает координаты элемента в контексте документа */
 function getCoords(elem) {
     let box = elem.getBoundingClientRect();
@@ -47,6 +55,83 @@ function getCoords(elem) {
         left: box.left + pageXOffset
     };
 }
+
+
+/*
+ * Функция проверки поддержки localStorage
+ * if (storageAvailable('localStorage')) {
+ * 	// Yippee! We can use localStorage awesomeness
+ * }
+ * else {
+ * 	// Too bad, no localStorage for us
+ * }
+ * */
+function storageAvailable(type) {
+    try {
+        let storage = window[type],
+            x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}
+
+/* Полифилы -- Start */
+(function() {
+    // проверяем поддержку
+    if (!Element.prototype.closest) {
+        // реализуем
+        Element.prototype.closest = function(css) {
+            let node = this;
+
+            while (node) {
+                if (node.matches(css)) return node;
+                else node = node.parentElement;
+            }
+            return null;
+        };
+    }
+})();
+
+(function() {
+    // проверяем поддержку
+    if (!Element.prototype.matches) {
+        // определяем свойство
+        Element.prototype.matches = Element.prototype.matchesSelector ||
+            Element.prototype.webkitMatchesSelector ||
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector;
+    }
+})();
+
+// Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
+(function (arr) {
+    arr.forEach(function (item) {
+        if (item.hasOwnProperty('prepend')) {
+            return;
+        }
+        Object.defineProperty(item, 'prepend', {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            value: function prepend() {
+                let argArr = Array.prototype.slice.call(arguments),
+                    docFrag = document.createDocumentFragment();
+
+                argArr.forEach(function (argItem) {
+                    let isNode = argItem instanceof Node;
+                    docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+                });
+
+                this.insertBefore(docFrag, this.firstChild);
+            }
+        });
+    });
+})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
+/* Полифилы -- End */
 
 document.addEventListener("DOMContentLoaded",() => {
     const body = document.body;
@@ -639,24 +724,6 @@ document.addEventListener("DOMContentLoaded",() => {
                     controls: [],
                 });
             map.geoObjects.add(myPlacemarkMsk);
-            map.controls.add('zoomControl');
-            map.behaviors.disable('scrollZoom');
-        }
-
-        // Карта на старнице Доставка
-        if (document.getElementById("deliveryMap")) {
-            let map = new ymaps.Map("deliveryMap", {
-                    center: [55.907807031377885,37.54312876660157],
-                    zoom: 10,
-                    controls: [],
-                });
-            map.geoObjects
-                .add(myPlacemarkKstovo)
-                .add(myPlacemarkLipetsk)
-                .add(myPlacemarkGranitstroy)
-                .add(myPlacemarkEvrobeton)
-                .add(myPlacemarkMedvedkovo)
-                .add(myPlacemarkStroyRegion);
             map.controls.add('zoomControl');
             map.behaviors.disable('scrollZoom');
         }
@@ -1297,79 +1364,3 @@ document.addEventListener("DOMContentLoaded",() => {
     }
     /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- End */
 });
-
-/*
- * Функция проверки поддержки localStorage
- * if (storageAvailable('localStorage')) {
- * 	// Yippee! We can use localStorage awesomeness
- * }
- * else {
- * 	// Too bad, no localStorage for us
- * }
- * */
-function storageAvailable(type) {
-    try {
-        let storage = window[type],
-            x = '__storage_test__';
-        storage.setItem(x, x);
-        storage.removeItem(x);
-        return true;
-    }
-    catch(e) {
-        return false;
-    }
-}
-
-// Полифилы -- Start
-(function() {
-    // проверяем поддержку
-    if (!Element.prototype.closest) {
-        // реализуем
-        Element.prototype.closest = function(css) {
-            let node = this;
-
-            while (node) {
-                if (node.matches(css)) return node;
-                else node = node.parentElement;
-            }
-            return null;
-        };
-    }
-})();
-
-(function() {
-    // проверяем поддержку
-    if (!Element.prototype.matches) {
-        // определяем свойство
-        Element.prototype.matches = Element.prototype.matchesSelector ||
-            Element.prototype.webkitMatchesSelector ||
-            Element.prototype.mozMatchesSelector ||
-            Element.prototype.msMatchesSelector;
-    }
-})();
-
-// Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
-(function (arr) {
-    arr.forEach(function (item) {
-        if (item.hasOwnProperty('prepend')) {
-            return;
-        }
-        Object.defineProperty(item, 'prepend', {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            value: function prepend() {
-                let argArr = Array.prototype.slice.call(arguments),
-                    docFrag = document.createDocumentFragment();
-
-                argArr.forEach(function (argItem) {
-                    let isNode = argItem instanceof Node;
-                    docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-                });
-
-                this.insertBefore(docFrag, this.firstChild);
-            }
-        });
-    });
-})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-// Полифилы -- End

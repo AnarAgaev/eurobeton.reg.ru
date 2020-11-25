@@ -59,6 +59,18 @@
             or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) {
             Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
         }
+
+        /* Добавляем Скрипт для расчёта доставки только на те страницы где он используется*/
+        if ($APPLICATION->GetCurPage(false) == '/dostavka/'
+            or $APPLICATION->GetCurPage(false) == '/produktsiya/') {
+            Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
+        }
+
+        if (preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) {
+            Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
+        }
     ?>
 </head>
 <body class="<?

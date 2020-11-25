@@ -12,149 +12,161 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-    <div class="page-title">
-        <div class="container">
-            <h1 class="page-title__content">
-                <?=$arResult['PREVIEW_TEXT']
-                ." ".$arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE']
-                ." ".$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE']
-                ." ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE']
-                ." ".$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE']
-                ." ".$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'];
-                ?>
-            </h1>
-        </div>
+<?/* Вставка включаемой области Модальные окна на странице с видежетом доставка
+   * include/delivery-txt.php
+   */
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",
+        "PATH" => "/include/delivery-calc-modals.php"
+    )
+);?>
+<div class="page-title">
+    <div class="container">
+        <h1 class="page-title__content">
+            <?=$arResult['PREVIEW_TEXT']
+            ." ".$arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE']
+            ." ".$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE']
+            ." ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE']
+            ." ".$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE']
+            ." ".$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'];
+            ?>
+        </h1>
     </div>
-
-    <div class="product">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 image__wrap">
-                    <div class="image" style="background-image: url(<?=$arResult["DETAIL_PICTURE"]["SRC"]?>)"></div>
+</div>
+<div class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 image__wrap">
+                <div class="image" style="background-image: url(<?=$arResult["DETAIL_PICTURE"]["SRC"]?>)"></div>
+            </div>
+            <div class="col-xl-6 specifications__wrap">
+                <div class="specifications"><h5 class="specifications__title">Характеристики:</h5>
+                    <ul class="specifications__list">
+                        <li class="specifications__item d-flex justify-content-between">
+                            <span class="specifications__parametr">Класс бетона</span>
+                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_CLASS"]["VALUE"]?></span>
+                        </li>
+                        <li class="specifications__item d-flex justify-content-between">
+                            <span class="specifications__parametr">Подвижность</span>
+                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]?></span>
+                        </li>
+                        <li class="specifications__item d-flex justify-content-between">
+                            <span class="specifications__parametr">Морозостойкость, F</span>
+                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?></span>
+                        </li>
+                        <li class="specifications__item d-flex justify-content-between">
+                            <span class="specifications__parametr">Водонепроницаемость</span>
+                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?></span>
+                        </li>
+                        <li class="specifications__item d-flex justify-content-between">
+                            <span class="specifications__parametr">Наполнитель</span>
+                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FILLER"]["VALUE"]?></span>
+                        </li>
+                        <li class="specifications__item d-flex justify-content-between">
+                            <span class="specifications__parametr">Средняя прочность, кгс/см<sup>2</sup></span>
+                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_STRENGTH"]["VALUE"]?></span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-xl-6 specifications__wrap">
-                    <div class="specifications"><h5 class="specifications__title">Характеристики:</h5>
-                        <ul class="specifications__list">
-                            <li class="specifications__item d-flex justify-content-between">
-                                <span class="specifications__parametr">Класс бетона</span>
-                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_CLASS"]["VALUE"]?></span>
-                            </li>
-                            <li class="specifications__item d-flex justify-content-between">
-                                <span class="specifications__parametr">Подвижность</span>
-                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]?></span>
-                            </li>
-                            <li class="specifications__item d-flex justify-content-between">
-                                <span class="specifications__parametr">Морозостойкость, F</span>
-                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?></span>
-                            </li>
-                            <li class="specifications__item d-flex justify-content-between">
-                                <span class="specifications__parametr">Водонепроницаемость</span>
-                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?></span>
-                            </li>
-                            <li class="specifications__item d-flex justify-content-between">
-                                <span class="specifications__parametr">Наполнитель</span>
-                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FILLER"]["VALUE"]?></span>
-                            </li>
-                            <li class="specifications__item d-flex justify-content-between">
-                                <span class="specifications__parametr">Средняя прочность, кгс/см<sup>2</sup></span>
-                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_STRENGTH"]["VALUE"]?></span>
-                            </li>
-                        </ul>
+            </div>
+            <div class="col-xl-6 description__wrap">
+                <div class="description">
+                    <div class="description__content">
+                        <?=$arResult["~DETAIL_TEXT"]?>
                     </div>
+                    <div class="description__toggler">Развернуть</div>
                 </div>
-                <div class="col-xl-6 description__wrap">
-                    <div class="description">
-                        <div class="description__content">
-                            <?=$arResult["~DETAIL_TEXT"]?>
-                        </div>
-                        <div class="description__toggler">Развернуть</div>
+            </div>
+            <div class="col-xl-6 actions__wrap">
+                <div class="actions">
+                    <div class="actions__price">
+                        Стоимость:
+                        <span><?if($arResult["PROPERTIES"]["PRICE_MINIMUM"]["VALUE_XML_ID"]) echo 'от';?> <?=$arResult["PROPERTIES"]["PRICE"]["VALUE"]?> руб</span>
                     </div>
-                </div>
-                <div class="col-xl-6 actions__wrap">
-                    <div class="actions">
-                        <div class="actions__price">
-                            Стоимость:
-                            <span><?if($arResult["PROPERTIES"]["PRICE_MINIMUM"]["VALUE_XML_ID"]) echo 'от';?> <?=$arResult["PROPERTIES"]["PRICE"]["VALUE"]?> руб</span>
-                        </div>
-                        <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
-                            <div class="actions__txt">
-                                <button class="btn show-modal" data-modal-id="modalSetOrder">
-                                    РАССЧИТАТЬ ПОЛНУЮ СТОИМОСТЬ
-                                </button>
-                                <div class="actions__comment">
-                                    Ваш заказ будет доставлен прямо на вашу строительную площадку в любое удобное время.
-                                </div>
-                            </div>
-                            <div class="btn-call">
-                                <?/* Вставка включаемой области Зделать звонок.
-                               * Разсположена на всехкарточках товара.
-                               * Лежит по пути /include/btn-call.php
-                               */
-                                $APPLICATION->IncludeComponent(
-                                    "bitrix:main.include",
-                                    "",
-                                    Array(
-                                        "AREA_FILE_SHOW" => "file",
-                                        "AREA_FILE_SUFFIX" => "inc",
-                                        "EDIT_TEMPLATE" => "",
-                                        "PATH" => "/include/btn-call.php"
-                                    )
-                                );?>
-                            </div>
-                        </div>
-                        <div class="actions__offer d-flex flex-column align-items-center flex-xl-row justify-content-between">
-                            <span><b>Нужно свыше 300 тонн?</b> Тогда нажимай!</span>
+                    <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
+                        <div class="actions__txt">
                             <button class="btn show-modal" data-modal-id="modalSetOrder">
-                                Персональное предложение
+                                РАССЧИТАТЬ ПОЛНУЮ СТОИМОСТЬ
                             </button>
+                            <div class="actions__comment">
+                                Ваш заказ будет доставлен прямо на вашу строительную площадку в любое удобное время.
+                            </div>
+                        </div>
+                        <div class="btn-call">
+                            <?/* Вставка включаемой области Зделать звонок.
+                           * Разсположена на всехкарточках товара.
+                           * Лежит по пути /include/btn-call.php
+                           */
+                            $APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "",
+                                Array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "AREA_FILE_SUFFIX" => "inc",
+                                    "EDIT_TEMPLATE" => "",
+                                    "PATH" => "/include/btn-call.php"
+                                )
+                            );?>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <?/* Вставка включаемой области Калькулятор доставки
-       * include/delivery-calc.php
-       */
-        $APPLICATION->IncludeComponent(
-            "bitrix:main.include",
-            "",
-            Array(
-                "AREA_FILE_SHOW" => "file",
-                "AREA_FILE_SUFFIX" => "inc",
-                "EDIT_TEMPLATE" => "",
-                "PATH" => "/include/delivery-calc.php"
-            )
-        );
-        ?>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-8 company">
-                    <?/* Вставка включаемой области Промо текст под калькулятором доставки
-                   * include/product-promotxt.php
-                   */
-                    $APPLICATION->IncludeComponent(
-                        "bitrix:main.include",
-                        "",
-                        Array(
-                            "AREA_FILE_SHOW" => "file",
-                            "AREA_FILE_SUFFIX" => "inc",
-                            "EDIT_TEMPLATE" => "",
-                            "PATH" => "/include/product-promotxt.php"
-                        )
-                    );
-                    ?>
-                </div>
-                <div class="col-xl-4 banner">
-                    <div class="banner__img d-flex">
-                        <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/banner-cars.png" alt="" title="">
-                    </div>
-                    <div class="banner__txt">Для обеспечения качественной доставки движение каждой единицы
-                        автотранспорта отслеживается в он-лайн режиме сотрудниками отдела логистики.
+                    <div class="actions__offer d-flex flex-column align-items-center flex-xl-row justify-content-between">
+                        <span><b>Нужно свыше 300 тонн?</b> Тогда нажимай!</span>
+                        <button class="btn show-modal" data-modal-id="modalSetOrder">
+                            Персональное предложение
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <?/* Вставка включаемой области Калькулятор доставки
+   * include/delivery-calc.php
+   */
+    $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/delivery-calc.php"
+        )
+    );
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 company">
+                <?/* Вставка включаемой области Промо текст под калькулятором доставки
+               * include/product-promotxt.php
+               */
+                $APPLICATION->IncludeComponent(
+                    "bitrix:main.include",
+                    "",
+                    Array(
+                        "AREA_FILE_SHOW" => "file",
+                        "AREA_FILE_SUFFIX" => "inc",
+                        "EDIT_TEMPLATE" => "",
+                        "PATH" => "/include/product-promotxt.php"
+                    )
+                );
+                ?>
+            </div>
+            <div class="col-xl-4 banner">
+                <div class="banner__img d-flex">
+                    <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/banner-cars.png" alt="" title="">
+                </div>
+                <div class="banner__txt">Для обеспечения качественной доставки движение каждой единицы
+                    автотранспорта отслеживается в он-лайн режиме сотрудниками отдела логистики.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?/* Вставка включаемой области Баннер "Собственная лаборатория"
        * Внтури родительского контейнера включаемой области /include/own-lab.php
