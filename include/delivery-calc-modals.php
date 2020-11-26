@@ -1,8 +1,8 @@
 <div class="modal" id="modalCoordsError">
     <div class="coords-error flex-column justify-content-center align-items-center" id="msgCoordsError">
-        <h3 class="send-msg-true__title">Не корректный адерса доставки</h3>
+        <h3 class="send-msg-true__title">Некорректный адерса доставки</h3>
         <p class="send-msg-true__txt">
-            Для определения Адреса доставки воспользуйтесь картой справа от формы ввода данных.
+            Для определения Адреса доставки воспользуйтесь картой.
             <b>Кликните на то место в котором Вы хотите получить продукцию</b>, после чего координаты
             этого места будут автоматически скопированы в поле Адрес дастовки.
         </p>

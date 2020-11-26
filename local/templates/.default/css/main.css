@@ -5114,6 +5114,7 @@ span.bread-crumbs__link {
 
 
 #modalDialogFeedback.hide,
+#modalDialogEquipmentOrder.hide,
 #modalDialogRequestTender.hide {
     display: none;
 }
@@ -5204,6 +5205,10 @@ span.bread-crumbs__link {
 @media (min-width: 768px) {
     .modal__subtitle {
         line-height: 27px
+    }
+    
+    #modalEquipmentOrder .modal__subtitle {
+        font-size: 21px;
     }
 }
 

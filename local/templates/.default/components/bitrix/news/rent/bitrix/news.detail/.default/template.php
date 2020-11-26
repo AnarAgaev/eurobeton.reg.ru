@@ -12,6 +12,83 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<div class="modal" id="modalEquipmentOrder">
+    <div class="send-msg-true flex-column justify-content-center align-items-center" id="sendEquipmentOrderMsgTrue">
+        <h3 class="send-msg-true__title">Сообщение отправлено</h3>
+        <span class="send-msg-true__txt">Менеджер свяжется с Вами в ближайшее время.</span>
+        <button class="btn" id="btnEOClose">Закрыть</button>
+    </div>
+    <div class="modal__dialog modal__dialog_set-order" id="modalDialogEquipmentOrder">
+        <div class="modal__close"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h4 class="modal__title">Заказ доп. оборудования</h4>
+            </div>
+            <div class="modal__body">
+                <h5 class="modal__subtitle d-flex flex-column justify-content-center align-items-center flex-md-row">
+                    <span>Заявка на заказ:</span>
+                    <span class="pl-md-1"><b><?= $arResult['NAME']?></b></span>
+                </h5>
+                <form class="form modal__form d-flex flex-column flex-md-row"
+                      name="form_equipment_order"
+                      action="/utils/handle-form-equipment-order.php"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      id="formEquipmentOrder">
+                    <input type="hidden" name="product-name" value="<?= $arResult['NAME']?>">
+                    <input type="hidden" name="product-link" value="<?= $APPLICATION->GetCurUri()?>">
+                    <div class="modal__controls d-flex flex-column">
+                        <label class="label label_w272">
+                            <span>Ваше имя:</span>
+                            <input class="input"
+                                   type="text"
+                                   name="name"
+                                   placeholder="Иванов Иван"
+                                   id="formEquipmentOrderName">
+                            <span class="err__msg"></span>
+                        </label>
+                        <label class="label label_w272">
+                            <span>Ваш e-mail:</span>
+                            <input class="input"
+                                   type="text"
+                                   placeholder="example@example.com"
+                                   name="email"
+                                   id="formEquipmentOrderMail">
+                            <span class="err__msg"></span>
+                        </label>
+                        <label class="label label_w272">
+                            <span>Телефон:</span>
+                            <input class="input"
+                                   type="text"
+                                   placeholder="+7 (999) 999-99-99"
+                                   name="phone"
+                                   id="formEquipmentOrderPhone">
+                            <span class="err__msg"></span>
+                        </label>
+                    </div>
+                    <div class="modal__msg">
+                        <label class="label">
+                            <span>Комментарий:</span>
+                            <textarea class="textarea"
+                                      placeholder="Данные для расчёта"
+                                      name="message"
+                                      id="formEquipmentOrderMsg"></textarea>
+                            <span class="err__msg"></span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
+                <button class="btn" type="submit" form="formEquipmentOrder">отправить</button>
+                <div class="modal__agreement">
+                    Нажимая кнопку, вы соглашаетесь с условиями
+                    <a class="link" href="/">пользовательского соглашения</a>
+                    по обработке персональных данных
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?$APPLICATION->IncludeComponent(
     "bitrix:breadcrumb",
     "breadcrumbs",
@@ -56,11 +133,11 @@ $this->setFrameMode(true);
                     </div>
                     <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
                         <div class="actions__txt d-flex flex-column align-items-center flex-sm-row flex-sm-wrap justify-content-sm-center justify-content-xl-start">
-                            <button class="btn show-modal mb-4 mb-sm-0 mr-sm-3" data-modal-id="modalSetOrder">
+                            <button class="btn show-modal mb-4 mb-sm-0 mr-sm-3" data-modal-id="modalEquipmentOrder">
                                 заказать
                             </button>
                             <div class="btn-call ml-sm-3 ml-xl-4">
-                                <?/* Вставка включаемой области Зделать звонок.
+                                <?/* Вставка включаемой области Сделать звонок.
                                * Разсположена на всехкарточках товара.
                                * Лежит по пути /include/btn-call.php
                                */

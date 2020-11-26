@@ -827,6 +827,9 @@ document.addEventListener("DOMContentLoaded",() => {
     const sendMsgTrue   = document.getElementById("sendMsgTrue");
     const btnFBClose    = document.getElementById("btnFBClose");
 
+    btnFBClose
+        .addEventListener("click", () =>  toggleModal(modalSetOrder, false));
+
     form.addEventListener('submit', evt => {
         evt.preventDefault();
         cleanErrs(name, mail, phone, msg);

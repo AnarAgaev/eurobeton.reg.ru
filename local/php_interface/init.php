@@ -182,3 +182,44 @@ class handleRequestTenderFrom {
         }
     }
 }
+
+/*
+ * Обработка отправки сообщения из формы
+ * Заявка на аренду доп. оборудования
+ * в модальном окне на странице с кароточкой
+ * товара из доп. оборудования
+ *
+ * Регистрируем обработчик
+ */
+AddEventHandler(
+    "iblock",
+    "OnAfterIBlockElementAdd",
+    Array("handleEquipmentOrderForm", "OnAfterIBlockElementAddHandler")
+);
+class handleEquipmentOrderForm {
+    /*
+     * Создаем обработчик события "OnAfterIBlockElementAdd"
+     * который слушает редактирование инфоблока
+     * Запросы/Аренда доп. оборудования
+     * с идентификатором 25.
+     *
+     * В массиве $arSend перезаписываем стандартные макросы
+     * почтового сообщения и добавляем свои в сответствии
+     * со свойствами инфоблока.
+     */
+    function OnAfterIBlockElementAddHandler(&$arFields) {
+        if ($arFields["IBLOCK_ID"] == 25) {
+
+            $arSend = array(
+                'AUTHOR' => $arFields['NAME'],
+                'EMAIL_FROM' => $arFields['PROPERTY_VALUES']['EMAIL'],
+                'PHONE' => $arFields['PROPERTY_VALUES']['PHONE'],
+                'TEXT' => $arFields['PROPERTY_VALUES']['MESSAGE'],
+                'PRODUCT_NAME' => $arFields['PROPERTY_VALUES']['PRODUCT_NAME'],
+                'PRODUCT_LINK' => $arFields['PROPERTY_VALUES']['PRODUCT_LINK'],
+            );
+
+            CEvent::Send('USER_REQUEST_EQUIPMENT_RENTAL',SITE_ID,$arSend);
+        }
+    }
+}
