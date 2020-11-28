@@ -379,6 +379,10 @@ document.addEventListener("DOMContentLoaded",() => {
             const inputs = modalDialog.getElementsByClassName("input");
             const texts = modalDialog.getElementsByClassName("textarea");
             const files = modalDialog.querySelectorAll('input[type="file"]');
+            const selects = modalDialog.getElementsByClassName("select");
+
+            // Отдельно чистим поле с ценой расчёт аредны бетононасоса
+            const rentPumpResult = document.getElementById('formRentPumpResult');
 
             if (modalsResult.length > 0) {
                 for (let i = 0; i < modalsResult.length; i++) {
@@ -414,6 +418,17 @@ document.addEventListener("DOMContentLoaded",() => {
                 for (let i = 0; i < files.length; i++) {
                     files[i].nextElementSibling.innerHTML = '';
                 }
+            }
+            if (selects.length > 0) {
+                for (let i = 0; i < selects.length; i++) {
+                    for (let j = 0; j < selects[i].options.length; j++) {
+                        selects[i].options[j].selected = j === 0;
+                    }
+                }
+            }
+
+            if (rentPumpResult) {
+                rentPumpResult.innerText = 0;
             }
         }
     };

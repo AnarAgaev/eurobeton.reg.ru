@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xl-5 calc__wrap">
             <div class="calc">
-                <h5 class="calc__title">Автоматизированная система расчёта стоимости доставки</h5>
+                <h5 class="calc__title">Автоматизированная система расчёта стоимости доставки бетона</h5>
                 <form class="form calc__nums d-flex flex-column align-items-start" id="deliveryСost">
                     <label class="label label_value">
                         <span>Количество (м<sup>3</sup>)</span>

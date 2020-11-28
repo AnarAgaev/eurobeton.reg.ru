@@ -2861,10 +2861,7 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     top: 0;
     left: 0;
-    background-size: cover;
-    background-position: 50%;
-    background-image: url(/local/templates/.default/img/news-card-back.jpg);
-    opacity: .4;
+    background: url(/local/templates/.default/img/noisy.png) repeat;
     z-index: 1
 }
 
@@ -3298,10 +3295,7 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     top: 0;
     left: 0;
-    background-size: cover;
-    background-position: 50%;
-    background-image: url(/local/templates/.default/img/news-card-back.jpg);
-    opacity: .1;
+    background: url(/local/templates/.default/img/noisy.png) repeat;
     z-index: 1
 }
 
@@ -3798,9 +3792,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .promo__card:before {
-    background-image: url(/local/templates/.default/img/news-card-back.jpg);
-    opacity: .4;
-    z-index: 1
+    /*background: url(/local/templates/.default/img/noisy.png) repeat;*/
+    /*opacity: 1;*/
+    /*z-index: 1*/
 }
 
 @media (-ms-high-contrast: none), screen and (-ms-high-contrast: active) {
@@ -4086,9 +4080,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .news-list__desc:before {
-    background-image: url(/local/templates/.default/img/news-card-back.jpg);
-    opacity: .4;
-    z-index: 1
+    /*background: url(/local/templates/.default/img/noisy.png) repeat;*/
+    /*opacity: .4;*/
+    /*z-index: 1*/
 }
 
 @media (-ms-high-contrast: none), screen and (-ms-high-contrast: active) {
@@ -4432,7 +4426,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .vacancy__subtitle-pic img {
     max-width: 70%;
-    margin-top: 10px
+    margin-top: 10px;
+    display: block;
 }
 
 @media (min-width: 768px) {
@@ -5083,6 +5078,22 @@ span.bread-crumbs__link {
     margin-top: 20px;
 }
 
+#modalRentPump .rent-pump-culc__result {
+    height: 75px;
+    margin-bottom: 15px;
+}
+
+#modalRentPump .rent-pump-culc__result span{
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 7px;
+    display: inline-block;
+    line-height: 37px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
 .coords-error {
     width: 90%;
     max-width: 550px;
@@ -5115,7 +5126,8 @@ span.bread-crumbs__link {
 
 #modalDialogFeedback.hide,
 #modalDialogEquipmentOrder.hide,
-#modalDialogRequestTender.hide {
+#modalDialogRequestTender.hide,
+#modalDialogRentPump.hide {
     display: none;
 }
 
@@ -5169,6 +5181,10 @@ span.bread-crumbs__link {
 
 .modal__body {
     background-color: #eee
+}
+
+.modal__body.pump-rent {
+    padding-top: 50px;
 }
 
 #modalRequestTender .modal__body {

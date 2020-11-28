@@ -223,3 +223,46 @@ class handleEquipmentOrderForm {
         }
     }
 }
+
+/*
+ * Обработка отправки сообщения из формы
+ * Заявка на аренду бетононасоса
+ * в модальном окне на странице Аренда
+ *
+ * Регистрируем обработчик
+ */
+AddEventHandler(
+    "iblock",
+    "OnAfterIBlockElementAdd",
+    Array("handlePumpRentForm", "OnAfterIBlockElementAddHandler")
+);
+class handlePumpRentForm {
+    /*
+     * Создаем обработчик события "OnAfterIBlockElementAdd"
+     * который слушает редактирование инфоблока
+     * Запросы/Аренда бетононасоса
+     * с идентификатором 28.
+     *
+     * В массиве $arSend перезаписываем стандартные макросы
+     * почтового сообщения и добавляем свои в сответствии
+     * со свойствами инфоблока.
+     */
+    function OnAfterIBlockElementAddHandler(&$arFields) {
+        if ($arFields["IBLOCK_ID"] == 28) {
+
+            $arSend = array(
+                'AUTHOR' => $arFields['NAME'],
+                'EMAIL_FROM' => $arFields['PROPERTY_VALUES']['EMAIL'],
+                'PHONE' => $arFields['PROPERTY_VALUES']['PHONE'],
+                'NUM_LENGTH' => $arFields['PROPERTY_VALUES']['NUM_LENGTH'],
+                'PRICE_HOUR' => $arFields['PROPERTY_VALUES']['PRICE_HOUR'],
+                'PRICE_RESULT' => $arFields['PROPERTY_VALUES']['PRICE_RESULT'],
+                'TIME' => $arFields['PROPERTY_VALUES']['TIME'],
+                'NUMBER_SHIFTS' => $arFields['PROPERTY_VALUES']['NUMBER_SHIFTS'],
+                'EXTRA_HOURS' => $arFields['PROPERTY_VALUES']['EXTRA_HOURS'],
+            );
+
+            CEvent::Send('USER_REQUEST_PUMP_RENTAL',SITE_ID,$arSend);
+        }
+    }
+}

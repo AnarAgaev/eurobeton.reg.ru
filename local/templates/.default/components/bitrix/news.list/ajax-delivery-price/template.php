@@ -20,6 +20,8 @@ foreach ($arResult['ITEMS'] as $arItem) {
             '30' => $arItem['PROPERTIES']['PRICE_UP_TO_30_KM']['VALUE'],
             '35' => $arItem['PROPERTIES']['PRICE_UP_TO_35_KM']['VALUE'],
             '40' => $arItem['PROPERTIES']['PRICE_UP_TO_40_KM']['VALUE'],
+            '45' => $arItem['PROPERTIES']['PRICE_UP_TO_45_KM']['VALUE'],
+            '50' => $arItem['PROPERTIES']['PRICE_UP_TO_50_KM']['VALUE'],
         ]
     ];
 

@@ -12,6 +12,91 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<div class="modal" id="modalRentPump">
+    <div class="send-msg-true flex-column justify-content-center align-items-center" id="sendRPMsgTrue">
+        <h3 class="send-msg-true__title">Сообщение отправлено</h3>
+        <span class="send-msg-true__txt">Менеджер свяжется с Вами в ближайшее время.</span>
+        <button class="btn" id="btnRPClose">Закрыть</button>
+    </div>
+    <div class="modal__dialog modal__dialog_set-order" id="modalDialogRentPump">
+        <div class="modal__close"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h4 class="modal__title">Оставить заявку</h4>
+            </div>
+            <div class="modal__body pump-rent">
+                <form class="form modal__form d-flex flex-column flex-md-row"
+                      name="form-rent-pump"
+                      action="/utils/handle-rent-pump-form.php"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      id="formRentPump">
+                    <input type="hidden" name="num-length" value="" id="numLength">
+                    <input type="hidden" name="price-result" value="" id="priceResult">
+                    <input type="hidden" name="number-shifts" value="" id="numberShifts">
+                    <input type="hidden" name="extra-hours" value="" id="extraHours">
+                    <div class="modal__controls d-flex flex-column">
+                        <label class="label label_w272">
+                            <span>Ваше имя (название организации):</span>
+                            <input class="input"
+                                   type="text"
+                                   name="name"
+                                   placeholder="Иван"
+                                   id="formRentPumpName">
+                            <span class="err__msg"></span>
+                        </label>
+                        <label class="label label_w272">
+                            <span>Ваш e-mail:</span>
+                            <input class="input"
+                                   type="text"
+                                   placeholder="example@example.com"
+                                   name="email"
+                                   id="formRentPumpMail">
+                            <span class="err__msg"></span>
+                        </label>
+                        <label class="label label_w272">
+                            <span>Телефон:</span>
+                            <input class="input"
+                                   type="text"
+                                   placeholder="+7 (999) 999-99-99"
+                                   name="phone"
+                                   id="formRentPumpPhone">
+                            <span class="err__msg"></span>
+                        </label>
+                    </div>
+                    <div class="modal__msg">
+                        <label class="label label_w251 label_select">
+                            <span>Длина подачи (м):</span>
+                            <select class="select"
+                                    id="formRentPumpLength"
+                                    name="price-hour"></select>
+                        </label>
+                        <label class="label label_w251">
+                            <span>Рабочая смена (час.):</span>
+                            <input class="input"
+                                   type="number"
+                                   name="time"
+                                   placeholder="8"
+                                   id="formRentPumpTime">
+                            <span class="err__msg"></span>
+                        </label>
+                        <div class="rent-pump-culc__result d-flex align-items-end">
+                            Итого:<span id="formRentPumpResult">0</span>руб.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
+                <button class="btn" type="submit" form="formRentPump">отправить</button>
+                <div class="modal__agreement">
+                    Нажимая кнопку, вы соглашаетесь с условиями
+                    <a class="link" href="/">пользовательского соглашения</a>
+                    по обработке персональных данных
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal pump-rent" id="modalShowRentPumpNote">
     <div class="modal__dialog modal__dialog_set-order" id="modalDialogShowRentPumpNote">
         <div class="modal__content">
@@ -86,7 +171,7 @@ $this->setFrameMode(true);
                     </div>
                     <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
                         <div class="actions__txt d-xl-flex flex-xl-wrap justify-content-xl-start">
-                            <button class="btn show-modal" data-modal-id="modalSetOrder">
+                            <button class="btn show-modal" data-modal-id="modalRentPump">
                                 выбрать и узнать стоимость
                             </button>
                             <div class="actions__comment">
