@@ -47,6 +47,8 @@
 
         /* Добавляем Яндекс картуы только на те страницы где она используется*/
         if ($APPLICATION->GetCurPage(false) == '/'
+            or $APPLICATION->GetCurPage(false) == '/produktsiya/izvestnyakovaya-muka/'
+            or $APPLICATION->GetCurPage(false) == '/produktsiya/mineralnyy-poroshok/'
             or $APPLICATION->GetCurPage(false) == '/proizvodstvo/tovarnyy-beton/'
             or $APPLICATION->GetCurPage(false) == '/proizvodstvo/shcheben/'
             or $APPLICATION->GetCurPage(false) == '/produktsiya/'
@@ -54,7 +56,8 @@
             or $APPLICATION->GetCurPage(false) == '/dostavka/')
                 Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
 
-        if (preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
+        if (preg_match('/\/produktsiya\/shcheben\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) {
             Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
@@ -70,6 +73,15 @@
             or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) {
             Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
+        }
+
+        if (preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())
+            or preg_match('/\/produktsiya\/shcheben\/\w/', $APPLICATION->GetCurPage())
+            or $APPLICATION->GetCurPage(false) == '/produktsiya/izvestnyakovaya-muka/'
+            or $APPLICATION->GetCurPage(false) == '/produktsiya/mineralnyy-poroshok/') {
+            Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/product-calc.js');
         }
     ?>
 </head>
@@ -222,7 +234,10 @@
                         <div class="cart d-flex justify-content-end align-items-center" id="cart">
                             <div class="cart__caption">Корзина</div>
                             <div class="cart__items">
-                                <div class="cart__items__num" id="cartProds"></div>
+                                <div class="cart__items__num" id="cartItemsCounter"><?
+                                    $user_session = \Bitrix\Main\Application::getInstance()->getSession();
+                                    $user_cart = json_decode($user_session['cart']);
+                                    echo $user_cart->itemCount; ?></div>
                             </div>
                         </div>
                     </div>

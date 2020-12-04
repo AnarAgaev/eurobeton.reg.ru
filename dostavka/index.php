@@ -2,9 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Доставка");
 ?>
-<?/* Вставка включаемой области Модальные окна на странице с видежетом доставка
-   * include/delivery-txt.php
-   */
+<?/* Вставка включаемой области Модальные окна на странице с видежетом доставка */
 $APPLICATION->IncludeComponent(
     "bitrix:main.include",
     "",

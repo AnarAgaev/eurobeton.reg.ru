@@ -10,14 +10,14 @@
                             <span class="value-checker__btn value-checker__btn_minus"></span>
                             <input type="number" step="1" value="0" min="0" class="input deliveryValue">
                             <span class="value-checker__btn value-checker__btn_plus"></span>
-                            <span class="err__msg">Не корректное значение</span>
+                            <span class="err__msg">Некорректное значение</span>
                         </span>
                     </label>
                     <label class="label label_w284 label_address">
                         <span>Адрес доставки:</span>
                         <input type="text" class="input deliveryAddress"
                                placeholder="Россия, Московская область, городской">
-                        <span class="err__msg">Не корректное значение</span>
+                        <span class="err__msg">Некорректное значение</span>
                     </label>
                     <button class="btn" type="submit">рассчитать</button>
                 </form>
@@ -31,7 +31,7 @@
         <div class="col-xl-12 calc-results">
             <div class="calc-results__body d-flex flex-column justify-content-center align-items-center flex-xl-row"
                  id="calcResultContainer">
-                <div class="calc-results__price">
+                <div class="calc-results__title">
                     Итого:<span id="calcPriceContainer"></span>руб.
                 </div>
                 <div class="calc-results__desc">
@@ -43,6 +43,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

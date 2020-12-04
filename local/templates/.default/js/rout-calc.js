@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            // Обработка события, возникающего при щелчке
+            // Обработка события, возникающего при клике
             // левой кнопкой мыши в любой точке карты.
             // При возникновении такого события откроем балун.
             deliveryMap.events.add('click', evt => {
@@ -271,7 +271,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 if (distance <= Number(key) && price != '') {
                                                     // Рссчитываем стоимость доставки как:
                                                     // расстояние * цена за транспортировку куба * количество кубов
-                                                    finalPrice = distance * parseFloat(price.replace(/,/, '.')) * value.value;
+                                                    //finalPrice = distance * parseFloat(price.replace(/,/, '.')) * value.value; // с учётом расстония
+                                                    finalPrice = parseFloat(price.replace(/,/, '.')) * value.value; // без учёта расстояния
                                                     break;
                                                 }
                                             }

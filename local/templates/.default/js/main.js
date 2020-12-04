@@ -1,5 +1,5 @@
 /* Сервис-функция асинхронного поучения данных с сервера */
-const getResource = async (url, form) => {
+window.getResource = async (url, form) => {
 
     const response = (form === undefined)
         ? await fetch(url)
@@ -419,6 +419,7 @@ document.addEventListener("DOMContentLoaded",() => {
                     files[i].nextElementSibling.innerHTML = '';
                 }
             }
+
             if (selects.length > 0) {
                 for (let i = 0; i < selects.length; i++) {
                     for (let j = 0; j < selects[i].options.length; j++) {
@@ -555,8 +556,9 @@ document.addEventListener("DOMContentLoaded",() => {
      * в хедере.
      * */
     if (storageAvailable('localStorage')) {
+        // Устанавливаем город по умолчанию в localStorage
         if(!localStorage.getItem('usrCity')) {
-            localStorage.setItem('usrCity', 'Москва'); // Устанавливаем город по умолчанию в localStorage
+            localStorage.setItem('usrCity', 'Москва');
         }
     }
     else {
