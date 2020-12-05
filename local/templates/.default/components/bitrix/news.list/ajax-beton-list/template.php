@@ -16,10 +16,34 @@ $arResponse = [
         '/utils/get-next-beton-page.php?PAGEN_1=')
 ];
 
+//debug($arResult['ITEMS']);
+
 // Добавляем в рузультирующий массив данные добавляемых товаро раздела Бетон
 foreach ($arResult['ITEMS'] as $arItem) {
     $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
     $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+
+    // Получаем минимальную цену товара
+    // В том случае если цен несколько в переменную $PRICE_MINIMUM
+    // пишем true и тогда в карточке товара в списке товара
+    // к товару добавиться приставка ОТ
+    $PRICE_COUNT = 0;
+    $PRICE = false;
+
+    for ($i = 382; $i < 388; $i++) {
+        $CURRENT_PRICE = (float)str_replace(',', '.', $arItem['PROPERTIES']['PRICE_FACTORY_ID_' . $i]['VALUE']);
+
+        if ($CURRENT_PRICE != 0) {
+            $PRICE = !$PRICE
+                ? $CURRENT_PRICE
+                : $CURRENT_PRICE < $PRICE
+                    ? $CURRENT_PRICE
+                    : $PRICE;
+            $PRICE_COUNT++;
+        }
+    }
+
+    if ($PRICE_COUNT > 0) $PRICE_MINIMUM = true;
 
     $arr = [
         'ID' => $this->GetEditAreaId($arItem['ID']),
@@ -31,8 +55,8 @@ foreach ($arResult['ITEMS'] as $arItem) {
         'CONCRETE_MOBILITY' => $arItem["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"],
         'CONCRETE_FROST' => $arItem["PROPERTIES"]["CONCRETE_FROST"]["VALUE"],
         'CONCRETE_WATER' => $arItem["PROPERTIES"]["CONCRETE_WATER"]["VALUE"],
-        'PRICE' => $arItem["PROPERTIES"]["PRICE"]["VALUE"],
-        'PRICE_MINIMUM' => $arItem["PROPERTIES"]["PRICE_MINIMUM"]["VALUE_XML_ID"],
+        'PRICE' => $PRICE,
+        'PRICE_MINIMUM' => $PRICE_MINIMUM,
         'DETAIL_PAGE_URL' => $arItem["DETAIL_PAGE_URL"],
     ];
 
@@ -47,48 +71,3 @@ $JSON__DATA = defined('JSON_UNESCAPED_UNICODE')
     : json_encode($arResponse);
 echo $JSON__DATA;
 ?><!--RestartBuffer-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="catalog">
-    <div class="container">
-        <div class="row justify-content-center justify-content-sm-start">
-            <?foreach($arResult["ITEMS"] as $arItem):?>
-                <?
-                $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-                $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
-                ?>
-                <div class="col-sm-6 col-lg-4 col-xl-3 catalog__item d-flex flex-column justify-content-start align-items-center"
-                     id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-                    <?=$arItem["NAME"]?>
-                    <div class="prices__pic" style="background-image: url(<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>)"></div>
-                    <div class="prices__caption"><?=$arItem["PREVIEW_TEXT"]?></div>
-                    <div class="prices__desc">
-                        <?=$arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_CLASS"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?>
-                    </div>
-                    <div class="prices__price"><?if($arItem["PROPERTIES"]["PRICE_MINIMUM"]["VALUE_XML_ID"]) echo 'от';?><span><?=$arItem["PROPERTIES"]["PRICE"]["VALUE"]?></span>руб.</div>
-                    <div class="prices__btn">
-                        <a class="btn" href="<?=$arItem["DETAIL_PAGE_URL"]?>">подробнее</a>
-                    </div>
-                </div>
-            <?endforeach;?>
-        </div>
-    </div>
-</div>
-<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-    <br /><?=$arResult["NAV_STRING"]?>
-<?endif;?>

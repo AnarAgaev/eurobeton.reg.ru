@@ -20,6 +20,7 @@ $this->setFrameMode(true);
  * в карточке товара.
  */
 
+//debug($arResult);
 ?>
 <div class="prices section_container" id="concreteSlider">
     <div class="container">
@@ -66,8 +67,29 @@ $this->setFrameMode(true);
                             <?=$arItem["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?>
                             <?=$arItem["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?>
                         </div>
-                        <div class="prices__price"><?=$arItem["PROPERTIES"]["PRICE_MINIMUM"]["VALUE_XML_ID"] ? 'от' : '';?>
-                            <span><?=$arItem["PROPERTIES"]["PRICE"]["VALUE"]?></span>руб./м<sup>2</sup>
+                        <div class="prices__price"><?
+                            // Определяем минимальную цену товара на всех заводах на которых он проадётся
+                            // В том случае еслу товар продаётся на несколькоих предприятиях
+                            // добавляем к нему приставку ОТ
+
+                            $PRICE_COUNT = 0;
+                            $PRICE = false;
+
+                            for ($i = 382; $i < 388; $i++) {
+                                $CURRENT_PRICE = (float) str_replace(',','.',$arItem['PROPERTIES']['PRICE_FACTORY_ID_'.$i]['VALUE']);
+
+                                if ($CURRENT_PRICE != 0) {
+                                    $PRICE = !$PRICE
+                                        ? $CURRENT_PRICE
+                                        : $CURRENT_PRICE < $PRICE
+                                            ? $CURRENT_PRICE
+                                            : $PRICE;
+                                    $PRICE_COUNT++;
+                                }
+                            }
+
+                            if ($PRICE_COUNT > 0) echo 'от ';
+                            echo '<span>'.$PRICE . '</span> руб/м<sup>3</sup>';?>
                         </div>
                         <div class="prices__btn">
                             <a class="btn" href="<?=$arItem["DETAIL_PAGE_URL"]?>">ПОДРОБНЕЕ</a>

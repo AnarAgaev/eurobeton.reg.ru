@@ -40,8 +40,8 @@ const createItemCertificates = (
     let price = document.createElement('div');
     price.classList.add("prices__price");
     price.innerHTML = priceMinimum
-        ? "от<span>"+ money +"</span>руб."
-        : "<span>"+ money +"</span>руб.";
+        ? "от<span>"+ money +"</span>руб./м<sup>3</sup>"
+        : "<span>"+ money +"</span>руб./м<sup>3</sup>";
 
     let btn = document.createElement('div');
     btn.classList.add("prices__btn");
