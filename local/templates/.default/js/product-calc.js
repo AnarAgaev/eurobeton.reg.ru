@@ -154,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 errCoordsContainer.classList.remove('visible');
                 errRouteContainer.classList.remove('visible');
 
+                // Сбрасываем ошибки на плях формы
                 value.parentElement.parentElement
                     .classList
                     .remove('has__error');
@@ -312,7 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 // Показываем сообщение с расчётными данными продукта
                                                 resContainer.classList.add('visible');
                                             } else {
-                                                // Опеделяем ближайший завод к месту поставки
+                                                // Если выбранной продукции нет ни на одном заводе
+                                                // опеделяем ближайший завод к месту поставки
                                                 // на котором есть данный вид продукции
                                                 for(let id in factories) {
                                                     if (factories[id]['distance'] && productPrices[id] !== '') {
@@ -323,10 +325,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                                                 : factoryId;
                                                     }
                                                 }
-
-                                                // Если выбранной продукции нет ни на одном заводе
-                                                // Опрделеляем билажайший к месту поставки
-
 
                                                 // Показываем сообщение Слишком длинная доставка
                                                 errRouteContainer.classList.add('visible');
@@ -366,17 +364,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                             optimalFactory.dataset.optimalFactoryId = JSON.stringify(factoryId);
                                             optimalFactory.value = factoryId;
 
-                                            // console.log('productPrices:', productPrices);
-                                            // console.log('factories:', factories);
-                                            // console.log('factoryId:', factoryId);
-                                            // console.log('optimalFactory:', factories[factoryId]);
-                                            // console.log('name:', factories[factoryId]['name']);
-                                            // console.log('address:', factories[factoryId]['address']);
-                                            // console.log('distance:', factories[factoryId]['distance'], 'км.');
-                                            // console.log('productPrices:', factories[factoryId]['productPrice'], 'руб.');
-                                            // console.log('deliveryPrice:', factories[factoryId]['deliveryPrice'], 'руб.');
-                                            // console.log('finalPrice:', factories[factoryId]['finalPrice'], 'руб.');
-                                            // console.log('*********************************')
+                                            console.log('productPrices:', productPrices);
+                                            console.log('factories:', factories);
+                                            console.log('factoryId:', factoryId);
+                                            console.log('optimalFactory:', factories[factoryId]);
+                                            console.log('name:', factories[factoryId]['name']);
+                                            console.log('address:', factories[factoryId]['address']);
+                                            console.log('distance:', factories[factoryId]['distance'], 'км.');
+                                            console.log('productPrices:', factories[factoryId]['productPrice'], 'руб.');
+                                            console.log('deliveryPrice:', factories[factoryId]['deliveryPrice'], 'руб.');
+                                            console.log('finalPrice:', factories[factoryId]['finalPrice'], 'руб.');
+                                            console.log('*********************************')
                                         }
                                     });
                                 }
@@ -396,6 +394,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 spinner.classList.add('visible');
                 getResource(form.action, form)
                     .then(response  => {
+                        console.log(response)
+
                         spinner.classList.remove('visible');
 
                         if (response['IS_ERRORS']) {

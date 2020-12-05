@@ -11,10 +11,76 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+//debug($arResult);
 ?>
+<?/* Вставка включаемой области Модальные окна на страницах с товарами
+   * В калькулятор расчёта стомимости товара (цена товара + доставка)
+   * передаются переменные содержащие цены товара на всех заводах
+   * и стомость доставки на каждом из заводов.
+   */
+$arPRODUCT_PRICES = Array(
+    "382" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_382']['VALUE'],
+    "383" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_383']['VALUE'],
+    "384" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_384']['VALUE'],
+    "385" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_385']['VALUE'],
+    "386" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_386']['VALUE'],
+    "387" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_387']['VALUE'],
+);
+$JSON__PRODUCT_PRICES = defined('JSON_UNESCAPED_UNICODE')
+    ? json_encode($arPRODUCT_PRICES, JSON_UNESCAPED_UNICODE)
+    : json_encode($arPRODUCT_PRICES);
+
+// Получаем стоимость доставки данного товара на каждом из предприятий, где 29 - это ИД инфоблока прайса
+$iterator = CIBlockElement::GetPropertyValues(29, array(), true, array());
+while ($row = $iterator->Fetch()) {
+    $res = CIBlockElement::GetByID($row['IBLOCK_ELEMENT_ID']);
+    $arDELIVERY_PRICES[$row['IBLOCK_ELEMENT_ID']] = Array(
+        'name' => $res->GetNext()['NAME'],
+        'address' => $row['130'],
+        'coordinates' => $row['131'],
+        'prices' => [
+            '5' => $row['132'],
+            '10' => $row['133'],
+            '15' => $row['134'],
+            '20' => $row['135'],
+            '25' => $row['136'],
+            '30' => $row['137'],
+            '35' => $row['138'],
+            '40' => $row['139'],
+            '45' => $row['140'],
+            '50' => $row['141'],
+        ]
+    );
+}
+$JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
+    ? json_encode($arDELIVERY_PRICES, JSON_UNESCAPED_UNICODE)
+    : json_encode($arDELIVERY_PRICES);
+
+$PRODUCT_DESCRIPTION = 'Характеристики: '
+ .'Порода - '.$arResult['PROPERTIES']['RUBBLE_TYPE']['VALUE'].'; '
+ .'Прочность - '.$arResult['PROPERTIES']['RUBBLE_STRENGTH']['VALUE'].'; '
+ .'Морозостойкость,F - '.$arResult['PROPERTIES']['RUBBLE_FROST']['VALUE'].'; '
+ .'Насыпной коэффициент - '.$arResult['PROPERTIES']['RUBBLE_BULK_RATIO']['VALUE'].'.';
+
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",	// Показывать включаемую область
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",	// Шаблон области по умолчанию
+        "PATH" => "/include/product-calc.php",	// Путь к файлу области
+        "PRODUCT_PRICES" => $JSON__PRODUCT_PRICES, // JSON с ценами товара на всех заводах
+        "DELIVERY_PRICES" => $JSON__DELIVERY_PRICES, // JSON с ценами доставки товара на всех заводах
+        "PRODUCT_TYPE" => 'crushedStone', // !!! Тип товара для сохранения в соответствующем разделе корзины
+        "PRODUCT_DESCRIPTION" => $PRODUCT_DESCRIPTION, // Описание товара. Для Известковой муки описание НЕТ
+        "PRODUCT_NAME" => $arResult['NAME'] // Наименование товара
+    ),
+    false
+);?>
 <div class="page-title">
     <div class="container">
-        <h1 class="page-title__content">
+        <h1 class="page-title__content" id="productName">
             <?$APPLICATION->ShowTitle(false)?>
         </h1>
     </div>
@@ -58,12 +124,30 @@ $this->setFrameMode(true);
             <div class="col-xl-6 actions__wrap">
                 <div class="actions">
                     <div class="actions__price">Стоимость:
-                        <span><?if($arResult["PROPERTIES"]["PRICE_MINIMUM"]["VALUE_XML_ID"]) echo 'от';?> <?=$arResult["PROPERTIES"]["PRICE"]["VALUE"]?> руб</span>
+                        <span><?
+                            $PRICE_COUNT = 0;
+                            $PRICE = false;
+
+                            for ($i = 382; $i < 388; $i++) {
+                                $CURRENT_PRICE = (float) str_replace(',','.',$arResult['PROPERTIES']['PRICE_FACTORY_ID_'.$i]['VALUE']);
+
+                                if ($CURRENT_PRICE != 0) {
+                                    $PRICE = !$PRICE
+                                        ? $CURRENT_PRICE
+                                        : $CURRENT_PRICE < $PRICE
+                                            ? $CURRENT_PRICE
+                                            : $PRICE;
+                                    $PRICE_COUNT++;
+                                }
+                            }
+
+                            if ($PRICE_COUNT > 0) echo 'от ';
+                            echo $PRICE . ' руб';?></span>
                     </div>
                     <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
                         <div class="actions__txt">
-                            <button class="btn show-modal" data-modal-id="modalSetOrder">
-                                РАССЧИТАТЬ ПОЛНУЮ СТОИМОСТЬ
+                            <button class="btn" id="showModalProductCalc">
+                                рассчитать полную стоимость
                             </button>
                             <div class="actions__comment">
                                 Отгрузка осуществляется железнодорожным, водным и

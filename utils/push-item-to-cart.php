@@ -1,20 +1,13 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 
-// Сохраняем сессия в перемнную для удобной работы
-$session = \Bitrix\Main\Application::getInstance()->getSession();
+/* !!!
+ * Корзина инициализируется в header шаблона сайте в блоке с корзиной,
+ * т.к. в этот момент уже нужны данные корзины, в частности
+ * количество товаров в корзине.
+ */
 
-// Инициализируем корзину если она не создана (при первом запуске сайта)
-if (!$session->has('cart')) {
-    $session->set('cart', json_encode([
-        "itemCount" => 0,
-        "items" => [
-            "concrete" => [], // бетон
-            "crushedStone" => [], // щебень
-            "mineralPowder" => [], // минеральный порошок
-            "limestoneFlour" => [], // известняковая мука
-        ]
-    ]));
-}
+// Сохраняем сессию в перемнную для удобной работы
+$session = \Bitrix\Main\Application::getInstance()->getSession();
 
 // Сохраняем корзину в переменную для редактирования
 $cart = json_decode($session['cart']);
@@ -56,8 +49,8 @@ if (isset($_POST['product-type'])) {
  * полученный с клиента POST и вся карзина,
  * хранящаяся в сессии целиком
  */
-//$arResponse['GETTING_POST'] = $_POST;
-//$arResponse['CART_IN_SESSION'] = json_decode($session->get('cart'));
+$arResponse['GETTING_POST'] = $_POST;
+$arResponse['CART_IN_SESSION'] = json_decode($session->get('cart'));
 
 $JSON__DATA = defined('JSON_UNESCAPED_UNICODE')
     ? json_encode($arResponse, JSON_UNESCAPED_UNICODE)

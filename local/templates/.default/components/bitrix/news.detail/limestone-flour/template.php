@@ -10,7 +10,8 @@
 /** @var string $templateFolder */
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
-$this->setFrameMode(true);                 // debug($arResult);
+$this->setFrameMode(true);
+// debug($arResult);
 ?>
 <?/* Вставка включаемой области Модальные окна на страницах с товарами
    * В калькулятор расчёта стомимости товара (цена товара + доставка)
@@ -29,6 +30,7 @@ $this->setFrameMode(true);                 // debug($arResult);
         ? json_encode($arPRODUCT_PRICES, JSON_UNESCAPED_UNICODE)
         : json_encode($arPRODUCT_PRICES);
 
+// Получаем стоимость доставки данного товара на каждом из предприятий, где 29 - это ИД инфоблока прайса
     $iterator = CIBlockElement::GetPropertyValues(29, array(), true, array());
     while ($row = $iterator->Fetch()) {
         $res = CIBlockElement::GetByID($row['IBLOCK_ELEMENT_ID']);
@@ -114,8 +116,7 @@ $APPLICATION->IncludeComponent(
                     </div>
                     <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
                         <div class="actions__txt">
-                            <a class="btn"
-                               id="showModalProductCalc">
+                            <a class="btn" id="showModalProductCalc">
                                 рассчитать полную стоимость
                             </a>
                             <div class="actions__comment">

@@ -63,7 +63,7 @@
             Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
         }
 
-        /* Добавляем Скрипт для расчёта доставки только на те страницы где он используется*/
+        /* Добавляем Скрипт для расчёта доставки только на те страницы где он используется */
         if ($APPLICATION->GetCurPage(false) == '/dostavka/'
             or $APPLICATION->GetCurPage(false) == '/produktsiya/') {
             Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
@@ -75,6 +75,7 @@
             Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
         }
 
+        /* Добавляем Скрипт для расчёта стоимости товара только на те страницы где он используется */
         if (preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())
@@ -235,9 +236,23 @@
                             <div class="cart__caption">Корзина</div>
                             <div class="cart__items">
                                 <div class="cart__items__num" id="cartItemsCounter"><?
-                                    $user_session = \Bitrix\Main\Application::getInstance()->getSession();
-                                    $user_cart = json_decode($user_session['cart']);
-                                    echo $user_cart->itemCount; ?></div>
+                                    $session = \Bitrix\Main\Application::getInstance()->getSession();
+
+                                    // Для вывода количества товаров в корзине
+                                    // инициализируем корзину если она не создана
+                                    if (!$session->has('cart')) {
+                                        $session->set('cart', json_encode([
+                                            "itemCount" => 0,
+                                            "items" => [
+                                                "concrete" => [], // бетон
+                                                "crushedStone" => [], // щебень
+                                                "mineralPowder" => [], // минеральный порошок
+                                                "limestoneFlour" => [], // известняковая мука
+                                            ]
+                                        ]));
+                                    }
+
+                                    echo json_decode($session['cart'])->itemCount; ?></div>
                             </div>
                         </div>
                     </div>

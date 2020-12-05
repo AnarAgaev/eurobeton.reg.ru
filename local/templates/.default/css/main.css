@@ -2163,8 +2163,8 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .header .products__dropdown.rubble {
-        width: 290px;
-        left: -54px
+        width: 380px;
+        left: -56px;
     }
 }
 
@@ -3262,6 +3262,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     line-height: 24px;
     height: 48px;
+    text-align: center;
 }
 
 .catalog__price, .prices__price {
@@ -6388,8 +6389,16 @@ span.bread-crumbs__link {
 
 .calc-results__title {
     padding: 25px 10px 10px;
-    width: 310px;
+    /*width: 310px;*/
+    width: 100%;
 }
+
+@media (min-width: 1200px) {
+    .calc-results__title {
+        width: calc(50% - 30px);
+    }
+}
+
 
 .calc-results__product-name {
     font-size: 23px;
@@ -6444,13 +6453,20 @@ span.bread-crumbs__link {
     text-align: center;
     font-size: 13px;
     line-height: 1.7;
+    width: 100%;
 }
 
 @media (min-width: 768px) {
     .calc-results__desc {
         font-size: 15px;
         line-height: 1.4;
-        width: 540px;
+        /*width: 540px;*/
+    }
+}
+
+@media (min-width: 1200px) {
+    .calc-results__desc {
+        width: 50%;
     }
 }
 
@@ -6470,6 +6486,7 @@ span.bread-crumbs__link {
     
     .calc-results__desc p {
         text-align: left;
+        padding-right: 30px;
     }
 }
 

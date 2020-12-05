@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Минеральный порошок");
 );?>
 <div class="page-title">
     <div class="container">
-        <h1 class="page-title__content">
+        <h1 class="page-title__content" id="productName">
             <?$APPLICATION->ShowTitle(false)?> </h1>
     </div>
 </div>
@@ -63,9 +63,12 @@ $APPLICATION->SetTitle("Минеральный порошок");
 		"PAGER_TITLE" => "Страница",
 		"PROPERTY_CODE" => array(
 			0 => "MINERAL_POWDER_DESCRIPTION",
-			1 => "PRICE",
-			2 => "PRICE_MINIMUM",
-			3 => "",
+			1 => "PRICE_FACTORY_ID_387",
+			2 => "PRICE_FACTORY_ID_386",
+			3 => "PRICE_FACTORY_ID_385",
+			4 => "PRICE_FACTORY_ID_384",
+			5 => "PRICE_FACTORY_ID_383",
+			6 => "PRICE_FACTORY_ID_382",
 		),
 		"SET_BROWSER_TITLE" => "Y",
 		"SET_CANONICAL_URL" => "N",
