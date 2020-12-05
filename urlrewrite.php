@@ -24,7 +24,7 @@ $arUrlRewrite=array (
     'PATH' => '/produktsiya/beton/betonnaya-smes/index.php',
     'SORT' => 100,
   ),
-  2 => 
+  11 => 
   array (
     'CONDITION' => '#^/produktsiya/shcheben/#',
     'RULE' => '',
