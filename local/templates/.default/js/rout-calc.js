@@ -7,15 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const body = document.body;
         const btnPlus = deliveryForm.querySelector('.value-checker__btn_plus');
         const btnMinus = deliveryForm.querySelector('.value-checker__btn_minus');
-        const value = deliveryForm.querySelector('.deliveryValue');
-        const address = deliveryForm.querySelector('.deliveryAddress');
+        const deliveryValue = deliveryForm.querySelector('.deliveryValue');
+        const deliveryAddress = deliveryForm.querySelector('.deliveryAddress');
         const modal = document.getElementById('modalCoordsError');
         const msg = document.getElementById('msgCoordsError');
         const btn = document.getElementById('btnCloseCoordsError');
         const modalLongRout = document.getElementById('modalToLongRoute');
         const msgLongRout = document.getElementById('msgToLongRoute');
         const btnLongRout = document.getElementById('btnToLongRoute');
-        const calcResultContainer = document.getElementById('calcResultContainer');
+        const resultContainer = document.getElementById('calcDeliveryResultContainer');
         let builtRout;
 
         btn.addEventListener('click', () => {
@@ -42,15 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
         let coordsFromMap = [];
 
         btnPlus.addEventListener('click', () => {
-            value.value = editValue(
+            deliveryValue.value = editValue(
                 true,
-                value.value);
+                deliveryValue.value);
         });
 
         btnMinus.addEventListener('click', () => {
-            value.value = editValue(
+            deliveryValue.value = editValue(
                 false,
-                value.value);
+                deliveryValue.value);
         });
 
         // Получаем координаты предприятий с сервера и сохраняем в переменной
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 // Пушим координаты в поле Адрес доставки
-                address.value = '[' + [
+                deliveryAddress.value = '[' + [
                     receivedCoords[0],
                     receivedCoords[1]
                 ].join(',') + ']';
@@ -135,27 +135,27 @@ document.addEventListener("DOMContentLoaded", () => {
             deliveryForm.addEventListener('submit', evt => {
                 evt.preventDefault();
                 deliveryMap.balloon.close();
-                calcResultContainer.classList.remove('visible');
+                resultContainer.classList.remove('visible');
 
-                value.parentElement.parentElement
+                deliveryValue.parentElement.parentElement
                     .classList
                     .remove('has__error');
-                address.parentElement
+                deliveryAddress.parentElement
                     .classList
                     .remove('has__error');
 
                 let formValid = true;
 
-                if (address.value === '') {
-                    address.parentElement
+                if (deliveryAddress.value === '') {
+                    deliveryAddress.parentElement
                         .classList
                         .add('has__error');
-                    address.focus();
+                    deliveryAddress.focus();
                     formValid = false;
                 }
 
-                if (value.value === '' || value.value == '0') {
-                    value.parentElement.parentElement
+                if (deliveryValue.value === '' || deliveryValue.value == '0') {
+                    deliveryValue.parentElement.parentElement
                         .classList
                         .add('has__error');
                     formValid = false;
@@ -164,9 +164,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (formValid) {
                     spinner.classList.add('visible');
 
-                    let addressValue = validCoords(address.value)
+                    let addressValue = validCoords(deliveryAddress.value)
                         ? coordsFromMap
-                        : address.value;
+                        : deliveryAddress.value;
 
                     const myGeocoder = ymaps.geocode(addressValue);
                     myGeocoder.then(
@@ -271,24 +271,24 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 if (distance <= Number(key) && price != '') {
                                                     // Рссчитываем стоимость доставки как:
                                                     // расстояние * цена за транспортировку куба * количество кубов
-                                                    //finalPrice = distance * parseFloat(price.replace(/,/, '.')) * value.value; // с учётом расстония
-                                                    finalPrice = parseFloat(price.replace(/,/, '.')) * value.value; // без учёта расстояния
+                                                    //finalPrice = distance * parseFloat(price.replace(/,/, '.')) * deliveryValue.value; // с учётом расстония
+                                                    finalPrice = parseFloat(price.replace(/,/, '.')) * deliveryValue.value; // без учёта расстояния
                                                     break;
                                                 }
                                             }
 
                                             // Говорим пользователю ЦЕНУ или что не можем доставить (слишком далеко)
                                             if (finalPrice) {
-                                                const calcPriceContainer = document.getElementById('calcPriceContainer');
-                                                const calcFactoryContainer = document.getElementById('calcFactoryContainer');
-                                                const calcRoutContainer = document.getElementById('calcRoutContainer');
-                                                const calcCoordsContainer = document.getElementById('calcCoordsContainer');
+                                                const price = document.getElementById('calcDeliveryPriceContainer');
+                                                const factory = document.getElementById('calcDeliveryFactoryContainer');
+                                                const route = document.getElementById('calcDeliveryRoutContainer');
+                                                const coords = document.getElementById('calcDeliveryCoordsContainer');
 
-                                                calcResultContainer.classList.add('visible');
-                                                calcPriceContainer.innerText = finalPrice;
-                                                calcFactoryContainer.innerText = factories[factoryNum]['name'];
-                                                calcRoutContainer.innerText = distance + ' км.';
-                                                calcCoordsContainer.innerText = address.value;
+                                                resultContainer.classList.add('visible');
+                                                price.innerText = finalPrice;
+                                                factory.innerText = factories[factoryNum]['name'];
+                                                route.innerText = distance + ' км.';
+                                                coords.innerText = deliveryAddress.value;
                                             } else {
                                                 modalLongRout.classList.add('show');
                                                 msgLongRout.classList.add('visible');

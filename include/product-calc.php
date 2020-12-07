@@ -16,11 +16,11 @@
                         <input type="hidden" value="" name="optimal-factory-id" data-optimal-factory-id id="optimalFactory">
                         <input type="hidden" value="<?= $arParams['PRODUCT_TYPE']?>" name="product-type" data-product-type="<?= $arParams['PRODUCT_TYPE']?>" id="productType">
                         <input type="hidden" value="<?= $arParams['PRODUCT_DESCRIPTION']?>" name="product-description" data-product-description="<?= $arParams['PRODUCT_DESCRIPTION']?>" id="productDescription">
+                        <input type="hidden" value="<?= $arParams['PRODUCT_NAME']?>" name="product-name" id="productNameController">
                         <input type="hidden" value name="route-length" id="routeLength">
                         <input type="hidden" value name="delivery-price" id="deliveryPriceController">
                         <input type="hidden" value name="product-price" id="productPriceController">
                         <input type="hidden" value name="final-price" id="finalPrice">
-                        <input type="hidden" value name="product-name" id="productNameController">
                         <label class="label label_value">
                             <span>Количество (м<sup>3</sup>)</span>
                             <span class="value-checker">
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-xl-12 calc-results">
                 <div class="calc-results__body d-flex flex-column justify-content-center align-items-center flex-xl-row"
-                     id="calcResultContainer">
+                     id="calcResultContainerModal">
                     <div class="calc-results__title d-flex flex-column align-items-center align-items-xl-end">
                         <div class="calc-results__product-name" id="calcProductNameContainer"></div>
                         <div>
@@ -70,7 +70,7 @@
                             <li>Расстояние:&nbsp; <span id="calcRoutContainer"></span></li>
                             <li>Количество: <span id="calcValueContainer"></span></li>
                             <li>Место поставки:&nbsp; <span id="calcCoordsContainer"></span></li>
-                            <li>Стоимость доставки: <span id="calcDeliveryPriceContainer"></span></li>
+                            <li>Стоимость доставки: <span id="calcProdDeliveryPriceContainer"></span></li>
                             <li>Стоимость продукции: <span id="calcProductPriceContainer"></span></li>
                         </ul>
                     </div>

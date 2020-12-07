@@ -31,10 +31,11 @@ const createItemCertificates = (
 
     let desc = document.createElement('div');
     desc.classList.add("prices__desc");
-    desc.innerHTML = concreteGrade
-        + concreteClass
-        + concreteMobility
-        + concreteFrost
+    desc.innerHTML = ' '
+        + concreteGrade + ' '
+        + concreteClass + ' '
+        + concreteMobility + ' '
+        + concreteFrost + ' '
         + concreteWater;
 
     let price = document.createElement('div');

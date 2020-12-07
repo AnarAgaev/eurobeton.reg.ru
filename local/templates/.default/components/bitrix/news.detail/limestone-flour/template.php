@@ -68,7 +68,7 @@ $APPLICATION->IncludeComponent(
         "DELIVERY_PRICES" => $JSON__DELIVERY_PRICES, // JSON с ценами доставки товара на всех заводах
         "PRODUCT_TYPE" => 'limestoneFlour', // Тип товара для сохранения в соответствующем разделе корзины
         "PRODUCT_DESCRIPTION" => '', // Описание товара. Для Известковой муки описание НЕТ
-        "PRODUCT_NAME" => '' // Наименование товара
+        "PRODUCT_NAME" => $arResult['NAME'] // Наименование товара
     ),
 	false
 );?>
@@ -116,9 +116,9 @@ $APPLICATION->IncludeComponent(
                     </div>
                     <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
                         <div class="actions__txt">
-                            <a class="btn" id="showModalProductCalc">
+                            <button class="btn" id="showModalProductCalc">
                                 рассчитать полную стоимость
-                            </a>
+                            </button>
                             <div class="actions__comment">
                                 <div class="footnote">Без транспортных услуг</div>
                             </div>

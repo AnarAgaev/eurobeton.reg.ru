@@ -12,6 +12,85 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<?/* Вставка включаемой области Модальные окна на страницах с товарами
+   * В калькулятор расчёта стомимости товара (цена товара + доставка)
+   * передаются переменные содержащие цены товара на всех заводах
+   * и стомость доставки на каждом из заводов.
+   */
+$arPRODUCT_PRICES = Array(
+    "350" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_350']['VALUE'],
+    "351" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_351']['VALUE'],
+    "352" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_352']['VALUE'],
+    "353" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_353']['VALUE'],
+    "354" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_354']['VALUE'],
+    "355" => $arResult['PROPERTIES']['PRICE_FACTORY_ID_355']['VALUE'],
+);
+$JSON__PRODUCT_PRICES = defined('JSON_UNESCAPED_UNICODE')
+    ? json_encode($arPRODUCT_PRICES, JSON_UNESCAPED_UNICODE)
+    : json_encode($arPRODUCT_PRICES);
+
+// Получаем стоимость доставки данного товара на каждом из предприятий, где 24 - это ИД инфоблока прайса
+$iterator = CIBlockElement::GetPropertyValues(24, array(), true, array());
+while ($row = $iterator->Fetch()) {
+    $res = CIBlockElement::GetByID($row['IBLOCK_ELEMENT_ID']);
+    $arDELIVERY_PRICES[$row['IBLOCK_ELEMENT_ID']] = Array(
+        'name' => $res->GetNext()['NAME'],
+        'address' => $row['89'],
+        'coordinates' => $row['90'],
+        'prices' => [
+            '5' => $row['91'],
+            '10' => $row['92'],
+            '15' => $row['93'],
+            '20' => $row['94'],
+            '25' => $row['95'],
+            '30' => $row['96'],
+            '35' => $row['97'],
+            '40' => $row['98'],
+            '45' => $row['104'],
+            '50' => $row['105'],
+        ]
+    );
+}
+$JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
+    ? json_encode($arDELIVERY_PRICES, JSON_UNESCAPED_UNICODE)
+    : json_encode($arDELIVERY_PRICES);
+
+$PRODUCT_DESCRIPTION = 'Характеристики: '
+    .'Класс бетона - '.$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE'].'; '
+    .'Подвижность - '.$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'].'; '
+    .'Морозостойкость,F - '.$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'].'; '
+    .'Водонепроницаемость - '.$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'].'.'
+    .'Наполнитель - '.$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'].'.'
+    .'Средняя прочность, кгс/см2 - '.$arResult['PROPERTIES']['CONCRETE_STRENGTH']['VALUE'].'.';
+
+$PRODUCT_NAME = $arResult['PREVIEW_TEXT']
+    ." ".$arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE']
+    ." ".$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE']
+    ." ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE']
+    ." ".$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE']
+    ." ".$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'];
+
+//debug(['$arPRODUCT_PRICES', $arPRODUCT_PRICES]);
+//debug(['$arDELIVERY_PRICES', $arDELIVERY_PRICES]);
+//debug(['$PRODUCT_DESCRIPTION', $PRODUCT_DESCRIPTION]);
+//debug(['$PRODUCT_NAME', $PRODUCT_NAME]);
+
+$APPLICATION->IncludeComponent(
+    "bitrix:main.include",
+    "",
+    Array(
+        "AREA_FILE_SHOW" => "file",	// Показывать включаемую область
+        "AREA_FILE_SUFFIX" => "inc",
+        "EDIT_TEMPLATE" => "",	// Шаблон области по умолчанию
+        "PATH" => "/include/product-calc.php",	// Путь к файлу области
+        "PRODUCT_PRICES" => $JSON__PRODUCT_PRICES, // JSON с ценами товара на всех заводах
+        "DELIVERY_PRICES" => $JSON__DELIVERY_PRICES, // JSON с ценами доставки товара на всех заводах
+        "PRODUCT_TYPE" => 'concrete', // Тип товара для сохранения в соответствующем разделе корзины
+        "PRODUCT_DESCRIPTION" => $PRODUCT_DESCRIPTION, // Описание товара. Для Известковой муки описание НЕТ
+        "PRODUCT_NAME" => $PRODUCT_NAME, // Наименование товара
+    ),
+    false
+);?>
 <?/* Вставка включаемой области Модальные окна на странице с видежетом доставка
    * include/delivery-txt.php
    */
@@ -86,12 +165,30 @@ $APPLICATION->IncludeComponent(
                 <div class="actions">
                     <div class="actions__price">
                         Стоимость:
-                        <span><?if($arResult["PROPERTIES"]["PRICE_MINIMUM"]["VALUE_XML_ID"]) echo 'от';?> <?=$arResult["PROPERTIES"]["PRICE"]["VALUE"]?> руб</span>
+                        <span><?
+                            $PRICE_COUNT = 0;
+                            $PRICE = false;
+
+                            for ($i = 350; $i < 356; $i++) {
+                                $CURRENT_PRICE = (float) str_replace(',','.',$arResult['PROPERTIES']['PRICE_FACTORY_ID_'.$i]['VALUE']);
+
+                                if ($CURRENT_PRICE != 0) {
+                                    $PRICE = !$PRICE
+                                        ? $CURRENT_PRICE
+                                        : $CURRENT_PRICE < $PRICE
+                                            ? $CURRENT_PRICE
+                                            : $PRICE;
+                                    $PRICE_COUNT++;
+                                }
+                            }
+
+                            if ($PRICE_COUNT > 0) echo 'от ';
+                            echo $PRICE . ' руб./м<sup>3</sup>';?></span>
                     </div>
                     <div class="actions__btns d-flex flex-column align-items-center flex-xl-row align-items-xl-start">
                         <div class="actions__txt">
-                            <button class="btn show-modal" data-modal-id="modalSetOrder">
-                                РАССЧИТАТЬ ПОЛНУЮ СТОИМОСТЬ
+                            <button class="btn" id="showModalProductCalc">
+                                рассчитать полную стоимость
                             </button>
                             <div class="actions__comment">
                                 Ваш заказ будет доставлен прямо на вашу строительную площадку в любое удобное время.

@@ -30,15 +30,15 @@
     <div class="row">
         <div class="col-xl-12 calc-results">
             <div class="calc-results__body d-flex flex-column justify-content-center align-items-center flex-xl-row"
-                 id="calcResultContainer">
+                 id="calcDeliveryResultContainer">
                 <div class="calc-results__title">
-                    Итого:<span id="calcPriceContainer"></span>руб.
+                    Итого:<span id="calcDeliveryPriceContainer"></span>руб.
                 </div>
                 <div class="calc-results__desc">
                     <ul>
-                        <li>Отгрузка:&nbsp; <span id="calcFactoryContainer"></span></li>
-                        <li>Расстояние:&nbsp; <span id="calcRoutContainer"></span></li>
-                        <li>Место поставки:&nbsp; <span id="calcCoordsContainer"></span></li>
+                        <li>Отгрузка:&nbsp; <span id="calcDeliveryFactoryContainer"></span></li>
+                        <li>Расстояние:&nbsp; <span id="calcDeliveryRoutContainer"></span></li>
+                        <li>Место поставки:&nbsp; <span id="calcDeliveryCoordsContainer"></span></li>
                     </ul>
                 </div>
             </div>

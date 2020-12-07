@@ -30,7 +30,7 @@ foreach ($arResult['ITEMS'] as $arItem) {
     $PRICE_COUNT = 0;
     $PRICE = false;
 
-    for ($i = 382; $i < 388; $i++) {
+    for ($i = 350; $i < 356; $i++) {
         $CURRENT_PRICE = (float)str_replace(',', '.', $arItem['PROPERTIES']['PRICE_FACTORY_ID_' . $i]['VALUE']);
 
         if ($CURRENT_PRICE != 0) {

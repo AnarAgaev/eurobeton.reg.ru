@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const productPrices = JSON.parse(productPricesJson.dataset.productPrices);
         const deliveryPricesJson = document.getElementById('deliveryPrices');
         const factories = JSON.parse(deliveryPricesJson.dataset.deliveryPrices);
-        const resContainer = document.getElementById('calcResultContainer');
+        const resContainer = document.getElementById('calcResultContainerModal');
         const errCoordsContainer = document.getElementById('calcErrorCoordsContainer');
         const errRouteContainer = document.getElementById('calcErrorRouteContainer');
         const optimalFactory = document.getElementById('optimalFactory');
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 valueInput.parentElement.parentElement.classList.remove('has__error');
                 addressInput.value = '';
                 addressInput.parentElement.classList.remove('has__error');
-                calcResultContainer.classList.remove('visible');
+                calcResultContainerModal.classList.remove('visible');
                 calcErrorCoordsContainer.classList.remove('visible');
                 calcErrorRouteContainer.classList.remove('visible');
 
@@ -289,10 +289,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 const distance = document.getElementById('calcRoutContainer');
                                                 const valueProd = document.getElementById('calcValueContainer');
                                                 const coords = document.getElementById('calcCoordsContainer');
-                                                const deliveryPrice = document.getElementById('calcDeliveryPriceContainer');
+                                                const deliveryPrice = document.getElementById('calcProdDeliveryPriceContainer');
                                                 const productPrice = document.getElementById('calcProductPriceContainer');
 
-                                                name.innerText = productName.innerText;
+                                                name.innerText = productNameController.value;
                                                 price.innerText = factories[factoryId]['finalPrice'];
                                                 factoryName.innerText = factories[factoryId]['name'];
                                                 distance.innerText = factories[factoryId]['distance'] + ' км.';
@@ -308,7 +308,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 deliveryPriceController.value = factories[factoryId]['deliveryPrice'];
                                                 productPriceController.value = factories[factoryId]['productPrice'];
                                                 finalPrice.value = factories[factoryId]['finalPrice'];
-                                                productNameController.value = productName.innerText;
 
                                                 // Показываем сообщение с расчётными данными продукта
                                                 resContainer.classList.add('visible');
@@ -364,17 +363,17 @@ document.addEventListener("DOMContentLoaded", () => {
                                             optimalFactory.dataset.optimalFactoryId = JSON.stringify(factoryId);
                                             optimalFactory.value = factoryId;
 
-                                            console.log('productPrices:', productPrices);
-                                            console.log('factories:', factories);
-                                            console.log('factoryId:', factoryId);
-                                            console.log('optimalFactory:', factories[factoryId]);
-                                            console.log('name:', factories[factoryId]['name']);
-                                            console.log('address:', factories[factoryId]['address']);
-                                            console.log('distance:', factories[factoryId]['distance'], 'км.');
-                                            console.log('productPrices:', factories[factoryId]['productPrice'], 'руб.');
-                                            console.log('deliveryPrice:', factories[factoryId]['deliveryPrice'], 'руб.');
-                                            console.log('finalPrice:', factories[factoryId]['finalPrice'], 'руб.');
-                                            console.log('*********************************')
+                                            // console.log('productPrices:', productPrices);
+                                            // console.log('factories:', factories);
+                                            // console.log('factoryId:', factoryId);
+                                            // console.log('optimalFactory:', factories[factoryId]);
+                                            // console.log('name:', factories[factoryId]['name']);
+                                            // console.log('address:', factories[factoryId]['address']);
+                                            // console.log('distance:', factories[factoryId]['distance'], 'км.');
+                                            // console.log('productPrices:', factories[factoryId]['productPrice'], 'руб.');
+                                            // console.log('deliveryPrice:', factories[factoryId]['deliveryPrice'], 'руб.');
+                                            // console.log('finalPrice:', factories[factoryId]['finalPrice'], 'руб.');
+                                            // console.log('*********************************')
                                         }
                                     });
                                 }

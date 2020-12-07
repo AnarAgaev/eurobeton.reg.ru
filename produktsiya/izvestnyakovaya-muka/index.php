@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Известняковая мука");
 );?>
 <div class="page-title">
     <div class="container">
-        <h1 class="page-title__content" id="productName">
+        <h1 class="page-title__content">
             <?$APPLICATION->ShowTitle(false)?> </h1>
     </div>
 </div>
