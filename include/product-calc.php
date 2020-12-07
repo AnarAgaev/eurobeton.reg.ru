@@ -1,3 +1,4 @@
+<?//debug($arParams);?>
 <div class="modal" id="modalProductCalc">
     <div class="container container__dialog" id="modalDialogProductCalc">
         <div class="modal__close yandex-modal-map__btn-close"
@@ -17,6 +18,7 @@
                         <input type="hidden" value="<?= $arParams['PRODUCT_TYPE']?>" name="product-type" data-product-type="<?= $arParams['PRODUCT_TYPE']?>" id="productType">
                         <input type="hidden" value="<?= $arParams['PRODUCT_DESCRIPTION']?>" name="product-description" data-product-description="<?= $arParams['PRODUCT_DESCRIPTION']?>" id="productDescription">
                         <input type="hidden" value="<?= $arParams['PRODUCT_NAME']?>" name="product-name" id="productNameController">
+                        <input type="hidden" value="<?= $arParams['PRODUCT_PICTURE_SRC']?>" name="product-pic-src" id="productPicSrcController">
                         <input type="hidden" value name="route-length" id="routeLength">
                         <input type="hidden" value name="delivery-price" id="deliveryPriceController">
                         <input type="hidden" value name="product-price" id="productPriceController">

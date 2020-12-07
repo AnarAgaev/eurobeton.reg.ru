@@ -7,7 +7,7 @@ $APPLICATION->SetTitle("Минеральный порошок");
     "breadcrumbs",
     Array(
         "3" => "",
-        "4" => fals,
+        "4" => false,
         "PATH" => "",
         "SITE_ID" => "s1",
         "START_FROM" => "0"
@@ -46,9 +46,10 @@ $APPLICATION->SetTitle("Минеральный порошок");
 		"ELEMENT_CODE" => "mineralnyy-poroshok",
 		"ELEMENT_ID" => $_REQUEST["ELEMENT_ID"],
 		"FIELD_CODE" => array(
-			0 => "DETAIL_TEXT",
-			1 => "DETAIL_PICTURE",
-			2 => "",
+			0 => "PREVIEW_PICTURE",
+			1 => "DETAIL_TEXT",
+			2 => "DETAIL_PICTURE",
+			3 => "",
 		),
 		"IBLOCK_ID" => "9",
 		"IBLOCK_TYPE" => "products",
@@ -69,6 +70,7 @@ $APPLICATION->SetTitle("Минеральный порошок");
 			4 => "PRICE_FACTORY_ID_384",
 			5 => "PRICE_FACTORY_ID_383",
 			6 => "PRICE_FACTORY_ID_382",
+			7 => "",
 		),
 		"SET_BROWSER_TITLE" => "Y",
 		"SET_CANONICAL_URL" => "N",

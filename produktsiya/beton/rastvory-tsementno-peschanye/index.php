@@ -9,7 +9,7 @@ $APPLICATION->SetTitle("Растворы цементно-песчаные");
 	"breadcrumbs",
 	Array(
 		"3" => "",
-		"4" => fals,
+		"4" => false,
 		"PATH" => "",
 		"SITE_ID" => "s1",
 		"START_FROM" => "0"
@@ -39,7 +39,8 @@ $APPLICATION->SetTitle("Растворы цементно-песчаные");
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
 		"DETAIL_FIELD_CODE" => array(
 			0 => "",
-			1 => "",
+			1 => "PREVIEW_PICTURE",
+			2 => "",
 		),
 		"DETAIL_PAGER_SHOW_ALL" => "Y",
 		"DETAIL_PAGER_TEMPLATE" => "",
@@ -58,6 +59,7 @@ $APPLICATION->SetTitle("Растворы цементно-песчаные");
 			10 => "PRICE_FACTORY_ID_355",
 			11 => "PRICE_FACTORY_ID_353",
 			12 => "PRICE_FACTORY_ID_350",
+			13 => "",
 		),
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
@@ -87,6 +89,7 @@ $APPLICATION->SetTitle("Растворы цементно-песчаные");
 			8 => "PRICE_FACTORY_ID_355",
 			9 => "PRICE_FACTORY_ID_353",
 			10 => "PRICE_FACTORY_ID_350",
+			11 => "",
 		),
 		"MESSAGE_404" => "",
 		"META_DESCRIPTION" => "-",

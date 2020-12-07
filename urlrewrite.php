@@ -1,6 +1,6 @@
 <?php
 $arUrlRewrite=array (
-  14 => 
+  18 => 
   array (
     'CONDITION' => '#^/produktsiya/beton/rastvory-tsementno-peschanye/#',
     'RULE' => '',
@@ -8,7 +8,7 @@ $arUrlRewrite=array (
     'PATH' => '/produktsiya/beton/rastvory-tsementno-peschanye/index.php',
     'SORT' => 100,
   ),
-  12 => 
+  16 => 
   array (
     'CONDITION' => '#^/produktsiya/beton/tovarnyy-beton/#',
     'RULE' => '',
@@ -16,7 +16,7 @@ $arUrlRewrite=array (
     'PATH' => '/produktsiya/beton/tovarnyy-beton/index.php',
     'SORT' => 100,
   ),
-  13 => 
+  17 => 
   array (
     'CONDITION' => '#^/produktsiya/beton/betonnaya-smes/#',
     'RULE' => '',
@@ -24,7 +24,7 @@ $arUrlRewrite=array (
     'PATH' => '/produktsiya/beton/betonnaya-smes/index.php',
     'SORT' => 100,
   ),
-  11 => 
+  15 => 
   array (
     'CONDITION' => '#^/produktsiya/shcheben/#',
     'RULE' => '',

@@ -68,7 +68,8 @@ $APPLICATION->IncludeComponent(
         "DELIVERY_PRICES" => $JSON__DELIVERY_PRICES, // JSON с ценами доставки товара на всех заводах
         "PRODUCT_TYPE" => 'limestoneFlour', // Тип товара для сохранения в соответствующем разделе корзины
         "PRODUCT_DESCRIPTION" => '', // Описание товара. Для Известковой муки описание НЕТ
-        "PRODUCT_NAME" => $arResult['NAME'] // Наименование товара
+        "PRODUCT_NAME" => $arResult['NAME'], // Наименование товара
+        "PRODUCT_PICTURE_SRC" => $arResult['PREVIEW_PICTURE']['SRC'] // Путь к изображению для анонса товара
     ),
 	false
 );?>
