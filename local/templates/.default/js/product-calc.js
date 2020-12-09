@@ -475,14 +475,18 @@ document.addEventListener("DOMContentLoaded", () => {
                             fnPushItemToCart(product['product-type'])
                                 .insertAdjacentHTML('beforeend', insertItemHtmlContent);
 
-                            // Показываем блоке с товарами и скрываем заглушку для пустой карзины
+                            // Показываем блоки с товарами и скрываем заглушку для пустой карзины
                             noProductsMsg.classList.add('hidden');
                             cartModalBody.classList.remove('hidden');
                             cartModalFooter.classList.remove('hidden');
 
-                            // Увиличиваем итоговой стоимость всех товаров в корзине на ссумму добавленного товара
+                            // Увиличиваем итоговую стоимость всех товаров в корзине на ссумму добавленного товара
+                            const newFinalCartPrice =
+                                parseFloat(finalCartPriceContainer.innerText) +
+                                parseFloat(product['final-price']);
 
-
+                            finalCartPriceContainer.innerText =
+                                Math.round(parseFloat(newFinalCartPrice) * 100) / 100;
                         }
                     });
 

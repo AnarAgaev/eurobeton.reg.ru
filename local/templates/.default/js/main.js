@@ -1384,7 +1384,6 @@ document.addEventListener("DOMContentLoaded",() => {
     }
     /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- End */
 
-
     // Обраотчика логики корзины -- Start
     const fnCartModalClose = (action) => {
         if (action) {
@@ -1412,22 +1411,7 @@ document.addEventListener("DOMContentLoaded",() => {
             fnCartModalClose(false);
     });
 
-    // Пказваем/скрываем поле с дополнительной информацией в карточке товара
-    const btnsShowInform = document.getElementsByClassName('cart-modal__item__inform-title');
-    for (let i = 0; i < btnsShowInform.length; i++) {
-        btnsShowInform[i].addEventListener('click', evt => {
-            btnsShowInform[i]
-                .nextElementSibling
-                .classList
-                .toggle('visible');
-            btnsShowInform[i]
-                .classList
-                .toggle('active');
-        });
-    }
-
     // Динамическое удаление товара из Карзины и из структуры данных, хранящейся в сесиии
-    const btnDeleteItemCart = document.getElementsByClassName('cart-modal__item__delete');
     const fnDeleteItemFromSession = (url) => {
         getResource(url)
             .then(response  => {
@@ -1458,9 +1442,14 @@ document.addEventListener("DOMContentLoaded",() => {
             });
     };
 
-    for (let i = 0; i < btnDeleteItemCart.length; i++) {
-        btnDeleteItemCart[i].addEventListener('click', evt => {
-            const item = btnDeleteItemCart[i].parentElement;
+    // Так как при добавлении нового элемента он динамически создаётся новый
+    // товар в корзине для того чтобы работала функция удаления элемента
+    // без перезагрузки страницы, вынуждены слушать клики на всём списке элементов
+    cartModalBody.addEventListener( 'click', evt => {
+
+        // Удаление элемнта
+        if (evt.target.classList.contains('cart-modal__item__delete')) {
+            const item = evt.target.parentElement;
             const url = '/utils/delete-item-from-cart.php'
                 + '?type='
                 + item.dataset.productType
@@ -1471,7 +1460,18 @@ document.addEventListener("DOMContentLoaded",() => {
 
             // Удаляем товар из сессионых данных
             fnDeleteItemFromSession(url);
-        });
-    }
+        }
+
+        // Пказваем/скрываем поле с дополнительной информацией в карточке товара
+        if (evt.target.classList.contains('cart-modal__item__inform-title')) {
+            evt.target
+                .nextElementSibling
+                .classList
+                .toggle('visible');
+            evt.target
+                .classList
+                .toggle('active');
+        }
+    });
     // Обраотчика логики корзины -- End
 });
