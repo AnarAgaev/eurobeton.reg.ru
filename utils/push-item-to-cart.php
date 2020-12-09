@@ -10,7 +10,7 @@
 $session = \Bitrix\Main\Application::getInstance()->getSession();
 
 // Сохраняем корзину в переменную для редактирования
-$cart = json_decode($session['cart']);
+$cart = json_decode($session['cart'], true);
 
 if (isset($_POST['product-type'])) {
     // Если пришёл $_POST с товаром, считаем, что ошибки нет
@@ -19,24 +19,28 @@ if (isset($_POST['product-type'])) {
     // Добавляем пришедший товар в соответствующую ветку корзины
     switch ($_POST['product-type']) {
         case 'concrete':
-            array_push($cart->items->concrete, $_POST);
+            $cart['items']['concrete'][] = $_POST; // добавляем товар в конец соответствующего массива
+            $arResponse['ADDED_ITEM_ID'] = count($cart['items']['concrete']) - 1;
             break;
         case 'crushedStone':
-            array_push($cart->items->crushedStone, $_POST);
+            $cart['items']['crushedStone'][] = $_POST; // добавляем товар в конец соответствующего массива
+            $arResponse['ADDED_ITEM_ID'] = count($cart['items']['crushedStone']) - 1;
             break;
         case 'mineralPowder':
-            array_push($cart->items->mineralPowder, $_POST);
+            $cart['items']['mineralPowder'][] = $_POST; // добавляем товар в конец соответствующего массива
+            $arResponse['ADDED_ITEM_ID'] = count($cart['items']['mineralPowder']) - 1;
             break;
         case 'limestoneFlour':
-            array_push($cart->items->limestoneFlour, $_POST);
+            $cart['items']['limestoneFlour'][] = $_POST; // добавляем товар в конец соответствующего массива
+            $arResponse['ADDED_ITEM_ID'] = count($cart['items']['limestoneFlour']) - 1;
             break;
     }
 
     // Увеличиваем счётчик товаров в карзине
-    $cart->itemCount++;
+    $cart['itemCount']++;
 
     // Отдельно передаём количество товаров в корзине
-    $arResponse['CART_ITEM_COUNT'] = $cart->itemCount;
+    $arResponse['CART_ITEM_COUNT'] = $cart['itemCount'];
 
     // Перезаписываем корзину в сессии
     $session->set('cart', json_encode($cart));

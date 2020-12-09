@@ -56,10 +56,9 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
     ? json_encode($arDELIVERY_PRICES, JSON_UNESCAPED_UNICODE)
     : json_encode($arDELIVERY_PRICES);
 
-$PRODUCT_DESCRIPTION = 'Характеристики: '
- .'Порода - '.$arResult['PROPERTIES']['RUBBLE_TYPE']['VALUE'].'; '
+$PRODUCT_DESCRIPTION = 'Порода - '.$arResult['PROPERTIES']['RUBBLE_TYPE']['VALUE'].'; '
  .'Прочность - '.$arResult['PROPERTIES']['RUBBLE_STRENGTH']['VALUE'].'; '
- .'Морозостойкость,F - '.$arResult['PROPERTIES']['RUBBLE_FROST']['VALUE'].'; '
+ .'Морозостойкость - '.$arResult['PROPERTIES']['RUBBLE_FROST']['VALUE'].'; '
  .'Насыпной коэффициент - '.$arResult['PROPERTIES']['RUBBLE_BULK_RATIO']['VALUE'].'.';
 
 $APPLICATION->IncludeComponent(

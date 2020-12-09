@@ -1383,4 +1383,95 @@ document.addEventListener("DOMContentLoaded",() => {
         handleClickSliderControls("pumpSlider");
     }
     /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- End */
+
+
+    // Обраотчика логики корзины -- Start
+    const fnCartModalClose = (action) => {
+        if (action) {
+            body.classList.add("modal-open");
+            cartModal.classList.add("show");
+        } else {
+            body.classList.remove("modal-open");
+            cartModal.classList.remove("show");
+        }
+    };
+
+    // Открываем карзину в модальном окне при клике на иконку карзины в хедере
+    cart.addEventListener('click', evt => {
+        fnCartModalClose(true);
+    });
+
+    // Закрываем мальное окно карзини при клике на крестик-закрыть окно
+    cartModalClose.addEventListener('click', evt => {
+        fnCartModalClose(false);
+    });
+
+    // Закрывамем модальное окно Корзина при клике вне мадального окна
+    cartModal.addEventListener('click', evt => {
+        if (evt.target.id === 'cartModal')
+            fnCartModalClose(false);
+    });
+
+    // Пказваем/скрываем поле с дополнительной информацией в карточке товара
+    const btnsShowInform = document.getElementsByClassName('cart-modal__item__inform-title');
+    for (let i = 0; i < btnsShowInform.length; i++) {
+        btnsShowInform[i].addEventListener('click', evt => {
+            btnsShowInform[i]
+                .nextElementSibling
+                .classList
+                .toggle('visible');
+            btnsShowInform[i]
+                .classList
+                .toggle('active');
+        });
+    }
+
+    // Динамическое удаление товара из Карзины и из структуры данных, хранящейся в сесиии
+    const btnDeleteItemCart = document.getElementsByClassName('cart-modal__item__delete');
+    const fnDeleteItemFromSession = (url) => {
+        getResource(url)
+            .then(response  => {
+                if (response['IS_ERRORS']) {
+                    alert('К сожалению не удалось удалить товар из карзины. ' +
+                        'Перезагрузите страницу и попробуйте ещё раз.')
+                } else {
+                    cartItemsCounter.innerText = response['CART_ITEM_COUNT'];
+
+                    if (response['CART_ITEM_COUNT'] === 0) {
+                        finalCartPriceContainer.innerText = '0.00';
+
+                        setTimeout(()=>{
+                            noProductsMsg.classList.remove('hidden');
+                            cartModalBody.classList.add('hidden');
+                            cartModalFooter.classList.add('hidden');
+                            }, 300);
+                    } else {
+                        // Уменьшаяем итоговую сумму карзины на величину стоимости удалённого товара
+                        const newFinalCartPrice =
+                            parseFloat(finalCartPriceContainer.innerText) -
+                            parseFloat(response['PRODUCT_PRICE']);
+
+                        finalCartPriceContainer.innerText =
+                            Math.round(parseFloat(newFinalCartPrice) * 100) / 100;
+                    }
+                }
+            });
+    };
+
+    for (let i = 0; i < btnDeleteItemCart.length; i++) {
+        btnDeleteItemCart[i].addEventListener('click', evt => {
+            const item = btnDeleteItemCart[i].parentElement;
+            const url = '/utils/delete-item-from-cart.php'
+                + '?type='
+                + item.dataset.productType
+                + '&id='
+                + item.dataset.pruductId;
+
+            item.classList.add('deleted');
+
+            // Удаляем товар из сессионых данных
+            fnDeleteItemFromSession(url);
+        });
+    }
+    // Обраотчика логики корзины -- End
 });

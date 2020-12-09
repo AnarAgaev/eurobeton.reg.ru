@@ -56,12 +56,11 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
     ? json_encode($arDELIVERY_PRICES, JSON_UNESCAPED_UNICODE)
     : json_encode($arDELIVERY_PRICES);
 
-$PRODUCT_DESCRIPTION = 'Характеристики: '
-    .'Класс бетона - '.$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE'].'; '
+$PRODUCT_DESCRIPTION = 'Класс бетона - '.$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE'].'; '
     .'Подвижность - '.$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'].'; '
-    .'Морозостойкость,F - '.$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'].'; '
-    .'Водонепроницаемость - '.$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'].'.'
-    .'Наполнитель - '.$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'].'.'
+    .'Морозостойкость - '.$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'].'; '
+    .'Водонепроницаемость - '.$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'].'; '
+    .'Наполнитель - '.$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'].'; '
     .'Средняя прочность, кгс/см2 - '.$arResult['PROPERTIES']['CONCRETE_STRENGTH']['VALUE'].'.';
 
 $PRODUCT_NAME = $arResult['PREVIEW_TEXT']

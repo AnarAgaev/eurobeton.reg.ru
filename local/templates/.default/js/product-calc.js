@@ -388,7 +388,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Добавляем товар в $_SESSION и меняем счётчик товаров в корзине в шапке сайта
+            // Добавляем товар в $_SESSION
+            // Меняем счётчик товаров в карзине в шапке сайта
+            // Актуализируем модальное окно с Карзиной
             addProductToCart.addEventListener('click', evt => {
                 spinner.classList.add('visible');
                 getResource(form.action, form)
@@ -398,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         spinner.classList.remove('visible');
 
                         if (response['IS_ERRORS']) {
-                            alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.')
+                            alert('Товар не добавле в карзину. Перезагрузите страницу и попробуйте снова.')
                         } else {
                             modalCalcClose();
                             cartItemsCounter.innerText = response['CART_ITEM_COUNT'];
@@ -407,6 +409,80 @@ document.addEventListener("DOMContentLoaded", () => {
                             setTimeout(() => {
                                 cartItemsCounter.classList.remove('items-added');
                             }, 4500);
+
+                            // ДОБАВЛЯЕМ ТОВАР В КАРЗИНУ
+                            const product = response['GETTING_POST'];
+
+                            // Получаем предприятие отгрузки продукции
+                            const fromFactoryId = product[`optimal-factory-id`];
+                            const fromFactoryName = JSON.parse(product['factories'])[fromFactoryId]['name'];
+
+                            // Получаем характеристики товара
+                            let description = '';
+                            if (product['product-type'] === 'concrete'
+                                || product['product-type'] === 'crushedStone') {
+                                description = '<b>Характеристики:</b> '+product[`product-description`]+'<br>';
+                            }
+
+                            const insertItemHtmlContent = '' +
+                                '<li class="cart-modal__item" data-product-type="'+product[`product-type`]+'" data-pruduct-id="'+response[`ADDED_ITEM_ID`]+'">' +
+                                    '<span class="cart-modal__item__delete" title="Удалить товар из карзины"></span>' +
+                                    '<div class="cart-modal__item__title">'+product[`product-name`]+'</div>' +
+                                    '<div class="cart-modal__item__content d-flex flex-column align-items-start flex-sm-row align-items-sm-center">' +
+                                        '<span class="cart-modal__item__pic mb-3 mb-sm-0" style="background-image: url('+product[`product-pic-src`]+')"></span>' +
+                                        '<ul class="cart-modal__item__props mb-1 mb-sm-0">' +
+                                            '<li class="cart-modal__item__value">Количество: '+product[`product-value`]+' куб.м.</li>' +
+                                            '<li class="cart-modal__item__product-price">Цена товара: '+product[`product-price`]+' руб.</li>' +
+                                            '<li class="cart-modal__item__delivery-price">Стоимость доставки: '+product[`delivery-price`]+' руб.</li>' +
+                                        '</ul>' +
+                                        '<div class="cart-modal__item__result-price d-flex flex-row align-items-baseline flex-sm-column">' +
+                                            '<span class="pr-1 pr-sm-0">Итоговая цена:</span>' +
+                                            '<span class="num">'+product[`final-price`]+' руб.</span>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="cart-modal__item__inform d-flex flex-column">' +
+                                        '<div class="cart-modal__item__inform-title">' +
+                                            '<span class="controller"></span>Дополнительная информация' +
+                                        '</div>' +
+                                        '<div class="cart-modal__item__inform-body">' +
+                                            '<p class="mb-0">' +
+                                                description +
+                                                '<b>Место отгрузки: </b> '+fromFactoryName+'<br>' +
+                                                '<b>Место поставки:</b> '+product[`delivery-address`]+'<br>' +
+                                                '<b>Расстояние доставки:</b> '+product[`route-length`]+' км.' +
+                                            '</p>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</li>';
+
+                            const fnPushItemToCart = (itemType) => {
+                                switch(itemType) {
+                                    case 'concrete':
+                                        return document
+                                            .getElementById('cartItemsConcrete');
+                                    case 'crushedStone':
+                                        return document
+                                            .getElementById('cartItemsCrushedStone');
+                                    case 'limestoneFlour':
+                                        return document
+                                            .getElementById('cartItemsLimestoneFlour');
+                                    case 'mineralPowder':
+                                        return document
+                                            .getElementById('cartItemsMineralPowder');
+                                }
+                            };
+
+                            fnPushItemToCart(product['product-type'])
+                                .insertAdjacentHTML('beforeend', insertItemHtmlContent);
+
+                            // Показываем блоке с товарами и скрываем заглушку для пустой карзины
+                            noProductsMsg.classList.add('hidden');
+                            cartModalBody.classList.remove('hidden');
+                            cartModalFooter.classList.remove('hidden');
+
+                            // Увиличиваем итоговой стоимость всех товаров в корзине на ссумму добавленного товара
+
+
                         }
                     });
 
