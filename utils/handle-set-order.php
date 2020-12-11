@@ -43,7 +43,7 @@ if (isset($_POST['date'])
     foreach ($cart['items'] as $arItem) {
         foreach ($arItem as $arProduct) {
             $ORDER .= '<ul>';
-            $ORDER .= '<li style="list-style: none;"><b>'.$arProduct['product-name'].'</b></li>';
+            $ORDER .= '<li style="list-style: none; font-size: 1.3rem;"><b>'.$arProduct['product-name'].'</b></li>';
             $ORDER .= '<li style="font-size: 0.9rem;"><b>Количество:</b> '.$arProduct['product-value'].'</li>';
             $ORDER .= '<li style="font-size: 0.9rem;"><b>Цена товара:</b> '.$arProduct['product-price'].' руб.</li>';
             $ORDER .= '<li style="font-size: 0.9rem;"><b>Стоимость доставки:</b> '.$arProduct['delivery-price'].' руб.</li>';

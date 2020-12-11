@@ -1397,8 +1397,6 @@ document.addEventListener("DOMContentLoaded",() => {
             // Если открыто модальное окно об удачном
             // создании заказа, чистим корзину
             if (msgSetOrderTrue.classList.contains('visible')) {
-                // Сбрасываем количество товаров в корзине на иконке в хедере сайта
-                cartItemsCounter.innerText = 0;
                 // Сбрасываем итоговоую сумму всех товаров в корзине
                 finalCartPriceContainer.innerText = '0.00';
                 // Показываем заглушку для корзины без товаров
@@ -1674,6 +1672,10 @@ document.addEventListener("DOMContentLoaded",() => {
                         alert('К сожалению не удалось оформить Заказ. ' +
                             'Произошла ошибка. Попробуйте немного позже.')
                     } else {
+                        // Сбрасываем количество товаров в корзине на иконке в хедере сайта
+                        // Сброс оставльных полей формы и всех заказов происходит по клику
+                        // Закрыть в модальном сообщении об удачном размещении заказа
+                        cartItemsCounter.innerText = 0;
                         msgSetOrderTrue.classList.add("visible");
                         cartModalDialog.classList.add('hide');
                     }
