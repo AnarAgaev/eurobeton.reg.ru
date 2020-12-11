@@ -1392,31 +1392,59 @@ document.addEventListener("DOMContentLoaded",() => {
         } else {
             body.classList.remove("modal-open");
             cartModal.classList.remove("show");
+            cartModalDialog.classList.remove('hide');
+
+            // Если открыто модальное окно об удачном
+            // создании заказа, чистим корзину
+            if (msgSetOrderTrue.classList.contains('visible')) {
+                // Сбрасываем количество товаров в корзине на иконке в хедере сайта
+                cartItemsCounter.innerText = 0;
+                // Сбрасываем итоговоую сумму всех товаров в корзине
+                finalCartPriceContainer.innerText = '0.00';
+                // Показываем заглушку для корзины без товаров
+                noProductsMsg.classList.remove('hidden');
+                // Скрвыаем список товаров в корзине
+                cartModalBody.classList.add('hidden');
+                // Скрываем форму ввода доп. данных в корзине
+                cartModalFooter.classList.add('hidden');
+                // Удаляем все товары из корзины
+                const productLists = cartModalBody.querySelectorAll('.cart-modal__list');
+                for (let i = 0; i < productLists.length; i++) {
+                    while (productLists[i].firstChild) {
+                        productLists[i]
+                            .removeChild(productLists[i].firstChild);
+                    }
+                }
+            }
+            fnCleanCartFormControls();
+            fnCleanCartFromErr();
+            msgSetOrderTrue.classList.remove('visible');
         }
     };
 
-    // Открываем карзину в модальном окне при клике на иконку карзины в хедере
+    // Открываем Корзину в модальном окне при клике на иконку корзины в хедере
     cart.addEventListener('click', evt => {
         fnCartModalClose(true);
     });
 
-    // Закрываем мальное окно карзини при клике на крестик-закрыть окно
+    // Закрываем мальное окно корзиныы при клике на крестик-закрыть окно
     cartModalClose.addEventListener('click', evt => {
         fnCartModalClose(false);
     });
 
-    // Закрывамем модальное окно Корзина при клике вне мадального окна
+    // Закрывамем модальное окно корзина при клике вне мадального окна
     cartModal.addEventListener('click', evt => {
         if (evt.target.id === 'cartModal')
             fnCartModalClose(false);
     });
 
-    // Динамическое удаление товара из Карзины и из структуры данных, хранящейся в сесиии
+    // Динамическое удаление товара из корзины
+    // и из структуры данных, хранящейся в сесиии
     const fnDeleteItemFromSession = (url) => {
         getResource(url)
             .then(response  => {
                 if (response['IS_ERRORS']) {
-                    alert('К сожалению не удалось удалить товар из карзины. ' +
+                    alert('К сожалению не удалось удалить товар из корзины. ' +
                         'Перезагрузите страницу и попробуйте ещё раз.')
                 } else {
                     cartItemsCounter.innerText = response['CART_ITEM_COUNT'];
@@ -1430,25 +1458,27 @@ document.addEventListener("DOMContentLoaded",() => {
                             cartModalFooter.classList.add('hidden');
                             }, 300);
                     } else {
-                        // Уменьшаяем итоговую сумму карзины на величину стоимости удалённого товара
+                        // Уменьшаяем итоговую сумму корзины
+                        // на величину стоимости удалённого товара
                         const newFinalCartPrice =
                             parseFloat(finalCartPriceContainer.innerText) -
-                            parseFloat(response['PRODUCT_PRICE']);
+                                parseFloat(response['PRODUCT_PRICE']);
 
                         finalCartPriceContainer.innerText =
-                            Math.round(parseFloat(newFinalCartPrice) * 100) / 100;
+                            Math.round(newFinalCartPrice * 100) / 100;
                     }
                 }
             });
     };
 
-    // Так как при добавлении нового элемента он динамически создаётся новый
-    // товар в корзине для того чтобы работала функция удаления элемента
-    // без перезагрузки страницы, вынуждены слушать клики на всём списке элементов
+    // Так как при добавлении нового элемента он создаётся динамически,
+    // для того чтобы работала функция удаления элемента
+    // без перезагрузки страницы, слушаем событие click
+    // на всём списке элементов
     cartModalBody.addEventListener( 'click', evt => {
-
         // Удаление элемнта
-        if (evt.target.classList.contains('cart-modal__item__delete')) {
+        if (evt.target.classList
+                .contains('cart-modal__item__delete')) {
             const item = evt.target.parentElement;
             const url = '/utils/delete-item-from-cart.php'
                 + '?type='
@@ -1458,12 +1488,18 @@ document.addEventListener("DOMContentLoaded",() => {
 
             item.classList.add('deleted');
 
+            // Удаляем товар из корзины
+            setTimeout(() => {
+                item.parentNode.removeChild(item);
+            },1000);
+
             // Удаляем товар из сессионых данных
             fnDeleteItemFromSession(url);
         }
 
         // Пказваем/скрываем поле с дополнительной информацией в карточке товара
-        if (evt.target.classList.contains('cart-modal__item__inform-title')) {
+        if (evt.target.classList
+                .contains('cart-modal__item__inform-title')) {
             evt.target
                 .nextElementSibling
                 .classList
@@ -1471,6 +1507,177 @@ document.addEventListener("DOMContentLoaded",() => {
             evt.target
                 .classList
                 .toggle('active');
+        }
+    });
+
+    // Обработчик отправки формы с данными корзины:
+    // 1. Добавляем новый элемент Заказ в инфоблок Заказы
+    // 2. Отправляем письмо менеджеру с данными нового заказа
+    const fnCleanCartFromErr = () => {
+        formCartPhone
+            .parentElement
+            .classList
+            .remove('has__error');
+
+        formCartPhone
+            .nextElementSibling
+            .innerHTML = '';
+
+        formCartMail
+            .parentElement
+            .classList
+            .remove('has__error');
+
+        formCartMail
+            .nextElementSibling
+            .innerHTML = '';
+
+        formCartDate
+            .parentElement
+            .classList
+            .remove('has__error');
+
+        formCartDate
+            .nextElementSibling
+            .innerHTML = '';
+
+        formCartName
+            .parentElement
+            .classList
+            .remove('has__error');
+
+        formCartName
+            .nextElementSibling
+            .innerHTML = '';
+    };
+    const fnCleanCartFormControls = () => {
+        formCartPhone.value = "";
+        formCartMail.value = "";
+        formCartDate.value = "";
+        formCartName.value = "";
+        formCartMsg.value = "";
+    };
+
+    btnSetOrderClose.addEventListener('click', evt => {
+        fnCartModalClose(false);
+    });
+
+    formCart.addEventListener('submit', evt => {
+        evt.preventDefault();
+        let formValid = true;
+        fnCleanCartFromErr();
+
+        if (formCartPhone.value === '') {
+            formCartPhone
+                .nextElementSibling
+                .innerHTML = 'Укажите телефон';
+
+            formCartPhone
+                .parentElement
+                .classList
+                .add('has__error');
+
+            formValid = false;
+            formCartPhone.focus();
+        } else {
+            if (validPhone(formCartPhone.value) === false) {
+                formCartPhone
+                    .nextElementSibling
+                    .innerHTML = 'Некорректный телефон';
+
+                formCartPhone
+                    .parentElement
+                    .classList
+                    .add('has__error');
+
+                formValid = false;
+                formCartPhone.focus();
+            }
+        }
+
+        if (formCartMail.value === '') {
+            formCartMail
+                .nextElementSibling
+                .innerHTML = 'Укажите Email';
+
+            formCartMail
+                .parentElement
+                .classList
+                .add('has__error');
+
+            formValid = false;
+            formCartMail.focus();
+        } else {
+            if (validMail(formCartMail.value) === false) {
+                formCartMail
+                    .nextElementSibling
+                    .innerHTML = 'Некорректный Email';
+
+                formCartMail
+                    .parentElement
+                    .classList.add('has__error');
+
+                formValid = false;
+                formCartMail.focus();
+            }
+        }
+
+        if (formCartDate.value === '') {
+            formCartDate
+                .nextElementSibling
+                .innerHTML = 'Укажите дату доставки';
+
+            formCartDate
+                .parentElement
+                .classList
+                .add('has__error');
+
+            formCartDate.focus();
+            formValid = false;
+        } else {
+            if (validDate(formCartDate.value) === false) {
+                formCartDate
+                    .nextElementSibling
+                    .innerHTML = 'Формат даты должен быть ДД.ММ.ГГГГ';
+
+                formCartDate
+                    .parentElement
+                    .classList
+                    .add('has__error');
+
+                formCartDate.focus();
+                formValid = false;
+            }
+        }
+
+        if (formCartName.value === '') {
+            formCartName
+                .nextElementSibling
+                .innerHTML = 'Укажите наименование компании';
+
+            formCartName
+                .parentElement
+                .classList
+                .add('has__error');
+
+            formCartName.focus();
+            formValid = false;
+        }
+
+        if (formValid) {
+            spinner.classList.add('visible');
+            getResource(formCart.action, formCart)
+                .then(response  => {
+                    spinner.classList.remove('visible');
+
+                    if (response['IS_ERRORS']) {
+                        alert('К сожалению не удалось оформить Заказ. ' +
+                            'Произошла ошибка. Попробуйте немного позже.')
+                    } else {
+                        msgSetOrderTrue.classList.add("visible");
+                        cartModalDialog.classList.add('hide');
+                    }
+                });
         }
     });
     // Обраотчика логики корзины -- End

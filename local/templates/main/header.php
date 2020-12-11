@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    <?/* Модальное окно Карзина */
+    <?/* Модальное окно корзина */
     $APPLICATION->IncludeComponent(
         "bitrix:main.include",
         "",

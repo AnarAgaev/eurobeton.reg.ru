@@ -266,3 +266,40 @@ class handlePumpRentForm {
         }
     }
 }
+
+/*
+ * Обработка создания заказа
+ */
+/* Регистрируем обработчик */
+AddEventHandler(
+    "iblock",
+    "OnAfterIBlockElementAdd",
+    Array("handleSetOrderForm", "OnAfterIBlockElementAddHandler")
+);
+class handleSetOrderForm {
+    /*
+     * Создаем обработчик события "OnAfterIBlockElementAdd"
+     * который слушает редактирование инфоблока
+     * Заказы/Запросы с идентификатором 32.
+     *
+     * В массиве $arSend перезаписываем стандартные макросы
+     * почтового сообщения и добавляем свои в сответствии
+     * со свойствами инфоблока.
+     */
+    function OnAfterIBlockElementAddHandler(&$arFields) {
+        if ($arFields["IBLOCK_ID"] == 32) {
+
+            $arSend = array(
+                'COMPANY' => $arFields['NAME'],
+                'PRICE' => $arFields['PROPERTY_VALUES']['PRICE'],
+                'DATE' => $arFields['PROPERTY_VALUES']['DELIVERY_DATE'],
+                'EMAIL' => $arFields['PROPERTY_VALUES']['EMAIL'],
+                'PHONE' => $arFields['PROPERTY_VALUES']['PHONE'],
+                'COMMENT' => $arFields['PROPERTY_VALUES']['COMMENT'],
+                'PRODUCTS' => $arFields['DETAIL_TEXT']
+            );
+
+            CEvent::Send('USER_REQUEST_SET_ORDER',SITE_ID,$arSend);
+        }
+    }
+}

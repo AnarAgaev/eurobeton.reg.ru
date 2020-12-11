@@ -389,8 +389,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             // Добавляем товар в $_SESSION
-            // Меняем счётчик товаров в карзине в шапке сайта
-            // Актуализируем модальное окно с Карзиной
+            // Меняем счётчик товаров в корзине в шапке сайта
+            // Актуализируем модальное окно с Корзиной
             addProductToCart.addEventListener('click', evt => {
                 spinner.classList.add('visible');
                 getResource(form.action, form)
@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         spinner.classList.remove('visible');
 
                         if (response['IS_ERRORS']) {
-                            alert('Товар не добавле в карзину. Перезагрузите страницу и попробуйте снова.')
+                            alert('Товар не добавле в Корзину. Перезагрузите страницу и попробуйте снова.')
                         } else {
                             modalCalcClose();
                             cartItemsCounter.innerText = response['CART_ITEM_COUNT'];
@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 cartItemsCounter.classList.remove('items-added');
                             }, 4500);
 
-                            // ДОБАВЛЯЕМ ТОВАР В КАРЗИНУ
+                            // ДОБАВЛЯЕМ ТОВАР В Корзину
                             const product = response['GETTING_POST'];
 
                             // Получаем предприятие отгрузки продукции
@@ -426,7 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                             const insertItemHtmlContent = '' +
                                 '<li class="cart-modal__item" data-product-type="'+product[`product-type`]+'" data-pruduct-id="'+response[`ADDED_ITEM_ID`]+'">' +
-                                    '<span class="cart-modal__item__delete" title="Удалить товар из карзины"></span>' +
+                                    '<span class="cart-modal__item__delete" title="Удалить товар из корзины"></span>' +
                                     '<div class="cart-modal__item__title">'+product[`product-name`]+'</div>' +
                                     '<div class="cart-modal__item__content d-flex flex-column align-items-start flex-sm-row align-items-sm-center">' +
                                         '<span class="cart-modal__item__pic mb-3 mb-sm-0" style="background-image: url('+product[`product-pic-src`]+')"></span>' +
@@ -475,7 +475,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             fnPushItemToCart(product['product-type'])
                                 .insertAdjacentHTML('beforeend', insertItemHtmlContent);
 
-                            // Показываем блоки с товарами и скрываем заглушку для пустой карзины
+                            // Показываем блоки с товарами и скрываем заглушку для пустой корзины
                             noProductsMsg.classList.add('hidden');
                             cartModalBody.classList.remove('hidden');
                             cartModalFooter.classList.remove('hidden');

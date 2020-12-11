@@ -1,11 +1,17 @@
 <div class="modal d-flex justify-content-end align-items-start" id="cartModal">
-    <div class="cart-modal__dialog d-flex flex-column">
+    <div class="send-msg-true flex-column justify-content-center align-items-center" id="msgSetOrderTrue">
+        <h3 class="send-msg-true__title">Заказ оформлен</h3>
+        <span class="send-msg-true__txt">Менеджер свяжется с Вами в ближайшее время.</span>
+        <button class="btn" id="btnSetOrderClose">Закрыть</button>
+    </div>
+
+    <div class="cart-modal__dialog d-flex flex-column" id="cartModalDialog">
         <div class="cart-modal__header d-flex flex-column justify-content-center">
             <h4 class="cart-modal__title">Корзина</h4>
             <div class="cart-modal__close" id="cartModalClose"></div>
         </div>
         <?
-            // Получаем данные карзины зи Сессии
+            // Получаем данные корзины зи Сессии
             $SESSION_CART = \Bitrix\Main\Application::getInstance()->getSession();
             $SESSION_CART_PRODUCTS = json_decode($SESSION_CART['cart'], true)['items'];
             $SESSION_CONCRETE = $SESSION_CART_PRODUCTS['concrete']; // бетон
@@ -14,7 +20,7 @@
             $SESSION_LIMESTONE_FLOUR = $SESSION_CART_PRODUCTS['limestoneFlour']; // известняковая мука
             $RESULT_CART_PRICE = 0;
 
-            // Смотрим есть ли в карзине какие-нибудь товары
+            // Смотрим есть ли в корзине какие-нибудь товары
             $IS_ITEMS = false;
             foreach ($SESSION_CART_PRODUCTS as $arItem) {
                 if (count($arItem)) {
@@ -28,7 +34,7 @@
             <ul class="cart-modal__list d-flex flex-column" id="cartItemsConcrete">
                 <?foreach($SESSION_CONCRETE as $key => $arItem):?>
                     <li class="cart-modal__item" data-product-type="<?=$arItem['product-type'];?>" data-pruduct-id="<?=$key?>">
-                        <span class="cart-modal__item__delete" title="Удалить товар из карзины"></span>
+                        <span class="cart-modal__item__delete" title="Удалить товар из корзины"></span>
                         <div class="cart-modal__item__title"><?=$arItem['product-name'];?></div>
                         <div class="cart-modal__item__content d-flex flex-column align-items-start flex-sm-row align-items-sm-center">
                             <span class="cart-modal__item__pic mb-3 mb-sm-0" style="background-image: url(<?=$arItem['product-pic-src'];?>);"></span>
@@ -66,7 +72,7 @@
             <ul class="cart-modal__list d-flex flex-column" id="cartItemsCrushedStone">
                 <?foreach($SESSION_CRUSHED_STONE as $key => $arItem):?>
                     <li class="cart-modal__item" data-product-type="<?=$arItem['product-type'];?>" data-pruduct-id="<?=$key?>">
-                        <span class="cart-modal__item__delete" title="Удалить товар из карзины"></span>
+                        <span class="cart-modal__item__delete" title="Удалить товар из корзины"></span>
                         <div class="cart-modal__item__title"><?=$arItem['product-name'];?></div>
                         <div class="cart-modal__item__content d-flex flex-column align-items-start flex-sm-row align-items-sm-center">
                             <span class="cart-modal__item__pic mb-3 mb-sm-0" style="background-image: url(<?=$arItem['product-pic-src'];?>);"></span>
@@ -104,7 +110,7 @@
             <ul class="cart-modal__list d-flex flex-column" id="cartItemsMineralPowder">
                 <?foreach($SESSION_MINERAL_POWDER as $key => $arItem):?>
                     <li class="cart-modal__item" data-product-type="<?=$arItem['product-type'];?>" data-pruduct-id="<?=$key?>">
-                        <span class="cart-modal__item__delete" title="Удалить товар из карзины"></span>
+                        <span class="cart-modal__item__delete" title="Удалить товар из корзины"></span>
                         <div class="cart-modal__item__title"><?=$arItem['product-name'];?></div>
                         <div class="cart-modal__item__content d-flex flex-column align-items-start flex-sm-row align-items-sm-center">
                             <span class="cart-modal__item__pic mb-3 mb-sm-0" style="background-image: url(<?=$arItem['product-pic-src'];?>);"></span>
@@ -141,7 +147,7 @@
             <ul class="cart-modal__list d-flex flex-column" id="cartItemsLimestoneFlour">
                 <?foreach($SESSION_LIMESTONE_FLOUR as $key => $arItem):?>
                     <li class="cart-modal__item" data-product-type="<?=$arItem['product-type'];?>" data-pruduct-id="<?=$key?>">
-                        <span class="cart-modal__item__delete" title="Удалить товар из карзины"></span>
+                        <span class="cart-modal__item__delete" title="Удалить товар из корзины"></span>
                         <div class="cart-modal__item__title"><?=$arItem['product-name'];?></div>
                         <div class="cart-modal__item__content d-flex flex-column align-items-start flex-sm-row align-items-sm-center">
                             <span class="cart-modal__item__pic mb-3 mb-sm-0" style="background-image: url(<?=$arItem['product-pic-src'];?>);"></span>
@@ -176,7 +182,7 @@
                 <?endforeach;?>
             </ul>
             <form class="form cart-modal__form d-flex flex-wrap"
-                  action="/utils/"
+                  action="/utils/handle-set-order.php"
                   method="POST"
                   enctype="multipart/form-data"
                   id="formCart">
@@ -219,10 +225,10 @@
                         <span class="err__msg"></span>
                     </label>
                     <label class="label label-comment">
-                        <span>Комментарий к заказу:</span>
+                        <span>Комментарий к заказу</span>
                         <textarea class="textarea"
                                   placeholder="Начните вводить ..."
-                                  name="message"
+                                  name="comment"
                                   id="formCartMsg"></textarea>
                         <span class="err__msg"></span>
                     </label>
@@ -254,7 +260,7 @@
             <h3 class="cart-modal__section-title">
                 <b>Ваша корзина пуста</b><br>
                 Выберите в каталоге интересующий
-                товар и добавьте его в карзину.
+                товар и добавьте его в Корзину.
             </h3>
             <div class="cart-modal__section-cards d-flex flex-column">
                 <a href="/produktsiya/beton/" class="products-list__item d-flex flex-column flex-sm-row">
