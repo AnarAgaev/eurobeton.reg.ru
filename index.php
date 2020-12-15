@@ -119,174 +119,19 @@ $APPLICATION->IncludeComponent(
 );?>
 
 <div class="calculator section_container">
-<div class="calculator">
-    <div class="calculator__title d-flex align-items-center justify-content-center">
-        РАССЧИТАТЬ ЦЕНУ БЕТОНА С ДОСТАВКОЙ
-    </div>
-    <form class="form" enctype="multipart/form-data" method="post">
-        <div class="container">
-            <div class="form__controls form_place d-flex align-items-lg-end flex-column align-items-start flex-lg-row">
-                <div class="form__title">Место и время доставки</div>
-                <label class="label label_w380">
-                    <span>Адрес доставки:</span>
-                    <input class="input" type="text" placeholder="Россия, Московская область, сельский посёлок Карачиха">
-                </label>
-                <label class="label label_w212">
-                    <span>Дата доставки:</span>
-                    <input class="input" type="text" placeholder="Не указана">
-                </label>
-                <label class="label label_check d-flex align-items-center">
-                    <span>Самовывоз</span>
-                    <input class="input" type="checkbox" value="true" name="takeself" checked>
-                    <span class="checker"></span>
-                </label>
-                <label class="label label_w205">
-                    <span>Выберите завод:</span>
-                    <input class="input" type="text" placeholder="Не указан">
-                </label>
-            </div>
-            <div class="form__controls form_parametrs">
-                <div class="form__title">Основные параметры бетона</div>
-                <div class="group-one">
-                    <label class="label label_w380 label_select">
-                        <span>Марка:</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-                    <label class="label label_w212 label_select">
-                        <span>Прочность (кгс/см<sup>2</sup>):</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-                    <label class="label label_w245 label_select">
-                        <span>Наполнитель:</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-
-                    <label class="label label_value">
-                        <span>Объём (м<sup>3</sup>):</span>
-                        <span class="value-checker">
-                            <span class="value-checker__btn value-checker__btn_minus"></span>
-                            <input class="input" type="text" value="0" readonly="">
-                            <span class="value-checker__btn value-checker__btn_plus"></span>
-                        </span>
-                    </label>
-                </div>
-                <div class="group-additive">
-                    <div class="tglr"><b>Добавки</b>(выберите при необходиости):</div>
-                </div>
-                <div class="group-two">
-                    <label class="label label_w179 label_select">
-                        <span>Морозостойкость:</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-                    <label class="label label_w174 label_select">
-                        <span>Подвижность:</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-                    <label class="label label_w212 label_select">
-                        <span>Водонепроницаемость:</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-                    <label class="label label_w179 label_select">
-                        <span>Противоморозные доб.:</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-                    <label class="label label_w205 label_select">
-                        <span>Фибра:</span>
-                        <select class="select">
-                            <option value="">Не указана</option>
-                            <option>Пункт 1</option>
-                            <option>Пункт 2</option>
-                            <option>Пункт 3</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="btn-form-send"><span>добавить товар</span></div>
-            </div>
-
-
-
-            <div class="form_comments d-flex justify-content-between flex-wrap">
-                <div class="d-flex flex-column wrapper flex-xl-row">
-                    <div class="form_comments-text">
-                        <div class="title">Комментарий к заказу:</div>
-                        <textarea class="textarea" placeholder="Начните вводить ..."></textarea>
-                    </div>
-                    <div class="form_comments-technics">
-                        <div class="title">Аренда техники:</div>
-                        <label class="label label_check d-flex align-items-center">
-                            <span>Бетононасос</span>
-                            <input class="input" type="checkbox" value="true" name="pump" checked>
-                            <span class="checker"></span>
-                        </label>
-                        <label class="label label_check d-flex align-items-center">
-                            <span>Кран</span>
-                            <input class="input" type="checkbox" value="true" name="crane">
-                            <span class="checker"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form_comments-offer d-flex flex-column align-items-center">
-                    <div class="title"><b>Набрал свыше 300 кубов?</b>Тогда получай</div>
-                    <a class="btn" href="">Персональное предложение</a></div>
-            </div>
-        </div>
-    </form>
-    <div class="calculator__resaults-wrap d-flex justify-content-center align-items-center">
-        <div class="calculator__resaults d-flex align-items-center flex-column flex-xl-row">
-            <div class="calculator__resaults-btn"><a class="btn" href="">добавить в корзину</a></div>
-            <div class="calculator__resaults-price d-flex align-items-center">
-                <div>Итого:<span>3000</span>руб.</div>
-            </div>
-            <div class="calculator__resaults-comments">
-                <div class="calculator__resaults-delivery">Стоимость
-                    доставки:<span>Не выбран адрес доставки</span></div>
-                <div class="calculator__resaults-concrete">Стоимость бетона:<span>Укажите параметры</span></div>
-            </div>
-        </div>
-    </div>
-
-   <!-- !!! Заглушка до момнета деплоя рабочей версии калькулятора. После тестрирования на продакшене нужно удалить -->
-    <div class="temporary-plug d-flex justify-content-center align-items-center flex-column">
-        <h4>Скоро зедсь будет новый и удобный калькулятор.<br>А пока, если у Вас есть вопросы, их можно здалть менеджеру.</h4>
-        <button class="btn show-modal" data-modal-id="modalSetOrder">Вопрос менеджеру</button>
-    </div>
-
-</div>
+<? /* Выводим калькулятор с формой выбора параметров бетона
+   * Форма выводится во включаемой области /include/form-calc.php
+   */
+    $APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/form-calc.php"
+        )
+    );?>
 </div>
 
 <?/* Выводим слайдер с популярными товарами ТОЛЬКО ИНФОБЛОКА БЕТОН (из всех подразделов кталога):
