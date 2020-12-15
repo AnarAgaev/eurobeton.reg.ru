@@ -294,17 +294,39 @@
 }
 
 .form .label-btn {
-    width: 245px;
+    width: 100%;
     margin-right: 0;
 }
 
+@media (min-width: 576px) {
+    .form .label-btn {
+        width: 245px;
+    }
+}
+
 .form .label-btn span {
-    padding-left: 12px;
+    text-align: center;
+}
+
+@media (min-width: 576px) {
+    .form .label-btn span {
+        text-align: left;
+        padding-left: 12px;
+    }
 }
 
 
 .form .label-btn .btn {
     padding: 12px 30px;
+    width: 100%;
+    text-align: center;
+}
+
+@media (min-width: 576px) {
+    .form .label-btn .btn {
+        width: auto;
+        text-align: left;
+    }
 }
 
 .form .label_select {
@@ -429,7 +451,7 @@
 
 @media (min-width: 992px) {
     .form_place .label_check {
-        margin-left: 71px
+        margin-left: 10px
     }
 }
 
@@ -460,7 +482,7 @@
     margin-bottom: 30px
 }
 
-@media (min-width: 576px) {
+@media (min-width: 1250px) {
     .form_parametrs .group-one {
         margin-bottom: 0
     }
@@ -526,8 +548,16 @@
     text-transform: uppercase;
     cursor: pointer;
     text-align: center;
-    line-height: 39px
+    line-height: 39px;
+    transition: all .3s;
 }
+
+@media (min-width: 992px) {
+    .form_parametrs .btn-form-send:hover {
+        border-color: #f1852c;
+    }
+}
+
 
 @media (min-width: 576px) {
     .form_parametrs .btn-form-send {
@@ -544,30 +574,17 @@
 
 .form_parametrs .btn-form-send span {
     position: relative;
-    padding-left: 12px
+    padding-left: 8px;
+    transition: all .3s;
 }
 
-.form_parametrs .btn-form-send span:after, .form_parametrs .btn-form-send span:before {
+.form_parametrs .btn-form-send:before {
     content: "";
-    display: block;
-    width: 10px;
-    height: 2px;
-    background-color: #f1852c;
-    position: absolute;
-    top: 55%;
-    left: 0
-}
-
-.form_parametrs .btn-form-send span:before {
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%)
-}
-
-.form_parametrs .btn-form-send span:after {
-    -webkit-transform: translate(-50%, -50%) rotate(90deg);
-    -ms-transform: translate(-50%, -50%) rotate(90deg);
-    transform: translate(-50%, -50%) rotate(90deg)
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("/local/templates/.default/img/calculator-solid.svg") center no-repeat;
+    position: relative;
 }
 
 .form_parametrs label.label {
@@ -803,22 +820,30 @@
     }
 }
 
-.form-calc button {
+.form-calc .btn-select-place {
     width: 266px;
     height: 40px;
     border: 1px solid #ccc;
     position: relative;
-    
+    cursor: pointer;
+    padding-bottom: 0 !important;
+    transition: all .3s;
 }
 
 @media (min-width: 768px) {
-    .form-calc button {
+    .form-calc .btn-select-place {
         width: 315px;
         margin-left: 4px;
     }
 }
 
-.form-calc button img {
+@media (min-width: 992px) {
+    .form-calc .btn-select-place:hover {
+        border-color: #f1852c;
+    }
+}
+
+.form-calc .btn-select-place img {
     display: block;
     position: absolute;
     left: 28px;
@@ -826,12 +851,12 @@
 }
 
 @media (min-width: 768px) {
-    .form-calc button img {
+    .form-calc .btn-select-place img {
         left: 49px;
     }
 }
 
-.form-calc button span {
+.form-calc .btn-select-place span {
     padding-bottom: 0 !important;
     padding-left: 43px !important;
 }

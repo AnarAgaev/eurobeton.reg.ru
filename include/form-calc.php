@@ -11,10 +11,10 @@
                     <input class="input" type="text" placeholder="Россия, Московская область, сельский посёлок Карачиха">
                 </label>
                 <label class="label">
-                    <button class="btn-select-place d-flex justify-content-center align-items-center">
+                    <span class="btn-select-place d-flex justify-content-center align-items-center">
                         <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/select-address.png" alt="Выбрать место на карте">
-                        <span>Выбрать место на карте</span>
-                    </button>
+                        <span>Выбрать адрес на карте</span>
+                    </span>
                 </label>
                 <label class="label label_check d-flex align-items-center">
                     <span>Арендовать бетононасос</span>
@@ -97,7 +97,9 @@
                         </select>
                     </label>
                 </div>
-                <div class="btn-form-send"><span>добавить товар</span></div>
+                <div class="btn-form-send d-flex justify-content-center align-items-center">
+                    <span>рассчитать стоимость</span>
+                </div>
             </div>
         </div>
     </form>
