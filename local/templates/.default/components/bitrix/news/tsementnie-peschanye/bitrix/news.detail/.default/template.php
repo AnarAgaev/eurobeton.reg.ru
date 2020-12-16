@@ -55,19 +55,18 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
     ? json_encode($arDELIVERY_PRICES, JSON_UNESCAPED_UNICODE)
     : json_encode($arDELIVERY_PRICES);
 
-$PRODUCT_DESCRIPTION = 'Класс бетона - '.$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE'].'; '
-    .'Подвижность - '.$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'].'; '
-    .'Морозостойкость - '.$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'].'; '
-    .'Водонепроницаемость - '.$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'].'; '
-    .'Наполнитель - '.$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'].'; '
-    .'Средняя прочность, кгс/см2 - '.$arResult['PROPERTIES']['CONCRETE_STRENGTH']['VALUE'].'.';
+$PRODUCT_DESCRIPTION  = 'Марка: '.$arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE'].';';
+$PRODUCT_DESCRIPTION .=' Подвижность: '.$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'].';';
+$PRODUCT_DESCRIPTION .=' Морозостойкость, F: '.$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'].';';
+$PRODUCT_DESCRIPTION .=' Водонепроницаемость: '.$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'].';';
+$PRODUCT_DESCRIPTION .=' Наполнитель: '.$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'].';';
+$PRODUCT_DESCRIPTION .=' Противоморозная добавка: '.$arResult['PROPERTIES']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'].' &#176;C;';
 
-$PRODUCT_NAME = $arResult['PREVIEW_TEXT']
-    ." ".$arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE']
-    ." ".$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE']
-    ." ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE']
-    ." ".$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE']
-    ." ".$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'];
+$PRODUCT_NAME  = $arResult['PREVIEW_TEXT'];
+$PRODUCT_NAME .= " ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'];
+$PRODUCT_NAME .= " ".$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'];
+$PRODUCT_NAME .= " ".$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'];
+$PRODUCT_NAME .= " ".$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'];
 
 //debug(['$arPRODUCT_PRICES', $arPRODUCT_PRICES]);
 //debug(['$arDELIVERY_PRICES', $arDELIVERY_PRICES]);
@@ -108,11 +107,11 @@ $APPLICATION->IncludeComponent(
     <div class="container">
         <h1 class="page-title__content">
             <?=$arResult['PREVIEW_TEXT']
-            ." ".$arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE']
-            ." ".$arResult['PROPERTIES']['CONCRETE_CLASS']['VALUE']
-            ." ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE']
-            ." ".$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE']
-            ." ".$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'];
+                ." ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE']
+                ." ".$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE']
+                ." ".$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE']
+                ." ".$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'];
+                // ." ".$arResult['PROPERTIES']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'];
             ?>
         </h1>
     </div>
@@ -126,30 +125,42 @@ $APPLICATION->IncludeComponent(
             <div class="col-xl-6 specifications__wrap">
                 <div class="specifications"><h5 class="specifications__title">Характеристики:</h5>
                     <ul class="specifications__list">
-                        <li class="specifications__item d-flex justify-content-between">
-                            <span class="specifications__parametr">Класс бетона</span>
-                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_CLASS"]["VALUE"]?></span>
-                        </li>
-                        <li class="specifications__item d-flex justify-content-between">
-                            <span class="specifications__parametr">Подвижность</span>
-                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]?></span>
-                        </li>
-                        <li class="specifications__item d-flex justify-content-between">
-                            <span class="specifications__parametr">Морозостойкость, F</span>
-                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?></span>
-                        </li>
-                        <li class="specifications__item d-flex justify-content-between">
-                            <span class="specifications__parametr">Водонепроницаемость</span>
-                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?></span>
-                        </li>
-                        <li class="specifications__item d-flex justify-content-between">
-                            <span class="specifications__parametr">Наполнитель</span>
-                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FILLER"]["VALUE"]?></span>
-                        </li>
-                        <li class="specifications__item d-flex justify-content-between">
-                            <span class="specifications__parametr">Средняя прочность, кгс/см<sup>2</sup></span>
-                            <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_STRENGTH"]["VALUE"]?></span>
-                        </li>
+                        <?if($arResult["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"]):?>
+                            <li class="specifications__item d-flex justify-content-between">
+                                <span class="specifications__parametr">Марка</span>
+                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"]?></span>
+                            </li>
+                        <?endif;?>
+                        <?if($arResult["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]):?>
+                            <li class="specifications__item d-flex justify-content-between">
+                                <span class="specifications__parametr">Подвижность</span>
+                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]?></span>
+                            </li>
+                        <?endif;?>
+                        <?if($arResult["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]):?>
+                            <li class="specifications__item d-flex justify-content-between">
+                                <span class="specifications__parametr">Морозостойкость, F</span>
+                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?></span>
+                            </li>
+                        <?endif;?>
+                        <?if($arResult["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]):?>
+                            <li class="specifications__item d-flex justify-content-between">
+                                <span class="specifications__parametr">Водонепроницаемость</span>
+                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?></span>
+                            </li>
+                        <?endif;?>
+                        <?if($arResult["PROPERTIES"]["CONCRETE_FILLER"]["VALUE"]):?>
+                            <li class="specifications__item d-flex justify-content-between">
+                                <span class="specifications__parametr">Наполнитель</span>
+                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_FILLER"]["VALUE"]?></span>
+                            </li>
+                        <?endif;?>
+                        <?if($arResult["PROPERTIES"]["CONCRETE_ANTIFREEZE_ADDITIVE"]["VALUE"]):?>
+                            <li class="specifications__item d-flex justify-content-between">
+                                <span class="specifications__parametr">Противоморозная добавка</span>
+                                <span class="specifications__value"><?=$arResult["PROPERTIES"]["CONCRETE_ANTIFREEZE_ADDITIVE"]["VALUE"]?> &#176;С</span>
+                            </li>
+                        <?endif;?>
                     </ul>
                 </div>
             </div>

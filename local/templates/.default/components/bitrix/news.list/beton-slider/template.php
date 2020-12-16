@@ -61,11 +61,15 @@ $this->setFrameMode(true);
                             <?=$arItem["PREVIEW_TEXT"]?>
                         </div>
                         <div class="prices__desc">
-                            <?=$arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"]?>
-                            <?=$arItem["PROPERTIES"]["CONCRETE_CLASS"]["VALUE"]?>
-                            <?=$arItem["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]?>
-                            <?=$arItem["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?>
-                            <?=$arItem["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?>
+                            <?if ($arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"] !== 'Цементное молоко'
+                                    && $arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"] !== 'Пусковая смесь'
+                                    && $arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"]
+                              ) echo $arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"];?>
+                            <?=$arItem["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"] ?: ''?>
+                            <?=$arItem["PROPERTIES"]["CONCRETE_FROST"]["VALUE"] ?: ''?>
+                            <?=$arItem["PROPERTIES"]["CONCRETE_WATER"]["VALUE"] ?: ''?>
+                            <?=$arItem["PROPERTIES"]["CONCRETE_FILLER"]["VALUE"] ?: ''?>
+                            <?/*=$arItem["PROPERTIES"]["CONCRETE_ANTIFREEZE_ADDITIVE"]["VALUE"] ?: ''*/?>
                         </div>
                         <div class="prices__price"><?
                             // Определяем минимальную цену товара на всех заводах на которых он проадётся

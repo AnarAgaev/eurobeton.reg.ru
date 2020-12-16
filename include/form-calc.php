@@ -18,7 +18,7 @@
                 </label>
                 <label class="label label_check d-flex align-items-center">
                     <span>Арендовать бетононасос</span>
-                    <input class="input" type="checkbox" value="true" name="takeself" checked>
+                    <input class="input" type="checkbox" value="true" name="takeself">
                     <span class="checker"></span>
                 </label>
             </div>
@@ -53,7 +53,7 @@
                     </label>
                     <label class="label label-btn">
                         <span><b>Набрал свыше 300 кубов?</b></span>
-                        <a class="btn" href="">спец. предложение</a>
+                        <a class="btn show-modal" data-modal-id="modalSetOrder">спец. предложение</a>
                     </label>
                 </div>
                 <div class="group-additive">

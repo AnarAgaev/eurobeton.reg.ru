@@ -47,11 +47,15 @@ $this->setFrameMode(true);
                     <div class="prices__pic" style="background-image: url(<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>)"></div>
                     <div class="prices__caption"><?=$arItem["PREVIEW_TEXT"]?></div>
                     <div class="prices__desc">
-                        <?=$arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_CLASS"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_FROST"]["VALUE"]?>
-                        <?=$arItem["PROPERTIES"]["CONCRETE_WATER"]["VALUE"]?>
+                        <?if ($arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"] !== 'Цементное молоко'
+                            && $arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"] !== 'Пусковая смесь'
+                            && $arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"]
+                        ) echo $arItem["PROPERTIES"]["CONCRETE_GRADE"]["VALUE"];?>
+                        <?=$arItem["PROPERTIES"]["CONCRETE_MOBILITY"]["VALUE"] ?: ''?>
+                        <?=$arItem["PROPERTIES"]["CONCRETE_FROST"]["VALUE"] ?: ''?>
+                        <?=$arItem["PROPERTIES"]["CONCRETE_WATER"]["VALUE"] ?: ''?>
+                        <?=$arItem["PROPERTIES"]["CONCRETE_FILLER"]["VALUE"] ?: ''?>
+                        <?/*=$arItem["PROPERTIES"]["CONCRETE_ANTIFREEZE_ADDITIVE"]["VALUE"] ?: ''*/?>
                     </div>
                     <div class="prices__price">
                         <?

@@ -1,11 +1,19 @@
 // Функция создаёт новый элемент для списка товаров
 // на странице каталога Бетон и возвращает его
 const createItemCertificates = (
-    id, name, previewPictureSrc,
-    previewText, concreteGrade,
-    concreteClass, concreteMobility,
-    concreteFrost, concreteWater,
-    money, priceMinimum, detailPageUrl
+    id,
+    name,
+    previewPictureSrc,
+    previewText,
+    concreteGrade,
+    concreteMobility,
+    concreteFrost,
+    concreteWater,
+    concreteFiller,
+    concreteAntifreezeAdditive,
+    money,
+    priceMinimum,
+    detailPageUrl
 ) => {
     let item = document.createElement('div');
     item.classList.add(
@@ -30,13 +38,18 @@ const createItemCertificates = (
     caption.innerHTML = previewText;
 
     let desc = document.createElement('div');
+    let grade = (concreteGrade !== 'Цементное молоко'
+                    && concreteGrade !== 'Пусковая смесь'
+                    && concreteGrade !== "")
+        ? concreteGrade
+        : "";
     desc.classList.add("prices__desc");
     desc.innerHTML = ' '
-        + concreteGrade + ' '
-        + concreteClass + ' '
+        + grade + ' '
         + concreteMobility + ' '
         + concreteFrost + ' '
-        + concreteWater;
+        + concreteWater + ' '
+        + concreteFiller;
 
     let price = document.createElement('div');
     price.classList.add("prices__price");
@@ -99,10 +112,11 @@ document.addEventListener("DOMContentLoaded",() => {
                             response[key].PREVIEW_PICTURE_SRC,
                             response[key].PREVIEW_TEXT,
                             response[key].CONCRETE_GRADE,
-                            response[key].CONCRETE_CLASS,
                             response[key].CONCRETE_MOBILITY,
                             response[key].CONCRETE_FROST,
                             response[key].CONCRETE_WATER,
+                            response[key].CONCRETE_FILLER,
+                            response[key].CONCRETE_ANTIFREEZE_ADDITIVE,
                             response[key].PRICE,
                             response[key].PRICE_MINIMUM,
                             response[key].DETAIL_PAGE_URL,
