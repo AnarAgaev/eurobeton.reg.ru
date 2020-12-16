@@ -56,11 +56,21 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
     : json_encode($arDELIVERY_PRICES);
 
 $PRODUCT_DESCRIPTION  = 'Марка: '.$arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE'].';';
-$PRODUCT_DESCRIPTION .=' Подвижность: '.$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'].';';
-$PRODUCT_DESCRIPTION .=' Морозостойкость, F: '.$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'].';';
-$PRODUCT_DESCRIPTION .=' Водонепроницаемость: '.$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'].';';
-$PRODUCT_DESCRIPTION .=' Наполнитель: '.$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'].';';
-$PRODUCT_DESCRIPTION .=' Противоморозная добавка: '.$arResult['PROPERTIES']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'].' &#176;C;';
+$PRODUCT_DESCRIPTION .= $arResult['PROPERTIES']['CONCRETE_GRADE']['VALUE']
+    ? ' Подвижность: '.$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'].';'
+    : '';
+$PRODUCT_DESCRIPTION .= $arResult['PROPERTIES']['CONCRETE_FROST']['VALUE']
+    ? ' Морозостойкость, F: '.$arResult['PROPERTIES']['CONCRETE_FROST']['VALUE'].';'
+    : '';
+$PRODUCT_DESCRIPTION .= $arResult['PROPERTIES']['CONCRETE_WATER']['VALUE']
+    ? ' Водонепроницаемость: '.$arResult['PROPERTIES']['CONCRETE_WATER']['VALUE'].';'
+    : '';
+$PRODUCT_DESCRIPTION .= $arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE']
+    ? ' Наполнитель: '.$arResult['PROPERTIES']['CONCRETE_FILLER']['VALUE'].';'
+    : '';
+$PRODUCT_DESCRIPTION .= $arResult['PROPERTIES']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE']
+    ? ' Противоморозная добавка: '.$arResult['PROPERTIES']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'].' &#176;C;'
+    : '';
 
 $PRODUCT_NAME  = $arResult['PREVIEW_TEXT'];
 $PRODUCT_NAME .= " ".$arResult['PROPERTIES']['CONCRETE_MOBILITY']['VALUE'];
