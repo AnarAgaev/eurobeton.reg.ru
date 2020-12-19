@@ -124,7 +124,7 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
                     <span class="checker"></span>
                 </label>
             </div>
-            <div class="form__controls form_parametrs">
+            <div class="form__controls form_parametrs d-flex flex-wrap">
                 <div class="form__title">Основные параметры бетона</div>
                 <div class="group-one" id="concreteParamsGroupOne">
                     <label class="label label_w380 label_select label_grade">
@@ -170,6 +170,10 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
                         </select>
                         <span class="btn__reset-select"></span>
                     </label>
+
+
+
+
                     <label class="label label_value">
                         <span>Объём (м<sup>3</sup>):</span>
                         <span class="value-checker">
@@ -185,10 +189,21 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
                         </span>
                         <span class="err__msg">Некорректное значение</span>
                     </label>
+
+
+
                     <label class="label label-btn">
                         <span><b>Набрал свыше 300 кубов?</b></span>
                         <a class="btn show-modal" data-modal-id="modalSetOrder">спец. предложение</a>
                     </label>
+
+
+
+
+
+
+
+
                 </div>
                 <div class="group-additive">
                     <div class="tglr" id="concreteAddParamsTglr">
