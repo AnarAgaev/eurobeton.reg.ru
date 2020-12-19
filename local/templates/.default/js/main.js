@@ -1385,7 +1385,7 @@ document.addEventListener("DOMContentLoaded",() => {
     /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- End */
 
     // Обраотчика логики корзины -- Start
-    const fnCartModalClose = (action) => {
+    window.fnCartModalToggle = (action) => {
         if (action) {
             body.classList.add("modal-open");
             cartModal.classList.add("show");
@@ -1422,18 +1422,18 @@ document.addEventListener("DOMContentLoaded",() => {
 
     // Открываем Корзину в модальном окне при клике на иконку корзины в хедере
     cart.addEventListener('click', evt => {
-        fnCartModalClose(true);
+        fnCartModalToggle(true);
     });
 
     // Закрываем мальное окно корзиныы при клике на крестик-закрыть окно
     cartModalClose.addEventListener('click', evt => {
-        fnCartModalClose(false);
+        fnCartModalToggle(false);
     });
 
     // Закрывамем модальное окно корзина при клике вне мадального окна
     cartModal.addEventListener('click', evt => {
         if (evt.target.id === 'cartModal')
-            fnCartModalClose(false);
+            fnCartModalToggle(false);
     });
 
     // Динамическое удаление товара из корзины
@@ -1557,7 +1557,7 @@ document.addEventListener("DOMContentLoaded",() => {
     };
 
     btnSetOrderClose.addEventListener('click', evt => {
-        fnCartModalClose(false);
+        fnCartModalToggle(false);
     });
 
     formCart.addEventListener('submit', evt => {

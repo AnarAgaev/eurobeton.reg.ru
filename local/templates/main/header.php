@@ -84,6 +84,11 @@
             or $APPLICATION->GetCurPage(false) == '/produktsiya/mineralnyy-poroshok/') {
             Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/product-calc.js');
         }
+
+        /* Добавляем Скрипт кулькулятора рассчёта стоимости бетона только на главной странице */
+        if ($APPLICATION->GetCurPage(false) == '/') {
+            Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/concrete-calc.js');
+        }
     ?>
 </head>
 <body class="<?

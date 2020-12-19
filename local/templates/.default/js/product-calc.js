@@ -388,9 +388,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Добавляем товар в $_SESSION
-            // Меняем счётчик товаров в корзине в шапке сайта
-            // Актуализируем модальное окно с Корзиной
+            /**
+             * 1. Добавляем товар в Сессиию.
+             * 2. Меняем счётчик товаров в корзине в шапке сайта.
+             * 3. Актуализируем модальное окно с Корзиной.
+             */
             addProductToCart.addEventListener('click', evt => {
                 spinner.classList.add('visible');
                 getResource(form.action, form)
@@ -410,7 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 cartItemsCounter.classList.remove('items-added');
                             }, 4500);
 
-                            // ДОБАВЛЯЕМ ТОВАР В Корзину
+                            // ДОБАВЛЯЕМ ТОВАР В модальное окно Корзины
                             const product = response['GETTING_POST'];
 
                             // Получаем предприятие отгрузки продукции
