@@ -238,7 +238,7 @@
         <div class="cart-modal__footer d-flex flex-column <?if(!$IS_ITEMS) echo 'hidden';?>"  id="cartModalFooter">
             <div class="cart-modal__result d-flex flex-column">
                 <div class="cart-modal__result-price">
-                    Итого:<span id="finalCartPriceContainer"><?=$RESULT_CART_PRICE;?></span>руб.
+                    Итого:<span id="finalCartPriceContainer"><?=number_format(round($RESULT_CART_PRICE, 2), 2, '.', '')?></span>руб.
                 </div>
                 <div class="cart-modal__result-comment">
                     С учётом всех товаров, их количества и доставки.
