@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     ? modalCalcClose()
                     : false;
             });
-            // Обрабатываем открытие и закрытие модальной формы и очистку всех данных -- End
 
             // В цикле добавляем метки на карту
             for(let i in factories) {
@@ -298,15 +297,15 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 distance.innerText = factories[factoryId]['distance'] + ' км.';
                                                 valueProd.innerHTML = value.value + ' м<sup>3</sup>';
                                                 coords.innerText = address.value;
-                                                deliveryPrice.innerText = factories[factoryId]['deliveryPrice'] + ' руб.';
-                                                productPrice.innerText = factories[factoryId]['productPrice'] + ' руб.';
+                                                deliveryPrice.innerText = (factories[factoryId]['deliveryPrice']).toFixed(2) + ' руб.';
+                                                productPrice.innerText = (factories[factoryId]['productPrice']).toFixed(2) + ' руб.';
 
                                                 // Сохраняем полученные данные в скрытые поля формы
                                                 // для отправки на сервер и добавления их в переменную сессии
                                                 // с данными корзины
                                                 routeLength.value = factories[factoryId]['distance'];
-                                                deliveryPriceController.value = factories[factoryId]['deliveryPrice'];
-                                                productPriceController.value = factories[factoryId]['productPrice'];
+                                                deliveryPriceController.value = (factories[factoryId]['deliveryPrice']).toFixed(2);
+                                                productPriceController.value = (factories[factoryId]['productPrice']).toFixed(2);
                                                 finalPrice.value = factories[factoryId]['finalPrice'];
 
                                                 // Показываем сообщение с расчётными данными продукта
@@ -488,7 +487,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 parseFloat(product['final-price']);
 
                             finalCartPriceContainer.innerText =
-                                Math.round(parseFloat(newFinalCartPrice) * 100) / 100;
+                                (Math.round(parseFloat(newFinalCartPrice) * 100) / 100).toFixed(2);
                         }
                     });
 
