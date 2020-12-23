@@ -107,9 +107,9 @@ $APPLICATION->SetTitle("Тендеры");?>
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
                     <a class="link"
-                       download="Пользовательское_соглашение_Евробетон.doc"
+                       target="_blank"
                        title="Пользовательское соглашение"
-                       href="/download/terms_of_use.doc">
+                       href="/polzovatelskoe-soglashenie/">
                         пользовательского соглашения
                     </a>
                     по обработке персональных данных
