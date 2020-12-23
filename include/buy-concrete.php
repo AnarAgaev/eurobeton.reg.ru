@@ -33,9 +33,9 @@
                     );?>
                 </div>
                 <div class="request__btn">
-                    <button class="btn show-modal" data-modal-id="modalSetOrder">
+                    <a href="/#calc-link-target" class="btn">
                         РАССЧИТАТЬ
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

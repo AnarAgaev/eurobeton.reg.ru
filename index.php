@@ -117,7 +117,7 @@ $APPLICATION->IncludeComponent(
 	),
 	false
 );?>
-
+<a name="calc-link-target"></a>
 <div class="calculator section_container">
 <? /* Выводим калькулятор с формой выбора параметров бетона
    * Форма выводится во включаемой области /include/form-calc.php
