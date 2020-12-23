@@ -106,7 +106,12 @@ $APPLICATION->SetTitle("Тендеры");?>
                 <button class="btn" type="submit" form="formRequestTender">отправить</button>
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
-                    <a class="link">пользовательского соглашения</a>
+                    <a class="link"
+                       download="Пользовательское_соглашение_Евробетон"
+                       title="Пользовательское соглашение"
+                       href="/download/terms_of_use.doc">
+                        пользовательского соглашения
+                    </a>
                     по обработке персональных данных
                 </div>
             </div>

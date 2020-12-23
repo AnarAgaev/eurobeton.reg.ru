@@ -67,8 +67,12 @@
                 <button class="btn" type="submit" form="formFeedback">отправить</button>
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
-                    <a class="link" href="/">пользовательского соглашения</a>
-                    по обработке персональных данных
+                    <a class="link"
+                       download="Пользовательское_соглашение_Евробетон"
+                       title="Пользовательское соглашение"
+                       href="/download/terms_of_use.doc">
+                        пользовательского соглашения
+                    </a> по обработке персональных данных
                 </div>
             </div>
         </div>
