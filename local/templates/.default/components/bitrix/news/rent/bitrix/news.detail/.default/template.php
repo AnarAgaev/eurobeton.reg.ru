@@ -83,7 +83,7 @@ $this->setFrameMode(true);
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
                     <a class="link"
-                       download="Пользовательское_соглашение_Евробетон"
+                       download="Пользовательское_соглашение_Евробетон.doc"
                        title="Пользовательское соглашение"
                        href="/download/terms_of_use.doc">
                         пользовательского соглашения
