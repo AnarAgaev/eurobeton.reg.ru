@@ -43,6 +43,9 @@
         Asset::getInstance()->addString('<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">');
         Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/vendors.css');
         Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/main.css');
+        if ($APPLICATION->GetCurPage(false) == '/') {
+            Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/billboard-animation.css');
+        }
         Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/main.js');
 
         /* Добавляем Яндекс картуы только на те страницы где она используется*/
