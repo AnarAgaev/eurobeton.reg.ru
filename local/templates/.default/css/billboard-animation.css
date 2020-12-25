@@ -152,19 +152,15 @@
     right: 381px;
     opacity: 0;
 }
-
 .pile-1 {
     animation: pile 30s linear 0s infinite normal;
 }
-
 .pile-2 {
     animation: pile 30s linear 10s infinite normal;
 }
-
 .pile-3 {
     animation: pile 30s linear 20s infinite normal;
 }
-
 @keyframes pile {
     0% {opacity: 0;}
     87% {opacity: 0;}
@@ -178,21 +174,18 @@
     height: 62px;
     z-index: 10;
 }
-
 .excavator-1 {
     top: 68px;
     right: 468px;
     background: url("/local/templates/.default/img/cars/excavator-1.png") no-repeat center center;
     animation: excavator-1 30s linear 10s infinite normal;
 }
-
 .excavator-2 {
     top: 107px;
     right: 400px;
     background: url("/local/templates/.default/img/cars/excavator-1.png") no-repeat;
     animation: excavator-2 30s linear 0s infinite normal;
 }
-
 @keyframes excavator-2 {
     0% {
         background: url("/local/templates/.default/img/cars/excavator-1.png") no-repeat;
@@ -237,7 +230,6 @@
         background: url("/local/templates/.default/img/cars/excavator-1.png") no-repeat;
     }
 }
-
 @keyframes excavator-1 {
     0% {
         background: url("/local/templates/.default/img/cars/excavator-1.png") no-repeat;
@@ -271,19 +263,15 @@
     height: 25px;
     z-index: 1;
 }
-
 .car-1 {
     animation: car-1 30s linear 0s infinite normal;
 }
-
 .car-2 {
     animation: car-2 30s linear 10s infinite normal;
 }
-
 .car-3 {
     animation: car-1 30s linear 20s infinite normal;
 }
-
 @keyframes car-1 {
     0% {
         top: -30px;
@@ -531,7 +519,6 @@
         background: url("/local/templates/.default/img/cars/car-back.png") no-repeat left top;
     }
 }
-
 @keyframes car-2 {
     0% {
         top: -30px;
@@ -782,4 +769,133 @@
     
     
     
+}
+
+.mixer {
+    position: absolute;
+    width: 29px;
+    height: 26px;
+    z-index: 1;
+}
+.mixer-1 {
+    animation: mixer 12s linear 0s infinite normal;
+}
+.mixer-2 {
+    animation: mixer 12s linear 4s infinite normal;
+}
+.mixer-3 {
+    animation: mixer 12s linear 8s infinite normal;
+}
+@keyframes mixer {
+    0% {
+        top: 255px;
+        right: 740px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    20% {
+        top: 328px;
+        right: 610px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    22% {
+        top: 328px;
+        right: 610px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    22.0001% {
+        top: 328px;
+        right: 610px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left top;
+    }
+    24% {
+        top: 328px;
+        right: 610px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left top;
+    }
+    50% {
+        top: 434px;
+        right: 793px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left top;
+    }
+    52% {
+        top: 434px;
+        right: 793px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left top;
+    }
+    52.0001% {
+        top: 434px;
+        right: 793px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    54% {
+        top: 434px;
+        right: 793px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    58% {
+        top: 423px;
+        right: 807px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    66% {
+        top: 423px;
+        right: 807px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    78% {
+        top: 481px;
+        right: 709px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    80% {
+        top: 481px;
+        right: 709px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left -31px top;
+    }
+    80.0001% {
+        top: 481px;
+        right: 709px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left top;
+    }
+    82% {
+        top: 481px;
+        right: 709px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left top;
+    }
+    100% {
+        top: 578px;
+        right: 873px;
+        background: url("/local/templates/.default/img/cars/mixer.png") no-repeat left top;
+    }
+}
+
+.foundation {
+    position: absolute;
+    width: 55px;
+    height: 37px;
+    z-index: 1;
+    top: 396px;
+    right: 821px;
+    background: url("/local/templates/.default/img/cars/foundation.png") no-repeat left top;
+    animation: foundation 6s linear 0s infinite normal;
+}
+@keyframes foundation {
+    0% {
+        background-position: left top;
+    }
+    25% {
+        background-position: left top;
+    }
+    25.0001% {
+        background-position: left -55px top;
+    }
+    75% {
+        background-position: left -55px top;
+    }
+    75.0001% {
+        background-position: left -110px top;
+    }
+    100% {
+        background-position: left -110px top;
+    }
 }

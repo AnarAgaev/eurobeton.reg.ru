@@ -60,6 +60,12 @@
             <div class="pile pile-1"></div>
             <div class="pile pile-2"></div>
             <div class="pile pile-3"></div>
+
+            <div class="mixer mixer-1"></div>
+            <div class="mixer mixer-2"></div>
+            <div class="mixer mixer-3"></div>
+
+            <div class="foundation"></div>
         </div>
     </div>
 </div>
