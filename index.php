@@ -49,7 +49,7 @@
     </div>
     <div class="billboard__pic-play d-none d-sm-block">
         <div class="billboard__animation">
-            <img src="/local/templates/.default/img/billboard-back-play.png" alt="">
+            <img src="/local/templates/.default/img/billboard/billboard-back-play.png" alt="">
             <div class="excavator excavator-1"></div>
             <div class="excavator excavator-2"></div>
 
@@ -63,9 +63,14 @@
 
             <div class="mixer mixer-1"></div>
             <div class="mixer mixer-2"></div>
-            <div class="mixer mixer-3"></div>
 
             <div class="foundation"></div>
+
+            <div class="bunker bunker-1"></div>
+            <div class="bunker bunker-2"></div>
+
+            <div class="hangar-wall"></div>
+            <div class="factory-wall"></div>
         </div>
     </div>
 </div>
