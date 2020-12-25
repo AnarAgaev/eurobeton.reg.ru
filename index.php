@@ -2,7 +2,7 @@
 <?$APPLICATION->SetTitle("Главная");?>
 <?// Баннер под шапкой с анимацией на картинке ?>
 <div class="billboard section_container">
-    <div class="container">
+    <div class="container billboard__content">
         <div class="row">
             <div class="billboard__desc col-lg-7 col-xl-6">
                 <div class="billboard__title">
@@ -48,13 +48,19 @@
         </div>
     </div>
     <div class="billboard__pic-play d-none d-sm-block">
-        <img style="z-index: 1;" src="/local/templates/.default/img/billboard-back-play.png" alt="">
-        <div class="excavator excavator-1"></div>
-        <div class="excavator excavator-2"></div>
+        <div class="billboard__animation">
+            <img src="/local/templates/.default/img/billboard-back-play.png" alt="">
+            <div class="excavator excavator-1"></div>
+            <div class="excavator excavator-2"></div>
 
-        <div class="car car-1"></div>
+            <div class="car car-1"></div>
+            <div class="car car-2"></div>
+            <div class="car car-3"></div>
 
-        <div class="rubble"></div>
+            <div class="pile pile-1"></div>
+            <div class="pile pile-2"></div>
+            <div class="pile pile-3"></div>
+        </div>
     </div>
 </div>
 
