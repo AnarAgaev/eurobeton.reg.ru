@@ -2777,7 +2777,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .header .products__item.drop:hover .products__dropdown.concrete, .header .products__item.drop:hover .products__dropdown.rubble {
-        max-height: 250px !important;
+        max-height: 320px !important;
         padding: 20px 0 25px;
     }
 
@@ -2823,12 +2823,12 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .header .products__dropdown.concrete {
-        width: 414px;
+        width: 330px;
         left: -53px
     }
 
     .header .products__dropdown.rubble {
-        width: 380px;
+        width: 340px;
         left: -56px;
     }
 }
@@ -3102,7 +3102,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header .visible .products__dropdown.rubble {
-    max-height: 320px
+    max-height: 400px;
 }
 
 .phone-visible .operating {
