@@ -272,332 +272,350 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (formValid) {
                     spinner.classList.add('visible');
 
-                    let addressValue = validCoords(concreteAddress.value)
-                        ? coordsFromMap
-                        : concreteAddress.value;
+                    let errCounter = 0;
 
-                    const myGeocoder = ymaps.geocode(addressValue);
-                    myGeocoder.then(
-                        response => {
-                            if (!response.geoObjects.get(0)) {
-                                spinner.classList.remove('visible');
-                                concreteErrorCoordsContainer.classList.add('visible');
-                                concreteAddress.parentElement.classList.add('has__error');
-                            }
-                            else {
-                                // Сбрасываем расстояния, роуты и цену доставки
-                                // у заводов для корректного пересчёта расстояний
-                                for (let i in factories) {
-                                    delete factories[i]['distance'];
-                                    delete factories[i]['route'];
-                                    delete factories[i]['deliveryPrice'];
+                    /**
+                     * Для того чтобы на ошибке вновь заново запускать запрос данных
+                     * от сервиса Яндекс карт, обернули код в функцию и в случае ошибки
+                     * вызываем её рекурсивно
+                     * Считаем ошибки в переменной errCounter.
+                     * Если ошибок более десяти выводим сообщение об ошибке
+                     */
+                    function calculate() {
+                        let addressValue = validCoords(concreteAddress.value)
+                            ? coordsFromMap
+                            : concreteAddress.value;
+
+                        const myGeocoder = ymaps.geocode(addressValue);
+                        myGeocoder.then(
+                            response => {
+                                if (!response.geoObjects.get(0)) {
+                                    spinner.classList.remove('visible');
+                                    concreteErrorCoordsContainer.classList.add('visible');
+                                    concreteAddress.parentElement.classList.add('has__error');
                                 }
+                                else {
+                                    // Сбрасываем расстояния, роуты и цену доставки
+                                    // у заводов для корректного пересчёта расстояний
+                                    for (let i in factories) {
+                                        delete factories[i]['distance'];
+                                        delete factories[i]['route'];
+                                        delete factories[i]['deliveryPrice'];
+                                    }
 
-                                /**
-                                 * В цикле проходим по всем заводам и расчитываем расстояние
-                                 * от каждого завода до точки поставки продукции.
-                                 * Полученный результат сохраняем в массиве завода.
-                                 * Так же в массив завода сохраняем полученный путь,
-                                 * чтобы потом пушить его в карту
-                                 */
-                                for(let i in factories) {
-                                    ymaps.route([
-                                        JSON.parse(factories[i].coordinates),
-                                        response.geoObjects.get(0).geometry.getCoordinates()
-                                    ], {
-                                        mapStateAutoApply: true,
-                                    }).then(route => {
-                                        // Сохраняем длинну маршрута в массив с данными заводов
-                                        factories[i]['distance'] = Math.ceil(route.getLength()/1000);
-                                        // Сохраняем полученный объект ROUTE чтобы потом пушить его в карту
-                                        factories[i]['route'] = route;
-                                        // Считаем стомиость доставки и сохраняем в переменную deliveryPrice в объект завода
-                                        factories[i]['deliveryPrice'] = null;
-                                        for (let key in factories[i]['prices']) {
-                                            if (factories[i]['distance'] <= Number(key)) {
-                                                // Рссчитываем стоимость доставки как:
-                                                // цена за транспортировку куба * количество кубов
-                                                // !!! Без учёта расстояния
-                                                factories[i]['deliveryPrice'] = parseFloat(factories[i]['prices'][key].replace(/,/, '.')) * concreteValue.value;
-                                                break;
+                                    /**
+                                     * В цикле проходим по всем заводам и расчитываем расстояние
+                                     * от каждого завода до точки поставки продукции.
+                                     * Полученный результат сохраняем в массиве завода.
+                                     * Так же в массив завода сохраняем полученный путь,
+                                     * чтобы потом пушить его в карту
+                                     */
+                                    for(let i in factories) {
+                                        ymaps.route([
+                                            JSON.parse(factories[i].coordinates),
+                                            response.geoObjects.get(0).geometry.getCoordinates()
+                                        ], {
+                                            mapStateAutoApply: true,
+                                        }).then(route => {
+                                            // Сохраняем длинну маршрута в массив с данными заводов
+                                            factories[i]['distance'] = Math.ceil(route.getLength()/1000);
+                                            // Сохраняем полученный объект ROUTE чтобы потом пушить его в карту
+                                            factories[i]['route'] = route;
+                                            // Считаем стомиость доставки и сохраняем в переменную deliveryPrice в объект завода
+                                            factories[i]['deliveryPrice'] = null;
+                                            for (let key in factories[i]['prices']) {
+                                                if (factories[i]['distance'] <= Number(key)) {
+                                                    // Рссчитываем стоимость доставки как:
+                                                    // цена за транспортировку куба * количество кубов
+                                                    // !!! Без учёта расстояния
+                                                    factories[i]['deliveryPrice'] = parseFloat(factories[i]['prices'][key].replace(/,/, '.')) * concreteValue.value;
+                                                    break;
+                                                }
                                             }
-                                        }
-
-                                        /**
-                                         * Для того чтобы гарантировать что все асинхронные запрсы выполенены
-                                         * и все координаты получены на каждой итерации цикла, проверяем
-                                         * все заводы на наличие у них дистанции до выбранного места доставки
-                                         * и если дистанция есть у всех, а токое возомжно только после того
-                                         * как последний асинхронный запрос вернёт данные, определяем кротчайший
-                                         * маршрут до завода и пушим его в карту
-                                         */
-                                        let isRequestsFinished = true;
-                                        for (let i in factories) {
-                                            if (!factories[i]['distance']) {
-                                                isRequestsFinished = false;
-                                                break;
-                                            }
-                                        }
-
-                                        /**
-                                         * Если у всех заводов посчитана дистанция и стоимость доставки
-                                         * считаем стомость каждого товара из отфильтрованного
-                                         * списка товаров по каждому из заводов. Полученную и итоговую
-                                         * стоимости товоара сохраняем в объекте товара в отфильтрованном
-                                         * списке товаров в productPrice и finalPrice соответственно.
-                                         */
-                                        if(isRequestsFinished) {
-                                            // Фильтруем товары в соответствии с выбранными
-                                            // пользователем характеристиками
-                                            const items = fnFilterAllItems();
 
                                             /**
-                                             * Оптимальный товара
-                                             *
-                                             * @type {Object}
-                                             * @param {number} id - ID опитмального товара в массиве товаров items
-                                             * @param {number} factory - ID оптимального заводо в массиве цент оптимального товара
-                                             * @param {number} distance - Дистанция до оптимального завода, нужна в том случае
-                                             *                            если на двух заводах итоговая цена товара одинакова,
-                                             *                            тогда выберем везти с того завода который ближе
+                                             * Для того чтобы гарантировать что все асинхронные запрсы выполенены
+                                             * и все координаты получены на каждой итерации цикла, проверяем
+                                             * все заводы на наличие у них дистанции до выбранного места доставки
+                                             * и если дистанция есть у всех, а токое возомжно только после того
+                                             * как последний асинхронный запрос вернёт данные, определяем кротчайший
+                                             * маршрут до завода и пушим его в карту
                                              */
-                                            let optimalProduct = null;
-
-                                            // ID ближайшего завода на случай слишком длоинной дистанции
-                                            let factoryId = null;
+                                            let isRequestsFinished = true;
+                                            for (let i in factories) {
+                                                if (!factories[i]['distance']) {
+                                                    isRequestsFinished = false;
+                                                    break;
+                                                }
+                                            }
 
                                             /**
-                                             * Определяем ИТОГОВОУ цену товара на каждом из заводов
-                                             * с учётом доставки от этого завода.
-                                             * Полученный результат записываем в объект PRICES в котором
-                                             * имя свойства - ИД завода, а значение - объект с итоговй ценой
-                                             * и др. параметрами по этому заводу
-                                             *
-                                             * Имена свойства/ID заводов взяты из ID инфоблока завода
-                                             * Битрикс/Администрирование/Контент/Прайсы/Доставка Бетона
+                                             * Если у всех заводов посчитана дистанция и стоимость доставки
+                                             * считаем стомость каждого товара из отфильтрованного
+                                             * списка товаров по каждому из заводов. Полученную и итоговую
+                                             * стоимости товоара сохраняем в объекте товара в отфильтрованном
+                                             * списке товаров в productPrice и finalPrice соответственно.
                                              */
-                                            items.forEach((item, index) => {
-                                                item['PRICES'] = {};
+                                            if(isRequestsFinished) {
+                                                // Фильтруем товары в соответствии с выбранными
+                                                // пользователем характеристиками
+                                                const items = fnFilterAllItems();
 
-                                                for (let factoryID = 350; factoryID < 356; factoryID++) {
-                                                    // Цена товара на конкретном заводе
-                                                    const price = parseFloat(item.PROPS['PRICE_FACTORY_ID_' + factoryID].VALUE.replace(/,/, '.')) * concreteValue.value;
+                                                /**
+                                                 * Оптимальный товара
+                                                 *
+                                                 * @type {Object}
+                                                 * @param {number} id - ID опитмального товара в массиве товаров items
+                                                 * @param {number} factory - ID оптимального заводо в массиве цент оптимального товара
+                                                 * @param {number} distance - Дистанция до оптимального завода, нужна в том случае
+                                                 *                            если на двух заводах итоговая цена товара одинакова,
+                                                 *                            тогда выберем везти с того завода который ближе
+                                                 */
+                                                let optimalProduct = null;
 
-                                                    item['PRICES'][factoryID] = factories[factoryID].deliveryPrice
-                                                        ? {
-                                                              deliveryPrice : factories[factoryID].deliveryPrice,
-                                                              distance: factories[factoryID].distance,
-                                                              productPrice : price,
-                                                              finalPrice : factories[factoryID].deliveryPrice + price,
-                                                          }
-                                                        : null;
+                                                // ID ближайшего завода на случай слишком длоинной дистанции
+                                                let factoryId = null;
 
-                                                    /**
-                                                     * Определяем оптимальый товар (минимальная цена с учётом доставки)
-                                                     * Если цена рассчитвыаемого на этой итерации товара меньше цены
-                                                     * товара ID которого хранится в переменной optimalProduct
-                                                     * или если цены равны и доставка текущего товара меньше
-                                                     * доставки оптимального, перезаписываем оптимальный товара,
-                                                     * оптимальный завод и оптимальную доставку текущим товаром
-                                                     */
-                                                    if (item['PRICES'][factoryID]) {
-                                                        const newOptimalProduct = {
-                                                            id: index,
-                                                            factory: factoryID,
-                                                            distance: factories[factoryID].distance,
-                                                        };
+                                                /**
+                                                 * Определяем ИТОГОВОУ цену товара на каждом из заводов
+                                                 * с учётом доставки от этого завода.
+                                                 * Полученный результат записываем в объект PRICES в котором
+                                                 * имя свойства - ИД завода, а значение - объект с итоговй ценой
+                                                 * и др. параметрами по этому заводу
+                                                 *
+                                                 * Имена свойства/ID заводов взяты из ID инфоблока завода
+                                                 * Битрикс/Администрирование/Контент/Прайсы/Доставка Бетона
+                                                 */
+                                                items.forEach((item, index) => {
+                                                    item['PRICES'] = {};
 
-                                                        // Если оптимальный продукт не определён (первая итерация), присваиваем текущий
-                                                        if (!optimalProduct) {
-                                                            optimalProduct = newOptimalProduct;
-                                                        } else {
-                                                            const currentPrice = item['PRICES'][factoryID].finalPrice;
-                                                            const optimalPrice = items[optimalProduct.id]['PRICES'][optimalProduct.factory].finalPrice;
-                                                            const currentDistance = item['PRICES'][factoryID].distance;
-                                                            const optimalDistance = items[optimalProduct.id]['PRICES'][optimalProduct.factory].distance;
+                                                    for (let factoryID = 350; factoryID < 356; factoryID++) {
+                                                        // Цена товара на конкретном заводе
+                                                        const price = parseFloat(item.PROPS['PRICE_FACTORY_ID_' + factoryID].VALUE.replace(/,/, '.')) * concreteValue.value;
 
-                                                            // Если цена текущего товара меньше цены оптимального, присваиваем текущий
-                                                            if (currentPrice < optimalPrice) {
+                                                        item['PRICES'][factoryID] = factories[factoryID].deliveryPrice
+                                                            ? {
+                                                                  deliveryPrice : factories[factoryID].deliveryPrice,
+                                                                  distance: factories[factoryID].distance,
+                                                                  productPrice : price,
+                                                                  finalPrice : factories[factoryID].deliveryPrice + price,
+                                                              }
+                                                            : null;
+
+                                                        /**
+                                                         * Определяем оптимальый товар (минимальная цена с учётом доставки)
+                                                         * Если цена рассчитвыаемого на этой итерации товара меньше цены
+                                                         * товара ID которого хранится в переменной optimalProduct
+                                                         * или если цены равны и доставка текущего товара меньше
+                                                         * доставки оптимального, перезаписываем оптимальный товара,
+                                                         * оптимальный завод и оптимальную доставку текущим товаром
+                                                         */
+                                                        if (item['PRICES'][factoryID]) {
+                                                            const newOptimalProduct = {
+                                                                id: index,
+                                                                factory: factoryID,
+                                                                distance: factories[factoryID].distance,
+                                                            };
+
+                                                            // Если оптимальный продукт не определён (первая итерация), присваиваем текущий
+                                                            if (!optimalProduct) {
                                                                 optimalProduct = newOptimalProduct;
-                                                            }
-                                                            else {
-                                                                // Если цена текущего равна цены оптимального сравниваем дистанцию доставки
-                                                                // и если текущая меньше, меняем оптимальный товар на текущий
-                                                                if (currentPrice === optimalPrice && currentDistance < optimalDistance) {
+                                                            } else {
+                                                                const currentPrice = item['PRICES'][factoryID].finalPrice;
+                                                                const optimalPrice = items[optimalProduct.id]['PRICES'][optimalProduct.factory].finalPrice;
+                                                                const currentDistance = item['PRICES'][factoryID].distance;
+                                                                const optimalDistance = items[optimalProduct.id]['PRICES'][optimalProduct.factory].distance;
+
+                                                                // Если цена текущего товара меньше цены оптимального, присваиваем текущий
+                                                                if (currentPrice < optimalPrice) {
                                                                     optimalProduct = newOptimalProduct;
+                                                                }
+                                                                else {
+                                                                    // Если цена текущего равна цены оптимального сравниваем дистанцию доставки
+                                                                    // и если текущая меньше, меняем оптимальный товар на текущий
+                                                                    if (currentPrice === optimalPrice && currentDistance < optimalDistance) {
+                                                                        optimalProduct = newOptimalProduct;
+                                                                    }
                                                                 }
                                                             }
                                                         }
                                                     }
-                                                }
-                                            });
+                                                });
 
-                                            /**
-                                             * Определяем завод или с минмальной ценой или самый ближайшй к место доставки
-                                             * Показываем пользователю минмальную цену товара с учётом доставки
-                                             * или выводим сообщение что не можем доставить (слишком далеко)
-                                             */
-                                            if (optimalProduct) {
-                                                // Сохраняем оптимальный завод в переменную для построения маршрута
-                                                factoryId = optimalProduct.factory;
-
-                                                // Собираем имя товара
-                                                let name = '';
-                                                name += (items[optimalProduct.id]['FIELDS']['NAME'] !== 'Цементное молоко'
-                                                            && items[optimalProduct.id]['FIELDS']['NAME'] !== 'Пусковая смесь')
-                                                    ? items[optimalProduct.id]['FIELDS']['PREVIEW_TEXT']
-                                                    : '';
-                                                name += items[optimalProduct.id]['PROPS']['CONCRETE_GRADE']['VALUE']
-                                                    ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_GRADE']['VALUE']
-                                                    : '';
-                                                name += items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE']
-                                                    ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE']
-                                                    : '';
-                                                name += items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE']
-                                                    ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE']
-                                                    : '';
-                                                name += items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE']
-                                                    ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE']
-                                                    : '';
-                                                name += items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE']
-                                                    ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE']
-                                                    : '';
-                                                name += items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE']
-                                                    ? ' До: ' + items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'] + '°C'
-                                                    : '';
-
-                                                // Собираем описание товара
-                                                let description = '';
-                                                description += concreteRentPump.checked
-                                                    ? '*Пользователь ометил поле Арендовать бетононасос. '
-                                                    : '';
-                                                description += 'Марка: ' + items[optimalProduct.id]['PROPS']['CONCRETE_GRADE']['VALUE'] + ';';
-                                                description += items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE']
-                                                    ? ' Подвижность: ' + items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE'] + ';'
-                                                    : '';
-                                                description += items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE']
-                                                    ? ' Морозостойкость: ' + items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE'] + ';'
-                                                    : '';
-                                                description += items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE']
-                                                    ? ' Водонепроницаемость: ' + items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE'] + ';'
-                                                    : '';
-                                                description += items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE']
-                                                    ? ' Наполнитель: ' + items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE'] + ';'
-                                                    : '';
-                                                description += items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE']
-                                                    ? ' Противоморозная добавка: ' + items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'] + '°C;'
-                                                    : '';
-
-                                                let productPrices = {};
-                                                for (let id = 350; id < 356; id++) {
-                                                    productPrices[id] = items[optimalProduct.id]['PROPS']['PRICE_FACTORY_ID_' + id]['VALUE'];
-                                                }
-
-                                                // Добавляем свойства оптимального товара в результирующее сообщение
-                                                concreteNameContainer.innerText = name;
-                                                concretePriceContainer.innerText = (items[optimalProduct.id]['PRICES'][factoryId]['finalPrice']).toFixed(2);
-                                                concreteFactoryContainer.innerText = factories[factoryId]['name'];
-                                                concreteRoutContainer.innerText = factories[factoryId]['distance'] + ' км.';
-                                                concreteValueContainer.innerHTML = concreteValue.value + ' м<sup>3</sup>';
-                                                concreteCoordsContainer.innerText = factories[factoryId]['name'];
-                                                concreteProdDeliveryPriceContainer.innerText = (factories[factoryId]['deliveryPrice']).toFixed(2) + ' руб.';
-                                                concreteProductPriceContainer.innerText = (items[optimalProduct.id]['PRICES'][factoryId]['productPrice']).toFixed(2) + ' руб.';
-
-                                                // Сохраняем полученные данные в скрытые поля формы
-                                                // для отправки на сервер и добавления их в переменную сессии
-                                                // с данными корзины
-                                                concreteRouteLength.value = factories[factoryId]['distance'];
-                                                concreteDeliveryPriceController.value = (factories[factoryId]['deliveryPrice']).toFixed(2);
-                                                concreteProductPriceController.value = (items[optimalProduct.id]['PRICES'][factoryId]['productPrice']).toFixed(2);
-                                                concreteFinalPriceController.value = (items[optimalProduct.id]['PRICES'][factoryId]['finalPrice']).toFixed(2);
-                                                concreteDescriptionController.value = description;
-                                                concreteNameController.value = name;
-                                                concretePricesController.value = JSON.stringify(productPrices);
-                                                concretePicSrcController.value = items[optimalProduct.id]['PREVIEW_PICTURE']['SRC'];
-
-                                                // Показываем сообщение с расчётными данными продукта
-                                                concreteResultContainer.classList.add('visible');
-                                            } else {
                                                 /**
-                                                 * Если не удальсь определить опитмальный товар
-                                                 * значит место доставки слишком далеко, тогда
-                                                 * определяем ближайший завод к месту поставки,
-                                                 * на котором есть данный вид продукции
-                                                 * пушм его роут в карту и говорим пользователю,
-                                                 * о слишком длинной доставке
+                                                 * Определяем завод или с минмальной ценой или самый ближайшй к место доставки
+                                                 * Показываем пользователю минмальную цену товара с учётом доставки
+                                                 * или выводим сообщение что не можем доставить (слишком далеко)
                                                  */
-                                                for(let id in factories) {
-                                                    if (factories[id]['distance']) {
-                                                        factoryId = !factoryId
-                                                            ? id
-                                                            : factories[id]['distance'] < factories[factoryId]['distance']
-                                                                ? id
-                                                                : factoryId;
+                                                if (optimalProduct) {
+                                                    // Сохраняем оптимальный завод в переменную для построения маршрута
+                                                    factoryId = optimalProduct.factory;
+
+                                                    // Собираем имя товара
+                                                    let name = '';
+                                                    name += (items[optimalProduct.id]['FIELDS']['NAME'] !== 'Цементное молоко'
+                                                                && items[optimalProduct.id]['FIELDS']['NAME'] !== 'Пусковая смесь')
+                                                        ? items[optimalProduct.id]['FIELDS']['PREVIEW_TEXT']
+                                                        : '';
+                                                    name += items[optimalProduct.id]['PROPS']['CONCRETE_GRADE']['VALUE']
+                                                        ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_GRADE']['VALUE']
+                                                        : '';
+                                                    name += items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE']
+                                                        ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE']
+                                                        : '';
+                                                    name += items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE']
+                                                        ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE']
+                                                        : '';
+                                                    name += items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE']
+                                                        ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE']
+                                                        : '';
+                                                    name += items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE']
+                                                        ? ' ' + items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE']
+                                                        : '';
+                                                    name += items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE']
+                                                        ? ' До: ' + items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'] + '°C'
+                                                        : '';
+
+                                                    // Собираем описание товара
+                                                    let description = '';
+                                                    description += concreteRentPump.checked
+                                                        ? '*Пользователь ометил поле Арендовать бетононасос. '
+                                                        : '';
+                                                    description += 'Марка: ' + items[optimalProduct.id]['PROPS']['CONCRETE_GRADE']['VALUE'] + ';';
+                                                    description += items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE']
+                                                        ? ' Подвижность: ' + items[optimalProduct.id]['PROPS']['CONCRETE_MOBILITY']['VALUE'] + ';'
+                                                        : '';
+                                                    description += items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE']
+                                                        ? ' Морозостойкость: ' + items[optimalProduct.id]['PROPS']['CONCRETE_FROST']['VALUE'] + ';'
+                                                        : '';
+                                                    description += items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE']
+                                                        ? ' Водонепроницаемость: ' + items[optimalProduct.id]['PROPS']['CONCRETE_WATER']['VALUE'] + ';'
+                                                        : '';
+                                                    description += items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE']
+                                                        ? ' Наполнитель: ' + items[optimalProduct.id]['PROPS']['CONCRETE_FILLER']['VALUE'] + ';'
+                                                        : '';
+                                                    description += items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE']
+                                                        ? ' Противоморозная добавка: ' + items[optimalProduct.id]['PROPS']['CONCRETE_ANTIFREEZE_ADDITIVE']['VALUE'] + '°C;'
+                                                        : '';
+
+                                                    let productPrices = {};
+                                                    for (let id = 350; id < 356; id++) {
+                                                        productPrices[id] = items[optimalProduct.id]['PROPS']['PRICE_FACTORY_ID_' + id]['VALUE'];
                                                     }
+
+                                                    // Добавляем свойства оптимального товара в результирующее сообщение
+                                                    concreteNameContainer.innerText = name;
+                                                    concretePriceContainer.innerText = (items[optimalProduct.id]['PRICES'][factoryId]['finalPrice']).toFixed(2);
+                                                    concreteFactoryContainer.innerText = factories[factoryId]['name'];
+                                                    concreteRoutContainer.innerText = factories[factoryId]['distance'] + ' км.';
+                                                    concreteValueContainer.innerHTML = concreteValue.value + ' м<sup>3</sup>';
+                                                    concreteCoordsContainer.innerText = factories[factoryId]['name'];
+                                                    concreteProdDeliveryPriceContainer.innerText = (factories[factoryId]['deliveryPrice']).toFixed(2) + ' руб.';
+                                                    concreteProductPriceContainer.innerText = (items[optimalProduct.id]['PRICES'][factoryId]['productPrice']).toFixed(2) + ' руб.';
+
+                                                    // Сохраняем полученные данные в скрытые поля формы
+                                                    // для отправки на сервер и добавления их в переменную сессии
+                                                    // с данными корзины
+                                                    concreteRouteLength.value = factories[factoryId]['distance'];
+                                                    concreteDeliveryPriceController.value = (factories[factoryId]['deliveryPrice']).toFixed(2);
+                                                    concreteProductPriceController.value = (items[optimalProduct.id]['PRICES'][factoryId]['productPrice']).toFixed(2);
+                                                    concreteFinalPriceController.value = (items[optimalProduct.id]['PRICES'][factoryId]['finalPrice']).toFixed(2);
+                                                    concreteDescriptionController.value = description;
+                                                    concreteNameController.value = name;
+                                                    concretePricesController.value = JSON.stringify(productPrices);
+                                                    concretePicSrcController.value = items[optimalProduct.id]['PREVIEW_PICTURE']['SRC'];
+
+                                                    // Показываем сообщение с расчётными данными продукта
+                                                    concreteResultContainer.classList.add('visible');
+                                                } else {
+                                                    /**
+                                                     * Если не удальсь определить опитмальный товар
+                                                     * значит место доставки слишком далеко, тогда
+                                                     * определяем ближайший завод к месту поставки,
+                                                     * на котором есть данный вид продукции
+                                                     * пушм его роут в карту и говорим пользователю,
+                                                     * о слишком длинной доставке
+                                                     */
+                                                    for(let id in factories) {
+                                                        if (factories[id]['distance']) {
+                                                            factoryId = !factoryId
+                                                                ? id
+                                                                : factories[id]['distance'] < factories[factoryId]['distance']
+                                                                    ? id
+                                                                    : factoryId;
+                                                        }
+                                                    }
+
+                                                    // Показываем сообщение Слишком длинная доставка
+                                                    concreteErrorRouteContainer.classList.add('visible');
                                                 }
 
-                                                // Показываем сообщение Слишком длинная доставка
-                                                concreteErrorRouteContainer.classList.add('visible');
+                                                spinner.classList.remove('visible');
+
+                                                // Удаляем предыдущий маршрут с карты для случаев
+                                                // пересчёта маршрута без перезагрузки страницы
+                                                if (builtRout) concreteCalcMap.geoObjects.remove(builtRout);
+
+                                                // Сохраняем полученный маршрут в переменную,
+                                                // чтобы потом была возможность удалить его с карты
+                                                // Предыдущая строка кода: concreteCalcMap.geoObjects.remove(builtRout);
+                                                builtRout = factories[factoryId].route;
+
+                                                // Кастомизируем метку на карте
+                                                const points = factories[factoryId].route.getWayPoints();
+                                                points.options.set('preset', 'islands#orangeCircleDotIcon');
+                                                points.get(0).options.set('visible', false);
+                                                //points.get(points.getLength() - 1).options.set('hasBalloon', false);
+                                                points.get(points.getLength() - 1).options.set('iconLayout', 'default#image');
+                                                points.get(points.getLength() - 1).options.set('iconImageHref', '/local/templates/.default/img/mark.png');
+                                                points.get(points.getLength() - 1).options.set('iconImageSize', [36, 43]);
+                                                points.get(points.getLength() - 1).options.set('iconImageOffset', [-15, -35]);
+
+                                                // Кастомизурем проложенный маршрут (цвет линии и прозрачность)
+                                                factories[factoryId].route.getPaths().options.set({
+                                                    strokeColor: 'f1852c',
+                                                    opacity: 0.9,
+                                                });
+
+                                                // Добавляем маршрут на карту
+                                                concreteCalcMap.geoObjects.add(factories[factoryId].route);
+
+                                                // Сохраняем ID оптимального завода в скрытое поле формы
+                                                concreteOptimalFactory.dataset.optimalFactoryId = JSON.stringify(factoryId);
+                                                concreteOptimalFactory.value = factoryId;
+
+                                                concreteCalcMap.balloon.close(); // закрываем открытый балун
+
+
+
+                                                console.log('Продукты (items): ', items);
+                                                console.log('Заводы и цены (factories): ', factories);
+                                                console.log('Оптимальный товар (optimalProduct): ', optimalProduct);
+                                                console.log('Оптимальный завод (factories[factoryId]): ', factories[factoryId]);
+                                                console.log('name:', factories[factoryId]['name']);
+                                                console.log('address:', factories[factoryId]['address']);
+                                                console.log('distance:', factories[factoryId]['distance'], 'км.');
+                                                console.log('deliveryPrice:', factories[factoryId]['deliveryPrice'], 'руб.');
+                                                console.log('*********************************')
                                             }
-
-                                            spinner.classList.remove('visible');
-
-                                            // Удаляем предыдущий маршрут с карты для случаев
-                                            // пересчёта маршрута без перезагрузки страницы
-                                            if (builtRout) concreteCalcMap.geoObjects.remove(builtRout);
-
-                                            // Сохраняем полученный маршрут в переменную,
-                                            // чтобы потом была возможность удалить его с карты
-                                            // Предыдущая строка кода: concreteCalcMap.geoObjects.remove(builtRout);
-                                            builtRout = factories[factoryId].route;
-
-                                            // Кастомизируем метку на карте
-                                            const points = factories[factoryId].route.getWayPoints();
-                                            points.options.set('preset', 'islands#orangeCircleDotIcon');
-                                            points.get(0).options.set('visible', false);
-                                            //points.get(points.getLength() - 1).options.set('hasBalloon', false);
-                                            points.get(points.getLength() - 1).options.set('iconLayout', 'default#image');
-                                            points.get(points.getLength() - 1).options.set('iconImageHref', '/local/templates/.default/img/mark.png');
-                                            points.get(points.getLength() - 1).options.set('iconImageSize', [36, 43]);
-                                            points.get(points.getLength() - 1).options.set('iconImageOffset', [-15, -35]);
-
-                                            // Кастомизурем проложенный маршрут (цвет линии и прозрачность)
-                                            factories[factoryId].route.getPaths().options.set({
-                                                strokeColor: 'f1852c',
-                                                opacity: 0.9,
-                                            });
-
-                                            // Добавляем маршрут на карту
-                                            concreteCalcMap.geoObjects.add(factories[factoryId].route);
-
-                                            // Сохраняем ID оптимального завода в скрытое поле формы
-                                            concreteOptimalFactory.dataset.optimalFactoryId = JSON.stringify(factoryId);
-                                            concreteOptimalFactory.value = factoryId;
-
-                                            concreteCalcMap.balloon.close(); // закрываем открытый балун
-
-
-
-                                            console.log('Продукты (items): ', items);
-                                            console.log('Заводы и цены (factories): ', factories);
-                                            console.log('Оптимальный товар (optimalProduct): ', optimalProduct);
-                                            console.log('Оптимальный завод (factories[factoryId]): ', factories[factoryId]);
-                                            console.log('name:', factories[factoryId]['name']);
-                                            console.log('address:', factories[factoryId]['address']);
-                                            console.log('distance:', factories[factoryId]['distance'], 'км.');
-                                            console.log('deliveryPrice:', factories[factoryId]['deliveryPrice'], 'руб.');
-                                            console.log('*********************************')
-                                        }
-                                    });
+                                        });
+                                    }
+                                }
+                            },
+                            err => {
+                                if (errCounter <= 10) {
+                                    calculate();
+                                } else {
+                                    spinner.classList.remove('visible');
+                                    console.log(err);
+                                    alert("Во время работы калькулятора произошла ошибка. Попробуйте перезагрузить страницу или повторить попытку позже.");
                                 }
                             }
-                        },
-                        err => {
-                            console.log(err);
-                            alert("Во время работы калькулятора произошла ошибка. Попробуйте повторить попытку позже.")
-                        }
-                    );
+                        );
+                    }
 
+                    // Первый запуск фунции получения данных с Яндекс карт.
+                    calculate();
                 }
             });
 

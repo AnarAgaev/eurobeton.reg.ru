@@ -9182,7 +9182,8 @@ span.bread-crumbs__link {
     background-color: #f1852c;
 }
 
-.ymaps-2-1-77-gotoymaps__pin {
+.ymaps-2-1-77-gotoymaps__pin,
+.ymaps-2-1-78-gotoymaps__pin {
     background-image: url("/local/templates/.default/img/yabaloon.svg") !important;
 }
 
