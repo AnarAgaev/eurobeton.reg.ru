@@ -6659,6 +6659,22 @@ span.bread-crumbs__link {
         -ms-flex-order: -1;
         order: -1
     }
+    
+    .company__director-pic {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .company__director-pic a,
+    .company__director-pic a img{
+        width: 100%;
+    }
 }
 
 .company__director-pic img {
