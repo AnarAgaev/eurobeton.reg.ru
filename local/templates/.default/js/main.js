@@ -1,53 +1,29 @@
-/* Сервис-функция асинхронного поучения данных с сервера */
-window.getResource = async (url, form) => {
-
-    const response = (form === undefined)
-        ? await fetch(url)
-        : await fetch(url, {
-            method: 'POST',
-            cache  : 'no-cache',
-            body: new FormData(form)
-        });
-
-    if (!response.ok) {
-        throw new Error('Не удалось получить данные от ' + url +  '. Получен ответ: ' . response.status);
-    }
-
-    try {
-        return await response.json();
-    } catch (error) {
-        throw new TypeError('Полученные данные должны быть в формате JSON. Произошла ошибка на URL: ' + response.url);
-    }
-};
-
 /* Функция для валидации электронной почты */
-function validMail(mail) {
+window.validMail = function(mail) {
     let regular = /.+@.+\..+/i;
     return regular.test(mail);
 }
 
 /* Функция для валидации телефона */
-function validPhone(phone) {
+window.validPhone = function(phone) {
     let regular = /^((8|\+7)[\- ]?)?(\(?\d{3,4}\)?[\- ]?)?[\d\- ]{6,10}$/;
     return regular.test(phone);
 }
 
 /* Функция для валидации даты */
-function validDate(date) {
+window.validDate = function(date) {
     let regular = /^\d{2}\.\d{2}\.\d{4}$/
     return regular.test(date);
 }
 
-/* Функция для координат на Яндкс карте */
-function validCoords(coordsStr) {
+/* Функция для валидации координат для рассчёта API Yandex maps */
+window.validCoords = function(coordsStr) {
     let regular = /^\[\d{2}\.\d+,\d{2}\.\d+\]$/  // [55.90356412305141,37.3824537177734]
     return regular.test(coordsStr);
 }
 
-
-
 /* Функция возвращает координаты элемента в контексте документа */
-function getCoords(elem) {
+window.getCoords = function(elem) {
     let box = elem.getBoundingClientRect();
 
     return {
@@ -56,227 +32,154 @@ function getCoords(elem) {
     };
 }
 
+/* Функция данных полей с числовыми значениями */
+window.editValue = function(direction, curValue) {
+    let newValue = curValue === ""
+        ? 0
+        : direction
+            ? Number(curValue) + 1
+            : Number(curValue) - 1;
 
-/*
- * Функция проверки поддержки localStorage
- * if (storageAvailable('localStorage')) {
- * 	// Yippee! We can use localStorage awesomeness
- * }
- * else {
- * 	// Too bad, no localStorage for us
- * }
- * */
-function storageAvailable(type) {
-    try {
-        let storage = window[type],
-            x = '__storage_test__';
-        storage.setItem(x, x);
-        storage.removeItem(x);
-        return true;
-    }
-    catch(e) {
-        return false;
+    return newValue < 0 ? 0 : newValue;
+}
+
+/**
+ * IE11 не поддерживает promise, поэтому некорректно отрабатывает запрос
+ * route в  АПИ Яндекс карт (он построен на promise),
+ * https://yandex.ru/dev/maps/jsapi/doc/2.1/ref/reference/route.html
+ * внутри ответа (then) не виден конкретный завод по которому рассчитвыем
+ * маршур (внтури перебираемого цикла for номер завода всегда последний + 1).
+ * Для того чтобы определить завод по которому
+ * производятся рассчёты, используем функциию catchFactory в которую
+ * передаём рассчитанный rout который вернул АПИ Яндекс карт. В возвращаемом
+ * ответе есть координаты завода, используемые для расчёта. Даллее в массиве
+ * с заводами находим завод с этими координатами и возвращаем его из функции.
+ */
+window.catchFactory = function(coords, factories) {
+    for (let i in factories) {
+        const factoryCoords = JSON.parse(factories[i]['coordinates']);
+
+        if (coords[0] === factoryCoords[0]
+            && coords[1] === factoryCoords[1]) {
+
+            return i;
+        }
     }
 }
 
-/* Полифилы -- Start */
-(function() {
-    // проверяем поддержку
-    if (!Element.prototype.closest) {
-        // реализуем
-        Element.prototype.closest = function(css) {
-            let node = this;
-
-            while (node) {
-                if (node.matches(css)) return node;
-                else node = node.parentElement;
-            }
-            return null;
-        };
-    }
-})();
-
-(function() {
-    // проверяем поддержку
-    if (!Element.prototype.matches) {
-        // определяем свойство
-        Element.prototype.matches = Element.prototype.matchesSelector ||
-            Element.prototype.webkitMatchesSelector ||
-            Element.prototype.mozMatchesSelector ||
-            Element.prototype.msMatchesSelector;
-    }
-})();
-
-// Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
-(function (arr) {
-    arr.forEach(function (item) {
-        if (item.hasOwnProperty('prepend')) {
-            return;
-        }
-        Object.defineProperty(item, 'prepend', {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            value: function prepend() {
-                let argArr = Array.prototype.slice.call(arguments),
-                    docFrag = document.createDocumentFragment();
-
-                argArr.forEach(function (argItem) {
-                    let isNode = argItem instanceof Node;
-                    docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-                });
-
-                this.insertBefore(docFrag, this.firstChild);
-            }
-        });
-    });
-})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
-/* Полифилы -- End */
-
-document.addEventListener("DOMContentLoaded",() => {
+document.addEventListener("DOMContentLoaded",function() {
     const body = document.body;
     const dropLinks = document.querySelectorAll(".products__link.drop");
     const navLinks = document.querySelectorAll(".nav__item.drop");
-    const faqLinks = document.getElementsByClassName("faq__item");
     let windowWidth = window.innerWidth;
 
-    const closeAccordion = () => {
-        for (let i = 0; i < dropLinks.length; ++i) {
+    function closeAccordion() {
+        for (let i = 0; i < dropLinks.length; i++) {
             dropLinks[i]
                 .parentElement
                 .classList
                 .remove('visible');
         }
 
-        for (let i = 0; i < navLinks.length; ++i) {
+        for (let i = 0; i < navLinks.length; i++) {
             navLinks[i]
                 .classList
                 .remove('visible');
         }
-    };
+    }
 
-    window.addEventListener('resize', (event) => {
+    window.addEventListener('resize', function() {
         windowWidth = window.innerWidth;
 
-        windowWidth >= 768
-            ? replaceCart(true) // replace cart to top
-            : replaceCart(false);  // replace cart to bottom
+        if (windowWidth >= 768) {
+            replaceCart(true) // replace cart to top
+            replaceOperating(true) // Replace operating after initial page
+        } else {
+            replaceCart(false);  // replace cart to bottom
+            replaceOperating(false);
+        }
 
-        windowWidth >= 1250
-            ? replaceNav(true) // replace nav after logo
-            : replaceNav(false);
+        if (windowWidth >= 1250) {
+            replaceNav(true) // replace nav after logo
+        } else {
+            replaceNav(false);
+        }
 
-        windowWidth >= 768
-            ? replaceOperating(true) // Replace operating after initial page
-            : replaceOperating(false);
-
-
-        // roll up all drop navigation when user resize window
-        for (let j = 0; j < dropLinks.length; ++j) {
+        // Сворачиваем все дроп меню
+        for (let j = 0; j < dropLinks.length; j++) {
             dropLinks[j]
                 .parentElement
                 .classList
                 .remove('visible');
         }
 
-        // Hide header nav and header phone
+        // Скрываем навигацию,телефон и выбор города в шапке
         body.classList.remove('phone-visible');
         body.classList.remove('nav-visible');
-
-        // Hide city select
         region.classList.remove("city-select-visible");
-
     });
 
-    /* Toggle phone at the header on mobile screen */
-    const headerPhoneBtn = document.getElementById('headerPhoneBtn');
-    const toggleHeaderPhone = () => {
-        body
-            .classList
-            .toggle('phone-visible');
-        body
-            .classList
-            .remove('nav-visible');
+    /* Переключенние телефона в шапке сайта на мобильной версии */
+    headerPhoneBtn.addEventListener('click', function() {
+        body.classList.toggle('phone-visible');
+        body.classList.remove('nav-visible');
+        region.classList.remove("city-select-visible");
 
         closeAccordion();
-    };
-    headerPhoneBtn.addEventListener('click', toggleHeaderPhone);
+    });
 
-    /* Toggle navigation at the header on mobile screen */
-    const navTgglr = document.getElementById('navTgglr');
-    const toggleHeaderNav = () => {
-        body
-            .classList
-            .toggle('nav-visible');
-
-        body
-            .classList
-            .remove('phone-visible');
+    /* Переключаем навигацию в шапке сайта на мибильных экранах */
+    navTgglr.addEventListener('click', function() {
+        body.classList.toggle('nav-visible');
+        body.classList.remove('phone-visible');
+        region.classList.remove("city-select-visible");
 
         closeAccordion();
-    };
-    navTgglr.addEventListener('click', toggleHeaderNav);
+    });
 
-    /* Toggle city selector at the header on mobile screen */
-    const region = document.getElementById("region");
-
-    region.addEventListener("click", event => {
+    /* Преключаем город в шапке сайта на моибильных экранах */
+    region.addEventListener("click", function(event) {
         let el = event.target;
 
         if (el.closest('#region')) {
-            region
-                .classList
-                .toggle("city-select-visible");
+            region.classList.toggle("city-select-visible");
         }
 
-        body
-            .classList
-            .remove('phone-visible');
-        body
-            .classList
-            .remove('nav-visible');
+        body.classList.remove('phone-visible');
+        body.classList.remove('nav-visible');
 
         closeAccordion();
     });
 
-    /* Replace cart at the header on mobile screen */
-    const cart = document.getElementById("cart");
-    const headerBottom = document.getElementById("headerBottom");
-    const headerTop = document.querySelector("#headerTop .header__top__body");
+    /* Обработка переноса и клика корзины в шапке сайта */
+    const headerTop = document
+        .querySelector("#headerTop .header__top__body");
 
-    const replaceCart = (move) => {
+    function replaceCart(move) {
         move
             ? headerTop.appendChild(cart)
             : headerBottom.appendChild(cart);
-    };
+    }
 
-    /* Replace cart after initial page */
+    /* Ставим корзину в нужное место после инициализации страницы */
     windowWidth >= 768
         ? replaceCart(true)
         : replaceCart(false);
 
-    /* Replace operating at the header on mobile screen */
-    const operating = document.getElementById("operating");
-
-    const replaceOperating = (move) => {
+    /* Перенос рабочего времени в шапке сайта на моибльной версиии */
+    function replaceOperating(move) {
         move
             ? headerBottom.appendChild(operating)
             : body.prepend(operating);
-    };
+    }
 
-    /* Replace operating after initial page */
+    /* Ставим рабочее время в нужное место при инициализации */
     windowWidth >= 768
         ? replaceOperating(true)
         : replaceOperating(false);
 
-    /* Replace navigation at the header on mobile screen */
-    const headerBottomContainer = document.getElementById("headerBottomContainer");
-    const headerTopNav = document.getElementById("headerTopNav");
-    const nav = document.getElementById("nav");
-    const prodContainer = document.getElementById("prodContainer");
-    const navContainer = document.getElementById("navContainer");
-
-    const replaceNav = (move) => {
+    /* Перенос навигации в шапке сайта на мобильной версии */
+    function replaceNav(move) {
         if (move) {
             prodContainer.appendChild(nav);
             navContainer.appendChild(headerTopNav);
@@ -284,20 +187,17 @@ document.addEventListener("DOMContentLoaded",() => {
             nav.appendChild(headerTopNav);
             headerBottomContainer.prepend(nav);
         }
-    };
+    }
 
     windowWidth >= 1250
-        ? replaceNav(true) // replace nav after logo
+        ? replaceNav(true)
         : replaceNav(false);
 
-    /* Nav accordion for mobile version */
-    if (windowWidth <=1250) {
-
-        // Toggle product dropdown
-        for (let i = 0; i < dropLinks.length; ++i) {
-            dropLinks[i].addEventListener('click', event => {
-
-                event.preventDefault(); // stopping click on link
+    /* Акоордион для навигации в шапке сайта на мобильной версии */
+    if (windowWidth <= 1250) {
+        for (let i = 0; i < dropLinks.length; i++) {
+            dropLinks[i].addEventListener('click', function (event) {
+                event.preventDefault();
 
                 let prntClasses = event.target.parentElement.classList;
                 let isVisible = prntClasses.contains('visible');
@@ -310,11 +210,10 @@ document.addEventListener("DOMContentLoaded",() => {
             });
         }
 
-        // Toggle nav dropdown
-        for (let i = 0; i < navLinks.length; ++i) {
-            navLinks[i].addEventListener('click', event => {
-                let elClasses = event.target.classList;
-                let isVisible = elClasses.contains('visible');
+        for (let i = 0; i < navLinks.length; i++) {
+            navLinks[i].addEventListener('click', function (event) {
+                const elClasses = event.target.classList;
+                const isVisible = elClasses.contains('visible');
 
                 closeAccordion();
 
@@ -323,20 +222,20 @@ document.addEventListener("DOMContentLoaded",() => {
                     : elClasses.add('visible');
             });
         }
-
-
     }
 
-    /* FAQ accordion */
-    const closeFaqAccordion = () => {
-        for (let i = 0; i < faqLinks.length; ++i) {
+    /* FAQ Аккордеон */
+    const faqLinks = document.getElementsByClassName("faq__item");
+
+    function closeFaqAccordion() {
+        for (let i = 0; i < faqLinks.length; i++) {
             faqLinks[i].classList.remove("visible");
         }
-    };
+    }
 
     if (faqLinks.length > 0) {
         for (let i = 0; i < faqLinks.length; ++i) {
-            faqLinks[i].addEventListener('click', event => {
+            faqLinks[i].addEventListener('click', function(event) {
                 let li = event.target.closest('li');
                 let isVisible = li.classList.contains('visible');
 
@@ -346,23 +245,26 @@ document.addEventListener("DOMContentLoaded",() => {
                     ? li.classList.remove('visible')
                     : li.classList.add('visible');
             });
-        }  }
+        }
+    }
 
-    /* Input FILE */
-    let inputs = document.querySelectorAll(".label_file input");
 
-    for (let i = 0; i < inputs.length; i++) {
-        let controller = inputs[i].nextElementSibling;
+    /* Обработка изменения Инпут полей для выбора файла */
+    const inputsFile = document.querySelectorAll(".label_file input");
 
-        inputs[i].addEventListener('change', (event) => {
+    for (let i = 0; i < inputsFile.length; i++) {
+        const controller = inputsFile[i].nextElementSibling;
+
+        inputsFile[i].addEventListener('change', function (event) {
             controller.innerHTML = event.target.value.split('\\').pop();
         });
     }
 
-    /* Show, hide modals */
-    let btns = document.getElementsByClassName('show-modal');
 
-    const toggleModal = (modal, action) => {
+    /* Показываем и скрываем модальные окна */
+    const btns = document.getElementsByClassName('show-modal');
+
+    function toggleModal(modal, action) {
         if (action) {
             body.classList.add("modal-open");
             modal.classList.add("show");
@@ -429,13 +331,13 @@ document.addEventListener("DOMContentLoaded",() => {
             }
 
             if (rentPumpResult) {
-                rentPumpResult.innerText = 0;
+                rentPumpResult.innerText = '0';
             }
         }
-    };
+    }
 
     for (let i = 0; i < btns.length; i++) {
-        btns[i].addEventListener('click', event => {
+        btns[i].addEventListener('click', function(event) {
             event.preventDefault();
 
             const modalId = event.target.dataset.modalId;
@@ -445,9 +347,9 @@ document.addEventListener("DOMContentLoaded",() => {
                 const btnClose = modal.querySelector(".modal__close");
 
                 btnClose.addEventListener("click",
-                    () => toggleModal(modal, false));
+                    function() { toggleModal(modal, false); } );
 
-                modal.addEventListener("click", event => {
+                modal.addEventListener("click", function (event) {
                     if (event.target.id ===  modalId) {
                         toggleModal(modal, false);
                     }
@@ -458,13 +360,14 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-    /* Show, hide comments for product on product page */
+
+    /* Показываем/скрываем комменты к товару на странице с карточкой товара */
     const tgglr = document.querySelector(".description__toggler");
 
     if (tgglr) {
         const prodTxt = tgglr.closest(".description");
 
-        tgglr.addEventListener("click", () => {
+        tgglr.addEventListener("click", function() {
             prodTxt.classList.toggle("show");
 
             tgglr.innerHTML === "Развернуть"
@@ -473,29 +376,23 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-    /* Click outside any elements */
-    document.addEventListener("click", event => {
+
+    /* Обработка кликов вне элементов */
+    document.addEventListener("click",  function(event) {
         const el = event.target.parentElement;
 
         if (!el.closest('#region')) {
             region.classList.remove("city-select-visible");
         }
 
-
-
-        // el.closest('#region') || el.id === "region"
-
-        // Click outside city select
-        // if (el.id !== "region" && region.classList.contains("city-select-visible")) {
-        //   region.classList.remove("city-select-visible");
-        // }
     });
 
-    /* Slider for small image at the block */
+
+    /* Слайдер для маленьких картинок на страницах Лаборатория и Товарный бетон */
     const pics = document.querySelectorAll(".sml-img-slider__item");
 
     for (let i = 0; i < pics.length; i++) {
-        pics[i].addEventListener("click", event => {
+        pics[i].addEventListener("click",  function (event) {
             const el = event.target;
 
             if (el.classList.contains("back")) {
@@ -520,21 +417,23 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
-    /* Breakstone page accordion */
+
+    /* Аккордеон для блока с описанием предприятия на странице Производство -> Щебень */
     const bsBtns = document.querySelectorAll(".breakstone__accordion-caption");
     const bsTxts = document.querySelectorAll(".breakstone__accordion-content");
-    const closeBreakstoneAccordion = () => {
+
+    function closeBreakstoneAccordion() {
         for (let i = 0; i < bsBtns.length; i++) {
             bsBtns[i].classList.remove("active");
             bsTxts[i].classList.remove("visible");
         }
-    };
+    }
 
     for (let i = 0; i < bsBtns.length; i++) {
-        bsBtns[i].addEventListener("click", event => {
+        bsBtns[i].addEventListener("click",  function(event) {
             const el = event.target;
-            const elCaptionMark = el.dataset.captionMark;
-            const elContent = el.parentElement.querySelector(`[data-caption-for="${elCaptionMark}"]`);
+            const elCaptionMark = '[data-caption-for="' + el.dataset.captionMark + '"]';
+            const elContent = el.parentElement.querySelector(elCaptionMark);
 
             // Off oll buttons and all content blocks
             if (!el.classList.contains("active")) {
@@ -546,36 +445,36 @@ document.addEventListener("DOMContentLoaded",() => {
         });
     }
 
+
     /*
-     * Работа с городом пользователя.
+     * Работа с городом пользователя в шапке сайта.
      *
-     * Смтотрим город в Storage, елси его нет, то создаём перемунную
+     * Смтотрим город в Cookies, елси его нет, то создаём перемунную
      * с городом по умолчанюи (Москва).
      *
-     * Размещаем город по умолчанию в выпадающем меню выбора города
-     * в хедере.
+     * Размещаем город по умолчанию в выпадающем меню выбора города в хедере.
      * */
-    if (storageAvailable('localStorage')) {
-        // Устанавливаем город по умолчанию в localStorage
-        if(!localStorage.getItem('usrCity')) {
-            localStorage.setItem('usrCity', 'Москва');
-        }
+    // Функция возвращает куки с указанным name, или undefined, если ничего не найдено
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
     }
-    else {
-        console.log(
-            'Браузер не поддерживает localStorage, возможно находится в режиме Инкогнито',
-            'Необходима реализация поддержки выбора города на альтернативной технологии.'
-        );
+
+    // Устанавливаем город по умолчанию в Cookies, если его там нет
+    if(!getCookie('usrCity')) {
+        let date = new Date(Date.now() + 2.628e+9);
+        date = date.toUTCString();
+        document.cookie = "usrCity=Москва; path=/; expires=" + date;
     }
-    /*
-     * Меняем город пользователя по клику на пунке города
-     * в выпадающем меню в хедере
-     * */
+
+    // Меняем город пользователя по клику на пунке города в выпадающем меню в хедере
     let cities = document.querySelectorAll(".region__item");
     let cityContainer = document.getElementById("regionCity");
 
-    const activeSelectedCity = () => {
-        let usrCity = localStorage.getItem('usrCity');
+    function activeSelectedCity() {
+        let usrCity = getCookie('usrCity');
         let cityItems = document.getElementsByClassName("region__item");
 
         for (let i = 0; i < cityItems.length; i++) {
@@ -583,16 +482,16 @@ document.addEventListener("DOMContentLoaded",() => {
                 ? cityItems[i].classList.add('active')
                 : cityItems[i].classList.remove('active');
         }
-    };
+    }
 
-    /* Размещаем город пользователя как выбранный в хедере */
-    cityContainer.innerHTML = localStorage.getItem('usrCity');
+    // Размещаем город пользователя как выбранный в хедере
+    cityContainer.innerHTML = getCookie('usrCity');
 
-    /* Делаем выбранный город пользователя скрытым при инициализации страницы */
+    // Делаем выбранный город пользователя скрытым при инициализации страницы
     activeSelectedCity();
 
     for (let i = 0; i < cities.length; i++) {
-        cities[i].addEventListener("click", event => {
+        cities[i].addEventListener("click", function(event) {
             let cityItem = event.target.closest(".region__item");
 
             // Получаем город по которому кликнул пользователь
@@ -604,21 +503,22 @@ document.addEventListener("DOMContentLoaded",() => {
             cityContainer.innerHTML = city;
 
             // Меняем город пользователя в localStorage
-            localStorage.setItem('usrCity', city);
+            let date = new Date(Date.now() + 2.628e+9);
+            date = date.toUTCString();
+            document.cookie = "usrCity=" + city + "; path=/; expires=" + date;
 
             activeSelectedCity();
         });
     }
 
-    /* Yandex maps -- START
-     *
-     * Функция ymaps.ready() будет вызвана, когда
-     * загрузятся все компоненты API,
-     * а также когда будет готово DOM-дерево.
+
+    /* Yandex maps
+     * Функция ymaps.ready() будет вызвана, когда загрузятся все
+     * компоненты API, а также когда будет готово DOM-дерево.
      */
     if (document.getElementById("indexMap")
-            || document.getElementById("contactsMap")
-            || document.getElementById("deliveryMap")) {
+        || document.getElementById("contactsMap")
+        || document.getElementById("deliveryMap")) {
         ymaps.ready(init);
     }
     function init() {
@@ -710,18 +610,18 @@ document.addEventListener("DOMContentLoaded",() => {
 
         // Карта на Главной старнице
         if (document.getElementById("indexMap")) {
-            let map = new ymaps.Map("indexMap", {
-                    // Координаты центра карты.
-                    // Порядок по умолчанию: «широта, долгота».
-                    // Чтобы не определять координаты центра карты вручную,
-                    // воспользуйтесь инструментом Определение координат.
-                    center: [55.38046857198313,41.687034406250014],
-                    // Уровень масштабирования. Допустимые значения:
-                    // от 0 (весь мир) до 19.
-                    zoom: 6,
-                    controls: [],
-                });
-            // Пушим метки в карту indexMap
+            const map = new ymaps.Map("indexMap", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [55.38046857198313,41.687034406250014],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 6,
+                controls: [],
+            });
+            // Пушим метки заводов в карту на главной странице (indexMap)
             map.geoObjects
                 .add(myPlacemarkKstovo)
                 .add(myPlacemarkLipetsk)
@@ -735,31 +635,31 @@ document.addEventListener("DOMContentLoaded",() => {
 
         // Карта на старнице Контакты
         if (document.getElementById("contactsMap")) {
-            let map = new ymaps.Map("contactsMap", {
-                    center: [55.77380806896347,37.50681899999997],
-                    zoom: 16,
-                    controls: [],
-                });
+            const map = new ymaps.Map("contactsMap", {
+                center: [55.77380806896347,37.50681899999997],
+                zoom: 16,
+                controls: [],
+            });
             map.geoObjects.add(myPlacemarkMsk);
             map.controls.add('zoomControl');
             map.behaviors.disable('scrollZoom');
         }
     }
-    /* Yandex maps -- END */
 
-    /* Yandex maps на страницах Производство бетона и Производства щебня бетона товарного -- START */
+
+    // Yandex maps на страницах Производство бетона и Производства щебня бетона товарного
     if (document.getElementById("prodMap")) {
         const btnsOpenMap = document.getElementsByClassName("open-map");
         const prodMap = document.getElementById('prodMap');
         const btnClose = document.getElementById('prodMapCloser');
 
-        btnClose.addEventListener('click', () => {
+        btnClose.addEventListener('click', function() {
             prodMap.classList.remove('visible');
         });
 
         // Создаём карту
-        ymaps.ready(function () {
-            let prodYaMap = new ymaps.Map("prodMap", {
+        ymaps.ready( function() {
+            const prodYaMap = new ymaps.Map("prodMap", {
                 // Координаты центра карты.
                 // Порядок по умолчанию: «широта, долгота».
                 // Чтобы не определять координаты центра карты вручную,
@@ -794,381 +694,406 @@ document.addEventListener("DOMContentLoaded",() => {
 
             // Открываем крту при клике на люой из кнопок
             for (let i = 0; i < btnsOpenMap.length; i++) {
-                btnsOpenMap[i].addEventListener('click', evt => {
+                btnsOpenMap[i].addEventListener('click', function(evt) {
                     evt.preventDefault();
                     prodMap.classList.add('visible');
 
-                    //Забираем координаты из кнопки
-                    let local = btnsOpenMap[i].dataset.coord;
+                    let local = evt.target.dataset.coord; // Забираем координаты из кнопки
                     local = JSON.parse(local);
-                    //Увеличиваем карту до нужного размера
-                    prodYaMap.setZoom(18,{smooth:true,centering:true});
-                    //Перемещаем карту к нужной метке
-                    prodYaMap.panTo(local);
+                    prodYaMap.setZoom(18,{smooth:true,centering:true}); //Увеличиваем карту до нужного размера
+                    prodYaMap.panTo(local); //Перемещаем карту к нужной метке
                 });
             }
         });
     }
-    /* Yandex maps на странице Производство бетона товарного -- END */
 
 
-    /* Обработчик отправки формы Сообщение с сайта -- Start */
-    const cleanErrs = (name, mail, phone, msg) => {
-        // Чистим контейнеры для сообщений об ошибках
-        name.nextSibling.innerHTML = '';
-        mail.nextSibling.innerHTML = '';
-        phone.nextSibling.innerHTML = '';
-        msg.nextSibling.innerHTML = '';
+    // Обработчик отправки формы Сообщение с сайта
+    if (document.getElementById('formFeedback')) {
+        const name          = document.getElementById('formFeedbackName');
+        const mail          = document.getElementById('formFeedbackMail');
+        const phone         = document.getElementById('formFeedbackPhone');
+        const msg           = document.getElementById('formFeedbackMsg');
+        const modalSetOrder = document.getElementById('modalSetOrder');
+        const modalBody     = document.getElementById('modalDialogFeedback');
+        const sendMsgTrue   = document.getElementById("sendMsgTrue");
 
-        // Удаляем класс ошибки у родительского узла
-        name.parentElement.classList.remove('has__error');
-        mail.parentElement.classList.remove('has__error');
-        phone.parentElement.classList.remove('has__error');
-        msg.parentElement.classList.remove('has__error');
-    };
+        function cleanErrs(name, mail, phone, msg) {
+            // Чистим контейнеры для сообщений об ошибках
+            name.nextSibling.innerHTML = '';
+            mail.nextSibling.innerHTML = '';
+            phone.nextSibling.innerHTML = '';
+            msg.nextSibling.innerHTML = '';
 
-    const cleanFields = (name, mail, phone, msg) => {
-        name.value = '';
-        mail.value = '';
-        phone.value = '';
-        msg.value = '';
-    };
-
-    const form          = document.getElementById('formFeedback');
-    const name          = document.getElementById('formFeedbackName');
-    const mail          = document.getElementById('formFeedbackMail');
-    const phone         = document.getElementById('formFeedbackPhone');
-    const msg           = document.getElementById('formFeedbackMsg');
-    const modalSetOrder = document.getElementById('modalSetOrder');
-    const modalBody     = document.getElementById('modalDialogFeedback');
-    const sendMsgTrue   = document.getElementById("sendMsgTrue");
-    const btnFBClose    = document.getElementById("btnFBClose");
-
-    btnFBClose
-        .addEventListener("click", () =>  toggleModal(modalSetOrder, false));
-
-    form.addEventListener('submit', evt => {
-        evt.preventDefault();
-        cleanErrs(name, mail, phone, msg);
-        let formValid = true;
-
-        if (msg.value === '') {
-            let err = msg.nextElementSibling;
-            err.innerHTML = 'Напишите вопрос';
-            msg.parentElement.classList.add('has__error');
-            msg.focus();
-            formValid = false;
+            // Удаляем класс ошибки у родительского узла
+            name.parentElement.classList.remove('has__error');
+            mail.parentElement.classList.remove('has__error');
+            phone.parentElement.classList.remove('has__error');
+            msg.parentElement.classList.remove('has__error');
         }
 
-        if (phone.value === '') {
-            let err = phone.nextElementSibling;
-            err.innerHTML = 'Укажите телефон';
-            phone.parentElement.classList.add('has__error');
-            formValid = false;
-            phone.focus();
-        } else {
-            if (validPhone(phone.value) === false) {
-                let err =  phone.nextElementSibling;
-                err.innerHTML = 'Некорректный телефон';
+        function cleanFields(name, mail, phone, msg) {
+            name.value = '';
+            mail.value = '';
+            phone.value = '';
+            msg.value = '';
+        }
+
+        function feedbackFunctionSubmit() {
+            cleanErrs(name, mail, phone, msg);
+            let formValid = true;
+
+            if (msg.value === '') {
+                let err = msg.nextElementSibling;
+                err.innerHTML = 'Напишите вопрос';
+                msg.parentElement.classList.add('has__error');
+                msg.focus();
+                formValid = false;
+            }
+
+            if (phone.value === '') {
+                let err = phone.nextElementSibling;
+                err.innerHTML = 'Укажите телефон';
                 phone.parentElement.classList.add('has__error');
                 formValid = false;
                 phone.focus();
+            } else {
+                if (validPhone(phone.value) === false) {
+                    let err =  phone.nextElementSibling;
+                    err.innerHTML = 'Некорректный телефон';
+                    phone.parentElement.classList.add('has__error');
+                    formValid = false;
+                    phone.focus();
+                }
             }
-        }
 
-        if (mail.value === '') {
-            let err =  mail.nextElementSibling;
-            err.innerHTML = 'Укажите e-mail';
-            mail.parentElement.classList.add('has__error');
-            formValid = false;
-            mail.focus();
-        } else {
-            if (validMail(mail.value) === false) {
+            if (mail.value === '') {
                 let err =  mail.nextElementSibling;
-                err.innerHTML = 'Некорректный e-mail';
+                err.innerHTML = 'Укажите e-mail';
                 mail.parentElement.classList.add('has__error');
                 formValid = false;
                 mail.focus();
+            } else {
+                if (validMail(mail.value) === false) {
+                    let err =  mail.nextElementSibling;
+                    err.innerHTML = 'Некорректный e-mail';
+                    mail.parentElement.classList.add('has__error');
+                    formValid = false;
+                    mail.focus();
+                }
             }
-        }
 
-        if (name.value === '') {
-            let err =  name.nextElementSibling;
-            err.innerHTML = 'Укажите имя';
-            name.parentElement.classList.add('has__error');
-            name.focus();
-            formValid = false;
-        }
+            if (name.value === '') {
+                let err =  name.nextElementSibling;
+                err.innerHTML = 'Укажите имя';
+                name.parentElement.classList.add('has__error');
+                name.focus();
+                formValid = false;
+            }
 
-        if (formValid) {
-            spinner.classList.add('visible');
-            getResource(form.action, form)
-                .then(response  => {
-                    spinner.classList.remove('visible');
+            if (formValid) {
+                spinner.classList.add('visible');
 
+                $.post(
+                    formFeedback.action,
+                    $('#formFeedback').serializeArray(),
+                    "json"
+                ).done(function (response) {
                     if (response['IS_ERRORS']) {
-                        alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.')
+                        alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.');
                     } else {
                         cleanFields(name, mail, phone, msg);
                         modalBody.classList.add('hide');
                         sendMsgTrue.classList.add("visible");
                     }
+                }).fail(function() {
+                    console.log('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.');
+                }).always(function () {
+                    spinner.classList.remove('visible');
                 });
-        }
-    });
-    /* Обработчик отправки формы Сообщение с сайта -- End */
-
-    /* Обработчик отправки формы "Записать на собеседование" -- Start */
-    const cleanErrsVacancy = (
-        name, birthday, phone,
-        email, position, questionary,
-        photo) => {
-
-        // Чистим контейнеры для сообщений об ошибках
-        name.nextSibling.innerHTML = '';
-        birthday.nextSibling.innerHTML = '';
-        phone.nextSibling.innerHTML = '';
-        email.nextSibling.innerHTML = '';
-        position.nextSibling.innerHTML = '';
-        questionary.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
-        photo.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
-
-        // Удаляем класс ошибки у родительского узла
-        name.parentElement.classList.remove('has__error');
-        birthday.parentElement.classList.remove('has__error');
-        phone.parentElement.classList.remove('has__error');
-        email.parentElement.classList.remove('has__error');
-        position.parentElement.classList.remove('has__error');
-        questionary.parentElement.classList.remove('has__error');
-        photo.parentElement.classList.remove('has__error');
-    };
-
-    const cleanFieldsVacancy = (
-        name, birthday, phone,
-        email, position, questionary,
-        photo) => {
-
-        name.value = '';
-        birthday.value = '';
-        phone.value = '';
-        email.value = '';
-        position.value = '';
-        questionary.value = '';
-        photo.value = '';
-        questionary.nextElementSibling.innerHTML = '';
-        photo.nextElementSibling.innerHTML = '';
-    };
-
-    const formVacancy        = document.getElementById('formVacancy');
-    const nameVacancy        = document.getElementById('formVacancyName');
-    const birthdayVacancy    = document.getElementById('formVacancyBirthday');
-    const phoneVacancy       = document.getElementById('formVacancyPhone');
-    const emailVacancy       = document.getElementById('formVacancyEmail');
-    const positionVacancy    = document.getElementById('formVacancyPosition');
-    const questionaryVacancy = document.getElementById('formVacancyQuestionary');
-    const photoVacancy       = document.getElementById('formVacancyPhoto');
-
-    if(formVacancy) {
-        formVacancy.addEventListener('submit', evt => {
-        evt.preventDefault();
-        cleanErrsVacancy(
-            nameVacancy, birthdayVacancy, phoneVacancy,
-            emailVacancy, positionVacancy, questionaryVacancy,
-            photoVacancy);
-        let formValid = true;
-
-        questionaryVacancy.nextElementSibling.innerHTML = questionaryVacancy.value.split('\\').pop();
-        photoVacancy.nextElementSibling.innerHTML = photoVacancy.value.split('\\').pop();
-
-        // Фото можно не добавлять, нет проверки на пустое поле.
-        if (photoVacancy.value !== '') {
-            let type = photoVacancy
-                .files[0]
-                .name
-                .split(".")
-                .splice(-1,1)[0];
-
-            if (!(type === 'jpg' || type === 'gif' || type === 'bmp' || type === 'png' || type === 'jpeg')) {
-                let err =  photoVacancy.nextElementSibling.nextElementSibling;
-                err.innerHTML = 'Выбранный файл - не картинка. Допускаются файлы jpg, gif, bmp, png, jpeg';
-                photoVacancy.parentElement.classList.add('has__error');
-                formValid = false;
             }
         }
 
-        if (questionaryVacancy.value !== '') {
-            let type = questionaryVacancy
-                .files[0]
-                .name
-                .split(".")
-                .splice(-1,1)[0];
+        btnFFClose
+            .addEventListener("click", function () {
+                toggleModal(modalSetOrder, false);
+            });
 
-            if (!(type === 'txt' || type === 'doc' || type === 'docx' || type === 'rtf' || type === 'pdf')) {
-                let err =  questionaryVacancy.nextElementSibling.nextElementSibling;
-                err.innerHTML = 'Ошибка формата. Допускаются txt, doc, docx, rtf, pdf';
-                questionaryVacancy.parentElement.classList.add('has__error');
+        btnFFSubmit
+            .addEventListener('click', function () {
+                feedbackFunctionSubmit();
+            });
+
+        $('#formFeedback').submit(function () {
+            feedbackFunctionSubmit();
+            return false;
+        });
+    }
+
+
+    // Обработчик отправки формы "Записать на собеседование"
+    if (document.getElementById('formVacancy')) {
+        const nameVacancy        = document.getElementById('formVacancyName');
+        const birthdayVacancy    = document.getElementById('formVacancyBirthday');
+        const phoneVacancy       = document.getElementById('formVacancyPhone');
+        const emailVacancy       = document.getElementById('formVacancyEmail');
+        const positionVacancy    = document.getElementById('formVacancyPosition');
+        const questionaryVacancy = document.getElementById('formVacancyQuestionary');
+        const photoVacancy       = document.getElementById('formVacancyPhoto');
+
+        function cleanErrsVacancy (
+            name, birthday, phone,
+            email, position, questionary,
+            photo) {
+
+            // Чистим контейнеры для сообщений об ошибках
+            name.nextSibling.innerHTML = '';
+            birthday.nextSibling.innerHTML = '';
+            phone.nextSibling.innerHTML = '';
+            email.nextSibling.innerHTML = '';
+            position.nextSibling.innerHTML = '';
+            questionary.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
+            photo.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
+
+            // Удаляем класс ошибки у родительского узла
+            name.parentElement.classList.remove('has__error');
+            birthday.parentElement.classList.remove('has__error');
+            phone.parentElement.classList.remove('has__error');
+            email.parentElement.classList.remove('has__error');
+            position.parentElement.classList.remove('has__error');
+            questionary.parentElement.classList.remove('has__error');
+            photo.parentElement.classList.remove('has__error');
+        }
+
+        function cleanFieldsVacancy (
+            name, birthday, phone,
+            email, position, questionary,
+            photo) {
+            name.value = '';
+            birthday.value = '';
+            phone.value = '';
+            email.value = '';
+            position.value = '';
+            questionary.value = '';
+            photo.value = '';
+            questionary.nextElementSibling.innerHTML = '';
+            photo.nextElementSibling.innerHTML = '';
+        }
+
+        function vacancyFunctionSubmit() {
+            cleanErrsVacancy(
+                nameVacancy, birthdayVacancy, phoneVacancy,
+                emailVacancy, positionVacancy, questionaryVacancy,
+                photoVacancy);
+
+            let formValid = true;
+
+            questionaryVacancy.nextElementSibling.innerHTML = questionaryVacancy.value.split('\\').pop();
+            photoVacancy.nextElementSibling.innerHTML = photoVacancy.value.split('\\').pop();
+
+            // Фото можно не добавлять, нет проверки на пустое поле.
+            if (photoVacancy.value !== '') {
+                let type = photoVacancy
+                    .files[0]
+                    .name
+                    .split(".")
+                    .splice(-1,1)[0];
+
+                if (!(type === 'jpg' || type === 'gif' || type === 'bmp' || type === 'png' || type === 'jpeg')) {
+                    let err =  photoVacancy.nextElementSibling.nextElementSibling;
+                    err.innerHTML = 'Выбранный файл - не картинка. Допускаются файлы jpg, gif, bmp, png, jpeg';
+                    photoVacancy.parentElement.classList.add('has__error');
+                    formValid = false;
+                }
+            }
+
+            if (questionaryVacancy.value !== '') {
+                let type = questionaryVacancy
+                    .files[0]
+                    .name
+                    .split(".")
+                    .splice(-1,1)[0];
+
+                if (!(type === 'txt' || type === 'doc' || type === 'docx' || type === 'rtf' || type === 'pdf')) {
+                    let err =  questionaryVacancy.nextElementSibling.nextElementSibling;
+                    err.innerHTML = 'Ошибка формата. Допускаются txt, doc, docx, rtf, pdf';
+                    questionaryVacancy.parentElement.classList.add('has__error');
+                    formValid = false;
+                }
+            }
+
+            if (positionVacancy.value === '') {
+                let err = positionVacancy.nextElementSibling;
+                err.innerHTML = 'Укажите желаемую должность';
+                positionVacancy.parentElement.classList.add('has__error');
+                positionVacancy.focus();
                 formValid = false;
             }
-        }
 
-        if (positionVacancy.value === '') {
-            let err = positionVacancy.nextElementSibling;
-            err.innerHTML = 'Укажите желаемую должность';
-            positionVacancy.parentElement.classList.add('has__error');
-            positionVacancy.focus();
-            formValid = false;
-        }
-
-        if (emailVacancy.value === '') {
-            let err = emailVacancy.nextElementSibling;
-            err.innerHTML = 'Укажите Ваш Е-мэйл';
-            emailVacancy.parentElement.classList.add('has__error');
-            emailVacancy.focus();
-            formValid = false;
-        } else {
-            if (validMail(emailVacancy.value) === false) {
-                let err =  emailVacancy.nextElementSibling;
-                err.innerHTML = 'Е-мэйл указан некорректно';
+            if (emailVacancy.value === '') {
+                let err = emailVacancy.nextElementSibling;
+                err.innerHTML = 'Укажите Ваш Емэйл';
                 emailVacancy.parentElement.classList.add('has__error');
                 emailVacancy.focus();
                 formValid = false;
+            } else {
+                if (validMail(emailVacancy.value) === false) {
+                    let err =  emailVacancy.nextElementSibling;
+                    err.innerHTML = 'Емэйл указан некорректно';
+                    emailVacancy.parentElement.classList.add('has__error');
+                    emailVacancy.focus();
+                    formValid = false;
+                }
             }
-        }
 
-        if (phoneVacancy.value === '') {
-            let err = phoneVacancy.nextElementSibling;
-            err.innerHTML = 'Укажите Ваш телефон';
-            phoneVacancy.parentElement.classList.add('has__error');
-            phoneVacancy.focus();
-            formValid = false;
-        } else {
-            if (validPhone(phoneVacancy.value) === false) {
-                let err =  phoneVacancy.nextElementSibling;
-                err.innerHTML = 'Телефон указан некорректно';
+            if (phoneVacancy.value === '') {
+                let err = phoneVacancy.nextElementSibling;
+                err.innerHTML = 'Укажите Ваш телефон';
                 phoneVacancy.parentElement.classList.add('has__error');
                 phoneVacancy.focus();
                 formValid = false;
+            } else {
+                if (validPhone(phoneVacancy.value) === false) {
+                    let err =  phoneVacancy.nextElementSibling;
+                    err.innerHTML = 'Телефон указан некорректно';
+                    phoneVacancy.parentElement.classList.add('has__error');
+                    phoneVacancy.focus();
+                    formValid = false;
+                }
             }
-        }
 
-        if (birthdayVacancy.value === '') {
-            let err = birthdayVacancy.nextElementSibling;
-            err.innerHTML = 'Укажите дату рождения';
-            birthdayVacancy.parentElement.classList.add('has__error');
-            birthdayVacancy.focus();
-            formValid = false;
-        } else {
-            if (validDate(birthdayVacancy.value) === false) {
-                let err =  birthdayVacancy.nextElementSibling;
-                err.innerHTML = 'Формат даты должен быть ДД.ММ.ГГГГ';
+            if (birthdayVacancy.value === '') {
+                let err = birthdayVacancy.nextElementSibling;
+                err.innerHTML = 'Укажите дату рождения';
                 birthdayVacancy.parentElement.classList.add('has__error');
                 birthdayVacancy.focus();
                 formValid = false;
+            } else {
+                if (validDate(birthdayVacancy.value) === false) {
+                    let err =  birthdayVacancy.nextElementSibling;
+                    err.innerHTML = 'Формат даты должен быть ДД.ММ.ГГГГ';
+                    birthdayVacancy.parentElement.classList.add('has__error');
+                    birthdayVacancy.focus();
+                    formValid = false;
+                }
+            }
+
+            if (nameVacancy.value === '') {
+                let err = nameVacancy.nextElementSibling;
+                err.innerHTML = 'Заполните поле имя';
+                nameVacancy.parentElement.classList.add('has__error');
+                nameVacancy.focus();
+                formValid = false;
+            }
+
+            if (formValid) {
+                spinner.classList.add('visible');
+
+                $.ajax({
+                    url: formVacancy.action,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: new FormData(formVacancy),
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response['IS_ERRORS']) {
+                            alert('Данные не добавлены. Ошибка сервера. Попробуйте немного позже.');
+                        } else {
+                            cleanFieldsVacancy(
+                                nameVacancy, birthdayVacancy, phoneVacancy,
+                                emailVacancy, positionVacancy, questionaryVacancy,
+                                photoVacancy);
+
+                            const modalDialog = modalVacancy.getElementsByClassName('send-msg-true')[0];
+
+                            modalVacancy.classList.add('show');
+                            body.classList.add('modal-open');
+                            modalDialog.classList.add('visible');
+
+                            btnVacancyClose.addEventListener('click', function () {
+                                modalVacancy.classList.remove('show');
+                                body.classList.remove('modal-open');
+                                modalDialog.classList.remove('visible');
+                            });
+                        }
+                    },
+                    error: function (xhr, desc, err) {
+                        console.log('Данные не добавлены. Произошла ошибка. Попробуйте немного позже.');
+                        console.log(desc, err);
+                    },
+                    complete: function () {
+                        spinner.classList.remove('visible');
+                    }
+                });
             }
         }
 
-        if (nameVacancy.value === '') {
-            let err = nameVacancy.nextElementSibling;
-            err.innerHTML = 'Заполните поле имя';
-            nameVacancy.parentElement.classList.add('has__error');
-            nameVacancy.focus();
-            formValid = false;
-        }
-
-        if (formValid) {
-            spinner.classList.add('visible');
-            getResource(formVacancy.action, formVacancy)
-                .then(response  => {
-                    spinner.classList.remove('visible');
-
-                    if (response['IS_ERRORS']) {
-                        alert('Данные не добавлены. Произошла ошибка. Попробуйте немного позже.')
-                    } else {
-                        cleanFieldsVacancy(
-                            nameVacancy, birthdayVacancy, phoneVacancy,
-                            emailVacancy, positionVacancy, questionaryVacancy,
-                            photoVacancy);
-
-                        let modal = document.getElementById('modalVacancy');
-                        let modalDialog = modal.getElementsByClassName('send-msg-true')[0];
-                        let btnClose = document.getElementById('btnVacancyClose');
-
-                        modal.classList.add('show');
-                        body.classList.add('modal-open');
-                        modalDialog.classList.add('visible');
-
-                        btnClose.addEventListener('click', () => {
-                            modal.classList.remove('show');
-                            body.classList.remove('modal-open');
-                            modalDialog.classList.remove('visible');
-                        });
-                    }
-                });
-        }
-    });
+        $('#formVacancy').submit(function () {
+            vacancyFunctionSubmit();
+            return false;
+        });
     }
-    /* Обработчик отправки формы "Записать на собеседование" -- End */
 
 
-    /* Обработчик отправки формы Заявка на тендер -- Start */
-    const cleanErrsRequestTender = (
-      name, address, director,
-      ogrn, phone, mail, docs,
-      money) => {
-        // Чистим контейнеры для сообщений об ошибках
-        name.nextSibling.innerHTML = '';
-        address.nextSibling.innerHTML = '';
-        director.nextSibling.innerHTML = '';
-        ogrn.nextSibling.innerHTML = '';
-        phone.nextSibling.innerHTML = '';
-        mail.nextSibling.innerHTML = '';
-        money.nextSibling.innerHTML = '';
-        docs.nextSibling.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
+    // Обработчик отправки формы Заявка на тендер
+    if (document.getElementById('formRequestTender')) {
+        const nameRequestTender     = document.getElementById('formRequestTenderName');
+        const addressRequestTender  = document.getElementById('formRequestTenderAddress');
+        const directorRequestTender = document.getElementById('formRequestTenderDirector');
+        const ogrnRequestTender     = document.getElementById('formRequestTenderOgrn');
+        const phoneRequestTender    = document.getElementById('formRequestTenderPhone');
+        const mailRequestTender     = document.getElementById('formRequestTenderMail');
+        const docsRequestTender     = document.getElementById('formRequestTenderDocs');
+        const moneyRequestTender    = document.getElementById('formRequestTenderMoney');
 
-        // Удаляем класс ошибки у родительского узла
-        name.parentElement.classList.remove('has__error');
-        address.parentElement.classList.remove('has__error');
-        director.parentElement.classList.remove('has__error');
-        ogrn.parentElement.classList.remove('has__error');
-        phone.parentElement.classList.remove('has__error');
-        mail.parentElement.classList.remove('has__error');
-        name.parentElement.classList.remove('has__error');
-        money.parentElement.classList.remove('has__error');
-        docs.parentElement.classList.remove('has__error');
-    };
+        function cleanErrsRequestTender (
+            name, address, director,
+            ogrn, phone, mail, docs,
+            money) {
+            // Чистим контейнеры для сообщений об ошибках
+            name.nextSibling.innerHTML = '';
+            address.nextSibling.innerHTML = '';
+            director.nextSibling.innerHTML = '';
+            ogrn.nextSibling.innerHTML = '';
+            phone.nextSibling.innerHTML = '';
+            mail.nextSibling.innerHTML = '';
+            money.nextSibling.innerHTML = '';
+            docs.nextSibling.nextSibling.nextSibling.innerHTML = ''; // у этого инпута span с ошибкой стоит чере одно поле, которое служит для отображения выбранного файла
 
-    const cleanFieldsRequestTender = (
-      name, address, director,
-      ogrn, phone, mail, docs,
-      money) => {
-        name.value = '';
-        address.value = '';
-        director.value = '';
-        ogrn.value = '';
-        phone.value = '';
-        mail.value = '';
-        money.value = '';
-        docs.nextElementSibling.innerHTML = '';
-    };
+            // Удаляем класс ошибки у родительского узла
+            name.parentElement.classList.remove('has__error');
+            address.parentElement.classList.remove('has__error');
+            director.parentElement.classList.remove('has__error');
+            ogrn.parentElement.classList.remove('has__error');
+            phone.parentElement.classList.remove('has__error');
+            mail.parentElement.classList.remove('has__error');
+            name.parentElement.classList.remove('has__error');
+            money.parentElement.classList.remove('has__error');
+            docs.parentElement.classList.remove('has__error');
+        }
 
-    const formRequestTender     = document.getElementById('formRequestTender');
-    const nameRequestTender     = document.getElementById('formRequestTenderName');
-    const addressRequestTender  = document.getElementById('formRequestTenderAddress');
-    const directorRequestTender = document.getElementById('formRequestTenderDirector');
-    const ogrnRequestTender     = document.getElementById('formRequestTenderOgrn');
-    const phoneRequestTender    = document.getElementById('formRequestTenderPhone');
-    const mailRequestTender     = document.getElementById('formRequestTenderMail');
-    const docsRequestTender     = document.getElementById('formRequestTenderDocs');
-    const moneyRequestTender    = document.getElementById('formRequestTenderMoney');
+        function cleanFieldsRequestTender (
+            name, address, director,
+            ogrn, phone, mail, docs,
+            money) {
+            name.value = '';
+            address.value = '';
+            director.value = '';
+            ogrn.value = '';
+            phone.value = '';
+            mail.value = '';
+            money.value = '';
+            docs.nextElementSibling.innerHTML = '';
+        }
 
-    if(formRequestTender) {
-        formRequestTender.addEventListener('submit', evt => {
-            evt.preventDefault();
+        function tenderFunctionSubmit() {
             cleanErrsRequestTender(
                 nameRequestTender, addressRequestTender,
                 directorRequestTender, ogrnRequestTender,
                 phoneRequestTender, mailRequestTender,
                 docsRequestTender, moneyRequestTender);
+
             let formValid = true;
 
             if (moneyRequestTender.value === '') {
@@ -1203,7 +1128,7 @@ document.addEventListener("DOMContentLoaded",() => {
             } else {
                 if (validMail(mailRequestTender.value) === false) {
                     let err =  mailRequestTender.nextElementSibling;
-                    err.innerHTML = 'Некорректный Е-mail';
+                    err.innerHTML = 'Некорректный Еmail';
                     mailRequestTender.parentElement.classList.add('has__error');
                     formValid = false;
                     mailRequestTender.focus();
@@ -1212,7 +1137,7 @@ document.addEventListener("DOMContentLoaded",() => {
 
             if (directorRequestTender.value === '') {
                 let err = directorRequestTender.nextElementSibling;
-                err.innerHTML = 'Укажите ФИЩ директора';
+                err.innerHTML = 'Укажите ФИО директора';
                 directorRequestTender.parentElement.classList.add('has__error');
                 directorRequestTender.focus();
                 formValid = false;
@@ -1260,12 +1185,17 @@ document.addEventListener("DOMContentLoaded",() => {
 
             if (formValid) {
                 spinner.classList.add('visible');
-                getResource(formRequestTender.action, formRequestTender)
-                    .then(response  => {
-                        spinner.classList.remove('visible');
 
+                $.ajax({
+                    url: formRequestTender.action,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: new FormData(formRequestTender),
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
                         if (response['IS_ERRORS']) {
-                            alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.')
+                            alert('Заявка на тендер не отправлена. Ошибка сервера. Попробуйте немного позже.');
                         } else {
                             cleanFieldsRequestTender(
                                 nameRequestTender, addressRequestTender,
@@ -1281,31 +1211,49 @@ document.addEventListener("DOMContentLoaded",() => {
                             modalDialog.classList.add('hide');
                             sendRequestTenderTrue.classList.add("visible");
 
-                            btnClose.addEventListener('click', () => {
+                            btnClose.addEventListener('click', function() {
                                 modal.classList.remove('show');
                                 body.classList.remove('modal-open');
                                 modalDialog.classList.remove('hide');
                                 sendRequestTenderTrue.classList.remove("visible");
                             });
                         }
-                    });
+                    },
+                    error: function (xhr, desc, err) {
+                        console.log('Заявка на тендер не отправлена. Произошла ошибка. Попробуйте немного позже.');
+                        console.log(desc, err);
+                    },
+                    complete: function () {
+                        spinner.classList.remove('visible');
+                    }
+                });
             }
+        }
+
+        btnFTSubmit
+            .addEventListener('click', function () {
+                tenderFunctionSubmit();
+            });
+
+        $('#formRequestTender').submit(function () {
+            tenderFunctionSubmit();
+            return false;
         });
     }
-    /* Обработчик отправки формы Заявка на тендер -- End */
 
-    /* Блокируем ссылки/пункты меню Производство - Start */
+
+    // Блокируем ссылки/пункты меню Производство
     const prodMenuItem = document
         .getElementsByClassName("production")[0]
         .previousElementSibling;
 
     prodMenuItem.style.cursor = "default";
-    prodMenuItem.addEventListener('click', evt => {
-       evt.preventDefault();
+    prodMenuItem.addEventListener('click', function(evt) {
+        evt.preventDefault();
     });
-    /* Блокируем ссылки/пункты меню Производство - End */
 
-    /* Инициализируем Slick Slider на слайдере Партнёры (Главная страница) */
+
+    // Инициализируем Slick Slider на слайдере Партнёры (Главная страница)
     $('.partners-slick-slider').slick({
         infinite: true,
         slidesToShow: 4,
@@ -1335,7 +1283,8 @@ document.addEventListener("DOMContentLoaded",() => {
     });
 
 
-    /* Инициализируем Slick Slider на слайдере товаров (Главная страница) */
+
+    // Инициализируем Slick Slider на слайдере товаров
     $('.product-slick-slider').slick({
         infinite: true,
         slidesToShow: 2,
@@ -1354,9 +1303,8 @@ document.addEventListener("DOMContentLoaded",() => {
         ]
     });
 
-
-    /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- Start */
-    const handleClickSliderControls = (sliderContainerId) => {
+    // Скролл к первому слайду после клика по стрелками влево/вправо на слайдере
+    function handleClickSliderControls(sliderContainerId) {
         const sliderContainer = document
             .getElementById(sliderContainerId);
 
@@ -1364,28 +1312,35 @@ document.addEventListener("DOMContentLoaded",() => {
             const controls = sliderContainer
                 .getElementsByClassName("slider__controller");
 
-            for (let el of controls) {
-                el.addEventListener('click', () => {
-                    //window.scrollTo(0, getCoords(slider).top - 150);
-                    sliderContainer.scrollIntoView({
-                        block: "start",
-                        behavior: "smooth"
-                    });
+            for (let i = 0; i < controls.length; i++) {
+                controls[i].addEventListener('click', function () {
+                    $('html, body').animate({
+                        scrollTop: $(sliderContainer).offset().top + 80
+                    }, 500);
                 });
             }
+
         }
     }
 
-    // Инициализируем только для мобильных
+    // Инициализируем Скролл к первому слайду только для мобильных
     if (windowWidth < 992) {
         handleClickSliderControls("concreteSlider");
         handleClickSliderControls("rubbleSlider");
         handleClickSliderControls("pumpSlider");
     }
-    /* Скролл к первому слайду после клика по стрелками влево/вправо на слайдере -- End */
 
-    // Обраотчика логики корзины -- Start
-    window.fnCartModalToggle = (action) => {
+
+
+    // Обраотчика логики корзины
+    cart = document.getElementById("cart");
+    cartModalClose = document.getElementById("cartModalClose");
+
+    window.fnCartModalToggle = function(action) {
+        cartModal = document.getElementById("cartModal");
+        cartModalDialog = document.getElementById("cartModalDialog");
+        msgSetOrderTrue = document.getElementById("msgSetOrderTrue");
+
         if (action) {
             body.classList.add("modal-open");
             cartModal.classList.add("show");
@@ -1414,6 +1369,7 @@ document.addEventListener("DOMContentLoaded",() => {
                     }
                 }
             }
+
             fnCleanCartFormControls();
             fnCleanCartFromErr();
             msgSetOrderTrue.classList.remove('visible');
@@ -1421,26 +1377,28 @@ document.addEventListener("DOMContentLoaded",() => {
     };
 
     // Открываем Корзину в модальном окне при клике на иконку корзины в хедере
-    cart.addEventListener('click', evt => {
+    cart.addEventListener('click', function() {
         fnCartModalToggle(true);
     });
 
     // Закрываем мальное окно корзиныы при клике на крестик-закрыть окно
-    cartModalClose.addEventListener('click', evt => {
+    cartModalClose.addEventListener('click', function() {
         fnCartModalToggle(false);
     });
 
     // Закрывамем модальное окно корзина при клике вне мадального окна
-    cartModal.addEventListener('click', evt => {
+    cartModal.addEventListener('click', function (evt) {
         if (evt.target.id === 'cartModal')
             fnCartModalToggle(false);
     });
 
     // Динамическое удаление товара из корзины
     // и из структуры данных, хранящейся в сесиии
-    const fnDeleteItemFromSession = (url) => {
-        getResource(url)
-            .then(response  => {
+    function fnDeleteItemFromSession(url) {
+        $.post(url)
+            .done(function (data) {
+                const response = JSON.parse(data);
+
                 if (response['IS_ERRORS']) {
                     alert('К сожалению не удалось удалить товар из корзины. ' +
                         'Перезагрузите страницу и попробуйте ещё раз.')
@@ -1450,34 +1408,34 @@ document.addEventListener("DOMContentLoaded",() => {
                     if (response['CART_ITEM_COUNT'] === 0) {
                         finalCartPriceContainer.innerText = '0.00';
 
-                        setTimeout(()=>{
+                        setTimeout(function () {
                             noProductsMsg.classList.remove('hidden');
                             cartModalBody.classList.add('hidden');
                             cartModalFooter.classList.add('hidden');
-                            }, 300);
+                        }, 300);
                     } else {
                         // Уменьшаяем итоговую сумму корзины
                         // на величину стоимости удалённого товара
                         const newFinalCartPrice =
                             parseFloat(finalCartPriceContainer.innerText) -
-                                parseFloat(response['PRODUCT_PRICE']);
+                            parseFloat(response['PRODUCT_PRICE']);
 
                         finalCartPriceContainer.innerText =
                             Math.round(newFinalCartPrice * 100) / 100;
                     }
                 }
             });
-    };
+    }
 
     // Так как при добавлении нового элемента он создаётся динамически,
     // для того чтобы работала функция удаления элемента
     // без перезагрузки страницы, слушаем событие click
     // на всём списке элементов
-    cartModalBody.addEventListener( 'click', evt => {
+    cartModalBody.addEventListener( 'click', function (evt) {
+        const el = evt.target;
         // Удаление элемнта
-        if (evt.target.classList
-                .contains('cart-modal__item__delete')) {
-            const item = evt.target.parentElement;
+        if (el.classList.contains('cart-modal__item__delete')) {
+            const item = el.parentElement;
             const url = '/utils/delete-item-from-cart.php'
                 + '?type='
                 + item.dataset.productType
@@ -1487,8 +1445,9 @@ document.addEventListener("DOMContentLoaded",() => {
             item.classList.add('deleted');
 
             // Удаляем товар из корзины
-            setTimeout(() => {
-                item.parentNode.removeChild(item);
+            setTimeout(function() {
+                // item.parentNode.removeChild(item);
+                $(item).remove();
             },1000);
 
             // Удаляем товар из сессионых данных
@@ -1496,14 +1455,12 @@ document.addEventListener("DOMContentLoaded",() => {
         }
 
         // Пказваем/скрываем поле с дополнительной информацией в карточке товара
-        if (evt.target.classList
-                .contains('cart-modal__item__inform-title')) {
-            evt.target
-                .nextElementSibling
+        if (el.classList
+            .contains('cart-modal__item__inform-title')) {
+            el.nextElementSibling
                 .classList
                 .toggle('visible');
-            evt.target
-                .classList
+            el.classList
                 .toggle('active');
         }
     });
@@ -1511,7 +1468,16 @@ document.addEventListener("DOMContentLoaded",() => {
     // Обработчик отправки формы с данными корзины:
     // 1. Добавляем новый элемент Заказ в инфоблок Заказы
     // 2. Отправляем письмо менеджеру с данными нового заказа
-    const fnCleanCartFromErr = () => {
+    formCartPhone = document.getElementById("formCartPhone");
+    formCartMail = document.getElementById("formCartMail");
+    formCartDate = document.getElementById("formCartDate");
+    formCartName = document.getElementById("formCartName");
+    formCartMsg = document.getElementById("formCartMsg");
+    btnSetOrderClose = document.getElementById("btnSetOrderClose");
+    formCart = document.getElementById("formCart");
+    btnFCSubmit = document.getElementById("btnFCSubmit");
+
+    function fnCleanCartFromErr() {
         formCartPhone
             .parentElement
             .classList
@@ -1547,23 +1513,24 @@ document.addEventListener("DOMContentLoaded",() => {
         formCartName
             .nextElementSibling
             .innerHTML = '';
-    };
-    const fnCleanCartFormControls = () => {
+    }
+
+    function fnCleanCartFormControls() {
         formCartPhone.value = "";
         formCartMail.value = "";
         formCartDate.value = "";
         formCartName.value = "";
         formCartMsg.value = "";
-    };
+    }
 
-    btnSetOrderClose.addEventListener('click', evt => {
+    btnSetOrderClose.addEventListener('click', function () {
         fnCartModalToggle(false);
     });
 
-    formCart.addEventListener('submit', evt => {
-        evt.preventDefault();
-        let formValid = true;
+    function cartFunctionSubmit() {
         fnCleanCartFromErr();
+
+        let formValid = true;
 
         if (formCartPhone.value === '') {
             formCartPhone
@@ -1664,9 +1631,17 @@ document.addEventListener("DOMContentLoaded",() => {
 
         if (formValid) {
             spinner.classList.add('visible');
-            getResource(formCart.action, formCart)
-                .then(response  => {
-                    spinner.classList.remove('visible');
+
+            $.ajax({
+                url: formCart.action,
+                type: "POST",
+                dataType: "JSON",
+                data: new FormData(formCart),
+                processData: false,
+                contentType: false,
+                success: function (response) {
+
+                    console.log(response)
 
                     if (response['IS_ERRORS']) {
                         alert('К сожалению не удалось оформить Заказ. ' +
@@ -1679,8 +1654,26 @@ document.addEventListener("DOMContentLoaded",() => {
                         msgSetOrderTrue.classList.add("visible");
                         cartModalDialog.classList.add('hide');
                     }
-                });
+                },
+                error: function (xhr, desc, err) {
+                    console.log('К сожалению не удалось оформить Заказ. ' +
+                        'Произошла ошибка. Попробуйте немного позже.');
+                    console.log(desc, err);
+                },
+                complete: function () {
+                    spinner.classList.remove('visible');
+                }
+            });
         }
+    }
+
+    btnFCSubmit
+        .addEventListener('click', function () {
+            cartFunctionSubmit();
+        });
+
+    $('#formCart').submit(function () {
+        cartFunctionSubmit();
+        return false;
     });
-    // Обраотчика логики корзины -- End
 });

@@ -1,11 +1,7 @@
 // Функция создаёт новый набор элементов (карточек с новостями) для списка новостей и возвращает его
-const createItemNews = (
-    date,
-    detailPageUrl,
-    id,
-    pictureSrc,
-    text,
-) => {
+function createItemNews(date, detailPageUrl,
+                        id, pictureSrc,
+                        text) {
     let item = document.createElement('div');
     let link = document.createElement('a');
     let pic = document.createElement('div');
@@ -42,27 +38,26 @@ const createItemNews = (
     item.appendChild(link);
 
     return item;
-};
+}
 
-/* Для асинхронного получения данных с сервера
- * используется сервис-функция getResource
- * /local/templates/.default/js/main.js
- */
-document.addEventListener("DOMContentLoaded",() => {
+// Асинхронно получаем список новостей следующей страницы с сервера
+document.addEventListener("DOMContentLoaded", function () {
+
     const btnGetNextPage = document
         .getElementById("btnGetNextPage");
 
     btnGetNextPage
-        .addEventListener('click', event => {
+        .addEventListener('click', function (event) {
             event.preventDefault();
 
             const container = document.getElementById('newsListContainer');
             const spinner = document.getElementById('spinner');
+
             spinner.classList.add('visible');
 
-            getResource(btnGetNextPage.href)
-                .then(response  => {
-                    spinner.classList.remove('visible');
+            $.post(btnGetNextPage.href)
+                .done(function (data) {
+                    const response = JSON.parse(data);
                     const isScrolled = window.pageYOffset;
 
                     // В цикле собирем новые элементы с карточками новостей
@@ -70,17 +65,17 @@ document.addEventListener("DOMContentLoaded",() => {
                     for (let key in response) {
                         if (key === '0') continue;
 
-                        let item = createItemNews(
+                        const item = createItemNews(
                             response[key].DATE,
                             response[key].DETAIL_PAGE_URL,
                             response[key].ID,
                             response[key].PICTURE_SRC,
-                            response[key].TEXT,
+                            response[key].TEXT
                         );
 
                         container.appendChild(item);
 
-                        setTimeout(() => {
+                        setTimeout(function () {
                             item.classList.remove('hide');
                         }, (key * 100));
                     }
@@ -96,6 +91,10 @@ document.addEventListener("DOMContentLoaded",() => {
                     } else {
                         btnGetNextPage.style.display = 'none';
                     }
+
+                })
+                .always(function () {
+                    spinner.classList.remove('visible');
                 });
         });
 });

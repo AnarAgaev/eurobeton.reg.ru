@@ -21,7 +21,7 @@ $APPLICATION->SetTitle("Тендеры");?>
                       enctype="multipart/form-data"
                       id="formRequestTender">
                     <div class="d-flex flex-column flex-md-row">
-                        <div class="d-flex flex-column">
+                        <div class="form-tender-controls d-flex flex-column">
                             <label class="label label_w345">
                                 <span>Наименование компании</span>
                                 <input class="input"
@@ -100,10 +100,11 @@ $APPLICATION->SetTitle("Тендеры");?>
                             <span class="err__msg"></span>
                         </label>
                     </div>
+                    <input type="submit" value="" class="from-submit-hidden-input">
                 </form>
             </div>
             <div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
-                <button class="btn" type="submit" form="formRequestTender">отправить</button>
+                <button class="btn" type="submit" form="formRequestTender" id="btnFTSubmit">отправить</button>
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
                     <a class="link"

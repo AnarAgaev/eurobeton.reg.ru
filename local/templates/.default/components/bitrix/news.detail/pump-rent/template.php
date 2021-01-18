@@ -76,7 +76,8 @@ $this->setFrameMode(true);
                             <input class="input"
                                    type="number"
                                    name="time"
-                                   placeholder="8"
+                                   min="8"
+                                   placeholder="Минимум 8 часов"
                                    id="formRentPumpTime">
                             <span class="err__msg"></span>
                         </label>
@@ -84,10 +85,11 @@ $this->setFrameMode(true);
                             Итого:<span id="formRentPumpResult">0</span>руб.
                         </div>
                     </div>
+                    <input type="submit" value="" class="from-rent-price-hidden-input">
                 </form>
             </div>
             <div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
-                <button class="btn" type="submit" form="formRentPump">отправить</button>
+                <button class="btn" type="submit" form="formRentPump" id="btnFRPSubmit">отправить</button>
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
                     <a class="link"

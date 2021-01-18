@@ -7,9 +7,15 @@ $iblock_id = 18; // ID инфоблока в который добавляем �
 
 //Свойства
 $PROP = array();
-$PROP['EMAIL'] = $_POST['email'];
-$PROP['PHONE'] = $_POST['phone'];
-$PROP['MESSAGE'] = $_POST['message'];
+$PROP['EMAIL'] = htmlspecialchars(strip_tags(trim($_POST['email'])));
+$PROP['PHONE'] = htmlspecialchars(strip_tags(trim($_POST['phone'])));
+$PROP['MESSAGE'] = htmlspecialchars(strip_tags(trim($_POST['message'])));
+
+if (get_magic_quotes_gpc()) {
+    $PROP['EMAIL'] = stripcslashes($PROP['EMAIL']);
+    $PROP['PHONE'] = stripcslashes($PROP['PHONE']);
+    $PROP['MESSAGE'] = stripcslashes($PROP['MESSAGE']);
+}
 
 //Основные поля элемента
 $fields = array(

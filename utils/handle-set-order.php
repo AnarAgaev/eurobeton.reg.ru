@@ -17,10 +17,10 @@ if (isset($_POST['date'])
     $PROP['COMMENT'] = htmlspecialchars(strip_tags(trim($_POST['comment'])));
 
     if (get_magic_quotes_gpc()) {
-        $username = stripcslashes($PROP['DELIVERY_DATE']);
-        $username = stripcslashes($PROP['EMAIL']);
-        $username = stripcslashes($PROP['PHONE']);
-        $username = stripcslashes($PROP['COMMENT']);
+        $PROP['DELIVERY_DATE'] = stripcslashes($PROP['DELIVERY_DATE']);
+        $PROP['EMAIL'] = stripcslashes($PROP['EMAIL']);
+        $PROP['PHONE'] = stripcslashes($PROP['PHONE']);
+        $PROP['COMMENT'] = stripcslashes($PROP['COMMENT']);
     }
 
     // Получаем данные из корзины, хранящейся в сессии

@@ -5,7 +5,11 @@
 <head>
 	<?$APPLICATION->ShowHead();?>
 	<title><?$APPLICATION->ShowTitle();?></title>
-    <?php
+    <?
+        Asset::getInstance()->addString('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+        Asset::getInstance()->addString('<meta http-equiv="X-UA-Compatible" content="ie=edge">');
+        Asset::getInstance()->addString('<meta name="robots" content="index, follow">');
+
         /* Added favicons */
         Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">');
         Asset::getInstance()->addString('<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">');
@@ -25,9 +29,13 @@
         Asset::getInstance()->addString('<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">');
         Asset::getInstance()->addString('<meta name="theme-color" content="#ffffff">');
 
-        Asset::getInstance()->addString('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
-        Asset::getInstance()->addString('<meta http-equiv="X-UA-Compatible" content="ie=edge">');
-        Asset::getInstance()->addString('<meta name="robots" content="index, follow">');
+        /* Added base site includes */
+        Asset::getInstance()->addString('<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">');
+        Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/vendors.css');
+        Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/main.css');
+        if ($APPLICATION->GetCurPage(false) == '/') {
+            Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/billboard-animation.css');
+        }
 
         /* Added Fancybox apps */
         Asset::getInstance()->addCss('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css');
@@ -39,16 +47,14 @@
         Asset::getInstance()->addJs('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
         Asset::getInstance()->addCss('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
 
-        /* Added base site includes */
-        Asset::getInstance()->addString('<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">');
-        Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/vendors.css');
-        Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/main.css');
-        if ($APPLICATION->GetCurPage(false) == '/') {
-            Asset::getInstance()->addCss(DEFAULT_TEMPLATE_PATH . '/css/billboard-animation.css');
-        }
+        Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/polyfill-js-find-method.js');
+        Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/polyfill-js-append-method.js');
+        Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/polyfill-js-from-method.js');
+        Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/polyfill-js-includes-method.js');
+        Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/js-polyfills.js');
         Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/main.js');
 
-        /* Добавляем Яндекс картуы только на те страницы где она используется*/
+        // Добавляем Яндекс карту только на те страницы где она используется
         if ($APPLICATION->GetCurPage(false) == '/'
             or $APPLICATION->GetCurPage(false) == '/produktsiya/izvestnyakovaya-muka/'
             or $APPLICATION->GetCurPage(false) == '/produktsiya/mineralnyy-poroshok/'
@@ -63,19 +69,19 @@
             or preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) {
-            Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
+                Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=bcf0711f-5031-4e9a-a643-2984d4000f2b&amp;lang=ru_RU');
         }
 
         /* Добавляем Скрипт для расчёта доставки только на те страницы где он используется */
         if ($APPLICATION->GetCurPage(false) == '/dostavka/'
             or $APPLICATION->GetCurPage(false) == '/produktsiya/') {
-            Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
+                Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
         }
 
         if (preg_match('/\/produktsiya\/beton\/tovarnyy-beton\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/betonnaya-smes\/\w/', $APPLICATION->GetCurPage())
             or preg_match('/\/produktsiya\/beton\/rastvory-tsementno-peschanye\/\w/', $APPLICATION->GetCurPage())) {
-            Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
+                Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/rout-calc.js');
         }
 
         /* Добавляем Скрипт для расчёта стоимости товара только на те страницы где он используется */
@@ -85,7 +91,7 @@
             or preg_match('/\/produktsiya\/shcheben\/\w/', $APPLICATION->GetCurPage())
             or $APPLICATION->GetCurPage(false) == '/produktsiya/izvestnyakovaya-muka/'
             or $APPLICATION->GetCurPage(false) == '/produktsiya/mineralnyy-poroshok/') {
-            Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/product-calc.js');
+                Asset::getInstance()->addJs(DEFAULT_TEMPLATE_PATH . '/js/product-calc.js');
         }
 
         /* Добавляем Скрипт кулькулятора рассчёта стоимости бетона только на главной странице */

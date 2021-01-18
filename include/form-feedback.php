@@ -2,7 +2,7 @@
     <div class="send-msg-true flex-column justify-content-center align-items-center" id="sendMsgTrue">
         <h3 class="send-msg-true__title">Сообщение отправлено</h3>
         <span class="send-msg-true__txt">Менеджер свяжется с Вами в ближайшее время.</span>
-        <button class="btn" id="btnFBClose">Закрыть</button>
+        <button class="btn" id="btnFFClose">Закрыть</button>
     </div>
 
     <div class="modal__dialog modal__dialog_set-order" id="modalDialogFeedback">
@@ -61,10 +61,11 @@
                             <span class="err__msg"></span>
                         </label>
                     </div>
+                    <input type="submit" value="" class="from-submit-hidden-input">
                 </form>
             </div>
             <div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
-                <button class="btn" type="submit" form="formFeedback">отправить</button>
+                <button class="btn" type="submit" form="formFeedback" id="btnFFSubmit">отправить</button>
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
                     <a class="link"

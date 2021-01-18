@@ -233,6 +233,7 @@
                         <span class="err__msg"></span>
                     </label>
                 </div>
+                <input type="submit" value="" class="from-cart-hidden-input">
             </form>
         </div>
         <div class="cart-modal__footer d-flex flex-column <?if(!$IS_ITEMS) echo 'hidden';?>"  id="cartModalFooter">
@@ -245,7 +246,7 @@
                 </div>
             </div>
             <div class="cart-modal__action d-flex flex-column justify-content-center align-items-center flex-md-row">
-                <button class="btn mb-3 mb-md-0 mr-md-4" type="submit" form="formCart">
+                <button class="btn mb-3 mb-md-0 mr-md-4" type="submit" form="formCart"  id="btnFCSubmit">
                     оформить заказ
                 </button>
                 <div class="cart-modal__agreement">

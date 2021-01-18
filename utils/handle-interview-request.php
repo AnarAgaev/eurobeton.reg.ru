@@ -7,14 +7,21 @@ $iblock_id = 19; // ID инфоблока в который добавляем �
 
 //Свойства
 $PROP = array();
-$PROP['NAME'] = $_POST['name'];
-$PROP['BIRTHDAY'] = $_POST['birthday'];
-$PROP['PHONE'] = $_POST['phone'];
-$PROP['EMAIL'] = $_POST['email'];
-$PROP['POSITION'] = $_POST['position'];
+$PROP['NAME'] = htmlspecialchars(strip_tags(trim($_POST['name'])));
+$PROP['BIRTHDAY'] = htmlspecialchars(strip_tags(trim($_POST['birthday'])));
+$PROP['PHONE'] = htmlspecialchars(strip_tags(trim($_POST['phone'])));
+$PROP['EMAIL'] = htmlspecialchars(strip_tags(trim($_POST['email'])));
+$PROP['POSITION'] = htmlspecialchars(strip_tags(trim($_POST['position'])));
 $PROP['QUESTIONARY'] = $_FILES['questionary'];
 $PROP['PHOTO'] = $_FILES['photo'];
 
+if (get_magic_quotes_gpc()) {
+    $PROP['NAME'] = stripcslashes($PROP['NAME']);
+    $PROP['BIRTHDAY'] = stripcslashes($PROP['BIRTHDAY']);
+    $PROP['PHONE'] = stripcslashes($PROP['PHONE']);
+    $PROP['EMAIL'] = stripcslashes($PROP['EMAIL']);
+    $PROP['POSITION'] = stripcslashes($PROP['POSITION']);
+}
 
 //Основные поля элемента
 $fields = array(

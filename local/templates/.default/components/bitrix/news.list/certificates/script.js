@@ -1,11 +1,5 @@
 // Функция создаёт новый элемент для списка новостей и возвращает его
-const createItemCertificates = (
-    id,
-    detailPictureHref,
-    previewPictureSrc,
-    alt,
-    title,
-) => {
+function createItemCertificates(id, detailPictureHref, previewPictureSrc, alt, title) {
 
     let item = document.createElement('li');
     let link = document.createElement('a');
@@ -31,27 +25,25 @@ const createItemCertificates = (
     item.appendChild(link);
 
     return item;
-};
+}
 
-/* Для асинхронного получения данных с сервера
- * используется сервис-функция getResource
- * по пути /local/templates/.default/js/main.js
- */
-document.addEventListener("DOMContentLoaded",() => {
+// Асинхронно получаем новые сертификаты с сервера
+document.addEventListener("DOMContentLoaded", function () {
+
     const btnGetNextPage = document
         .getElementById("btnGetNextSertificates");
 
     btnGetNextPage
-        .addEventListener('click', event => {
+        .addEventListener('click', function (event) {
             event.preventDefault();
 
             const container = document.getElementById('certificatesListContainer');
             const spinner = document.getElementById('spinner');
             spinner.classList.add('visible');
 
-            getResource(btnGetNextPage.href)
-                .then(response  => {
-                    spinner.classList.remove('visible');
+            $.post(btnGetNextPage.href)
+                .done(function (data) {
+                    const response = JSON.parse(data);
                     const isScrolled = window.pageYOffset;
 
                     // В цикле собирем новые элементы с карточками сертификатов
@@ -66,12 +58,12 @@ document.addEventListener("DOMContentLoaded",() => {
                             response[key].DETAIL_PICTURE_SRC,
                             response[key].PREVIEW_PICTURE_SRC,
                             response[key].PREVIEW_ALT,
-                            response[key].PREVIEW_TITLE,
+                            response[key].PREVIEW_TITLE
                         );
 
                         container.appendChild(item);
 
-                        setTimeout(() => {
+                        setTimeout(function () {
                             item.classList.remove('hide');
                         }, (key * 100));
                     }
@@ -92,6 +84,9 @@ document.addEventListener("DOMContentLoaded",() => {
                     $().fancybox({
                         selector : '.certificates__card',
                     });
+                })
+                .always(function () {
+                    spinner.classList.remove('visible');
                 });
         });
 });

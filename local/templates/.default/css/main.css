@@ -329,6 +329,10 @@
     }
 }
 
+_:-ms-fullscreen, :root .form .label_select select option {
+    font-weight: bold;
+}
+
 .form .label_select {
     position: relative;
 }
@@ -391,6 +395,8 @@
     background: #fff url("/local/templates/.default/img/select-arr-down.png") no-repeat top 18px right 15px;
     position: relative;
 }
+
+
 
 @media (min-width: 992px) {
     .form .label_select select:hover {
@@ -1777,7 +1783,6 @@ h1, h2, h3, h4, h5, h6 {
     -ms-flex-direction: column;
     flex-direction: column;
     height: 700px;
-    border-bottom: 2px solid #eee;
 }
 
 @media (min-width: 1250px) {
@@ -2171,6 +2176,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #cartModal {
     padding: 0;
+    overflow-y: auto;
 }
 
 .cart-modal__dialog {
@@ -2693,20 +2699,23 @@ h1, h2, h3, h4, h5, h6 {
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
         -ms-flex-direction: row;
-        flex-direction: row
+        flex-direction: row;
+        width: auto;
     }
 }
 
 .header .products__item {
     position: relative;
-    border-bottom: 2px solid #eee
+    border-bottom: 2px solid #eee;
+    width: 100%;
 }
 
 @media (min-width: 1250px) {
     .header .products__item {
         padding: 0 40px;
         height: 86px;
-        border: none
+        border: none;
+        width: auto;
     }
 
     .header .products__item:before {
@@ -2959,13 +2968,15 @@ h1, h2, h3, h4, h5, h6 {
     -o-transition: all .3s linear;
     transition: all .3s linear;
     position: relative;
-    padding: 0 30px
+    padding: 0 30px;
+    width: 100%;
 }
 
 @media (min-width: 1250px) {
     .header .products__link {
         height: 86px;
-        padding: 0
+        padding: 0;
+        width: auto;
     }
 }
 
@@ -3095,7 +3106,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .header .handset {
     width: 22px;
-    height: 22px
+    height: 22px;
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -3970,7 +3982,8 @@ h1, h2, h3, h4, h5, h6 {
 .map__body {
     width: 100%;
     height: 386px;
-    background-color: #eee
+    background-color: #eee;
+    overflow: hidden;
 }
 
 @media (min-width: 992px) {
@@ -5554,7 +5567,7 @@ span.bread-crumbs__link {
     padding: 0 5px;
     z-index: 999;
     background-color: rgba(0, 0, 0, 0);
-    height: 100vh;
+    height: 100%;
     width: 100%;
     left: 0;
     top: -100vh;
@@ -5563,6 +5576,12 @@ span.bread-crumbs__link {
     -webkit-transition: background-color .1s linear, top 0s linear .2s;
     -o-transition: background-color .1s linear, top 0s linear .2s;
     transition: background-color .1s linear, top 0s linear .2s
+}
+
+@media (min-width: 768px) {
+    .modal {
+        overflow-y: hidden;
+    }
 }
 
 .modal.show {
@@ -5882,6 +5901,19 @@ span.bread-crumbs__link {
     }
 }
 
+.from-submit-hidden-input,
+.from-cart-hidden-input,
+.from-rent-price-hidden-input,
+.from-equipment-rent-hidden-input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
 #formRequestTender {
     padding-right: 15px;
     padding-left: 15px;
@@ -5906,6 +5938,17 @@ span.bread-crumbs__link {
         margin-bottom: 17px !important
     }
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .modal__controls {
+        width: 343px;
+    }
+    
+    .form-tender-controls {
+        width: 368px;
+    }
+}
+
 
 .modal__msg {
     width: 100%

@@ -1,32 +1,13 @@
 // Функция создаёт новый элемент для списка товаров
 // на странице каталога Бетон и возвращает его
-const createItemCertificates = (
-    id,
-    name,
-    previewPictureSrc,
-    previewText,
-    concreteGrade,
-    concreteMobility,
-    concreteFrost,
-    concreteWater,
-    concreteFiller,
-    concreteAntifreezeAdditive,
-    money,
-    priceMinimum,
-    detailPageUrl
-) => {
-    let item = document.createElement('div');
-    item.classList.add(
-        "col-sm-6",
-        "col-lg-4",
-        "col-xl-3",
-        "catalog__item",
-        "d-flex",
-        "flex-column",
-        "justify-content-start",
-        "align-items-center",
-        "hide"
-    );
+function createItemCertificates (id, name, previewPictureSrc, previewText,
+                                 concreteGrade, concreteMobility, concreteFrost,
+                                 concreteWater, concreteFiller, concreteAntifreezeAdditive,
+                                 money, priceMinimum, detailPageUrl) {
+
+    const item = document.createElement('div');
+    $(item).addClass("col-sm-6 col-lg-4 col-xl-3 catalog__item d-flex flex-column justify-content-start align-items-center hide");
+
     item.id = id;
 
     let pic = document.createElement('div');
@@ -76,27 +57,26 @@ const createItemCertificates = (
     item.appendChild(btn);
 
     return item;
-};
+}
 
-/* Для асинхронного получения данных с сервера
- * используется сервис-функция getResource
- * по пути /local/templates/.default/js/main.js
- */
-document.addEventListener("DOMContentLoaded",() => {
+// Асинхроннно получаем товары следующей страницы
+document.addEventListener("DOMContentLoaded", function () {
+
     const btnGetNextPage = document
         .getElementById("btnGetNextBetonPage");
 
     btnGetNextPage
-        .addEventListener('click', event => {
+        .addEventListener('click', function(event) {
             event.preventDefault();
 
             const container = document.getElementById('itemsListContainer');
             const spinner = document.getElementById('spinner');
+
             spinner.classList.add('visible');
 
-            getResource(btnGetNextPage.href)
-                .then(response  => {
-                    spinner.classList.remove('visible');
+            $.post(btnGetNextPage.href)
+                .done(function (data) {
+                    const response = JSON.parse(data);
                     const isScrolled = window.pageYOffset;
 
                     // В цикле собирем новые элементы с карточками товаров
@@ -119,12 +99,12 @@ document.addEventListener("DOMContentLoaded",() => {
                             response[key].CONCRETE_ANTIFREEZE_ADDITIVE,
                             response[key].PRICE,
                             response[key].PRICE_MINIMUM,
-                            response[key].DETAIL_PAGE_URL,
+                            response[key].DETAIL_PAGE_URL
                         );
 
                         container.appendChild(item);
 
-                        setTimeout(() => {
+                        setTimeout(function () {
                             item.classList.remove('hide');
                         }, (key * 100));
                     }
@@ -140,6 +120,9 @@ document.addEventListener("DOMContentLoaded",() => {
                     } else {
                         btnGetNextPage.style.display = 'none';
                     }
+                })
+                .always(function () {
+                    spinner.classList.remove('visible');
                 });
         });
 });

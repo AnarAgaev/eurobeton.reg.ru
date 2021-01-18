@@ -1,8 +1,19 @@
-/* Обработчик отправки формы Заказ доп. оборудования */
-document.addEventListener("DOMContentLoaded", () => {
-    const body = document.body;
+// Обработчик отправки формы Заказ доп. оборудования
+document.addEventListener("DOMContentLoaded", function () {
 
-    const cleanErrsEO = (name, mail, phone, msg) => {
+    const body = document.body;
+    const formEO        = document.getElementById('formEquipmentOrder');
+    const nameEO        = document.getElementById('formEquipmentOrderName');
+    const mailEO        = document.getElementById('formEquipmentOrderMail');
+    const phoneEO       = document.getElementById('formEquipmentOrderPhone');
+    const msgEO         = document.getElementById('formEquipmentOrderMsg');
+    const modalEOOrder  = document.getElementById('modalEquipmentOrder');
+    const modalEOBody   = document.getElementById('modalDialogEquipmentOrder');
+    const sendMsgEOTrue = document.getElementById("sendEquipmentOrderMsgTrue");
+    const btnEOClose    = document.getElementById("btnEOClose");
+    const btnFRSubmit    = document.getElementById("btnFRSubmit");
+
+    function cleanErrsEO (name, mail, phone, msg) {
         // Чистим контейнеры для сообщений об ошибках
         name.nextSibling.innerHTML = '';
         mail.nextSibling.innerHTML = '';
@@ -14,16 +25,16 @@ document.addEventListener("DOMContentLoaded", () => {
         mail.parentElement.classList.remove('has__error');
         phone.parentElement.classList.remove('has__error');
         msg.parentElement.classList.remove('has__error');
-    };
+    }
 
-    const cleanFieldsEO = (name, mail, phone, msg) => {
+    function cleanFieldsEO (name, mail, phone, msg) {
         name.value = '';
         mail.value = '';
         phone.value = '';
         msg.value = '';
-    };
+    }
 
-    const toggleModalEO = (modal, action) => {
+    function toggleModalEO (modal, action) {
         if (action) {
             body.classList.add("modal-open");
             modal.classList.add("show");
@@ -33,68 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
             body.classList.remove("modal-open");
             modal.classList.remove("show");
             modalDialog.classList.remove('hide');
+            sendMsgEOTrue.classList.remove('visible');
 
-            const modalsResult = document.getElementsByClassName('send-msg-true');
-            const errors = modalDialog.getElementsByClassName("err__msg");
-            const labels = modalDialog.getElementsByClassName("label");
-            const inputs = modalDialog.getElementsByClassName("input");
-            const texts = modalDialog.getElementsByClassName("textarea");
-            const files = modalDialog.querySelectorAll('input[type="file"]');
+            sendMsgEOTrue.
 
-            if (modalsResult.length > 0) {
-                for (let i = 0; i < modalsResult.length; i++) {
-                    modalsResult[i].classList.remove('visible');
-                }
-            }
-
-            if (errors.length > 0) {
-                for (let i = 0; i < errors.length; i++) {
-                    errors[i].innerHTML = '';
-                }
-            }
-
-            if (labels.length > 0) {
-                for (let i = 0; i < labels.length; i++) {
-                    labels[i].classList.remove("has__error");
-                }
-            }
-
-            if (inputs.length > 0) {
-                for (let i = 0; i < inputs.length; i++) {
-                    inputs[i].value = '';
-                }
-            }
-
-            if (texts.length > 0) {
-                for (let i = 0; i < texts.length; i++) {
-                    texts[i].value = '';
-                }
-            }
-
-            if (files.length > 0) {
-                for (let i = 0; i < files.length; i++) {
-                    files[i].nextElementSibling.innerHTML = '';
-                }
-            }
+            cleanErrsEO(nameEO, mailEO, phoneEO, msgEO);
+            cleanFieldsEO(nameEO, mailEO, phoneEO, msgEO);
         }
-    };
+    }
 
-    const formEO        = document.getElementById('formEquipmentOrder');
-    const nameEO        = document.getElementById('formEquipmentOrderName');
-    const mailEO        = document.getElementById('formEquipmentOrderMail');
-    const phoneEO       = document.getElementById('formEquipmentOrderPhone');
-    const msgEO         = document.getElementById('formEquipmentOrderMsg');
-    const modalEOOrder  = document.getElementById('modalEquipmentOrder');
-    const modalEOBody   = document.getElementById('modalDialogEquipmentOrder');
-    const sendMsgEOTrue = document.getElementById("sendEquipmentOrderMsgTrue");
-    const btnEOClose    = document.getElementById("btnEOClose");
+    function rentFunctionSubmit() {
 
-    btnEOClose
-        .addEventListener("click", () =>  toggleModalEO(modalEOOrder, false));
-
-    formEO.addEventListener('submit', evt => {
-        evt.preventDefault();
         cleanErrsEO(nameEO, mailEO, phoneEO, msgEO);
+
         let formValid = true;
 
         if (msgEO.value === '') {
@@ -147,18 +109,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (formValid) {
             spinner.classList.add('visible');
-            getResource(formEO.action, formEO)
-                .then(response  => {
-                    spinner.classList.remove('visible');
 
+            $.ajax({
+                url: formEO.action,
+                type: "POST",
+                dataType: "JSON",
+                data: new FormData(formEO),
+                processData: false,
+                contentType: false,
+                success: function (response) {
                     if (response['IS_ERRORS']) {
-                        alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.')
+                        alert('Сообщение не отправлено. Произошла ошибка. Попробуйте немного позже.');
                     } else {
                         cleanFieldsEO(nameEO, mailEO, phoneEO, msgEO);
                         modalEOBody.classList.add('hide');
                         sendMsgEOTrue.classList.add("visible");
                     }
-                });
+                },
+                error: function (xhr, desc, err) {
+                    alert('Ошибка сервера. Сообщение не отправлено. Попробуйте немного позже.');
+                    console.log(desc, err);
+                },
+                complete: function () {
+                    spinner.classList.remove('visible');
+                }
+            });
         }
+    }
+
+    btnEOClose
+        .addEventListener("click", function () {
+            toggleModalEO(modalEOOrder, false);
+        });
+
+    btnFRSubmit
+        .addEventListener('click', function () {
+            rentFunctionSubmit();
+        });
+
+    $('#formEquipmentOrder').submit(function () {
+        rentFunctionSubmit();
+        return false;
     });
 });

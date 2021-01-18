@@ -76,10 +76,11 @@ $this->setFrameMode(true);
                             <span class="err__msg"></span>
                         </label>
                     </div>
+                    <input class="from-equipment-rent-hidden-input" type="submit" value="">
                 </form>
             </div>
             <div class="modal__footer d-flex flex-column flex-md-row align-items-center justify-content-center">
-                <button class="btn" type="submit" form="formEquipmentOrder">отправить</button>
+                <button class="btn" type="submit" form="formEquipmentOrder" id="btnFRSubmit">отправить</button>
                 <div class="modal__agreement">
                     Нажимая кнопку, вы соглашаетесь с условиями
                     <a class="link"
