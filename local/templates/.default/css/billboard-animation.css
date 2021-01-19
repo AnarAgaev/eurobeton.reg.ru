@@ -4305,10 +4305,10 @@
         opacity: 0;
     }
     89.3% {
-        opacity: 0;
+        opacity: 1;
     }
     100% {
-        opacity: 0;
+        opacity: 1;
     }
 }
 
@@ -4499,10 +4499,6 @@
         opacity: 0;
     }
 }
-
-
-
-
 
 
 

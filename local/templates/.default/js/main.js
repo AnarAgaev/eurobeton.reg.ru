@@ -106,17 +106,17 @@ document.addEventListener("DOMContentLoaded",function() {
         }
 
         // Сворачиваем все дроп меню
-        for (let j = 0; j < dropLinks.length; j++) {
-            dropLinks[j]
-                .parentElement
-                .classList
-                .remove('visible');
-        }
+        // for (let j = 0; j < dropLinks.length; j++) {
+        //     dropLinks[j]
+        //         .parentElement
+        //         .classList
+        //         .remove('visible');
+        // }
 
         // Скрываем навигацию,телефон и выбор города в шапке
-        body.classList.remove('phone-visible');
-        body.classList.remove('nav-visible');
-        region.classList.remove("city-select-visible");
+        // body.classList.remove('phone-visible');
+        // body.classList.remove('nav-visible');
+        // region.classList.remove("city-select-visible");
     });
 
     /* Переключенние телефона в шапке сайта на мобильной версии */
