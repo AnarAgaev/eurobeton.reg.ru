@@ -95,21 +95,6 @@
                 <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/car-full.png" alt="">
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="pile pile-1"></div>
             <div class="pile pile-2"></div>
             <div class="pile pile-3"></div>

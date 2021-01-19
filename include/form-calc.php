@@ -190,27 +190,20 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
                         <span class="err__msg">Некорректное значение</span>
                     </label>
 
-
-
                     <label class="label label-btn">
                         <span><b>Набрал свыше 300 кубов?</b></span>
                         <a class="btn show-modal" data-modal-id="modalSetOrder">спец. предложение</a>
                     </label>
 
-
-
-
-
-
-
-
                 </div>
-                <div class="group-additive">
-                    <div class="tglr" id="concreteAddParamsTglr">
-                        <b>Добавки</b>(выберите при необходиости):
+                <!--
+                    <div class="group-additive">
+                        <div class="tglr" id="concreteAddParamsTglr">
+                            <b>Добавки</b>(выберите при необходиости):
+                        </div>
                     </div>
-                </div>
-                <div class="group-two" id="concreteParamsGroupTwo">
+                -->
+                <div class="group-two params-visible" id="concreteParamsGroupTwo">
                     <label class="label label_w212 label_select">
                         <span>Морозостойкость:</span>
                         <select class="select"
