@@ -64,9 +64,10 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.classList.remove("show");
             modalDialog.classList.remove('hide');
 
-
-            for (let i = 0; i < modalsResult.length; i++) {
-                modalsResult[i].classList.remove('visible');
+            if (modalsResult.length > 0) {
+                for (let i = 0; i < modalsResult.length; i++) {
+                    modalsResult[i].classList.remove('visible');
+                }
             }
 
             cleanErrsRP(nameRP, mailRP, phoneRP, timeRP); // чистим сообщения об ошибках

@@ -1,9 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
 
 .billboard {
     margin-top: 0 !important;
@@ -186,1360 +180,4331 @@
     100% {opacity: 1;}
 }
 
-.excavator {
-    position: absolute;
-    width: 67px;
-    height: 62px;
-    z-index: 10;
-}
-.excavator-1 {
-    top: 68px;
-    right: 468px;
-    background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat center center;
-    -webkit-animation: excavator-1 30s linear 10s infinite normal;
-    animation: excavator-1 30s linear 10s infinite normal;
-}
-.excavator-2 {
-    top: 107px;
-    right: 400px;
-    background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    -webkit-animation: excavator-2 30s linear 0s infinite normal;
-    animation: excavator-2 30s linear 0s infinite normal;
-}
-@-webkit-keyframes excavator-2 {
-    0% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    18% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    19% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    20% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    21% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    22% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    23% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    84.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    85.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    86.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    87.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    88.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    89.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    100% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-}
-@keyframes excavator-2 {
-    0% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    18% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    19% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    20% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    21% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    22% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    23% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    84.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    85.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    86.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    87.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    88.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    89.3% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    100% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-}
-@-webkit-keyframes excavator-1 {
-    0% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    15% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    16% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    17% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    18% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    19% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    20% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    100% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-}
-@keyframes excavator-1 {
-    0% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    15% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    16% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    17% {
-        background: url("/local/templates/.default/img/billboard/excavator-2.png") no-repeat;
-    }
-    18% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    19% {
-        background: url("/local/templates/.default/img/billboard/excavator-3.png") no-repeat;
-    }
-    20% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
-    100% {
-        background: url("/local/templates/.default/img/billboard/excavator-1.png") no-repeat;
-    }
+
+.car-1-empty img,
+.car-1-full img,
+.car-2-empty img,
+.car-2-full img,
+.car-3-empty img,
+.car-3-full img {
+    display: block;
+    width: 31px;
+    height: 25px;
 }
 
-.car {
+.car-1-empty {
     position: absolute;
     width: 31px;
     height: 25px;
+    top: -30px;
+    right: 755px;
     z-index: 1;
+    -webkit-animation: car-1-empty 30s linear 0s infinite normal;
+    animation: car-1-empty 30s linear 0s infinite normal;
+    transform: scale(-1,1);
+    opacity: 1;
 }
-.car-1 {
-    -webkit-animation: car-1 30s linear 0s infinite normal;
-    animation: car-1 30s linear 0s infinite normal;
-}
-.car-2 {
-    -webkit-animation: car-2 30s linear 10s infinite normal;
-    animation: car-2 30s linear 10s infinite normal;
-}
-.car-3 {
-    -webkit-animation: car-1 30s linear 20s infinite normal;
-    animation: car-1 30s linear 20s infinite normal;
-}
-@-webkit-keyframes car-1 {
+@-webkit-keyframes car-1-empty {
     0% {
         top: -30px;
         right: 755px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     10% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     11% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     11.0001% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     12% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     15% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     20% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     20.0001% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     23% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     25% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     26% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     26.0001%  {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     30%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     31%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     31.0001%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     32%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     38%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     39%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     39.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     40%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     42%  {
         top: 237px;
         right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     45%  {
         top: 237px;
         right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     47%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     48%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     48.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     49%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     49.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     50%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     53%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     54%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     54.0001%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     55%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     60%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     61%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     61.0001%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     63%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     71%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     72%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     72.0001%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     74%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     79% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     80% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     80.0001% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     81% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     85% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     87% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     87.0001% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     91% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     100% {
         top: 585px;
         right: 605px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
+    
 }
-@keyframes car-1 {
+@keyframes car-1-empty {
     0% {
         top: -30px;
         right: 755px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     10% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     11% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
-    11.0001% {
+    11.1% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     12% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     15% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     20% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 1;
     }
-    20.0001% {
+    20.1% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     23% {
         top: 120px;
         right: 445px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     25% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     26% {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    26.1%  {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31.1%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39.1%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48.1%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49.1%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54.1%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61.1%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72.1%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+}
+.car-1-full {
+    position: absolute;
+    width: 31px;
+    height: 25px;
+    top: -30px;
+    right: 755px;
+    z-index: 1;
+    -webkit-animation: car-1-full 30s linear 0s infinite normal;
+    animation: car-1-full 30s linear 0s infinite normal;
+    transform: scale(1,1);
+    opacity: 0;
+}
+@-webkit-keyframes car-1-full {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    10% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    11% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    11.0001% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    12% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    15% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20.0001% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    23% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    25% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    26% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
     }
     26.0001%  {
         top: 132px;
         right: 465px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     30%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     31%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     31.0001%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     32%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     38%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     39%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     39.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     40%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     42%  {
         top: 237px;
         right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     45%  {
         top: 237px;
         right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     47%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     48%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     48.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     49%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     49.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     50%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     53%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     54%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     54.0001%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     55%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;;
     }
     60%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     61%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     61.0001%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     63%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     71%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     72%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     72.0001%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     74%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     79% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     80% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     80.0001% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     81% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     85% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     87% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     87.0001% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     91% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     100% {
         top: 585px;
         right: 605px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 0;
     }
 }
-@-webkit-keyframes car-2 {
+@keyframes car-1-full {
     0% {
         top: -30px;
         right: 755px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
-    }
-    8% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
-    }
-    9% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
-    }
-    9.0001% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     10% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
     }
-    13% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+    11% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
     }
-    18% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+    11.0001% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
     }
-    18.0001% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+    12% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
     }
-    21% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+    15% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20.0001% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
     }
     23% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
     }
-    24% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+    25% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
     }
-    24.0001%  {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+    26% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    26.0001%  {
+        top: 132px;
+        right: 465px;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     30%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     31%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     31.0001%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     32%  {
         top: 183px;
         right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     38%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     39%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     39.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     40%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     42%  {
         top: 237px;
         right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     45%  {
         top: 237px;
         right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     47%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     48%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     48.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     49%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     49.0001%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     50%  {
         top: 251px;
         right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     53%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     54%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     54.0001%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     55%  {
         top: 277px;
         right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;;
     }
     60%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     61%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     61.0001%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     63%  {
         top: 335px;
         right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     71%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     72%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     72.0001%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     74%  {
         top: 420px;
         right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     79% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     80% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
+        transform: scale(-1,1);
+        opacity: 1;
     }
     80.0001% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     81% {
         top: 494px;
         right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     85% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     87% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
+        transform: scale(1,1);
+        opacity: 1;
     }
     87.0001% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     91% {
         top: 461px;
         right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 0;
     }
     100% {
         top: 585px;
         right: 605px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
+        transform: scale(1,1);
+        opacity: 0;
     }
-    
-    
-    
-    
-}
-@keyframes car-2 {
-    0% {
-        top: -30px;
-        right: 755px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
-    }
-    8% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
-    }
-    9% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -31px top;
-    }
-    9.0001% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
-    }
-    10% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
-    }
-    13% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
-    }
-    18% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
-    }
-    18.0001% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    21% {
-        top: 82px;
-        right: 513px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    23% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    24% {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    24.0001%  {
-        top: 96px;
-        right: 541px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    30%  {
-        top: 183px;
-        right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    31%  {
-        top: 183px;
-        right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    31.0001%  {
-        top: 183px;
-        right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    32%  {
-        top: 183px;
-        right: 384px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    38%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    39%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    39.0001%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    40%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    42%  {
-        top: 237px;
-        right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    45%  {
-        top: 237px;
-        right: 529px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    47%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    48%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    48.0001%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    49%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    49.0001%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    50%  {
-        top: 251px;
-        right: 506px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    53%  {
-        top: 277px;
-        right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    54%  {
-        top: 277px;
-        right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    54.0001%  {
-        top: 277px;
-        right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    55%  {
-        top: 277px;
-        right: 548px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    60%  {
-        top: 335px;
-        right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    61%  {
-        top: 335px;
-        right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    61.0001%  {
-        top: 335px;
-        right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    63%  {
-        top: 335px;
-        right: 446px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    71%  {
-        top: 420px;
-        right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    72%  {
-        top: 420px;
-        right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    72.0001%  {
-        top: 420px;
-        right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    74%  {
-        top: 420px;
-        right: 593px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    79% {
-        top: 494px;
-        right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    80% {
-        top: 494px;
-        right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -93px top;
-    }
-    80.0001% {
-        top: 494px;
-        right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    81% {
-        top: 494px;
-        right: 463px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    85% {
-        top: 461px;
-        right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    87% {
-        top: 461px;
-        right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left -62px top;
-    }
-    87.0001% {
-        top: 461px;
-        right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
-    }
-    91% {
-        top: 461px;
-        right: 410px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
-    }
-    100% {
-        top: 585px;
-        right: 605px;
-        background: url("/local/templates/.default/img/billboard/car-back.png") no-repeat left top;
-    }
-    
-    
-    
-    
 }
 
-.mixer {
+.car-2-empty {
+    position: absolute;
+    width: 31px;
+    height: 25px;
+    top: -30px;
+    right: 755px;
+    z-index: 1;
+    -webkit-animation: car-2-empty 30s linear 10s infinite normal;
+    animation: car-2-empty 30s linear 10s infinite normal;
+    transform: scale(-1,1);
+    opacity: 1;
+}
+@-webkit-keyframes car-2-empty {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    8% {
+        top: 96px;
+        right: 541px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    9% {
+        top: 96px;
+        right: 541px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    9.0001% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    10% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    13% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    18% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    18.0001% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    21% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    23% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    24% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    24.0001%  {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+}
+@keyframes car-2-empty {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    8% {
+        top: 96px;
+        right: 541px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    9% {
+        top: 96px;
+        right: 541px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    9.0001% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    10% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    13% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    18% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    18.0001% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    21% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    23% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    24% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    24.0001%  {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+}
+.car-2-full {
+    position: absolute;
+    width: 31px;
+    height: 25px;
+    top: -30px;
+    right: 755px;
+    z-index: 1;
+    -webkit-animation: car-2-full 30s linear 10s infinite normal;
+    animation: car-2-full 30s linear 10s infinite normal;
+    transform: scale(1,1);
+    opacity: 0;
+}
+@-webkit-keyframes car-2-full {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    8% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    9% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    9.0001% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    10% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    13% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    18% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    18.0001% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    21% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    23% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    24% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    24.0001%  {
+        top: 96px;
+        right: 541px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+}
+@keyframes car-2-full {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    8% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    9% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    9.0001% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    10% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    13% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    18% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    18.0001% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    21% {
+        top: 82px;
+        right: 513px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    23% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    24% {
+        top: 96px;
+        right: 541px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    24.0001%  {
+        top: 96px;
+        right: 541px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+}
+
+.car-3-empty {
+    position: absolute;
+    width: 31px;
+    height: 25px;
+    top: -30px;
+    right: 755px;
+    z-index: 1;
+    -webkit-animation: car-3-empty 30s linear 20s infinite normal;
+    animation: car-3-empty 30s linear 20s infinite normal;
+    transform: scale(-1,1);
+    opacity: 1;
+}
+@-webkit-keyframes car-3-empty {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    10% {
+        top: 132px;
+        right: 465px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    11% {
+        top: 132px;
+        right: 465px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    11.0001% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    12% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    15% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    20% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    20.0001% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    23% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    25% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    26% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    26.0001%  {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    
+}
+@keyframes car-3-empty {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    10% {
+        top: 132px;
+        right: 465px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    11% {
+        top: 132px;
+        right: 465px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    11.0001% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    12% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    15% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    20% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    20.0001% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    23% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    25% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    26% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    26.0001%  {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+}
+.car-3-full {
+    position: absolute;
+    width: 31px;
+    height: 25px;
+    top: -30px;
+    right: 755px;
+    z-index: 1;
+    -webkit-animation: car-3-full 30s linear 20s infinite normal;
+    animation: car-3-full 30s linear 20s infinite normal;
+    transform: scale(1,1);
+    opacity: 0;
+}
+@-webkit-keyframes car-3-full {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    10% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    11% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    11.0001% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    12% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    15% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20.0001% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    23% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    25% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    26% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    26.0001%  {
+        top: 132px;
+        right: 465px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+}
+@keyframes car-3-full {
+    0% {
+        top: -30px;
+        right: 755px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    10% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    11% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    11.0001% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    12% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    15% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    20.0001% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    23% {
+        top: 120px;
+        right: 445px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    25% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    26% {
+        top: 132px;
+        right: 465px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    26.0001%  {
+        top: 132px;
+        right: 465px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    30%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    31.0001%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    32%  {
+        top: 183px;
+        right: 384px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    38%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    39.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    40%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    42%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    45%  {
+        top: 237px;
+        right: 529px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    47%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    48.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    49.0001%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    50%  {
+        top: 251px;
+        right: 506px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    53%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    54.0001%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    55%  {
+        top: 277px;
+        right: 548px;
+        transform: scale(-1,1);
+        opacity: 1;;
+    }
+    60%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    61.0001%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    63%  {
+        top: 335px;
+        right: 446px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    71%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    72.0001%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    74%  {
+        top: 420px;
+        right: 593px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    79% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80% {
+        top: 494px;
+        right: 463px;
+        transform: scale(-1,1);
+        opacity: 1;
+    }
+    80.0001% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    81% {
+        top: 494px;
+        right: 463px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    85% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    87.0001% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    91% {
+        top: 461px;
+        right: 410px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+    100% {
+        top: 585px;
+        right: 605px;
+        transform: scale(1,1);
+        opacity: 0;
+    }
+}
+
+
+.mixer-1 {
     position: absolute;
     width: 29px;
     height: 26px;
     z-index: 1;
-}
-.mixer-1 {
+    top: 255px;
+    right: 740px;
+    transform: scale(1,1);
     -webkit-animation: mixer 12s linear 0s infinite normal;
     animation: mixer 12s linear 0s infinite normal;
 }
 .mixer-2 {
+    position: absolute;
+    width: 29px;
+    height: 26px;
+    z-index: 1;
+    top: 255px;
+    right: 740px;
+    transform: scale(1,1);
     -webkit-animation: mixer 12s linear 6s infinite normal;
     animation: mixer 12s linear 6s infinite normal;
+}
+.mixer-1 img,
+.mixer-2 img {
+    display: block;
+    width: 29px;
+    height: 26px;
 }
 @-webkit-keyframes mixer {
     0% {
         top: 255px;
         right: 740px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     20% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     22% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     22.0001% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     24% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     48% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     50% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     50.0001% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     52% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     56% {
         top: 423px;
         right: 807px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     64% {
         top: 423px;
         right: 807px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     76% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     78% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     78.0001% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     80% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     100% {
         top: 578px;
         right: 873px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
 }
 @keyframes mixer {
     0% {
         top: 255px;
         right: 740px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     20% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     22% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     22.0001% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     24% {
         top: 328px;
         right: 610px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     48% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     50% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     50.0001% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     52% {
         top: 434px;
         right: 793px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     56% {
         top: 423px;
         right: 807px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     64% {
         top: 423px;
         right: 807px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     76% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     78% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left -31px top;
+        transform: scale(1,1);
     }
     78.0001% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     80% {
         top: 481px;
         right: 709px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
     100% {
         top: 578px;
         right: 873px;
-        background: url("/local/templates/.default/img/billboard/mixer.png") no-repeat left top;
+        transform: scale(-1, 1);
     }
 }
+
+
+
+
+
+.excavator-1 img,
+.excavator-2 img {
+    display: block;
+    width: 67px;
+    height: 62px;
+}
+
+.excavator-1 {
+    position: absolute;
+    width: 67px;
+    height: 62px;
+    z-index: 10;
+    top: 68px;
+    right: 468px;
+}
+.excavator-1_1 {
+    opacity: 1;
+    -webkit-animation: excavator-1_1 30s linear 10s infinite normal;
+    animation: excavator-1_1 30s linear 10s infinite normal;
+}
+@-webkit-keyframes excavator-1_1 {
+    0% {
+        opacity: 1;
+    }
+    15% {
+        opacity: 1;
+    }
+    16% {
+        opacity: 0;
+    }
+    17% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes excavator-1_1 {
+    0% {
+        opacity: 1;
+    }
+    15% {
+        opacity: 1;
+    }
+    16% {
+        opacity: 0;
+    }
+    17% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.excavator-1_2 {
+    opacity: 0;
+    -webkit-animation: excavator-1_2 30s linear 10s infinite normal;
+    animation: excavator-1_2 30s linear 10s infinite normal;
+}
+@-webkit-keyframes excavator-1_2 {
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 0;
+    }
+    16% {
+        opacity: 1;
+    }
+    17% {
+        opacity: 1;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes excavator-1_2 {
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 0;
+    }
+    16% {
+        opacity: 1;
+    }
+    17% {
+        opacity: 1;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.excavator-1_3 {
+    opacity: 0;
+    -webkit-animation: excavator-1_3 30s linear 10s infinite normal;
+    animation: excavator-1_3 30s linear 10s infinite normal;
+}
+@-webkit-keyframes excavator-1_3 {
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 0;
+    }
+    16% {
+        opacity: 0;
+    }
+    17% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 1;
+    }
+    19% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes excavator-1_3 {
+    0% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 0;
+    }
+    16% {
+        opacity: 0;
+    }
+    17% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 1;
+    }
+    19% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+.excavator-2 {
+    position: absolute;
+    width: 67px;
+    height: 62px;
+    z-index: 10;
+    top: 107px;
+    right: 400px;
+}
+.excavator-2_1 {
+    opacity: 1;
+    -webkit-animation: excavator-2_1 30s linear 0s infinite normal;
+    animation: excavator-2_1 30s linear 0s infinite normal;
+}
+@-webkit-keyframes excavator-2_1 {
+    0% {
+        opacity: 1;
+    }
+    18% {
+        opacity: 1;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 0;
+    }
+    22% {
+        opacity: 0;
+    }
+    23% {
+        opacity: 1;
+    }
+    84.3% {
+        opacity: 1;
+    }
+    85.3% {
+        opacity: 0;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87.3% {
+        opacity: 0;
+    }
+    88.3% {
+        opacity: 0;
+    }
+    89.3% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes excavator-2_1 {
+    0% {
+        opacity: 1;
+    }
+    18% {
+        opacity: 1;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 0;
+    }
+    22% {
+        opacity: 0;
+    }
+    23% {
+        opacity: 1;
+    }
+    84.3% {
+        opacity: 1;
+    }
+    85.3% {
+        opacity: 0;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87.3% {
+        opacity: 0;
+    }
+    88.3% {
+        opacity: 0;
+    }
+    89.3% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.excavator-2_2 {
+    opacity: 0;
+    -webkit-animation: excavator-2_2 30s linear 0s infinite normal;
+    animation: excavator-2_2 30s linear 0s infinite normal;
+}
+@-webkit-keyframes excavator-2_2 {
+    0% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 1;
+    }
+    21% {
+        opacity: 0;
+    }
+    22% {
+        opacity: 0;
+    }
+    23% {
+        opacity: 0;
+    }
+    84.3% {
+        opacity: 0;
+    }
+    85.3% {
+        opacity: 1;
+    }
+    86.3% {
+        opacity: 1;
+    }
+    87.3% {
+        opacity: 0;
+    }
+    88.3% {
+        opacity: 0;
+    }
+    89.3% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes excavator-2_2 {
+    0% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 1;
+    }
+    21% {
+        opacity: 0;
+    }
+    22% {
+        opacity: 0;
+    }
+    23% {
+        opacity: 0;
+    }
+    84.3% {
+        opacity: 0;
+    }
+    85.3% {
+        opacity: 1;
+    }
+    86.3% {
+        opacity: 1;
+    }
+    87.3% {
+        opacity: 0;
+    }
+    88.3% {
+        opacity: 0;
+    }
+    89.3% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.excavator-2_3 {
+    opacity: 0;
+    -webkit-animation: excavator-2_3 30s linear 0s infinite normal;
+    animation: excavator-2_3 30s linear 0s infinite normal;
+}
+@-webkit-keyframes excavator-2_32 {
+    0% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 1;
+    }
+    22% {
+        opacity: 1;
+    }
+    23% {
+        opacity: 0;
+    }
+    84.3% {
+        opacity: 0;
+    }
+    85.3% {
+        opacity: 0;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87.3% {
+        opacity: 1;
+    }
+    88.3% {
+        opacity: 1;
+    }
+    89.3% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes excavator-2_3 {
+    0% {
+        opacity: 0;
+    }
+    18% {
+        opacity: 0;
+    }
+    19% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 0;
+    }
+    21% {
+        opacity: 1;
+    }
+    22% {
+        opacity: 1;
+    }
+    23% {
+        opacity: 0;
+    }
+    84.3% {
+        opacity: 0;
+    }
+    85.3% {
+        opacity: 0;
+    }
+    86.3% {
+        opacity: 0;
+    }
+    87.3% {
+        opacity: 1;
+    }
+    88.3% {
+        opacity: 1;
+    }
+    89.3% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
 
 .foundation {
     position: absolute;
@@ -1548,7 +4513,9 @@
     z-index: 1;
     top: 396px;
     right: 821px;
-    background: url("/local/templates/.default/img/billboard/foundation.png") no-repeat left top;
+    background-image: url("/local/templates/.default/img/billboard/foundation.png");
+    background-repeat: no-repeat;
+    background-position: left top;
     -webkit-animation: foundation 12s linear 4s infinite normal;
     animation: foundation 12s linear 4s infinite normal;
 }
@@ -1592,6 +4559,7 @@
         background-position: left -110px top;
     }
 }
+
 
 .bunker {
     position: absolute;

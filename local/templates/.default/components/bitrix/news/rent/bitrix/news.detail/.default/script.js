@@ -40,13 +40,17 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.classList.add("show");
         } else {
             const modalDialog = modal.getElementsByClassName("modal__dialog")[0];
+            const modalsResult = document.getElementsByClassName('send-msg-true');
 
             body.classList.remove("modal-open");
             modal.classList.remove("show");
             modalDialog.classList.remove('hide');
-            sendMsgEOTrue.classList.remove('visible');
 
-            sendMsgEOTrue.
+            if (modalsResult.length > 0) {
+                for (let i = 0; i < modalsResult.length; i++) {
+                    modalsResult[i].classList.remove('visible');
+                }
+            }
 
             cleanErrsEO(nameEO, mailEO, phoneEO, msgEO);
             cleanFieldsEO(nameEO, mailEO, phoneEO, msgEO);

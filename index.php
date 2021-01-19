@@ -50,19 +50,76 @@
     <div class="billboard__pic-play d-none d-sm-block">
         <div class="billboard__animation">
             <img src="/local/templates/.default/img/billboard/billboard-back-play.png" alt="">
-            <div class="excavator excavator-1"></div>
-            <div class="excavator excavator-2"></div>
 
-            <div class="car car-1"></div>
-            <div class="car car-2"></div>
-            <div class="car car-3"></div>
+
+            <div class="excavator-1 excavator-1_1">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/excavator-1.png" alt="">
+            </div>
+            <div class="excavator-1 excavator-1_2">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/excavator-2.png" alt="">
+            </div>
+            <div class="excavator-1 excavator-1_3">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/excavator-3.png" alt="">
+            </div>
+
+
+            <div class="excavator-2 excavator-2_1">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/excavator-1.png" alt="">
+            </div>
+            <div class="excavator-2 excavator-2_2">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/excavator-2.png" alt="">
+            </div>
+            <div class="excavator-2 excavator-2_3">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/excavator-3.png" alt="">
+            </div>
+
+
+            <div class="car-1-empty">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/car-empty.png" alt="">
+            </div>
+            <div class="car-1-full">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/car-full.png" alt="">
+            </div>
+
+            <div class="car-2-empty">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/car-empty.png" alt="">
+            </div>
+            <div class="car-2-full">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/car-full.png" alt="">
+            </div>
+
+            <div class="car-3-empty">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/car-empty.png" alt="">
+            </div>
+            <div class="car-3-full">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/car-full.png" alt="">
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <div class="pile pile-1"></div>
             <div class="pile pile-2"></div>
             <div class="pile pile-3"></div>
 
-            <div class="mixer mixer-1"></div>
-            <div class="mixer mixer-2"></div>
+            <div class="mixer-1">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/single-mixer.png" alt="">
+            </div>
+            <div class="mixer-2">
+                <img src="<?=DEFAULT_TEMPLATE_PATH?>/img/billboard/single-mixer.png" alt="">
+            </div>
 
             <div class="foundation"></div>
 
