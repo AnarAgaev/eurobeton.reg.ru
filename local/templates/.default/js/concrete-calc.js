@@ -127,10 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
         fnFilterOptions(fnFilterAllItems());
 
         // Открвыаем закрываем блок с доп. параметрами
-        concreteAddParamsTglr.addEventListener('click', function () {
-            concreteAddParamsTglr.classList.toggle('params-visible');
-            concreteParamsGroupTwo.classList.toggle('params-visible');
-        });
+        // concreteAddParamsTglr.addEventListener('click', function () {
+        //     concreteAddParamsTglr.classList.toggle('params-visible');
+        //     concreteParamsGroupTwo.classList.toggle('params-visible');
+        // });
 
         btnConcreteValPlus.addEventListener('click', function () {
             concreteValue.value = editValue(

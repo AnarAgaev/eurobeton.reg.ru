@@ -196,13 +196,25 @@ $JSON__DELIVERY_PRICES = defined('JSON_UNESCAPED_UNICODE')
                     </label>
 
                 </div>
-                <!--
-                    <div class="group-additive">
-                        <div class="tglr" id="concreteAddParamsTglr">
-                            <b>Добавки</b>(выберите при необходиости):
-                        </div>
+
+                <?
+                /**
+                 * 19.01.2021
+                 * Закоментировали кнопку для переключения видимости блока с доп. параметрами
+                 * Доп. параметры вдины всегда. Для этого ему добавили класс params-visible
+                 * Стили сохранены, для включения этой функции их трогать не надо.
+                 * Так же, что бы не вылетала ошибка в файле concrete-calc.js закментировал
+                 * обработчик клика по кнопке туглеру, для включения раскоментирвоать
+                 * лисенер на элементе concreteAddParamsTglr
+
+                <div class="group-additive">
+                    <div class="tglr" id="concreteAddParamsTglr">
+                        <b>Добавки</b>(выберите при необходиости):
                     </div>
-                -->
+                </div>
+                */
+                ?>
+
                 <div class="group-two params-visible" id="concreteParamsGroupTwo">
                     <label class="label label_w212 label_select">
                         <span>Морозостойкость:</span>

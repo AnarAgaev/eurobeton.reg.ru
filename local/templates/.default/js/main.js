@@ -1372,6 +1372,13 @@ document.addEventListener("DOMContentLoaded",function() {
 
             fnCleanCartFormControls();
             fnCleanCartFromErr();
+
+            const modalsResult = document.getElementsByClassName('send-msg-true');
+            if (modalsResult.length > 0) {
+                for (let i = 0; i < modalsResult.length; i++) {
+                    modalsResult[i].classList.remove('visible');
+                }
+            }
             msgSetOrderTrue.classList.remove('visible');
         }
     };
@@ -1650,7 +1657,7 @@ document.addEventListener("DOMContentLoaded",function() {
                         // Сбрасываем количество товаров в корзине на иконке в хедере сайта
                         // Сброс оставльных полей формы и всех заказов происходит по клику
                         // Закрыть в модальном сообщении об удачном размещении заказа
-                        cartItemsCounter.innerText = 0;
+                        cartItemsCounter.innerText = '0';
                         msgSetOrderTrue.classList.add("visible");
                         cartModalDialog.classList.add('hide');
                     }
