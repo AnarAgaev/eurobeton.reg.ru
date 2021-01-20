@@ -23,7 +23,7 @@ $this->setFrameMode(true);
             <img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
                  alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
                  title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>">
-            <span><?=$arItem["PREVIEW_TEXT"]?>></span>
+            <span><?=$arItem["PREVIEW_TEXT"]?></span>
         </li>
     <?endforeach;?>
 </ul>
