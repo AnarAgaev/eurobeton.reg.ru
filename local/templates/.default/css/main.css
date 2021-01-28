@@ -9452,8 +9452,4 @@ span.bread-crumbs__link {
     .header .region__description {
         display: inline-block;
     }
-    
-    .header .region {
-        width: 190px !important;
-    }
 }
