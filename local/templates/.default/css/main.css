@@ -9415,3 +9415,41 @@ span.bread-crumbs__link {
         border-right: 910px solid transparent;
     }
 }
+
+@media (max-width: 575px) {
+    .header .products,
+    .header .products__list,
+    .header .products__item,
+    .header .products__dropdown,
+    .header .products .dropdown-list,
+    .header .products .dropdown__item,
+    .header .nav,
+    .header .nav__list,
+    .header .nav__item,
+    .header .nav__item .dropdown__list {
+        display: block !important;
+    }
+    
+    .header .products__link {
+        display: inline-block;
+        line-height: 69px;
+    }
+    
+    .header .products .dropdown__item {
+        line-height: 50px;
+    }
+    
+    .header .region {
+        display: block !important;
+        text-align: center;
+    }
+    
+    .header .region__map-marker {
+        display: inline-block;
+        top: 0;
+    }
+    
+    .header .region__description {
+        display: inline-block;
+    }
+}
