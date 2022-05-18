@@ -3,7 +3,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<?$APPLICATION->ShowHead();?>
+	<?//$APPLICATION->ShowHead();?>
+	<?$APPLICATION->ShowMeta("robots");
+	//$APPLICATION->ShowMeta("keywords");
+	$APPLICATION->ShowMeta("description");
+	$APPLICATION->ShowLink("canonical");
+	$APPLICATION->ShowCSS();
+	$APPLICATION->ShowHeadStrings();?>
 	<title><?$APPLICATION->ShowTitle();?></title>
     <?
         Asset::getInstance()->addString('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
